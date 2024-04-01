@@ -1,0 +1,48 @@
+.hamburgerMenu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.hamburgerIcon {
+  width: 30px;
+  height: 10px;
+  margin-bottom: 4px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+/* Animation for the first and third lines */
+.open .hamburgerIcon:nth-child(1) img {
+  animation: rotateTopLine 0.3s ease forwards;
+}
+
+.open .hamburgerIcon:nth-child(3) img {
+  animation: rotateBottomLine 0.3s ease forwards;
+}
+
+/* Keyframes for opening animation */
+@keyframes rotateTopLine {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(14px) rotate(45deg);
+  }
+}
+
+@keyframes rotateBottomLine {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  100% {
+    transform: translateY(-14px) rotate(-45deg);
+  }
+}
+
+/* Hide middle line on opening animation end */
+.open .hamburgerIcon:nth-child(2) img {
+  opacity: 0;
+}
