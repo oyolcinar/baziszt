@@ -8,19 +8,37 @@
 
 .hamburgerIcon {
   width: 30px;
-  height: 10px;
+  height: 8px;
   margin-bottom: 4px;
   position: relative;
-  transition: transform 0.3s ease;
 }
 
-/* Animation for the first and third lines */
-.open .hamburgerIcon:nth-child(1) img {
+/* Animation for opening the menu */
+.hamburgerMenu.open .hamburgerIcon:nth-child(1) img {
   animation: rotateTopLine 0.3s ease forwards;
 }
 
-.open .hamburgerIcon:nth-child(3) img {
+.hamburgerMenu.open .hamburgerIcon:nth-child(2) img {
+  opacity: 0; /* Hide middle line when menu is open */
+  transition: opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+.hamburgerMenu.open .hamburgerIcon:nth-child(3) img {
   animation: rotateBottomLine 0.3s ease forwards;
+}
+
+/* Animation for closing the menu */
+.hamburgerMenu:not(.open) .hamburgerIcon:nth-child(1) img {
+  animation: rotateBackTopLine 0.3s ease forwards;
+}
+
+.hamburgerMenu:not(.open) .hamburgerIcon:nth-child(2) img {
+  opacity: 1; /* Show middle line when menu is closed */
+  transition: opacity 0.3s ease; /* Smooth opacity transition */
+}
+
+.hamburgerMenu:not(.open) .hamburgerIcon:nth-child(3) img {
+  animation: rotateBackBottomLine 0.3s ease forwards;
 }
 
 /* Keyframes for opening animation */
@@ -29,7 +47,7 @@
     transform: translateY(0) rotate(0deg);
   }
   100% {
-    transform: translateY(14px) rotate(45deg);
+    transform: translateY(12px) rotate(45deg);
   }
 }
 
@@ -38,11 +56,25 @@
     transform: translateY(0) rotate(0deg);
   }
   100% {
-    transform: translateY(-14px) rotate(-45deg);
+    transform: translateY(-12px) rotate(-45deg);
   }
 }
 
-/* Hide middle line on opening animation end */
-.open .hamburgerIcon:nth-child(2) img {
-  opacity: 0;
+/* Keyframes for closing animation */
+@keyframes rotateBackTopLine {
+  0% {
+    transform: translateY(12px) rotate(45deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+@keyframes rotateBackBottomLine {
+  0% {
+    transform: translateY(-12px) rotate(-45deg);
+  }
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
 }
