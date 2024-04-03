@@ -4,16 +4,16 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 
 import whiteLine1 from '../../../../public/Hamburger/whiteLine.png';
-import brownLine1 from '../../../../public/Hamburger/brownLine.png';
+import brownLine1 from '../../../../public/Hamburger/yellowLine.png';
 import blueLine1 from '../../../../public/Hamburger/blueLine.png';
 import whiteLine2 from '../../../../public/Hamburger/whiteLine2.png';
-import brownLine2 from '../../../../public/Hamburger/brownLine2.png';
+import brownLine2 from '../../../../public/Hamburger/yellowLine2.png';
 import blueLine2 from '../../../../public/Hamburger/blueLine2.png';
 import whiteLine3 from '../../../../public/Hamburger/whiteLine3.png';
-import brownLine3 from '../../../../public/Hamburger/brownLine3.png';
+import brownLine3 from '../../../../public/Hamburger/yellowLine3.png';
 import blueLine3 from '../../../../public/Hamburger/blueLine3.png';
 import whiteLine4 from '../../../../public/Hamburger/whiteLine4.png';
-import brownLine4 from '../../../../public/Hamburger/brownLine4.png';
+import brownLine4 from '../../../../public/Hamburger/yellowLine4.png';
 import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
 import Link from 'next/link';
 
