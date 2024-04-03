@@ -146,7 +146,7 @@ const HamburgerMenu: React.FC = () => {
               lineOpacities[lineIndex]
             } transition-opacity duration-150 ${
               phase === 'toX' && (lineIndex === 0 || lineIndex === 2)
-                ? 'transform translate-y-[12px]'
+                ? 'transform'
                 : ''
             } ${
               phase === 'toX' && lineIndex === 2
