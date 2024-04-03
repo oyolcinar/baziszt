@@ -32,6 +32,14 @@ const HamburgerMenu: React.FC = () => {
   const [phase, setPhase] = useState('normal');
   const [menuOpened, setMenuOpened] = useState(false);
 
+  const toggleMenu = () => {
+    if (!menuOpened) {
+      startSequence();
+    } else {
+      reverseSequence();
+    }
+  };
+
   const toggleStitch = (
     startIndex: number,
     onComplete?: () => void,
@@ -88,17 +96,18 @@ const HamburgerMenu: React.FC = () => {
               ),
             );
           }
-        }, 30 * (reverse ? startIndex - imgIndex : imgIndex) + 120 * lineIndex);
+        }, 35 * (reverse ? startIndex - imgIndex : imgIndex) + 140 * lineIndex);
       }
     }
 
     setTimeout(
       onComplete || (() => {}),
-      lineImages[0].length * 30 + 120 * lineImages.length,
+      lineImages[0].length * 35 + 140 * lineImages.length,
     );
   };
 
   const startSequence = () => {
+    setMenuOpened(true);
     setPhase('normal');
     setLineOpacities(['opacity-100', 'opacity-100', 'opacity-100']);
     toggleStitch(0, () => {
@@ -110,10 +119,23 @@ const HamburgerMenu: React.FC = () => {
     });
   };
 
+  const reverseSequence = () => {
+    setMenuOpened(false);
+    setPhase('toX');
+    setLineOpacities(['opacity-100', 'opacity-0', 'opacity-100']);
+    toggleStitch(0, () => {
+      setPhase('normal');
+      setTimeout(() => {
+        setLineOpacities(['opacity-100', 'opacity-100', 'opacity-100']);
+        toggleStitch(lineImages[0].length - 1, undefined, true, false, false);
+      }, 15);
+    });
+  };
+
   return (
     <div
       className='flex flex-col items-start gap-1 cursor-pointer'
-      onClick={startSequence}
+      onClick={toggleMenu}
     >
       {currentIndices.map((imgIndex, lineIndex) => (
         <div
@@ -122,13 +144,13 @@ const HamburgerMenu: React.FC = () => {
             lineOpacities[lineIndex]
           } transition-opacity duration-150 ${
             phase === 'toX' && (lineIndex === 0 || lineIndex === 2)
-              ? 'transform translate-x-[2px] translate-y-2'
+              ? 'transform translate-y-[16px]'
               : ''
           } ${
             phase === 'toX' && lineIndex === 2
-              ? '-rotate-45 translate-y-[-19px]'
+              ? '-rotate-45 translate-y-[-16px]'
               : phase === 'toX' && lineIndex === 0
-              ? 'rotate-45'
+              ? 'rotate-45 translate-y-[18px]'
               : ''
           }`}
           style={{ transformOrigin: 'center' }}
@@ -136,8 +158,8 @@ const HamburgerMenu: React.FC = () => {
           <Image
             src={lineImages[lineIndex][imgIndex]}
             alt={`Line ${lineIndex + 1}`}
-            width={30}
-            height={8}
+            width={40}
+            height={10}
           />
         </div>
       ))}
