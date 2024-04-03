@@ -15,11 +15,12 @@ import blueLine3 from '../../../../public/Hamburger/blueLine3.png';
 import whiteLine4 from '../../../../public/Hamburger/whiteLine4.png';
 import brownLine4 from '../../../../public/Hamburger/brownLine4.png';
 import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
+import Link from 'next/link';
 
 const HamburgerMenu: React.FC = () => {
   const lineImages = [
-    [brownLine1, brownLine2, brownLine3, brownLine4],
     [whiteLine1, whiteLine2, whiteLine3, whiteLine4],
+    [brownLine1, brownLine2, brownLine3, brownLine4],
     [blueLine1, blueLine2, blueLine3, blueLine4],
   ];
 
@@ -133,37 +134,59 @@ const HamburgerMenu: React.FC = () => {
   };
 
   return (
-    <div
-      className='flex flex-col items-start gap-1 cursor-pointer'
-      onClick={toggleMenu}
-    >
-      {currentIndices.map((imgIndex, lineIndex) => (
-        <div
-          key={lineIndex}
-          className={`${
-            lineOpacities[lineIndex]
-          } transition-opacity duration-150 ${
-            phase === 'toX' && (lineIndex === 0 || lineIndex === 2)
-              ? 'transform translate-y-[16px]'
-              : ''
-          } ${
-            phase === 'toX' && lineIndex === 2
-              ? '-rotate-45 translate-y-[-16px]'
-              : phase === 'toX' && lineIndex === 0
-              ? 'rotate-45 translate-y-[18px]'
-              : ''
-          }`}
-          style={{ transformOrigin: 'center' }}
-        >
-          <Image
-            src={lineImages[lineIndex][imgIndex]}
-            alt={`Line ${lineIndex + 1}`}
-            width={40}
-            height={10}
-          />
+    <>
+      <div
+        className='flex flex-col items-start gap-1 cursor-pointer relative z-50'
+        onClick={toggleMenu}
+      >
+        {currentIndices.map((imgIndex, lineIndex) => (
+          <div
+            key={lineIndex}
+            className={`${
+              lineOpacities[lineIndex]
+            } transition-opacity duration-150 ${
+              phase === 'toX' && (lineIndex === 0 || lineIndex === 2)
+                ? 'transform translate-y-[12px]'
+                : ''
+            } ${
+              phase === 'toX' && lineIndex === 2
+                ? '-rotate-45 translate-y-[-12px]'
+                : phase === 'toX' && lineIndex === 0
+                ? 'rotate-45 translate-y-[15px]'
+                : ''
+            }`}
+            style={{ transformOrigin: 'center' }}
+          >
+            <Image
+              src={lineImages[lineIndex][imgIndex]}
+              alt={`Line ${lineIndex + 1}`}
+              width={30}
+              height={8}
+            />
+          </div>
+        ))}
+      </div>
+      <div
+        className={`fixed top-0 left-0 h-full w-full md:w-[40%] bg-bordeux transform flex justify-start items-center pl-[60px] ${
+          menuOpened ? 'translate-x-0' : '-translate-x-full'
+        } transition-transform duration-700 ease-in-out z-40`}
+      >
+        <div className='flex flex-col justify-center items-start text-3xl text-bone font-quasimoda gap-6'>
+          <Link
+            href='/shop'
+            className='hover:opacity-70 transition duration-300'
+          >
+            SHOP
+          </Link>
+          <Link
+            href='/journal'
+            className='hover:opacity-70 transition duration-300'
+          >
+            JOURNAL
+          </Link>
         </div>
-      ))}
-    </div>
+      </div>
+    </>
   );
 };
 
