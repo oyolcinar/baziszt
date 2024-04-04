@@ -30,7 +30,9 @@ const Navbar: React.FC = () => {
             position: 'relative',
           }}
         >
-          <Image alt='baziszt' src={Logo} layout='fill' objectFit='contain' />
+          <Link href='/'>
+            <Image alt='baziszt' src={Logo} layout='fill' objectFit='contain' />
+          </Link>
         </div>
       )}
       <div className='flex items-center font-quasimoda text-bone gap-4'>
