@@ -17,12 +17,13 @@ const Navbar: React.FC = () => {
   const isNotHome = pathName !== '/';
 
   return (
-    <nav className='flex justify-between items-center h-[60px] bg-opacity-0 text-black sticky top-0 z-10 mx-[30px]'>
-      <div className='mr-[180px]'>
+    <nav className='fixed top-0 left-0 right-0 flex justify-between items-center h-[60px] bg-opacity-0 text-black z-10 mx-[30px]'>
+      <div className='md:mr-[180px]'>
         <HamburgerMenu />
       </div>
       {isNotHome && (
         <div
+          className='hidden md:block'
           style={{
             width: '200px',
             height: '100px',
@@ -32,7 +33,7 @@ const Navbar: React.FC = () => {
           <Image alt='baziszt' src={Logo} layout='fill' objectFit='contain' />
         </div>
       )}
-      <div className='flex items-center font-quasimoda text-bordeux gap-4'>
+      <div className='flex items-center font-quasimoda text-bone gap-4'>
         <Link
           href='/search'
           className='hover:opacity-70 transition duration-300'
