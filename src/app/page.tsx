@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import React from 'react';
 
-import Logo from '../../public/Logos/logoEditBordeux2.png';
+import Logo from '../../public/Logos/logoEditBordeux.png';
 import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
 import TopsImage2 from '../../public/Images/topsImage2.png';

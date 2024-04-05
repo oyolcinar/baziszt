@@ -7,7 +7,7 @@ import React from 'react';
 
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 
-import Logo from '../../../../public/Logos/logoEditBordeux2.png';
+import Logo from '../../../../public/Logos/logoEditBordeux.png';
 
 const Navbar: React.FC = () => {
   const router = useRouter();
