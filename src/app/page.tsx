@@ -12,9 +12,9 @@ import TopsImage from '../../public/Images/topsImage.png';
 import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
-import Dummy1 from '../../public/DummyImages/dummy1.png';
-import Dummy2 from '../../public/DummyImages/dummy2.png';
-import Dummy3 from '../../public/DummyImages/dummy3.png';
+import ProductGroup from './components/ProductGroup/ProductGroup';
+import { dummyProductsArray } from './dummyData/dummyData';
+import Link from 'next/link';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -29,15 +29,6 @@ export default function Home() {
   }, []);
 
   const imageSize = Math.max(50 - scrollY / 100, 10);
-
-  const dummyProduct: Product = {
-    slug: '/',
-    name: 'Test',
-    images: [Dummy1.src, Dummy2.src, Dummy3.src],
-    colors: ['black', 'white', 'red'],
-    price: '100.00€',
-    sizes: ['S', 'M', 'L'],
-  };
 
   return (
     <main>
@@ -60,48 +51,57 @@ export default function Home() {
 
       <div className='flex flex-col md:flex-row'>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3'>
-          <div
-            className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
-            style={{
-              zIndex: 2,
-            }}
-          >
-            TOPS
-          </div>
-          <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-            <Image alt='Tops' src={TopsImage} />
-          </div>
+          <Link href='/shop/tops'>
+            <div
+              className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
+              style={{
+                zIndex: 2,
+              }}
+            >
+              TOPS
+            </div>
+            <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
+              <Image alt='Tops' src={TopsImage} />
+            </div>
+          </Link>
         </div>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3'>
-          <div
-            className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
-            style={{
-              zIndex: 2,
-            }}
-          >
-            BOTTOMS
-          </div>
-          <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-            <Image alt='Bottoms' src={BottomsImage} />
-          </div>
+          <Link href='/shop/bottoms'>
+            <div
+              className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
+              style={{
+                zIndex: 2,
+              }}
+            >
+              BOTTOMS
+            </div>
+            <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
+              <Image alt='Bottoms' src={BottomsImage} />
+            </div>
+          </Link>
         </div>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3'>
-          <div
-            className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
-            style={{
-              zIndex: 2,
-            }}
-          >
-            ACCESSORIES
-          </div>
-          <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-            <Image alt='Accessories' src={AccessoriesImage} />
-          </div>
+          <Link href='/shop/accessories'>
+            <div
+              className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
+              style={{
+                zIndex: 2,
+              }}
+            >
+              ACCESSORIES
+            </div>
+            <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
+              <Image alt='Accessories' src={AccessoriesImage} />
+            </div>
+          </Link>
         </div>
       </div>
-      <div className='w-[300px] h-full'>
-        <ProductCard product={dummyProduct} />
-      </div>
+      <ProductGroup
+        products={dummyProductsArray}
+        category='all'
+        title={'NEW RELEASES'}
+      />
+
       <div className='w-full flex justify-center my-16'>
         <div className='flex w-3/4 flex-col items-center justify-center'>
           <div className='font-altesse64 text-bordeux text-5xl sm:tex-6xl md:text-8xl mb-4'>

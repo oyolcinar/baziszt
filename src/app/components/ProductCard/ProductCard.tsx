@@ -14,7 +14,7 @@ export interface Product {
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const imageWidth = 300;
+  const imageWidth = 350;
   const totalWidth = product.images.length * imageWidth;
 
   const handleImageChange = (
@@ -41,7 +41,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         className='relative cursor-pointer group'
         style={{
           width: `${imageWidth}px`,
-          height: '400px',
+          height: '450px',
           overflow: 'hidden',
         }}
       >
@@ -75,16 +75,16 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             <div
               key={index}
               className='flex-none'
-              style={{ width: `${imageWidth}px`, height: '400px' }}
+              style={{ width: `${imageWidth}px`, height: '450px' }}
             >
               <div
-                style={{ width: '300px', height: '100%', position: 'relative' }}
+                style={{ width: '350px', height: '100%', position: 'relative' }}
               >
                 <Image
                   src={image}
                   alt={product.name}
                   layout='fill'
-                  objectFit='cover' // or "contain" based on your need
+                  objectFit='cover'
                   objectPosition='center'
                 />
               </div>
