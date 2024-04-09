@@ -15,6 +15,9 @@ import blueLine3 from '../../../../public/Hamburger/blueLine3.png';
 import whiteLine4 from '../../../../public/Hamburger/whiteLine4.png';
 import brownLine4 from '../../../../public/Hamburger/yellowLine4.png';
 import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
+import topsMenu from '../../../../public/Images/topsMenu.png';
+import bottomsMenu from '../../../../public/Images/bottomsMenu.png';
+import accessoriesMenu from '../../../../public/Images/accessoriesMenu.png';
 import Link from 'next/link';
 
 const HamburgerMenu: React.FC = () => {
@@ -32,6 +35,14 @@ const HamburgerMenu: React.FC = () => {
   ]);
   const [phase, setPhase] = useState('normal');
   const [menuOpened, setMenuOpened] = useState(false);
+  const [hoveredImage, setHoveredImage] = useState('');
+  const [isImageVisible, setIsImageVisible] = useState(false);
+
+  const categoryImages = {
+    tops: topsMenu.src,
+    bottoms: bottomsMenu.src,
+    accessories: accessoriesMenu.src,
+  };
 
   const toggleMenu = () => {
     if (!menuOpened) {
@@ -178,12 +189,87 @@ const HamburgerMenu: React.FC = () => {
           >
             SHOP
           </Link>
+          <div className='flex flex-col pl-6 text-xl gap-4'>
+            <Link
+              href='/shop/tops'
+              className='hover:opacity-70 transition duration-300'
+              onMouseEnter={() => {
+                setHoveredImage(topsMenu.src);
+                setIsImageVisible(true);
+              }}
+              onMouseLeave={() => setIsImageVisible(false)}
+            >
+              • TOPS
+            </Link>
+            <Link
+              href='/shop/bottoms'
+              className='hover:opacity-70 transition duration-300'
+              onMouseEnter={() => {
+                setHoveredImage(bottomsMenu.src);
+                setIsImageVisible(true);
+              }}
+              onMouseLeave={() => setIsImageVisible(false)}
+            >
+              • BOTTOMS
+            </Link>
+            <Link
+              href='/shop/accessories'
+              className='hover:opacity-70 transition duration-300'
+              onMouseEnter={() => {
+                setHoveredImage(accessoriesMenu.src);
+                setIsImageVisible(true);
+              }}
+              onMouseLeave={() => setIsImageVisible(false)}
+            >
+              • ACCESSORIES
+            </Link>
+          </div>
+          <Link
+            href='/lookbooks'
+            className='hover:opacity-70 transition duration-300'
+          >
+            LOOKBOOKS
+          </Link>
+          <Link
+            href='/stockists'
+            className='hover:opacity-70 transition duration-300'
+          >
+            STOCKISTS
+          </Link>
+          <Link
+            href='/press'
+            className='hover:opacity-70 transition duration-300'
+          >
+            PRESS
+          </Link>
           <Link
             href='/journal'
             className='hover:opacity-70 transition duration-300'
           >
             JOURNAL
           </Link>
+          <div
+            className={`w-full h-[150px] overflow-hidden transition-opacity duration-300 ${
+              isImageVisible ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            {hoveredImage && (
+              <div
+                className={`transition-opacity duration-300 ${
+                  isImageVisible ? 'opacity-100' : 'opacity-0'
+                } w-full h-[300px] overflow-hidden`}
+              >
+                <div className='fixed bottom-0 left-0 h-[200px] w-full'>
+                  <Image
+                    src={hoveredImage}
+                    alt='Test Image'
+                    layout='fill'
+                    objectFit='cover'
+                  />
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

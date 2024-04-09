@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className='fixed top-0 left-0 right-0 flex justify-between items-center h-[60px] bg-opacity-0 text-black z-10 mx-[30px]'>
-      <div className='md:mr-[180px]'>
+      <div className='md:mr-[90px]'>
         <HamburgerMenu />
       </div>
       {isNotHome && (
