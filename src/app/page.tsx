@@ -3,12 +3,18 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import React from 'react';
 
+import ProductCard from './components/ProductCard/ProductCard';
+import { Product } from './components/ProductCard/ProductCard';
+
 import Logo from '../../public/Logos/logoEditBordeux.png';
 import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
 import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
+import Dummy1 from '../../public/DummyImages/dummy1.png';
+import Dummy2 from '../../public/DummyImages/dummy2.png';
+import Dummy3 from '../../public/DummyImages/dummy3.png';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -23,6 +29,15 @@ export default function Home() {
   }, []);
 
   const imageSize = Math.max(50 - scrollY / 100, 10);
+
+  const dummyProduct: Product = {
+    slug: '/',
+    name: 'Test',
+    images: [Dummy1.src, Dummy2.src, Dummy3.src],
+    colors: ['black', 'white', 'red'],
+    price: '100.00€',
+    sizes: ['S', 'M', 'L'],
+  };
 
   return (
     <main>
@@ -83,6 +98,9 @@ export default function Home() {
             <Image alt='Accessories' src={AccessoriesImage} />
           </div>
         </div>
+      </div>
+      <div className='w-[300px] h-full'>
+        <ProductCard product={dummyProduct} />
       </div>
       <div className='w-full flex justify-center my-16'>
         <div className='flex w-3/4 flex-col items-center justify-center'>
