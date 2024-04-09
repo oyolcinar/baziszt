@@ -8,6 +8,9 @@ import React from 'react';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 
 import Logo from '../../../../public/Logos/logoEditBordeux.png';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { UserIcon } from '@heroicons/react/24/outline';
+import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 
 const Navbar: React.FC = () => {
   const router = useRouter();
@@ -35,21 +38,21 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
       )}
-      <div className='flex items-center font-quasimoda text-bone gap-4'>
+      <div className='flex items-center font-quasimoda text-bone gap-6'>
         <Link
           href='/search'
           className='hover:opacity-70 transition duration-300'
         >
-          SEARCH
+          <MagnifyingGlassIcon className='h-6 w-6 text-bordeux font-bold' />
         </Link>
         <Link
           href='/account'
           className='hover:opacity-70 transition duration-300'
         >
-          ACCOUNT
+          <UserIcon className='h-6 w-6 text-bordeux font-bold' />
         </Link>
         <Link href='/bag' className='hover:opacity-70 transition duration-300'>
-          BAG
+          <ShoppingBagIcon className='h-6 w-6 text-bordeux font-bold' />
         </Link>
       </div>
     </nav>
