@@ -38,12 +38,6 @@ const HamburgerMenu: React.FC = () => {
   const [hoveredImage, setHoveredImage] = useState('');
   const [isImageVisible, setIsImageVisible] = useState(false);
 
-  const categoryImages = {
-    tops: topsMenu.src,
-    bottoms: bottomsMenu.src,
-    accessories: accessoriesMenu.src,
-  };
-
   const toggleMenu = () => {
     if (!menuOpened) {
       startSequence();
@@ -186,6 +180,7 @@ const HamburgerMenu: React.FC = () => {
           <Link
             href='/shop'
             className='hover:opacity-70 transition duration-300'
+            onClick={toggleMenu}
           >
             SHOP
           </Link>
@@ -198,6 +193,7 @@ const HamburgerMenu: React.FC = () => {
                 setIsImageVisible(true);
               }}
               onMouseLeave={() => setIsImageVisible(false)}
+              onClick={toggleMenu}
             >
               • TOPS
             </Link>
@@ -209,6 +205,7 @@ const HamburgerMenu: React.FC = () => {
                 setIsImageVisible(true);
               }}
               onMouseLeave={() => setIsImageVisible(false)}
+              onClick={toggleMenu}
             >
               • BOTTOMS
             </Link>
@@ -220,6 +217,7 @@ const HamburgerMenu: React.FC = () => {
                 setIsImageVisible(true);
               }}
               onMouseLeave={() => setIsImageVisible(false)}
+              onClick={toggleMenu}
             >
               • ACCESSORIES
             </Link>
@@ -227,24 +225,28 @@ const HamburgerMenu: React.FC = () => {
           <Link
             href='/lookbooks'
             className='hover:opacity-70 transition duration-300'
+            onClick={toggleMenu}
           >
             LOOKBOOKS
           </Link>
           <Link
             href='/stockists'
             className='hover:opacity-70 transition duration-300'
+            onClick={toggleMenu}
           >
             STOCKISTS
           </Link>
           <Link
             href='/press'
             className='hover:opacity-70 transition duration-300'
+            onClick={toggleMenu}
           >
             PRESS
           </Link>
           <Link
             href='/journal'
             className='hover:opacity-70 transition duration-300'
+            onClick={toggleMenu}
           >
             JOURNAL
           </Link>
