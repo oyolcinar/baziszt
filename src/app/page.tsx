@@ -47,6 +47,9 @@ export default function Home() {
       </div>
       <div className='relative w-full h-screen top-0 left-0'>
         <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
+        <div className='absolute bottom-1/4 left-1/2 transform -translate-x-1/2 font-altesse64 text-bone text-[28px] sm:text-[40px] md:text-[50px]'>
+          Spring - Summer &apos;24
+        </div>
       </div>
 
       <div className='flex flex-col md:flex-row'>
