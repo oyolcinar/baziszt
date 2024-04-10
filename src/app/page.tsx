@@ -12,38 +12,55 @@ import TopsImage from '../../public/Images/topsImage.png';
 import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
-import ProductGroup from './components/ProductGroup/ProductGroup';
-import { dummyProductsArray } from './dummyData/dummyData';
 import Link from 'next/link';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
+  const [threshold, setThreshold] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
     };
-    window.addEventListener('scroll', handleScroll);
+    const updateThreshold = () => {
+      const pageHeight = document.body.scrollHeight;
+      const calculatedThreshold = pageHeight * 0.55;
+      setThreshold(calculatedThreshold);
+    };
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', updateThreshold);
+
+    updateThreshold();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', updateThreshold);
+    };
   }, []);
 
   const imageSize = Math.max(50 - scrollY / 100, 10);
 
+  const isBeyondThreshold = scrollY > threshold;
+
+  const topStyle = `${threshold + 100}px`;
+
   return (
     <main>
-      <div
-        style={{
-          width: `${imageSize}vw`,
-          height: `${imageSize}vh`,
-          position: 'fixed',
-          top: '18%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          zIndex: 4,
-        }}
-      >
-        <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
+      <div style={{ position: 'relative' }}>
+        <div
+          style={{
+            width: `${imageSize}vw`,
+            height: `${imageSize}vh`,
+            position: isBeyondThreshold ? 'absolute' : 'fixed',
+            top: isBeyondThreshold ? topStyle : '18%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            zIndex: 4,
+          }}
+        >
+          <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
+        </div>
       </div>
       <div className='relative w-full h-screen top-0 left-0'>
         <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
