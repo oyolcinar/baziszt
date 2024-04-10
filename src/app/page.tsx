@@ -120,7 +120,7 @@ export default function Home() {
             Our Commitment
           </div>
           <div className='text-bordeux font-quasimoda text-lg flex flex-col items-center'>
-            <div className='mb-2 w-1/2'>
+            <div className='mb-2 w-full md:w-1/2'>
               We had at heart to create an eco-responsible and socially
               conscious brand. We work with collectives of dyers and embroiders
               in forsaken villages in India. We work with collectives of dyers
