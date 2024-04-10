@@ -17,14 +17,16 @@ import Link from 'next/link';
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [threshold, setThreshold] = useState(0);
+  const [logoVisible, setLogoVisible] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrollY(window.scrollY);
+      if (!logoVisible) setLogoVisible(true);
     };
     const updateThreshold = () => {
       const pageHeight = document.body.scrollHeight;
-      const calculatedThreshold = pageHeight * 0.545;
+      const calculatedThreshold = pageHeight * 0.55;
       setThreshold(calculatedThreshold);
     };
 
@@ -32,12 +34,13 @@ export default function Home() {
     window.addEventListener('resize', updateThreshold);
 
     updateThreshold();
+    window.dispatchEvent(new Event('scroll'));
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateThreshold);
     };
-  }, []);
+  }, [logoVisible]);
 
   const imageSize = Math.max(50 - scrollY / 100, 10);
 
@@ -57,6 +60,8 @@ export default function Home() {
             left: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 4,
+            opacity: logoVisible ? 1 : 0,
+            transition: 'opacity 0.5s',
           }}
         >
           <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
