@@ -176,7 +176,7 @@ const HamburgerMenu: React.FC = () => {
           menuOpened ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
-        <div className='flex flex-col justify-center items-start text-2xl md:text-3xl text-bone font-quasimoda gap-6'>
+        <div className='flex flex-col justify-center items-start text-base text-bone font-quasimoda gap-6'>
           <Link
             href='/shop'
             className='hover:opacity-70 transition duration-300'
@@ -184,7 +184,7 @@ const HamburgerMenu: React.FC = () => {
           >
             SHOP
           </Link>
-          <div className='flex flex-col pl-6 text-lg md:text-xl gap-4'>
+          <div className='flex flex-col pl-6 text-base gap-4'>
             <Link
               href='/shop/tops'
               className='hover:opacity-70 transition duration-300'

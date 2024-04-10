@@ -40,13 +40,13 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
 
   return (
     <>
-      <div className='flex justify-between items-center w-full px-6 mb-8 mt-24'>
-        <div className='text-2xl text-bordeux font-quasimoda'>{title}</div>
+      <div className='flex justify-between items-center w-full px-6 mb-4 mt-24'>
+        <div className='text-xl text-bordeux font-quasimoda'>{title}</div>
         <button
           onClick={handleSortChange}
-          className='text-bordeux px-4 py-2 rounded hover:opacity-70 transition duration-300 ease-in-out'
+          className='text-bordeux font-quasimoda px-4 py-2 rounded hover:opacity-70 transition duration-300 ease-in-out'
         >
-          Sort Price {sortOrder === 'asc' ? '↑' : '↓'}
+          Price {sortOrder === 'asc' ? '↑' : '↓'}
         </button>
       </div>
       <div className='flex justify-center w-full mb-20'>

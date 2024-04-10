@@ -5,7 +5,7 @@ import Dummy3 from '../../../public/DummyImages/dummy3.png';
 export const dummyProduct = {
   id: '1',
   slug: '/',
-  name: 'Test',
+  name: 'TEST',
   images: [Dummy1.src, Dummy2.src, Dummy3.src],
   colors: ['black', 'white', 'red'],
   price: '100.00€',

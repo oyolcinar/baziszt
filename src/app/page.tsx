@@ -47,9 +47,6 @@ export default function Home() {
       </div>
       <div className='relative w-full h-screen top-0 left-0'>
         <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
-        <div className='absolute bottom-1/4 left-1/2 transform -translate-x-1/2 font-altesse64 text-bone text-[28px] sm:text-[40px] md:text-[50px]'>
-          Spring - Summer &apos;24
-        </div>
       </div>
 
       <div className='flex flex-col md:flex-row'>
@@ -99,32 +96,27 @@ export default function Home() {
           </Link>
         </div>
       </div>
-      <ProductGroup
-        products={dummyProductsArray}
-        category='all'
-        title={'NEW RELEASES'}
-      />
 
       <div className='w-full flex justify-center my-16'>
         <div className='flex w-3/4 flex-col items-center justify-center'>
-          <div className='font-altesse64 text-bordeux text-5xl sm:tex-6xl md:text-8xl mb-4'>
-            Our commitment
+          <div className='font-altesse64 text-bordeux text-5xl sm:text-6xl md:text-8xl mb-4'>
+            Our Commitment
           </div>
-          <div className='text-bordeux font-altesse24 text-2xl'>
-            <div className='mb-2'>
+          <div className='text-bordeux font-quasimoda text-lg flex flex-col items-center'>
+            <div className='mb-2 text-center'>
               We had at heart to create an eco-responsible and socially
               conscious brand.
             </div>
-            <div className='mb-2'>
+            <div className='mb-2 text-center'>
               We work with collectives of dyers and embroiders in forsaken
               villages in India.
             </div>
-            <div className='mb-2'>
+            <div className='mb-2 text-center'>
               Most of the pieces in this collection were made from hemp, a
               material that is on the rise<br></br>not only for its nice feel on
               the skin but also thanks to the plant not being water intensive.
             </div>
-            <div>
+            <div className='text-center'>
               We create unique clothes from vintage fabrics that tell the
               stories of the past but are made to<br></br>live in the present
               and for many years to come
