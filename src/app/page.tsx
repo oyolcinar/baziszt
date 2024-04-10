@@ -24,7 +24,7 @@ export default function Home() {
     };
     const updateThreshold = () => {
       const pageHeight = document.body.scrollHeight;
-      const calculatedThreshold = pageHeight * 0.55;
+      const calculatedThreshold = pageHeight * 0.545;
       setThreshold(calculatedThreshold);
     };
 
@@ -120,7 +120,18 @@ export default function Home() {
             Our Commitment
           </div>
           <div className='text-bordeux font-quasimoda text-lg flex flex-col items-center'>
-            <div className='mb-2 text-center'>
+            <div className='mb-2 w-1/2'>
+              We had at heart to create an eco-responsible and socially
+              conscious brand. We work with collectives of dyers and embroiders
+              in forsaken villages in India. We work with collectives of dyers
+              and embroiders in forsaken villages in India. Most of the pieces
+              in this collection were made from hemp, a material that is on the
+              rise not only for its nice feel on the skin but also thanks to the
+              plant not being water intensive. We create unique clothes from
+              vintage fabrics that tell the stories of the past but are made to
+              live in the present and for many years to come.
+            </div>
+            {/* <div className='mb-2 text-center'>
               We had at heart to create an eco-responsible and socially
               conscious brand.
             </div>
@@ -137,7 +148,7 @@ export default function Home() {
               We create unique clothes from vintage fabrics that tell the
               stories of the past but are made to<br></br>live in the present
               and for many years to come
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
