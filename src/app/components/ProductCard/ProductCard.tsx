@@ -4,11 +4,14 @@ import Link from 'next/link';
 import { HeartIcon } from '@heroicons/react/24/outline';
 
 export interface Product {
+  id: string;
   slug: string;
   name: string;
   images: string[];
   colors: string[];
   price: string;
+  details?: string;
+  category: string;
   sizes: string[];
 }
 
@@ -36,7 +39,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const shift = -currentImageIndex * imageWidth;
 
   return (
-    <Link href={`/product/${product.slug}`} passHref>
+    <Link href={`/shop/${product.category}/${product.slug}`} passHref>
       <div
         className='relative cursor-pointer group'
         style={{

@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        customMd: '1450px',
+      },
       colors: {
         sandColor: '#6A6B44',
         bordeux: '#370008',
