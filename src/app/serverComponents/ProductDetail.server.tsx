@@ -12,8 +12,6 @@ const ProductDetailServer = () => {
 
   const product = dummyProductsArray.find((p) => p.slug === slug);
 
-  console.log(product);
-
   if (!product) {
     return <div className='text-8xl text-bordeux'>Product not found</div>;
   }
