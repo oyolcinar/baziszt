@@ -37,27 +37,6 @@ const HamburgerMenu: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [hoveredImage, setHoveredImage] = useState('');
   const [isImageVisible, setIsImageVisible] = useState(false);
-  const [isMobileScreen, setIsMobileScreen] = useState(false);
-
-  useEffect(() => {
-    setIsMobileScreen(window.innerWidth < 600);
-    function handleResize() {
-      setIsMobileScreen(window.innerWidth < 600);
-    }
-
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (isMobileScreen) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'auto';
-    }
-  }, [isMobileScreen]);
 
   const toggleMenu = () => {
     if (!menuOpened) {
