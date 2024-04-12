@@ -45,6 +45,14 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   const scaleAmount = isMobileScreen ? 4 : 2;
 
+  useEffect(() => {
+    if (isMobileScreen && isZoomed) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMobileScreen, isZoomed]);
+
   const toggleZoom = useCallback(() => {
     setIsZoomed((prevZoomed) => !prevZoomed);
     setTranslate({ x: 0, y: 0 });
