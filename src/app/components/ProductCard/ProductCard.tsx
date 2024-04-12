@@ -78,7 +78,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             <div
               key={index}
               className='flex-none'
-              style={{ width: `${imageWidth}px`, height: '450px' }}
+              style={{
+                width: `${imageWidth}px`,
+                height: '450px',
+              }}
             >
               <div
                 style={{ width: '350px', height: '100%', position: 'relative' }}

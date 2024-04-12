@@ -2,6 +2,9 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { Product } from '../ProductCard/ProductCard';
 
+import { ShoppingBagIcon } from '@heroicons/react/24/outline';
+import CompleteTheLook from '../CompleteTheLook/CompleteTheLook';
+
 const debounce = <F extends (...args: any[]) => any>(
   func: F,
   waitFor: number,
@@ -30,6 +33,29 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const [isMobileScreen, setIsMobileScreen] = useState(false);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
+  const [colorSelection, setColorSelection] = useState(product.colors[0]);
+  const [sizeSelection, setSizeSelection] = useState(product.sizes[0]);
+  const [isDetails, setIsDetails] = useState(false);
+  const [isDelivery, setIsDelivery] = useState(false);
+  const [isAssistance, setIsAssistance] = useState(false);
+
+  const toggleDetails = () => {
+    setIsDetails(true);
+    setIsDelivery(false);
+    setIsAssistance(false);
+  };
+
+  const toggleDelivery = () => {
+    setIsDetails(false);
+    setIsDelivery(true);
+    setIsAssistance(false);
+  };
+
+  const toggleAssistance = () => {
+    setIsDetails(false);
+    setIsDelivery(false);
+    setIsAssistance(true);
+  };
 
   useEffect(() => {
     setIsMobileScreen(window.innerWidth < 600);
@@ -163,7 +189,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   return (
     <div>
-      <div className='flex'>
+      <div className='flex flex-col md:flex-row'>
         <div
           ref={carouselRef}
           className={`relative overflow-hidden w-full h-full md:w-[58%] ${
@@ -224,6 +250,135 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           >
             →
           </button>
+        </div>
+        <div className='sticky top-0 min-h-[900px] h-[100vh] flex flex-col items-center pt-20 w-[100%] md:w-[42%]'>
+          <div className='text-bordeux font-quasimoda w-[60%] mb-12'>
+            <div className='mb-4'>{product.name}</div>
+            <div>{product.details}</div>
+          </div>
+          <div className='w-[60%] mb-12'>
+            <div>
+              <div className='font-quasimoda text-bordeux text-[12px] mb-4'>
+                {colorSelection.toUpperCase()}
+              </div>
+              <div className='flex gap-4'>
+                {product.colors.map((color, index) => (
+                  <div
+                    key={index}
+                    className={`inline-block pb-[6px] pl-[1px] pr-[1px] ${
+                      colorSelection === color
+                        ? `border-b-2 border-bordeux hover:border-bordeux/70`
+                        : `border-b-2 border-transparent`
+                    }`}
+                    onClick={() => {
+                      setColorSelection(color);
+                    }}
+                  >
+                    <span
+                      className='block w-2 h-2 rounded-full'
+                      style={{
+                        backgroundColor: color,
+                        border:
+                          color === '#ffffff' || color.toLowerCase() === 'white'
+                            ? '1px solid black'
+                            : '1px solid transparent',
+                      }}
+                    ></span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className='border-b-[1px] border-gray-200 w-[60%]'></div>
+          <div className='text-bordeux font-quasimoda w-[60%] mt-6'>
+            <div className='flex justify-between mb-4'>
+              <div className='text-[10px]'>SIZE</div>
+              <div className='text-[10px] hover:opacity-70 transition duration-300'>
+                SIZE GUIDE
+              </div>
+            </div>
+            <div>
+              <div className='flex gap-4'>
+                {product.sizes.map((size, index) => (
+                  <div
+                    key={index}
+                    className={`cursor-pointer hover:opacity-70 transition duration-300 inline-block px-1 pb-2 ${
+                      sizeSelection === size
+                        ? `border-b-2 border-bordeux hover:bordeux/70 hover:border-bordeux/70 transition duration-300`
+                        : 'border-b-2 border-transparent'
+                    }`}
+                    onClick={() => {
+                      setSizeSelection(size);
+                    }}
+                  >
+                    <span key={index}>{size}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className='hidden border border-bordeux h-16 w-[60%] mt-16 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-bordeux text-bordeux hover:text-bone'>
+            <div className='flex justify-between items-center w-[80%]'>
+              <div className='flex gap-2'>
+                <ShoppingBagIcon className='h-4 w-4 font-bold' />
+                <div className='font-quasimoda text-sm'>ADD</div>
+              </div>
+              <div className='font-quasimoda text-sm'>{product.price}</div>
+            </div>
+          </div>
+          <div className='font-quasimoda text-bordeux text-sm flex flex-col md:flex-row md:justify-between w-[60%] mt-20'>
+            <div
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
+                isDetails
+                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
+                  : `border-b border-transparent`
+              }`}
+              onClick={() => {
+                toggleDetails();
+              }}
+            >
+              DETAILS
+            </div>
+            <div
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
+                isDelivery
+                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
+                  : `border-b border-transparent`
+              }`}
+              onClick={() => {
+                toggleDelivery();
+              }}
+            >
+              DELIVERY & RETURNS
+            </div>
+            <div
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 ${
+                isAssistance
+                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
+                  : `border-b border-transparent`
+              }`}
+              onClick={() => {
+                toggleAssistance();
+              }}
+            >
+              ASSISTANCE
+            </div>
+          </div>
+        </div>
+      </div>
+      <CompleteTheLook product={product} />
+      <div className='sticky bottom-0 h-[100px] sm:hidden bg-lightBlue px-2'>
+        <div className='font-quasimoda text-bordeux text-[14px] ml-2'>
+          {product.name}
+        </div>
+        <div className='border border-bordeux h-16 w-[100%] flex justify-center items-center transition duration-300 ease-in-out bg-bordeux hover:bg-bordeux text-bone hover:text-bone'>
+          <div className='flex justify-between items-center w-[80%]'>
+            <div className='flex gap-2'>
+              <ShoppingBagIcon className='h-4 w-4 font-bold' />
+              <div className='font-quasimoda text-sm'>ADD</div>
+            </div>
+            <div className='font-quasimoda text-sm'>{product.price}</div>
+          </div>
         </div>
       </div>
     </div>

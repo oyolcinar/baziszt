@@ -11,6 +11,8 @@ const dummyProduct1 = {
   price: '100.00€',
   sizes: ['S', 'M', 'L'],
   category: 'tops',
+  details:
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit corporis, nostrum repudiandae cumque et dolor nulla ullam expedita? Quis ullam consectetur architecto aliquid. Iusto ad assumenda non quo dolorem.',
 };
 
 const dummyProduct2 = {
@@ -22,6 +24,8 @@ const dummyProduct2 = {
   price: '150.00€',
   sizes: ['M', 'L', 'XL'],
   category: 'bottoms',
+  details:
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit corporis, nostrum repudiandae cumque et dolor nulla ullam expedita? Quis ullam consectetur architecto aliquid. Iusto ad assumenda non quo dolorem.',
 };
 
 const dummyProduct3 = {
@@ -33,6 +37,8 @@ const dummyProduct3 = {
   price: '75.00€',
   sizes: ['One size'],
   category: 'accessories',
+  details:
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit corporis, nostrum repudiandae cumque et dolor nulla ullam expedita? Quis ullam consectetur architecto aliquid. Iusto ad assumenda non quo dolorem.',
 };
 
 export { dummyProduct1, dummyProduct2, dummyProduct3 };
