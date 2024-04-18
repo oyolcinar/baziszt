@@ -1,8 +1,15 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  CSSProperties,
+} from 'react';
 import Image from 'next/image';
 import { Product } from '../ProductCard/ProductCard';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
+import { HeartIcon } from '@heroicons/react/24/outline';
 import CompleteTheLook from '../CompleteTheLook/CompleteTheLook';
 
 const debounce = <F extends (...args: any[]) => any>(
@@ -31,7 +38,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [isMobileScreen, setIsMobileScreen] = useState(false);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(
+    null,
+  );
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [colorSelection, setColorSelection] = useState(product.colors[0]);
   const [sizeSelection, setSizeSelection] = useState(product.sizes[0]);
@@ -113,13 +122,24 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     (event: any) => {
       if (!isZoomed) return;
 
-      const touches = event.type.includes('touch')
-        ? event.changedTouches
-        : null;
-      const x = touches ? touches[0].clientX : event.clientX;
-      const y = touches ? touches[0].clientY : event.clientY;
+      const rect = carouselRef.current?.getBoundingClientRect();
+      const x = event.clientX;
+      const y = event.clientY;
 
-      if (!x || !y) return;
+      if (
+        !rect ||
+        x < rect.left ||
+        x > rect.right ||
+        y < rect.top ||
+        y > rect.bottom
+      ) {
+        return;
+      }
+
+      if (!mousePos) {
+        setMousePos({ x, y });
+        return;
+      }
 
       let deltaX = mousePos.x - x;
       let deltaY = mousePos.y - y;
@@ -161,14 +181,23 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     (event: any) => {
       if (!isZoomed) return;
 
-      const touches = event.touches;
-      const x = touches && touches[0] ? touches[0].clientX : event.clientX;
-      const y = touches && touches[0] ? touches[0].clientY : event.clientY;
-
+      const x = event.clientX;
+      const y = event.clientY;
       setMousePos({ x, y });
     },
     [isZoomed],
   );
+
+  useEffect(() => {
+    const handleMouseUp = () => {
+      setMousePos(null);
+    };
+
+    window.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   useEffect(() => {
     const handleTouchMove = (event: any) => handleMove(event);
@@ -192,16 +221,17 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       <div className='flex flex-col md:flex-row'>
         <div
           ref={carouselRef}
-          className={`relative overflow-hidden w-full h-full md:w-[58%] ${
+          className={`relative w-full h-full md:w-[58%] ${
             isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
           }`}
-          style={{ position: 'relative' }}
+          style={{ position: 'relative', contain: 'paint' }}
         >
           <div
             className='flex transition-transform duration-500 ease-in-out'
             style={{
               transform: `translateX(${shift}px)`,
               width: `${product.images.length * carouselWidth}px`,
+              zIndex: 2,
             }}
           >
             {product.images.map((image, index) => (
@@ -212,13 +242,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   width: `${carouselWidth}px`,
                   overflow: 'hidden',
                 }}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMove}
-                onMouseUp={handleMove}
-                onTouchStart={handleMouseDown}
-                onTouchMove={handleMove}
-                onTouchEnd={handleMove}
-                onClick={toggleZoom}
+                // onMouseDown={handleMouseDown}
+                // onMouseMove={handleMove}
+                // onMouseUp={handleMove}
+                // onTouchStart={handleMouseDown}
+                // onTouchMove={handleMove}
+                // onTouchEnd={handleMove}
+                // onClick={toggleZoom}
               >
                 <Image
                   key={isZoomed.toString() + index}
@@ -236,20 +266,54 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               </div>
             ))}
           </div>
-          <button
-            onClick={() => handleImageChange('prev')}
-            className='absolute left-0 p-4 top-1/2 -translate-y-1/2 text-bone'
-            style={{ zIndex: 2 }}
+          <div
+            className='absolute inset-0'
+            // onMouseDown={handleMouseDown}
+            // onMouseMove={handleMove}
+            // onMouseUp={handleMove}
+            // onTouchStart={handleMouseDown}
+            // onTouchMove={handleMove}
+            // onTouchEnd={handleMove}
+            // onClick={toggleZoom}
           >
-            ←
-          </button>
-          <button
-            onClick={() => handleImageChange('next')}
-            className='absolute right-0 p-4 top-1/2 -translate-y-1/2 text-bone'
-            style={{ zIndex: 2 }}
+            <div className='relative h-[90%] w-full'>
+              <div className='sticky top-[50%] -translate-y-1/2 flex justify-between'>
+                <button
+                  onClick={() => handleImageChange('prev')}
+                  className='left-0 p-4 text-bone'
+                  style={{ zIndex: 3 }}
+                >
+                  ←
+                </button>
+                <button
+                  onClick={() => handleImageChange('next')}
+                  className='right-0 p-4 text-bone'
+                  style={{ zIndex: 3 }}
+                >
+                  →
+                </button>
+              </div>
+            </div>
+          </div>
+          <div
+            className='absolute inset-0 '
+            onMouseDown={handleMouseDown}
+            onMouseMove={handleMove}
+            onMouseUp={handleMove}
+            onTouchStart={handleMouseDown}
+            onTouchMove={handleMove}
+            onTouchEnd={handleMove}
+            onClick={toggleZoom}
           >
-            →
-          </button>
+            <div className='relative h-full w-full'>
+              <div className='sticky top-[95%] -translate-y-1/2 flex justify-between'>
+                <div className='ml-4'>Test</div>
+                <div>
+                  <HeartIcon className='text-bone h-4 w-4 mr-4' />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div className='sticky top-0 min-h-[900px] h-[100vh] flex flex-col items-center pt-20 w-[100%] md:w-[42%]'>
           <div className='text-bordeux font-quasimoda w-[60%] mb-12'>
@@ -265,10 +329,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 {product.colors.map((color, index) => (
                   <div
                     key={index}
-                    className={`inline-block pb-[6px] pl-[1px] pr-[1px] ${
+                    className={`inline-block pb-[6px] pl-[1px] pr-[1px] border-b-2 transition-colors duration-500 ease-in-out ${
                       colorSelection === color
-                        ? `border-b-2 border-bordeux hover:border-bordeux/70`
-                        : `border-b-2 border-transparent`
+                        ? 'border-bordeux'
+                        : 'border-transparent'
                     }`}
                     onClick={() => {
                       setColorSelection(color);
@@ -293,7 +357,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           <div className='text-bordeux font-quasimoda w-[60%] mt-6'>
             <div className='flex justify-between mb-4'>
               <div className='text-[10px]'>SIZE</div>
-              <div className='text-[10px] hover:opacity-70 transition duration-300'>
+              <div className='cursor-pointer text-[10px] hover:opacity-70 transition duration-300'>
                 SIZE GUIDE
               </div>
             </div>

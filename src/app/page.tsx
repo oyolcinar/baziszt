@@ -17,9 +17,14 @@ import Link from 'next/link';
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [threshold, setThreshold] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
   const [logoVisible, setLogoVisible] = useState(false);
 
   useEffect(() => {
+    const updateWindowHeight = () => {
+      setWindowHeight(window.innerHeight);
+    };
+
     const handleScroll = () => {
       setScrollY(window.scrollY);
       if (!logoVisible) setLogoVisible(true);
@@ -30,13 +35,16 @@ export default function Home() {
       setThreshold(calculatedThreshold);
     };
 
+    window.addEventListener('resize', updateWindowHeight);
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', updateThreshold);
 
+    updateWindowHeight();
     updateThreshold();
     window.dispatchEvent(new Event('scroll'));
 
     return () => {
+      window.removeEventListener('resize', updateWindowHeight);
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateThreshold);
     };
@@ -46,7 +54,9 @@ export default function Home() {
 
   const isBeyondThreshold = scrollY > threshold;
 
-  const topStyle = `${threshold + 100}px`;
+  const topPixels = windowHeight * 0.18;
+
+  const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
 
   return (
     <main>
@@ -56,12 +66,12 @@ export default function Home() {
             width: `${imageSize}vw`,
             height: `${imageSize}vh`,
             position: isBeyondThreshold ? 'absolute' : 'fixed',
-            top: isBeyondThreshold ? topStyle : '18%',
+            top: topStyle,
             left: '50%',
             transform: 'translate(-50%, -50%)',
             zIndex: 4,
             opacity: logoVisible ? 1 : 0,
-            transition: 'opacity 0.5s',
+            transition: 'transform 0.5s ease, opacity 0.5s ease',
           }}
         >
           <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
