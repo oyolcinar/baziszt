@@ -120,19 +120,18 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   const handleMove = useCallback(
     (event: any) => {
-      if (!isZoomed) return;
+      if (!isZoomed || !carouselRef.current) return;
 
-      const rect = carouselRef.current?.getBoundingClientRect();
-      const x = event.clientX;
-      const y = event.clientY;
+      const rect = carouselRef.current.getBoundingClientRect();
+      const x = event.type.includes('touch')
+        ? event.touches[0].clientX
+        : event.clientX;
+      const y = event.type.includes('touch')
+        ? event.touches[0].clientY
+        : event.clientY;
 
-      if (
-        !rect ||
-        x < rect.left ||
-        x > rect.right ||
-        y < rect.top ||
-        y > rect.bottom
-      ) {
+      if (x < rect.left || x > rect.right || y < rect.top || y > rect.bottom) {
+        setMousePos(null);
         return;
       }
 
@@ -145,8 +144,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       let deltaY = mousePos.y - y;
 
       setTranslate((prev) => {
-        const newX = prev.x + deltaX;
-        const newY = prev.y + deltaY;
+        let newX = prev.x - deltaX;
+        let newY = prev.y - deltaY;
 
         const maxTranslateX = Math.max(
           0,
@@ -157,18 +156,12 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           (carouselWidth * scaleAmount - carouselWidth) / 2,
         );
 
-        const constrainedX = Math.min(
-          Math.max(newX, -maxTranslateX),
-          maxTranslateX,
-        );
-        const constrainedY = Math.min(
-          Math.max(newY, -maxTranslateY),
-          maxTranslateY,
-        );
+        newX = Math.min(Math.max(newX, -maxTranslateX), maxTranslateX);
+        newY = Math.min(Math.max(newY, -maxTranslateY), maxTranslateY);
 
         return {
-          x: constrainedX,
-          y: constrainedY,
+          x: newX,
+          y: newY,
         };
       });
 
@@ -179,13 +172,26 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   const handleMouseDown = useCallback(
     (event: any) => {
-      if (!isZoomed) return;
+      if (!isZoomed || !carouselRef.current) return;
 
-      const x = event.clientX;
-      const y = event.clientY;
-      setMousePos({ x, y });
+      const rect = carouselRef.current.getBoundingClientRect();
+      const x = event.type.includes('touch')
+        ? event.touches[0].clientX
+        : event.clientX;
+      const y = event.type.includes('touch')
+        ? event.touches[0].clientY
+        : event.clientY;
+
+      if (
+        x >= rect.left &&
+        x <= rect.right &&
+        y >= rect.top &&
+        y <= rect.bottom
+      ) {
+        setMousePos({ x, y });
+      }
     },
-    [isZoomed],
+    [isZoomed, carouselRef],
   );
 
   useEffect(() => {
@@ -222,7 +228,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         <div
           ref={carouselRef}
           className={`relative w-full h-full md:w-[58%] ${
-            isZoomed ? 'cursor-zoom-out' : 'cursor-zoom-in'
+            isZoomed ? 'cursor-all-scroll' : 'cursor-zoom-in'
           }`}
           style={{ position: 'relative', contain: 'paint' }}
         >
@@ -268,35 +274,6 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
           <div
             className='absolute inset-0'
-            // onMouseDown={handleMouseDown}
-            // onMouseMove={handleMove}
-            // onMouseUp={handleMove}
-            // onTouchStart={handleMouseDown}
-            // onTouchMove={handleMove}
-            // onTouchEnd={handleMove}
-            // onClick={toggleZoom}
-          >
-            <div className='relative h-[90%] w-full'>
-              <div className='sticky top-[50%] -translate-y-1/2 flex justify-between'>
-                <button
-                  onClick={() => handleImageChange('prev')}
-                  className='left-0 p-4 text-bone'
-                  style={{ zIndex: 3 }}
-                >
-                  ←
-                </button>
-                <button
-                  onClick={() => handleImageChange('next')}
-                  className='right-0 p-4 text-bone'
-                  style={{ zIndex: 3 }}
-                >
-                  →
-                </button>
-              </div>
-            </div>
-          </div>
-          <div
-            className='absolute inset-0 '
             onMouseDown={handleMouseDown}
             onMouseMove={handleMove}
             onMouseUp={handleMove}
@@ -306,10 +283,34 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             onClick={toggleZoom}
           >
             <div className='relative h-full w-full'>
+              <div className='sticky top-[50vh] -translate-y-1/2 pb-[80px]'>
+                <div className='flex justify-between'>
+                  <button
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleImageChange('prev');
+                    }}
+                    className='cursor-pointer left-0 p-4 text-bone'
+                    style={{ zIndex: 3 }}
+                  >
+                    ←
+                  </button>
+                  <button
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      handleImageChange('next');
+                    }}
+                    className='cursor-pointer right-0 p-4 text-bone'
+                    style={{ zIndex: 3 }}
+                  >
+                    →
+                  </button>
+                </div>
+              </div>
               <div className='sticky top-[95%] -translate-y-1/2 flex justify-between'>
-                <div className='ml-4'>Test</div>
+                <div className='ml-4 cursor-pointer'>Test</div>
                 <div>
-                  <HeartIcon className='text-bone h-4 w-4 mr-4' />
+                  <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
                 </div>
               </div>
             </div>
