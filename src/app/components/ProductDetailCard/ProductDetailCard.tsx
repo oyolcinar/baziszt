@@ -33,7 +33,8 @@ interface ProductDetailCardProps {
 }
 
 const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(1);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const [carouselWidth, setCarouselWidth] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -106,17 +107,35 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     return () => window.removeEventListener('resize', debouncedHandleResize);
   }, [updateWidth]);
 
-  const handleImageChange = (direction: 'next' | 'prev') => {
-    setCurrentImageIndex((prevIndex) => {
-      const newIndex =
-        direction === 'next'
-          ? (prevIndex + 1) % product.images.length
-          : (prevIndex - 1 + product.images.length) % product.images.length;
-      return newIndex;
-    });
+  const handleImageChange = (
+    direction: 'next' | 'prev',
+    e: React.MouseEvent<HTMLButtonElement>,
+  ) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (!isTransitioning) {
+      let newIndex = currentImageIndex + (direction === 'next' ? 1 : -1);
+      setIsTransitioning(true);
+      setCurrentImageIndex(newIndex);
+    }
+  };
+
+  const handleTransitionEnd = () => {
+    setIsTransitioning(false);
+    if (currentImageIndex <= 0) {
+      setCurrentImageIndex(product.images.length);
+    } else if (currentImageIndex >= product.images.length + 1) {
+      setCurrentImageIndex(1);
+    }
   };
 
   const shift = -currentImageIndex * carouselWidth;
+  const enhancedImages = [
+    product.images[product.images.length - 1],
+    ...product.images,
+    product.images[0],
+  ];
 
   const handleMove = useCallback(
     (event: any) => {
@@ -228,19 +247,24 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         <div
           ref={carouselRef}
           className={`relative w-full h-full md:w-[58%] ${
-            isZoomed ? 'cursor-all-scroll' : 'cursor-zoom-in'
+            isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'
           }`}
           style={{ position: 'relative', contain: 'paint' }}
         >
           <div
-            className='flex transition-transform duration-500 ease-in-out'
+            className={`flex ${
+              isTransitioning
+                ? 'transition-transform duration-500 ease-in-out'
+                : ''
+            }`}
             style={{
               transform: `translateX(${shift}px)`,
               width: `${product.images.length * carouselWidth}px`,
               zIndex: 2,
             }}
+            onTransitionEnd={handleTransitionEnd}
           >
-            {product.images.map((image, index) => (
+            {enhancedImages.map((image, index) => (
               <div
                 key={index}
                 className='flex-none relative h-[100vh] md:h-[1100px]'
@@ -286,20 +310,22 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               <div className='sticky top-[50vh] -translate-y-1/2 pb-[80px]'>
                 <div className='flex justify-between'>
                   <button
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleImageChange('prev');
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleImageChange('prev', e);
                     }}
+                    disabled={isTransitioning}
                     className='cursor-pointer left-0 p-4 text-bone'
                     style={{ zIndex: 3 }}
                   >
                     ←
                   </button>
                   <button
-                    onClick={(event) => {
-                      event.stopPropagation();
-                      handleImageChange('next');
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleImageChange('next', e);
                     }}
+                    disabled={isTransitioning}
                     className='cursor-pointer right-0 p-4 text-bone'
                     style={{ zIndex: 3 }}
                   >

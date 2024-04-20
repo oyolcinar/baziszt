@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      cursor: {
+        zoomInCustom: 'url(/Cursors/zoomin1.png), auto',
+        dragCustom: 'url(/Cursors/drag1.png), auto',
+      },
       screens: {
         customMd: '1450px',
       },
