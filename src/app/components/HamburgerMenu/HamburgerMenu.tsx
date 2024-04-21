@@ -121,7 +121,7 @@ const HamburgerMenu: React.FC = () => {
       setTimeout(() => {
         setLineOpacities(['opacity-100', 'opacity-0', 'opacity-100']);
         toggleStitch(lineImages[0].length - 1, undefined, true, false, true);
-      }, 15); // Short pause before starting the reverse sequence
+      }, 15);
     });
   };
 

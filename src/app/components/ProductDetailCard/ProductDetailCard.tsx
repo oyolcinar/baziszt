@@ -1,16 +1,11 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  CSSProperties,
-} from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import { Product } from '../ProductCard/ProductCard';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import CompleteTheLook from '../CompleteTheLook/CompleteTheLook';
+import DetailsMenu from '../DetailsMenu/DetailsMenu';
 
 const debounce = <F extends (...args: any[]) => any>(
   func: F,
@@ -45,27 +40,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
   const [colorSelection, setColorSelection] = useState(product.colors[0]);
   const [sizeSelection, setSizeSelection] = useState(product.sizes[0]);
-  const [isDetails, setIsDetails] = useState(false);
-  const [isDelivery, setIsDelivery] = useState(false);
-  const [isAssistance, setIsAssistance] = useState(false);
-
-  const toggleDetails = () => {
-    setIsDetails(true);
-    setIsDelivery(false);
-    setIsAssistance(false);
-  };
-
-  const toggleDelivery = () => {
-    setIsDetails(false);
-    setIsDelivery(true);
-    setIsAssistance(false);
-  };
-
-  const toggleAssistance = () => {
-    setIsDetails(false);
-    setIsDelivery(false);
-    setIsAssistance(true);
-  };
+  const [detailsMenu, setDetailsMenu] = useState('');
 
   useEffect(() => {
     setIsMobileScreen(window.innerWidth < 600);
@@ -420,36 +395,36 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           <div className='font-quasimoda text-bordeux text-sm flex flex-col md:flex-row md:justify-between w-[60%] mt-20'>
             <div
               className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
-                isDetails
+                detailsMenu === 'details'
                   ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
               onClick={() => {
-                toggleDetails();
+                setDetailsMenu('details');
               }}
             >
               DETAILS
             </div>
             <div
               className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
-                isDelivery
+                detailsMenu === 'delivery'
                   ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
               onClick={() => {
-                toggleDelivery();
+                setDetailsMenu('delivery');
               }}
             >
               DELIVERY & RETURNS
             </div>
             <div
               className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 ${
-                isAssistance
+                detailsMenu === 'assistance'
                   ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
               onClick={() => {
-                toggleAssistance();
+                setDetailsMenu('assistance');
               }}
             >
               ASSISTANCE
@@ -472,6 +447,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
+      {detailsMenu && (
+        <DetailsMenu
+          menu={detailsMenu}
+          setMenu={setDetailsMenu}
+          detailText={product.details}
+        />
+      )}
     </div>
   );
 };
