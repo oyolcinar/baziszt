@@ -172,11 +172,11 @@ const HamburgerMenu: React.FC = () => {
         ))}
       </div>
       <div
-        className={`fixed top-0 left-0 h-full w-full md:w-[40%] bg-bordeux transform flex justify-start items-center pl-[60px] ${
+        className={`fixed top-0 left-0 h-[100vh] w-full md:w-[40%] bg-bordeux transform flex justify-start items-center pl-[60px] ${
           menuOpened ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
-        <div className='flex flex-col justify-center items-start text-base text-bone font-quasimoda gap-6'>
+        <div className='flex flex-col justify-center items-start text-base text-bone font-quasimoda gap-6 overflow-y-auto h-full w-full'>
           <Link
             href='/shop'
             className='hover:opacity-70 transition duration-300'
