@@ -51,9 +51,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     product.images[0],
   ];
 
-  useEffect(() => {
-    console.log(`Current Index: ${currentImageIndex}`);
-  }, [currentImageIndex]);
+  // useEffect(() => {
+  //   console.log(`Current Index: ${currentImageIndex}`);
+  // }, [currentImageIndex]);
 
   return (
     <Link href={`/shop/${product.category}/${product.slug}`} passHref>

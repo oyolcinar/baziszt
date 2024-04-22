@@ -96,7 +96,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
           </div>
         )}
         {menu !== 'sizeMenu' && (
-          <div className='fixed font-quasimoda text-bone text-sm flex flex-col md:flex-row md:justify-between w-[60%] bottom-10'>
+          <div className='fixed font-quasimoda text-bone text-sm flex flex-col lg:flex-row md:justify-between w-[60%] bottom-10'>
             <div
               className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 mb-4 md:mb-0 ${
                 menu === 'details'

@@ -4,6 +4,7 @@ import { Product } from '../ProductCard/ProductCard';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import CompleteTheLook from '../CompleteTheLook/CompleteTheLook';
 import DetailsMenu from '../DetailsMenu/DetailsMenu';
 
@@ -41,6 +42,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const [colorSelection, setColorSelection] = useState(product.colors[0]);
   const [sizeSelection, setSizeSelection] = useState(product.sizes[0]);
   const [detailsMenu, setDetailsMenu] = useState('');
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     setIsMobileScreen(window.innerWidth < 600);
@@ -216,6 +218,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     };
   }, [handleMove]);
 
+  const toggleFavorite = () => {
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  };
+
   return (
     <div>
       <div className='flex flex-col md:flex-row'>
@@ -309,15 +315,50 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 </div>
               </div>
               <div className='sticky top-[95%] -translate-y-1/2 flex justify-between'>
-                <div className='ml-4 cursor-pointer'>Test</div>
-                <div>
-                  <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
+                <div
+                  className='cursor-pointer ml-4 flex justify-center space-x-2 mt-4'
+                  onClick={(e) => {
+                    e.preventDefault;
+                    e.stopPropagation();
+                  }}
+                >
+                  {product.images.map((image, index) => (
+                    <div
+                      key={index}
+                      className='w-4 h-4 flex justify-center items-center'
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setCurrentImageIndex(index + 1);
+                      }}
+                    >
+                      <button
+                        className={`h-2 w-2 rounded-full cursor-pointer border ${
+                          currentImageIndex === index + 1
+                            ? 'bg-bordeux border-bordeux'
+                            : 'bg-transparent border-bone'
+                        }`}
+                        aria-label={`Go to image ${index + 1}`}
+                      ></button>
+                    </div>
+                  ))}
+                </div>
+                <div
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite();
+                  }}
+                >
+                  {isFavorite ? (
+                    <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
+                  ) : (
+                    <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                  )}
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className='sticky top-0 min-h-[900px] h-[100vh] flex flex-col items-center pt-20 w-[100%] md:w-[42%]'>
+        <div className='sticky top-0 min-h-[760px] md:min-h-[900px] h-[100vh] flex flex-col items-center pt-20 w-[100%] md:w-[42%]'>
           <div className='text-bordeux font-quasimoda w-[60%] mb-12'>
             <div className='mb-4'>{product.name}</div>
             <div>{product.details}</div>
@@ -397,7 +438,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               <div className='font-quasimoda text-sm'>{product.price}</div>
             </div>
           </div>
-          <div className='font-quasimoda text-bordeux text-sm flex flex-col md:flex-row md:justify-between w-[60%] mt-20'>
+          <div className='font-quasimoda text-bordeux text-sm flex flex-col lg:flex-row md:justify-between w-[60%] mt-20'>
             <div
               className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
                 detailsMenu === 'details'
@@ -437,9 +478,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
-      <CompleteTheLook product={product} />
-      <div className='sticky bottom-0 h-[100px] sm:hidden bg-lightBlue px-2'>
-        <div className='font-quasimoda text-bordeux text-[14px] ml-2'>
+      <div className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-sandColor px-2'>
+        <div className='font-quasimoda text-bone text-[14px] ml-2'>
           {product.name}
         </div>
         <div className='border border-bordeux h-16 w-[100%] flex justify-center items-center transition duration-300 ease-in-out bg-bordeux hover:bg-bordeux text-bone hover:text-bone'>
@@ -452,6 +492,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
+      <CompleteTheLook product={product} />
       {detailsMenu && (
         <DetailsMenu
           product={product}
