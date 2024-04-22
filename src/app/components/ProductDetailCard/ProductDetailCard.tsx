@@ -349,9 +349,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   }}
                 >
                   {isFavorite ? (
-                    <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
-                  ) : (
                     <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                  ) : (
+                    <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
                   )}
                 </div>
               </div>
