@@ -16,6 +16,11 @@ const DetailsMenu: React.FC<DetailProps> = ({
   product,
 }) => {
   const [visible, setVisible] = useState(false);
+  const [allowAnimation, setAllowAnimation] = useState(true); // New state to control animations
+
+  const toggleAnimationControl = () => {
+    setAllowAnimation(!allowAnimation);
+  };
 
   useEffect(() => {
     if (menu !== '') {
@@ -52,6 +57,8 @@ const DetailsMenu: React.FC<DetailProps> = ({
             isOpen={visible}
             toggle={toggleMenu}
             onAnimationComplete={() => setMenu('')}
+            allowAnimation={allowAnimation}
+            setAllowAnimation={setAllowAnimation}
           />
         </div>
         {menu === 'details' && (
@@ -97,6 +104,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
                   : `border-b border-transparent`
               }`}
               onClick={() => {
+                setAllowAnimation(false);
                 setMenu('details');
               }}
             >
@@ -109,6 +117,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
                   : `border-b border-transparent`
               }`}
               onClick={() => {
+                setAllowAnimation(false);
                 setMenu('delivery');
               }}
             >
@@ -121,6 +130,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
                   : `border-b border-transparent`
               }`}
               onClick={() => {
+                setAllowAnimation(false);
                 setMenu('assistance');
               }}
             >

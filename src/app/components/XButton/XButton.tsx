@@ -11,15 +11,19 @@ import whiteLine4 from '../../../../public/Hamburger/whiteLine4.png';
 import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
 
 interface XButtonProps {
+  allowAnimation: boolean;
   isOpen: boolean;
   toggle: () => void;
   onAnimationComplete: () => void;
+  setAllowAnimation: (allow: boolean) => void;
 }
 
 const XButton: React.FC<XButtonProps> = ({
   isOpen,
   toggle,
   onAnimationComplete,
+  allowAnimation,
+  setAllowAnimation,
 }) => {
   const lineImages = useMemo(
     () => [
@@ -46,6 +50,7 @@ const XButton: React.FC<XButtonProps> = ({
   }, []);
 
   const animateLinesOpen = useCallback(() => {
+    if (!allowAnimation) return;
     if (!animationReady) return;
 
     lineImages.forEach((line, lineIndex) => {
@@ -67,9 +72,10 @@ const XButton: React.FC<XButtonProps> = ({
         }, 100 * imgIndex + 400 * lineIndex);
       });
     });
-  }, [lineImages, animationReady, onAnimationComplete]);
+  }, [lineImages, animationReady, onAnimationComplete, allowAnimation]);
 
   const animateLinesClose = useCallback(() => {
+    if (!allowAnimation) return;
     if (!animationReady) return;
 
     [...lineImages].reverse().forEach((line, reversedLineIndex) => {
@@ -87,13 +93,13 @@ const XButton: React.FC<XButtonProps> = ({
               ),
             );
             if (lineIndex === 3) {
-              setTimeout(onAnimationComplete, 300);
+              onAnimationComplete();
             }
           }
         }, 100 * reversedImgIndex + 400 * reversedLineIndex);
       });
     });
-  }, [lineImages, onAnimationComplete, animationReady]);
+  }, [lineImages, onAnimationComplete, animationReady, allowAnimation]);
 
   useEffect(() => {
     if (animationReady) {
@@ -109,6 +115,7 @@ const XButton: React.FC<XButtonProps> = ({
     <div
       className='flex flex-col items-center gap-2 cursor-pointer z-50'
       onClick={(e) => {
+        setAllowAnimation(true);
         toggle();
       }}
     >
