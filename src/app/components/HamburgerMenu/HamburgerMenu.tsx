@@ -176,7 +176,7 @@ const HamburgerMenu: React.FC = () => {
           menuOpened ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
-        <div className='flex flex-col justify-center items-start text-base text-bone font-quasimoda gap-6 overflow-y-auto h-full w-full'>
+        <div className='flex flex-col justify-start items-start text-base text-bone font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <Link
             href='/shop'
             className='hover:opacity-70 transition duration-300'
@@ -259,9 +259,9 @@ const HamburgerMenu: React.FC = () => {
               <div
                 className={`transition-opacity duration-300 ${
                   isImageVisible ? 'opacity-100' : 'opacity-0'
-                } w-full h-[300px] overflow-hidden`}
+                } w-full h-[30%] overflow-hidden`}
               >
-                <div className='fixed bottom-0 left-0 h-[200px] w-full'>
+                <div className='fixed bottom-0 left-0 h-[30%] w-full'>
                   <Image
                     src={hoveredImage}
                     alt='Test Image'
