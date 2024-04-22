@@ -111,7 +111,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
               DETAILS
             </div>
             <div
-              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 mb-4 md:mb-0 ${
                 menu === 'delivery'
                   ? `border-b-2 border-bone hover:border-bone/70`
                   : `border-b border-transparent`
