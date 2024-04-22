@@ -13,9 +13,14 @@ import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
 interface XButtonProps {
   isOpen: boolean;
   toggle: () => void;
+  onAnimationComplete: () => void;
 }
 
-const XButton: React.FC<XButtonProps> = ({ isOpen, toggle }) => {
+const XButton: React.FC<XButtonProps> = ({
+  isOpen,
+  toggle,
+  onAnimationComplete,
+}) => {
   const lineImages = useMemo(
     () => [
       [whiteLine1, whiteLine2, whiteLine3, whiteLine4],
@@ -30,7 +35,19 @@ const XButton: React.FC<XButtonProps> = ({ isOpen, toggle }) => {
     'opacity-100',
   ]);
 
+  const [animationReady, setAnimationReady] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAnimationReady(true);
+    }, 100);
+
+    return () => clearTimeout(timeout);
+  }, []);
+
   const animateLinesOpen = useCallback(() => {
+    if (!animationReady) return;
+
     lineImages.forEach((line, lineIndex) => {
       line.forEach((_, imgIndex) => {
         setTimeout(() => {
@@ -43,13 +60,18 @@ const XButton: React.FC<XButtonProps> = ({ isOpen, toggle }) => {
                 idx === lineIndex ? 'opacity-100' : opacity,
               ),
             );
+            if (lineIndex === 0) {
+              setTimeout(onAnimationComplete, 300);
+            }
           }
         }, 100 * imgIndex + 400 * lineIndex);
       });
     });
-  }, [lineImages]);
+  }, [lineImages, animationReady, onAnimationComplete]);
 
   const animateLinesClose = useCallback(() => {
+    if (!animationReady) return;
+
     [...lineImages].reverse().forEach((line, reversedLineIndex) => {
       const lineIndex = lineImages.length - 1 - reversedLineIndex;
       [...line].reverse().forEach((_, reversedImgIndex) => {
@@ -64,19 +86,24 @@ const XButton: React.FC<XButtonProps> = ({ isOpen, toggle }) => {
                 idx === lineIndex ? 'opacity-0' : opacity,
               ),
             );
+            if (lineIndex === 3) {
+              setTimeout(onAnimationComplete, 300);
+            }
           }
         }, 100 * reversedImgIndex + 400 * reversedLineIndex);
       });
     });
-  }, [lineImages]);
+  }, [lineImages, onAnimationComplete, animationReady]);
 
   useEffect(() => {
-    if (!isOpen) {
-      animateLinesOpen();
-    } else {
-      animateLinesClose();
+    if (animationReady) {
+      if (isOpen) {
+        animateLinesClose();
+      } else {
+        animateLinesOpen();
+      }
     }
-  }, [isOpen, animateLinesOpen, animateLinesClose]);
+  }, [isOpen, animationReady, animateLinesOpen, animateLinesClose]);
 
   return (
     <div
@@ -98,6 +125,7 @@ const XButton: React.FC<XButtonProps> = ({ isOpen, toggle }) => {
             position: 'absolute',
             width: '30px',
             height: '8px',
+            transition: 'transform 300ms ease-in-out',
           }}
         >
           <Image

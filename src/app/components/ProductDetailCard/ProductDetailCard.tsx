@@ -359,7 +359,12 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           <div className='text-bordeux font-quasimoda w-[60%] mt-6'>
             <div className='flex justify-between mb-4'>
               <div className='text-[10px]'>SIZE</div>
-              <div className='cursor-pointer text-[10px] hover:opacity-70 transition duration-300'>
+              <div
+                className='cursor-pointer text-[10px] hover:opacity-70 transition duration-300'
+                onClick={() => {
+                  setDetailsMenu('sizeMenu');
+                }}
+              >
                 SIZE GUIDE
               </div>
             </div>
@@ -449,6 +454,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       </div>
       {detailsMenu && (
         <DetailsMenu
+          product={product}
           menu={detailsMenu}
           setMenu={setDetailsMenu}
           detailText={product.details}

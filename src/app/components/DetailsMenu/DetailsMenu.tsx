@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
 import XButton from '../XButton/XButton';
+import { Product } from '../ProductCard/ProductCard';
 
 export interface DetailProps {
   detailText?: string;
   menu: string;
   setMenu: (menu: string) => void;
+  product: Product;
 }
 
-const DetailsMenu: React.FC<DetailProps> = ({ detailText, menu, setMenu }) => {
+const DetailsMenu: React.FC<DetailProps> = ({
+  detailText,
+  menu,
+  setMenu,
+  product,
+}) => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,7 +32,7 @@ const DetailsMenu: React.FC<DetailProps> = ({ detailText, menu, setMenu }) => {
   return (
     <>
       <div
-        className={`fixed top-0 right-0 h-full w-full md:w-[42%] bg-bordeux transform flex justify-start items-center pr-[60px] ${
+        className={`fixed top-0 right-0 h-full w-full md:w-[42%] bg-bordeux transform flex flex-col justify-start items-center ${
           visible ? '-translate-x-0' : 'translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
@@ -41,46 +48,86 @@ const DetailsMenu: React.FC<DetailProps> = ({ detailText, menu, setMenu }) => {
             marginRight: 30,
           }}
         >
-          <XButton isOpen={visible} toggle={toggleMenu} />
+          <XButton
+            isOpen={visible}
+            toggle={toggleMenu}
+            onAnimationComplete={() => setMenu('')}
+          />
         </div>
-        <div className='font-quasimoda text-bone text-sm flex flex-col md:flex-row md:justify-between w-[60%] mt-20'>
-          <div
-            className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 mb-4 md:mb-0 ${
-              menu === 'details'
-                ? `border-b-2 border-bone hover:border-bone/70`
-                : `border-b border-transparent`
-            }`}
-            onClick={() => {
-              setMenu('details');
-            }}
-          >
-            DETAILS
+        {menu === 'details' && (
+          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+            <div className='mb-4'>{product.name}</div>
+            <div>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+              deleniti voluptates reiciendis iusto blanditiis quasi, in vero
+              aspernatur sit amet dolor obcaecati, magnam neque unde quibusdam!
+              Accusamus ducimus eius ab?
+            </div>
           </div>
-          <div
-            className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
-              menu === 'delivery'
-                ? `border-b-2 border-bone hover:border-bone/70`
-                : `border-b border-transparent`
-            }`}
-            onClick={() => {
-              setMenu('delivery');
-            }}
-          >
-            DELIVERY & RETURNS
+        )}
+        {menu === 'delivery' && (
+          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+            <div className='mb-4'>DELIVERY</div>
+            <div>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
+              deleniti voluptates reiciendis iusto blanditiis quasi, in vero
+              aspernatur sit amet dolor obcaecati, magnam neque unde quibusdam!
+              Accusamus ducimus eius ab?
+            </div>
           </div>
-          <div
-            className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 ${
-              menu === 'assistance'
-                ? `border-b-2 border-bone hover:border-bone/70`
-                : `border-b border-transparent`
-            }`}
-            onClick={() => {
-              setMenu('assistance');
-            }}
-          >
-            ASSISTANCE
+        )}
+        {menu === 'assistance' && (
+          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+            <div className='mb-4'>EMAIL US</div>
+            <div>info@baziszt.com</div>
           </div>
-        </div>
+        )}
+        {menu === 'sizeMenu' && (
+          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+            <div className='mb-4'>SIZE CHART</div>
+            <div></div>
+          </div>
+        )}
+        {menu !== 'sizeMenu' && (
+          <div className='fixed font-quasimoda text-bone text-sm flex flex-col md:flex-row md:justify-between w-[60%] bottom-10'>
+            <div
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 mb-4 md:mb-0 ${
+                menu === 'details'
+                  ? `border-b-2 border-bone hover:border-bone/70`
+                  : `border-b border-transparent`
+              }`}
+              onClick={() => {
+                setMenu('details');
+              }}
+            >
+              DETAILS
+            </div>
+            <div
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
+                menu === 'delivery'
+                  ? `border-b-2 border-bone hover:border-bone/70`
+                  : `border-b border-transparent`
+              }`}
+              onClick={() => {
+                setMenu('delivery');
+              }}
+            >
+              DELIVERY & RETURNS
+            </div>
+            <div
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 ${
+                menu === 'assistance'
+                  ? `border-b-2 border-bone hover:border-bone/70`
+                  : `border-b border-transparent`
+              }`}
+              onClick={() => {
+                setMenu('assistance');
+              }}
+            >
+              ASSISTANCE
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
