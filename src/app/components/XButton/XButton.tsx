@@ -9,6 +9,10 @@ import whiteLine3 from '../../../../public/Hamburger/whiteLine3.png';
 import blueLine3 from '../../../../public/Hamburger/blueLine3.png';
 import whiteLine4 from '../../../../public/Hamburger/whiteLine4.png';
 import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
+import brownLine1 from '../../../../public/Hamburger/brownLine.png';
+import brownLine2 from '../../../../public/Hamburger/brownLine2.png';
+import brownLine3 from '../../../../public/Hamburger/brownLine3.png';
+import brownLine4 from '../../../../public/Hamburger/brownLine4.png';
 
 interface XButtonProps {
   allowAnimation: boolean;
@@ -27,8 +31,8 @@ const XButton: React.FC<XButtonProps> = ({
 }) => {
   const lineImages = useMemo(
     () => [
-      [whiteLine1, whiteLine2, whiteLine3, whiteLine4],
-      [blueLine1, blueLine2, blueLine3, blueLine4],
+      [brownLine1, brownLine2, brownLine3, brownLine4],
+      [brownLine1, brownLine2, brownLine3, brownLine4],
     ],
     [],
   );

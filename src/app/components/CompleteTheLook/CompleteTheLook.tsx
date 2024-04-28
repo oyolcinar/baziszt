@@ -39,7 +39,7 @@ const CompleteTheLook: React.FC<CompleteTheLookProps> = ({ product }) => {
       <div className='text-bordeux font-quasimoda text-lg md:ml-10 mb-10'>
         COMPLETE THE LOOK
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-4 lg:grid-cols-3 md:pl-0 p-2 gap-2'>
+      <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-3 lg:grid-cols-3 md:pl-0 p-2 gap-2'>
         {matchingProducts.map((matchingProduct) => (
           <ProductCard key={matchingProduct.id} product={matchingProduct} />
         ))}

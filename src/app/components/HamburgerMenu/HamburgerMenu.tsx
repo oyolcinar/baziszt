@@ -4,16 +4,16 @@ import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import whiteLine1 from '../../../../public/Hamburger/whiteLine.png';
-import brownLine1 from '../../../../public/Hamburger/yellowLine.png';
+import brownLine1 from '../../../../public/Hamburger/brownLine.png';
 import blueLine1 from '../../../../public/Hamburger/blueLine.png';
 import whiteLine2 from '../../../../public/Hamburger/whiteLine2.png';
-import brownLine2 from '../../../../public/Hamburger/yellowLine2.png';
+import brownLine2 from '../../../../public/Hamburger/brownLine2.png';
 import blueLine2 from '../../../../public/Hamburger/blueLine2.png';
 import whiteLine3 from '../../../../public/Hamburger/whiteLine3.png';
-import brownLine3 from '../../../../public/Hamburger/yellowLine3.png';
+import brownLine3 from '../../../../public/Hamburger/brownLine3.png';
 import blueLine3 from '../../../../public/Hamburger/blueLine3.png';
 import whiteLine4 from '../../../../public/Hamburger/whiteLine4.png';
-import brownLine4 from '../../../../public/Hamburger/yellowLine4.png';
+import brownLine4 from '../../../../public/Hamburger/brownLine4.png';
 import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
 import topsMenu from '../../../../public/Images/topsMenu.png';
 import bottomsMenu from '../../../../public/Images/bottomsMenu.png';
@@ -22,9 +22,9 @@ import Link from 'next/link';
 
 const HamburgerMenu: React.FC = () => {
   const lineImages = [
-    [whiteLine1, whiteLine2, whiteLine3, whiteLine4],
     [brownLine1, brownLine2, brownLine3, brownLine4],
-    [blueLine1, blueLine2, blueLine3, blueLine4],
+    [brownLine1, brownLine2, brownLine3, brownLine4],
+    [brownLine1, brownLine2, brownLine3, brownLine4],
   ];
 
   const [currentIndices, setCurrentIndices] = useState([0, 0, 0]);
@@ -172,11 +172,11 @@ const HamburgerMenu: React.FC = () => {
         ))}
       </div>
       <div
-        className={`fixed top-0 left-0 h-[100vh] w-full md:w-[40%] bg-bordeux transform flex justify-start items-center pl-[60px] ${
+        className={`fixed top-0 left-0 h-[100vh] w-full md:w-[30%] bg-sandColor transform flex justify-start items-center pl-[60px] ${
           menuOpened ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
-        <div className='flex flex-col justify-start items-start text-base text-bone font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
+        <div className='flex flex-col justify-start items-start text-base text-bordeux font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <Link
             href='/shop'
             className='hover:opacity-70 transition duration-300'

@@ -63,9 +63,19 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
     <>
       <div className='flex justify-center items-center mt-20 md:mt-32'>
         <div className='flex flex-col md:flex-row w-[80%] md:w-[50%] justify-center items-center gap-4'>
-          <div className='text-4xl md:text-5xl text-bordeux font-quasimoda w-full md:w-1/2'>
+          {/* <div className='text-4xl md:text-5xl text-bordeux font-altesse24 w-full md:w-1/2'>
             {title}
+          </div> */}
+          <div
+            className='text-6xl md:text-7xl text-bordeux font-altesse24 w-full md:w-1/2'
+            style={{ textTransform: 'lowercase' }}
+          >
+            <span style={{ textTransform: 'capitalize' }}>
+              {title.slice(0, 1)}
+            </span>
+            {title.slice(1)}
           </div>
+
           <div className='text-base text-bordeux font-quasimoda w-full md:w-1/2'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit
             corporis, nostrum repudiandae cumque et dolor nulla ullam expedita?
@@ -87,7 +97,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
         </button>
       </div>
       <div className='flex justify-center w-full mb-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-4 lg:grid-cols-3 p-2 gap-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-3 lg:grid-cols-3 p-2 gap-2'>
           {sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

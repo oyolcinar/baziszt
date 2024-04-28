@@ -37,7 +37,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
   return (
     <>
       <div
-        className={`fixed top-0 right-0 h-full w-full md:w-[42%] bg-bordeux transform flex flex-col justify-start items-center ${
+        className={`fixed top-0 right-0 h-full w-full md:w-[42%] bg-sandColor transform flex flex-col justify-start items-center ${
           visible ? '-translate-x-0' : 'translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >

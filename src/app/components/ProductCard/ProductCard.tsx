@@ -18,7 +18,7 @@ export interface Product {
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const imageWidth = 350;
+  const imageWidth = 450;
   const totalWidth = (product.images.length + 2) * imageWidth;
 
   const handleImageChange = (
@@ -61,7 +61,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         className='relative cursor-pointer group'
         style={{
           width: `${imageWidth}px`,
-          height: '450px',
+          height: '580px',
           overflow: 'hidden',
         }}
       >
@@ -104,11 +104,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               className='flex-none'
               style={{
                 width: `${imageWidth}px`,
-                height: '450px',
+                height: '580px',
               }}
             >
               <div
-                style={{ width: '350px', height: '100%', position: 'relative' }}
+                style={{ width: '450px', height: '100%', position: 'relative' }}
               >
                 <Image
                   src={image}
@@ -121,9 +121,9 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             </div>
           ))}
         </div>
-        <div className='absolute w-full text-center text-2xl top-1/2 transform -translate-y-1/2 text-bone font-quasimoda transition-opacity duration-300 ease-in-out opacity-100 group-hover:opacity-0'>
+        {/* <div className='absolute w-full text-center text-2xl top-1/2 transform -translate-y-1/2 text-bone font-quasimoda transition-opacity duration-300 ease-in-out opacity-100 group-hover:opacity-0'>
           {product.name}
-        </div>
+        </div> */}
         <div className='absolute top-0 right-0 p-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           {product.colors.map((color, index) => (
             <span

@@ -248,7 +248,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             {enhancedImages.map((image, index) => (
               <div
                 key={index}
-                className='flex-none relative h-[100vh] md:h-[1100px]'
+                className={`flex-none relative h-[100vh] md:h-[${
+                  (carouselWidth / 2) * 3
+                }px]`}
                 style={{
                   width: `${carouselWidth}px`,
                   overflow: 'hidden',

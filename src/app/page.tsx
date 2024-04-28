@@ -50,7 +50,7 @@ export default function Home() {
     };
   }, [logoVisible]);
 
-  const imageSize = Math.max(50 - scrollY / 100, 10);
+  const imageSize = Math.max(40 - scrollY / 100, 10);
 
   const isBeyondThreshold = scrollY > threshold;
 
@@ -85,12 +85,12 @@ export default function Home() {
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3'>
           <Link href='/shop/tops'>
             <div
-              className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
+              className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
               style={{
                 zIndex: 2,
               }}
             >
-              TOPS
+              Tops
             </div>
             <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
               <Image alt='Tops' src={TopsImage} />
@@ -98,32 +98,32 @@ export default function Home() {
           </Link>
         </div>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3'>
-          <Link href='/shop/bottoms'>
+          <Link href='/shop/accessories'>
             <div
-              className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
+              className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
               style={{
                 zIndex: 2,
               }}
             >
-              BOTTOMS
+              New
             </div>
             <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-              <Image alt='Bottoms' src={BottomsImage} />
+              <Image alt='New' src={AccessoriesImage} />
             </div>
           </Link>
         </div>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3'>
-          <Link href='/shop/accessories'>
+          <Link href='/shop/bottoms'>
             <div
-              className='absolute font-quasimoda top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-3xl'
+              className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
               style={{
                 zIndex: 2,
               }}
             >
-              ACCESSORIES
+              Bottoms
             </div>
             <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-              <Image alt='Accessories' src={AccessoriesImage} />
+              <Image alt='Bottoms' src={BottomsImage} />
             </div>
           </Link>
         </div>
@@ -134,7 +134,7 @@ export default function Home() {
           <div className='font-altesse64 text-bordeux text-5xl sm:text-6xl md:text-8xl mb-4'>
             Our Commitment
           </div>
-          <div className='text-bordeux font-quasimoda text-lg flex flex-col items-center'>
+          <div className='text-bordeux font-quasimoda text-lg flex flex-col items-center text-justify'>
             <div className='mb-2 w-full md:w-1/2'>
               We had at heart to create an eco-responsible and socially
               conscious brand. We work with collectives of dyers and embroiders

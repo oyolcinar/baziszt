@@ -20,7 +20,7 @@ const Navbar: React.FC = () => {
   const isNotHome = pathName !== '/';
 
   return (
-    <nav className='fixed top-0 left-0 right-0 flex justify-between items-center h-[60px] bg-opacity-0 text-black z-10 mx-[30px]'>
+    <nav className='fixed top-0 left-0 right-0 flex justify-between items-center h-[80px] bg-opacity-0 text-black z-10 mx-[30px]'>
       <div className='md:mr-[90px]'>
         <HamburgerMenu />
       </div>
@@ -28,8 +28,8 @@ const Navbar: React.FC = () => {
         <div
           className='hidden md:block'
           style={{
-            width: '200px',
-            height: '100px',
+            width: '240px',
+            height: '140px',
             position: 'relative',
           }}
         >

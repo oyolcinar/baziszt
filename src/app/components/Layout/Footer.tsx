@@ -23,16 +23,22 @@ const Footer: React.FC = () => {
   return (
     <nav>
       <div className='flex justify-center items-center flex-row text-center'>
-        <div className='flex-1 w-full'>
+        {/* <div className='flex-1 w-full'>
           <div className='w-full h-2' style={borderStyle}></div>
           <div className='w-full h-2' style={borderStyle2}></div>
+        </div> */}
+        <div className='flex-1 w-full'>
+          <div className='w-full h-2' style={borderStyle}></div>
         </div>
         <div className='py-4'>
           <Image alt='baziszt' src={Logo} width={100} height={60} />
         </div>
-        <div className='flex-1 w-full'>
+        {/* <div className='flex-1 w-full'>
           <div className='w-full h-2' style={borderStyle}></div>
           <div className='w-full h-2' style={borderStyle2}></div>
+        </div> */}
+        <div className='flex-1 w-full'>
+          <div className='w-full h-2' style={borderStyle}></div>
         </div>
       </div>
       <div className='h-[200px] flex justify-center items-center'>
