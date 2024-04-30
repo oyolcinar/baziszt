@@ -71,8 +71,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       : Math.round(windowSize.width * 0.58);
   const imageHeight =
     windowSize.width < 768
-      ? window.innerHeight
+      ? windowSize.width * 1.289
       : windowSize.width * 0.58 * 1.289;
+
+  console.log(imageHeight);
 
   useEffect(() => {
     setIsMobileScreen(window.innerWidth < 600);
@@ -324,8 +326,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             onTouchEnd={handleMove}
             onClick={toggleZoom}
           >
-            <div className={`relative h-[100vh] w-full`}>
-              <div className='sticky top-[50vh] -translate-y-1/2 pb-[80px]'>
+            <div className={`relative h-[96%] w-full`}>
+              <div className={`sticky top-[50%] -translate-y-1/2 pb-[80px]`}>
                 <div className='flex justify-between'>
                   <button
                     onClick={(e) => {
@@ -351,7 +353,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   </button>
                 </div>
               </div>
-              <div className='sticky top-[95%] -translate-y-1/2 flex justify-between'>
+              <div
+                className={`sticky top-[95%] -translate-y-1/2 flex justify-between`}
+              >
                 <div
                   className='cursor-pointer ml-4 flex justify-center space-x-2 mt-4'
                   onClick={(e) => {
