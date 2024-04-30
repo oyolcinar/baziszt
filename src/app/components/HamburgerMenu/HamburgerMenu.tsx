@@ -3,18 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import whiteLine1 from '../../../../public/Hamburger/whiteLine.png';
 import brownLine1 from '../../../../public/Hamburger/brownLine.png';
-import blueLine1 from '../../../../public/Hamburger/blueLine.png';
-import whiteLine2 from '../../../../public/Hamburger/whiteLine2.png';
 import brownLine2 from '../../../../public/Hamburger/brownLine2.png';
-import blueLine2 from '../../../../public/Hamburger/blueLine2.png';
-import whiteLine3 from '../../../../public/Hamburger/whiteLine3.png';
 import brownLine3 from '../../../../public/Hamburger/brownLine3.png';
-import blueLine3 from '../../../../public/Hamburger/blueLine3.png';
-import whiteLine4 from '../../../../public/Hamburger/whiteLine4.png';
 import brownLine4 from '../../../../public/Hamburger/brownLine4.png';
-import blueLine4 from '../../../../public/Hamburger/blueLine4.png';
 import topsMenu from '../../../../public/Images/topsMenu.png';
 import bottomsMenu from '../../../../public/Images/bottomsMenu.png';
 import accessoriesMenu from '../../../../public/Images/accessoriesMenu.png';
@@ -141,7 +133,7 @@ const HamburgerMenu: React.FC = () => {
   return (
     <>
       <div
-        className='flex flex-col items-start gap-1 cursor-pointer relative z-50'
+        className='flex flex-col items-start gap-3 cursor-pointer relative z-50'
         onClick={toggleMenu}
       >
         {currentIndices.map((imgIndex, lineIndex) => (

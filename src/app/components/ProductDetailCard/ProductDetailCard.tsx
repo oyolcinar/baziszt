@@ -43,6 +43,36 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const [sizeSelection, setSizeSelection] = useState(product.sizes[0]);
   const [detailsMenu, setDetailsMenu] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
+  const [windowSize, setWindowSize] = useState({
+    width: 0,
+    height: 0,
+  });
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (typeof window !== 'undefined') {
+        setWindowSize({
+          width: window.innerWidth,
+          height: window.innerHeight,
+        });
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
+
+  const imageWidth =
+    windowSize.width < 768
+      ? windowSize.width
+      : Math.round(windowSize.width * 0.58);
+  const imageHeight =
+    windowSize.width < 768
+      ? window.innerHeight
+      : windowSize.width * 0.58 * 1.289;
 
   useEffect(() => {
     setIsMobileScreen(window.innerWidth < 600);
@@ -227,10 +257,14 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       <div className='flex flex-col md:flex-row'>
         <div
           ref={carouselRef}
-          className={`relative w-full h-full md:w-[58%] ${
+          className={`relative w-full h-[${imageHeight}px] md:w-[58%] ${
             isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'
           }`}
-          style={{ position: 'relative', contain: 'paint' }}
+          style={{
+            height: `${imageHeight}px`,
+            position: 'relative',
+            contain: 'paint',
+          }}
         >
           <div
             className={`flex ${
@@ -239,6 +273,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 : ''
             }`}
             style={{
+              height: `${imageHeight}px`,
               transform: `translateX(${shift}px)`,
               width: `${product.images.length * carouselWidth}px`,
               zIndex: 2,
@@ -248,9 +283,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             {enhancedImages.map((image, index) => (
               <div
                 key={index}
-                className={`flex-none relative h-[100vh] md:h-[${
-                  (carouselWidth / 2) * 3
-                }px]`}
+                className={`flex-none relative h-[${imageHeight}px]`}
                 style={{
                   width: `${carouselWidth}px`,
                   overflow: 'hidden',
@@ -267,8 +300,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   key={isZoomed.toString() + index}
                   src={image}
                   alt={product.name}
-                  layout='fill'
-                  objectFit={isZoomed ? 'contain' : 'cover'}
+                  width={imageWidth}
+                  height={imageHeight}
+                  // objectFit='cover'
+                  // layout='fill'
                   objectPosition='center'
                   style={{
                     transform: `translate(${translate.x}px, ${
@@ -289,7 +324,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             onTouchEnd={handleMove}
             onClick={toggleZoom}
           >
-            <div className='relative h-full w-full'>
+            <div className={`relative h-[100vh] w-full`}>
               <div className='sticky top-[50vh] -translate-y-1/2 pb-[80px]'>
                 <div className='flex justify-between'>
                   <button

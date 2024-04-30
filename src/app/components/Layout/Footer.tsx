@@ -6,7 +6,6 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 
 import brownLine from '../../../../public/Hamburger/brownLine.png';
-import blueLine from '../../../../public/Hamburger/blueLine.png';
 import Logo from '../../../../public/Logos/camelLogoSmall.png';
 
 const Footer: React.FC = () => {
@@ -15,10 +14,10 @@ const Footer: React.FC = () => {
     backgroundRepeat: 'repeat-x',
   };
 
-  const borderStyle2 = {
-    backgroundImage: `url(${blueLine.src})`,
-    backgroundRepeat: 'repeat-x',
-  };
+  // const borderStyle2 = {
+  //   backgroundImage: `url(${blueLine.src})`,
+  //   backgroundRepeat: 'repeat-x',
+  // };
 
   return (
     <nav>
