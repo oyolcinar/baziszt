@@ -1,7 +1,9 @@
+import { useSwipeable } from 'react-swipeable';
 import Image from 'next/image';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import { HeartIcon } from '@heroicons/react/24/outline';
+import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 
 export interface Product {
   id: string;
@@ -18,15 +20,44 @@ export interface Product {
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const imageWidth = 450;
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [imageWidth, setImageWidth] = useState<number | null>(null);
+
+  useLayoutEffect(() => {
+    function updateWidth() {
+      const windowWidth = window.innerWidth;
+      const newWidth =
+        windowWidth < 768
+          ? windowWidth - 30
+          : windowWidth < 1024
+          ? Math.round(windowWidth / 2 - 30)
+          : Math.round(windowWidth / 3 - 30);
+      setImageWidth(newWidth);
+    }
+
+    updateWidth();
+    window.addEventListener('resize', updateWidth);
+    return () => window.removeEventListener('resize', updateWidth);
+  }, []);
+
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => imageWidth && handleImageChange('next'),
+    onSwipedRight: () => imageWidth && handleImageChange('prev'),
+    trackTouch: true,
+  });
+
+  if (imageWidth === null) return null;
+
   const totalWidth = (product.images.length + 2) * imageWidth;
 
   const handleImageChange = (
     direction: 'next' | 'prev',
-    e: React.MouseEvent<HTMLButtonElement>,
+    e?: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
     if (!isTransitioning) {
       let newIndex = currentImageIndex + (direction === 'next' ? 1 : -1);
@@ -51,6 +82,10 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     product.images[0],
   ];
 
+  const toggleFavorite = () => {
+    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  };
+
   // useEffect(() => {
   //   console.log(`Current Index: ${currentImageIndex}`);
   // }, [currentImageIndex]);
@@ -58,10 +93,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   return (
     <Link href={`/shop/${product.category}/${product.slug}`} passHref>
       <div
+        {...swipeHandlers}
         className='relative cursor-pointer group'
         style={{
           width: `${imageWidth}px`,
-          height: '580px',
+          height: `${imageWidth * 1.289}px`,
           overflow: 'hidden',
         }}
       >
@@ -104,17 +140,22 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
               className='flex-none'
               style={{
                 width: `${imageWidth}px`,
-                height: '580px',
+                height: `${Math.round(imageWidth * 1.289)}px`,
               }}
             >
               <div
-                style={{ width: '450px', height: '100%', position: 'relative' }}
+                style={{
+                  width: `${imageWidth}px`,
+                  height: '100%',
+                  position: 'relative',
+                }}
               >
                 <Image
                   src={image}
                   alt={product.name}
-                  layout='fill'
-                  objectFit='cover'
+                  width={imageWidth}
+                  height={`${Math.round(imageWidth * 1.289)}`}
+                  objectFit='contain'
                   objectPosition='center'
                 />
               </div>
@@ -133,11 +174,24 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             ></span>
           ))}
         </div>
-        <div className='absolute bottom-0 right-0 p-2 text-bone font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+        <div className='absolute bottom-4 right-0 p-2 text-bone font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div className='text-sm'>{product.price}</div>
-          <HeartIcon className='h-4 w-4 text-bone' />
+          <div
+            style={{ zIndex: 3 }}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              toggleFavorite();
+            }}
+          >
+            {isFavorite ? (
+              <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4' />
+            ) : (
+              <HeartIcon className='cursor-pointer text-bone h-4 w-4' />
+            )}
+          </div>
         </div>
-        <div className='absolute bottom-0 left-0 p-2 text-bone text-sm font-quasimoda opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+        <div className='absolute bottom-4 left-0 p-2 text-bone text-sm font-quasimoda opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div>{product.name}</div>
           <div className='flex gap-2'>
             {product.sizes.map((size, index) => (
