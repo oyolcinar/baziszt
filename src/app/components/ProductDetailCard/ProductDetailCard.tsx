@@ -356,26 +356,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   };
 
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => {
-      console.log('Swiped left');
-      imageWidth && handleImageChange('next');
-    },
-    onSwipedRight: () => {
-      console.log('Swiped left');
-      imageWidth && handleImageChange('prev');
-    },
+    onSwipedLeft: () => imageWidth && handleImageChange('next'),
+    onSwipedRight: () => imageWidth && handleImageChange('prev'),
     trackTouch: true,
   });
-
-  useEffect(() => {
-    console.log(carouselRef.current);
-  }, []);
-
-  useEffect(() => {
-    if (carouselRef.current) {
-      setCarouselWidth(windowSize.width * 0.58);
-    }
-  }, [windowSize]);
 
   return (
     <div>
