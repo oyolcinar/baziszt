@@ -358,6 +358,11 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => !isZoomed && imageWidth && handleImageChange('next'),
     onSwipedRight: () => !isZoomed && imageWidth && handleImageChange('prev'),
+    onSwiping: (eventData) => {
+      if (Math.abs(eventData.deltaX) > Math.abs(eventData.deltaY)) {
+        eventData.event.preventDefault();
+      }
+    },
     trackTouch: !isZoomed,
   });
 

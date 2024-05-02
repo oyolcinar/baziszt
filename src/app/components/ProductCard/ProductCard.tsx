@@ -43,6 +43,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => imageWidth && handleImageChange('next'),
     onSwipedRight: () => imageWidth && handleImageChange('prev'),
+    onSwiping: (eventData) => {
+      if (Math.abs(eventData.deltaX) > Math.abs(eventData.deltaY)) {
+        eventData.event.preventDefault();
+      }
+    },
     trackTouch: true,
   });
 
