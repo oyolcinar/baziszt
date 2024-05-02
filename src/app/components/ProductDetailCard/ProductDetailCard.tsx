@@ -42,6 +42,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [carouselWidth, setCarouselWidth] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
+  const desktopCarouselRef = useRef<HTMLDivElement>(null);
   const [isZoomed, setIsZoomed] = useState(false);
   const [isMobileScreen, setIsMobileScreen] = useState(false);
   const [mousePos, setMousePos] = useState<{ x: number; y: number } | null>(
@@ -155,7 +156,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   }, []);
 
   const updateWidth = useCallback(() => {
-    if (carouselRef.current) {
+    if (window.innerWidth >= 768 && desktopCarouselRef.current) {
+      setCarouselWidth(desktopCarouselRef.current.offsetWidth);
+    } else if (carouselRef.current) {
       setCarouselWidth(carouselRef.current.offsetWidth);
     }
   }, []);
@@ -201,9 +204,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   const handleMove = useCallback(
     (event: any) => {
-      if (!isZoomed || !carouselRef.current) return;
+      const currentRef =
+        window.innerWidth >= 768
+          ? desktopCarouselRef.current
+          : carouselRef.current;
+      if (!isZoomed || !currentRef) return;
 
-      const rect = carouselRef.current.getBoundingClientRect();
+      const rect = currentRef.getBoundingClientRect();
       const x = event.type.includes('touch')
         ? event.touches[0].clientX
         : event.clientX;
@@ -374,7 +381,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     <div>
       <div className='flex flex-col md:flex-row'>
         <div
-          ref={carouselRef}
+          ref={desktopCarouselRef}
           className={`hidden md:block md:relative md:w-[58%] md:h-[${
             imageHeight * product.images.length
           }px] ${isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'}`}
@@ -478,7 +485,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         <div
           {...swipeHandlers}
           className={`relative md:hidden w-full h-[${imageHeight}px]`}
-          style={{ width: '100%', overflow: 'hidden' }}
+          style={{ width: '100vw', overflow: 'hidden' }}
         >
           <div
             ref={carouselRef}
