@@ -171,6 +171,13 @@ const HamburgerMenu: React.FC = () => {
       >
         <div className='flex flex-col justify-start items-start text-base text-bordeux font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <Link
+            href='/'
+            className='md:hidden hover:opacity-70 transition duration-300'
+            onClick={toggleMenu}
+          >
+            HOME
+          </Link>
+          <Link
             href='/shop'
             className='hover:opacity-70 transition duration-300'
             onClick={toggleMenu}
@@ -256,7 +263,7 @@ const HamburgerMenu: React.FC = () => {
             JOURNAL
           </Link>
           <div
-            className={`w-full h-[150px] overflow-hidden transition-opacity duration-300 ${
+            className={`hidden sm:block w-full h-[150px] overflow-hidden transition-opacity duration-300 ${
               isImageVisible ? 'opacity-100' : 'opacity-0'
             }`}
           >
