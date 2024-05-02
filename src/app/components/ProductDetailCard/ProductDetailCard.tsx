@@ -1,3 +1,4 @@
+import { useSwipeable } from 'react-swipeable';
 import React, {
   useState,
   useEffect,
@@ -168,10 +169,12 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   const handleImageChange = (
     direction: 'next' | 'prev',
-    e: React.MouseEvent<HTMLButtonElement>,
+    e?: React.MouseEvent<HTMLButtonElement>,
   ) => {
-    e.preventDefault();
-    e.stopPropagation();
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
 
     if (!isTransitioning) {
       let newIndex = currentImageIndex + (direction === 'next' ? 1 : -1);
@@ -345,6 +348,28 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     }
   };
 
+  const swipeHandlers = useSwipeable({
+    onSwipedLeft: () => {
+      console.log('Swiped left');
+      imageWidth && handleImageChange('next');
+    },
+    onSwipedRight: () => {
+      console.log('Swiped left');
+      imageWidth && handleImageChange('prev');
+    },
+    trackTouch: true,
+  });
+
+  useEffect(() => {
+    console.log(carouselRef.current);
+  }, []);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      setCarouselWidth(windowSize.width * 0.58);
+    }
+  }, [windowSize]);
+
   return (
     <div>
       <div className='flex flex-col md:flex-row'>
@@ -451,142 +476,148 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
         <div
-          ref={carouselRef}
-          className={`relative md:hidden w-full h-[${imageHeight}px] md:w-[58%] ${
-            isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'
-          }`}
-          style={{
-            height: `${imageHeight}px`,
-            position: 'relative',
-            contain: 'paint',
-          }}
+          {...swipeHandlers}
+          className={`relative md:hidden w-full h-[${imageHeight}px]`}
+          style={{ width: '100%', overflow: 'hidden' }}
         >
           <div
-            className={`flex ${
-              isTransitioning
-                ? 'transition-transform duration-500 ease-in-out'
-                : ''
+            ref={carouselRef}
+            className={`relative md:hidden w-full h-[${imageHeight}px] ${
+              isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'
             }`}
             style={{
               height: `${imageHeight}px`,
-              transform: `translateX(${shift}px)`,
-              width: `${product.images.length * carouselWidth}px`,
-              zIndex: 2,
+              position: 'relative',
+              contain: 'paint',
             }}
-            onTransitionEnd={handleTransitionEnd}
           >
-            {enhancedImages.map((image, index) => (
-              <div
-                key={index}
-                className={`flex-none relative h-[${imageHeight}px]`}
-                style={{
-                  width: `${carouselWidth}px`,
-                  overflow: 'hidden',
-                }}
-                // onMouseDown={handleMouseDown}
-                // onMouseMove={handleMove}
-                // onMouseUp={handleMove}
-                // onTouchStart={handleMouseDown}
-                // onTouchMove={handleMove}
-                // onTouchEnd={handleMove}
-                // onClick={toggleZoom}
-              >
-                <Image
-                  key={isZoomed.toString() + index}
-                  src={image}
-                  alt={product.name}
-                  width={imageWidth}
-                  height={imageHeight}
-                  // objectFit='cover'
-                  // layout='fill'
-                  objectPosition='center'
-                  style={{
-                    transform: `translate(${translate.x}px, ${
-                      translate.y
-                    }px) scale(${isZoomed ? scaleAmount : 1})`,
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-          <div
-            className='absolute inset-0'
-            onMouseDown={handleMouseDown}
-            onMouseMove={handleMove}
-            onMouseUp={handleMove}
-            onTouchStart={handleMouseDown}
-            onTouchMove={handleMove}
-            onTouchEnd={handleMove}
-            onClick={toggleZoom}
-          >
-            <div className={`relative h-[96%] w-full`}>
-              <div className={`sticky top-[50%] -translate-y-1/2 pb-[80px]`}>
-                <div className='flex justify-between'>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleImageChange('prev', e);
-                    }}
-                    disabled={isTransitioning}
-                    className='cursor-pointer left-0 p-4 text-bone'
-                    style={{ zIndex: 3 }}
-                  >
-                    ←
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleImageChange('next', e);
-                    }}
-                    disabled={isTransitioning}
-                    className='cursor-pointer right-0 p-4 text-bone'
-                    style={{ zIndex: 3 }}
-                  >
-                    →
-                  </button>
-                </div>
-              </div>
-              <div
-                className={`sticky top-[95%] -translate-y-1/2 flex justify-between`}
-              >
+            <div
+              className={`flex ${
+                isTransitioning
+                  ? 'transition-transform duration-500 ease-in-out'
+                  : ''
+              }`}
+              style={{
+                height: `${imageHeight}px`,
+                transform: `translateX(${shift}px)`,
+                width: `${product.images.length * carouselWidth}px`,
+                zIndex: 2,
+              }}
+              onTransitionEnd={handleTransitionEnd}
+            >
+              {enhancedImages.map((image, index) => (
                 <div
-                  className='cursor-pointer ml-4 flex justify-center space-x-2 mt-4'
-                  onClick={(e) => {
-                    e.preventDefault;
-                    e.stopPropagation();
+                  key={index}
+                  className={`flex-none relative h-[${imageHeight}px]`}
+                  style={{
+                    width: `${carouselWidth}px`,
+                    overflow: 'hidden',
                   }}
+                  // onMouseDown={handleMouseDown}
+                  // onMouseMove={handleMove}
+                  // onMouseUp={handleMove}
+                  // onTouchStart={handleMouseDown}
+                  // onTouchMove={handleMove}
+                  // onTouchEnd={handleMove}
+                  // onClick={toggleZoom}
                 >
-                  {product.images.map((image, index) => (
-                    <div
-                      key={index}
-                      className='w-4 h-4 flex justify-center items-center'
+                  <Image
+                    key={isZoomed.toString() + index}
+                    src={image}
+                    alt={product.name}
+                    width={imageWidth}
+                    height={imageHeight}
+                    // objectFit='cover'
+                    // layout='fill'
+                    objectPosition='center'
+                    style={{
+                      transform: `translate(${translate.x}px, ${
+                        translate.y
+                      }px) scale(${isZoomed ? scaleAmount : 1})`,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
+            <div
+              className='absolute inset-0'
+              onMouseDown={handleMouseDown}
+              onMouseMove={handleMove}
+              onMouseUp={handleMove}
+              onTouchStart={handleMouseDown}
+              onTouchMove={handleMove}
+              onTouchEnd={handleMove}
+              onClick={toggleZoom}
+            >
+              <div className={`relative h-[96%] w-full`}>
+                <div className={`sticky top-[50%] -translate-y-1/2 pb-[80px]`}>
+                  <div className='flex justify-between'>
+                    <button
                       onClick={(e) => {
                         e.stopPropagation();
-                        setCurrentImageIndex(index + 1);
+                        handleImageChange('prev', e);
                       }}
+                      disabled={isTransitioning}
+                      className='cursor-pointer left-0 p-4 text-bone'
+                      style={{ zIndex: 3 }}
                     >
-                      <button
-                        className={`h-2 w-2 rounded-full cursor-pointer border ${
-                          currentImageIndex === index + 1
-                            ? 'bg-bordeux border-bordeux'
-                            : 'bg-transparent border-bone'
-                        }`}
-                        aria-label={`Go to image ${index + 1}`}
-                      ></button>
-                    </div>
-                  ))}
+                      ←
+                    </button>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleImageChange('next', e);
+                      }}
+                      disabled={isTransitioning}
+                      className='cursor-pointer right-0 p-4 text-bone'
+                      style={{ zIndex: 3 }}
+                    >
+                      →
+                    </button>
+                  </div>
                 </div>
                 <div
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleFavorite();
-                  }}
+                  className={`sticky top-[95%] -translate-y-1/2 flex justify-between`}
                 >
-                  {isFavorite ? (
-                    <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
-                  ) : (
-                    <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
-                  )}
+                  <div
+                    className='cursor-pointer ml-4 flex justify-center space-x-2 mt-4'
+                    onClick={(e) => {
+                      e.preventDefault;
+                      e.stopPropagation();
+                    }}
+                  >
+                    {product.images.map((image, index) => (
+                      <div
+                        key={index}
+                        className='w-4 h-4 flex justify-center items-center'
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setCurrentImageIndex(index + 1);
+                        }}
+                      >
+                        <button
+                          className={`h-2 w-2 rounded-full cursor-pointer border ${
+                            currentImageIndex === index + 1
+                              ? 'bg-bordeux border-bordeux'
+                              : 'bg-transparent border-bone'
+                          }`}
+                          aria-label={`Go to image ${index + 1}`}
+                        ></button>
+                      </div>
+                    ))}
+                  </div>
+                  <div
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleFavorite();
+                    }}
+                  >
+                    {isFavorite ? (
+                      <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                    ) : (
+                      <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
