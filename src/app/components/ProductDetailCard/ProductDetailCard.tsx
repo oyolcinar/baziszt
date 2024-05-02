@@ -359,6 +359,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     onSwipedLeft: () => imageWidth && handleImageChange('next'),
     onSwipedRight: () => imageWidth && handleImageChange('prev'),
     trackTouch: true,
+    onSwiping: (eventData) => {
+      eventData.event.preventDefault();
+    },
   });
 
   return (
