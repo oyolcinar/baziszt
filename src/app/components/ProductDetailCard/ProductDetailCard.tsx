@@ -485,7 +485,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         <div
           {...swipeHandlers}
           className={`relative md:hidden w-full h-[${imageHeight}px]`}
-          style={{ width: '100vw', overflow: 'hidden' }}
+          style={{ width: imageWidth, overflow: 'hidden' }}
         >
           <div
             ref={carouselRef}
