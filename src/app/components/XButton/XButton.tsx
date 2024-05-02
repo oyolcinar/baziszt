@@ -122,7 +122,7 @@ const XButton: React.FC<XButtonProps> = ({
           style={{
             transform: `
               rotate(${lineIndex === 0 ? '45deg' : '-45deg'}) 
-              translate(${lineIndex === 0 ? '5%, -9%' : '-5%, 9%'})
+              translate(${lineIndex === 0 ? '-5%, 15%' : '5%, 15%'})
             `,
             transformOrigin: 'center center',
             position: 'absolute',

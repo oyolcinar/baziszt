@@ -7,6 +7,7 @@ import brownLine1 from '../../../../public/Hamburger/brownLine.png';
 import brownLine2 from '../../../../public/Hamburger/brownLine2.png';
 import brownLine3 from '../../../../public/Hamburger/brownLine3.png';
 import brownLine4 from '../../../../public/Hamburger/brownLine4.png';
+import newMenu from '../../../../public/Images/newMenu.png';
 import topsMenu from '../../../../public/Images/topsMenu.png';
 import bottomsMenu from '../../../../public/Images/bottomsMenu.png';
 import accessoriesMenu from '../../../../public/Images/accessoriesMenu.png';
@@ -164,7 +165,7 @@ const HamburgerMenu: React.FC = () => {
         ))}
       </div>
       <div
-        className={`fixed top-0 left-0 h-[100vh] w-full md:w-[30%] bg-sandColor transform flex justify-start items-center pl-[60px] ${
+        className={`fixed top-0 left-0 h-[100vh] w-full md:w-[30%] bg-bone transform flex justify-start items-center pl-[60px] ${
           menuOpened ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
@@ -177,6 +178,18 @@ const HamburgerMenu: React.FC = () => {
             SHOP
           </Link>
           <div className='flex flex-col pl-6 text-base gap-4'>
+            <Link
+              href='/shop/new'
+              className='hover:opacity-70 transition duration-300'
+              onMouseEnter={() => {
+                setHoveredImage(newMenu.src);
+                setIsImageVisible(true);
+              }}
+              onMouseLeave={() => setIsImageVisible(false)}
+              onClick={toggleMenu}
+            >
+              • NEW
+            </Link>
             <Link
               href='/shop/tops'
               className='hover:opacity-70 transition duration-300'
@@ -204,11 +217,11 @@ const HamburgerMenu: React.FC = () => {
             <Link
               href='/shop/accessories'
               className='hover:opacity-70 transition duration-300'
-              onMouseEnter={() => {
-                setHoveredImage(accessoriesMenu.src);
-                setIsImageVisible(true);
-              }}
-              onMouseLeave={() => setIsImageVisible(false)}
+              // onMouseEnter={() => {
+              //   setHoveredImage(accessoriesMenu.src);
+              //   setIsImageVisible(true);
+              // }}
+              // onMouseLeave={() => setIsImageVisible(false)}
               onClick={toggleMenu}
             >
               • ACCESSORIES

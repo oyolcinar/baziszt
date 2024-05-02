@@ -1,4 +1,10 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  createRef,
+} from 'react';
 import Image from 'next/image';
 import { Product } from '../ProductCard/ProductCard';
 
@@ -30,6 +36,8 @@ interface ProductDetailCardProps {
 
 const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
+  const [clickedIndex, setClickedIndex] = useState(0);
+  const [scrollIndex, setScrollIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [carouselWidth, setCarouselWidth] = useState(0);
   const carouselRef = useRef<HTMLDivElement>(null);
@@ -47,6 +55,50 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     width: 0,
     height: 0,
   });
+
+  const imageRefs = useRef<Array<React.RefObject<HTMLDivElement>>>(
+    product.images.map(() => createRef<HTMLDivElement>()),
+  );
+
+  useEffect(() => {
+    const currentRefs = imageRefs.current;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+            const index = currentRefs.findIndex(
+              (ref) => ref.current === entry.target,
+            );
+            if (index !== -1) {
+              if (Math.abs(index - clickedIndex) <= 2) {
+                setScrollIndex(index);
+              }
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+      },
+    );
+
+    currentRefs.forEach((ref) => {
+      if (ref.current) {
+        observer.observe(ref.current);
+      }
+    });
+
+    return () => {
+      currentRefs.forEach((ref) => {
+        if (ref.current) {
+          observer.unobserve(ref.current);
+        }
+      });
+    };
+  }, [product.images.length, clickedIndex]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -73,8 +125,6 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     windowSize.width < 768
       ? windowSize.width * 1.289
       : windowSize.width * 0.58 * 1.289;
-
-  console.log(imageHeight);
 
   useEffect(() => {
     setIsMobileScreen(window.innerWidth < 600);
@@ -254,12 +304,155 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
 
+  const handleImageClick = (index: number) => {
+    setClickedIndex(index);
+  };
+
+  const smoothScrollTo = (targetElement: any, duration = 500) => {
+    const target =
+      targetElement.getBoundingClientRect().top + window.pageYOffset;
+    const startPosition = window.scrollY;
+    const distance = target - startPosition;
+    let startTime: any = null;
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = easeInOutCubic(
+        timeElapsed,
+        startPosition,
+        distance,
+        duration,
+      );
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    };
+
+    const easeInOutCubic = (t: any, b: any, c: any, d: any) => {
+      t /= d / 2;
+      if (t < 1) return (c / 2) * t * t * t + b;
+      t -= 2;
+      return (c / 2) * (t * t * t + 2) + b;
+    };
+
+    requestAnimationFrame(animation);
+  };
+
+  const scrollToImage = (index: any) => {
+    const ref = imageRefs.current[index];
+    if (ref && ref.current) {
+      smoothScrollTo(ref.current);
+    }
+  };
+
   return (
     <div>
       <div className='flex flex-col md:flex-row'>
         <div
           ref={carouselRef}
-          className={`relative w-full h-[${imageHeight}px] md:w-[58%] ${
+          className={`hidden md:block md:relative md:w-[58%] md:h-[${
+            imageHeight * product.images.length
+          }px] ${isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'}`}
+          style={{
+            height: `${imageHeight * product.images.length}px`,
+            position: 'relative',
+            contain: 'paint',
+          }}
+        >
+          {product.images.map((image, index) => (
+            <div
+              key={index}
+              ref={imageRefs.current[index]}
+              className={`flex-none relative h-[${imageHeight}px]`}
+              style={{
+                width: `${imageWidth}px`,
+                overflow: 'hidden',
+              }}
+              onClick={() => handleImageClick(index)}
+            >
+              <Image
+                key={isZoomed.toString() + index}
+                src={image}
+                alt={product.name}
+                width={imageWidth}
+                height={imageHeight}
+                // objectFit='cover'
+                // layout='fill'
+                objectPosition='center'
+                style={{
+                  transform:
+                    clickedIndex === index
+                      ? `translate(${translate.x}px, ${translate.y}px) scale(${
+                          isZoomed ? scaleAmount : 1
+                        })`
+                      : 'none',
+                }}
+              />
+              <div
+                className='absolute inset-0 z-10'
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMove}
+                onMouseUp={handleMove}
+                onTouchStart={handleMouseDown}
+                onTouchMove={handleMove}
+                onTouchEnd={handleMove}
+                onClick={toggleZoom}
+              ></div>
+            </div>
+          ))}
+          <div className='absolute inset-0'>
+            <div className={`relative h-[96%] w-full`}>
+              <div
+                className={`sticky top-[95%] -translate-y-1/2 w-full flex justify-between items-end z-20`}
+              >
+                <div
+                  className='cursor-pointer ml-4 flex-col items-center'
+                  onClick={(e) => {
+                    e.preventDefault;
+                    e.stopPropagation();
+                  }}
+                >
+                  {product.images.map((image, index) => (
+                    <div
+                      key={index}
+                      className='w-4 h-4 flex justify-center items-center'
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        scrollToImage(index);
+                        setClickedIndex(index);
+                      }}
+                    >
+                      <button
+                        className={`h-2 w-2 rounded-full cursor-pointer border ${
+                          scrollIndex === index
+                            ? 'bg-bordeux border-bordeux'
+                            : 'bg-transparent border-bone'
+                        }`}
+                        aria-label={`Go to image ${index + 1}`}
+                      ></button>
+                    </div>
+                  ))}
+                </div>
+                <div
+                  className='w-full flex justify-end'
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleFavorite();
+                  }}
+                >
+                  {isFavorite ? (
+                    <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                  ) : (
+                    <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          ref={carouselRef}
+          className={`relative md:hidden w-full h-[${imageHeight}px] md:w-[58%] ${
             isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'
           }`}
           style={{

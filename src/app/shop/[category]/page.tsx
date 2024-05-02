@@ -14,7 +14,8 @@ export default function Shop() {
   if (
     category !== 'tops' &&
     category !== 'bottoms' &&
-    category !== 'accessories'
+    category !== 'accessories' &&
+    category !== 'new'
   ) {
     return <div className='text-8xl text-bordeux'>Category not found</div>;
   }

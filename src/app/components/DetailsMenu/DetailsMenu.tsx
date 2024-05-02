@@ -37,7 +37,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
   return (
     <>
       <div
-        className={`fixed top-0 right-0 h-full w-full md:w-[42%] bg-sandColor transform flex flex-col justify-start items-center ${
+        className={`fixed top-0 right-0 h-full w-full md:w-[42%] bg-bone transform flex flex-col justify-start items-center ${
           visible ? '-translate-x-0' : 'translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
@@ -45,7 +45,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
           style={{
             zIndex: 50,
             position: 'fixed',
-            top: 0,
+            top: 16,
             right: 0,
             height: 30,
             width: 30,
@@ -62,7 +62,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
           />
         </div>
         {menu === 'details' && (
-          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+          <div className='font-quasimoda text-bordeux flex flex-col w-[60%] pt-20'>
             <div className='mb-4'>{product.name}</div>
             <div>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
@@ -73,7 +73,7 @@ const DetailsMenu: React.FC<DetailProps> = ({
           </div>
         )}
         {menu === 'delivery' && (
-          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+          <div className='font-quasimoda text-bordeux flex flex-col w-[60%] pt-20'>
             <div className='mb-4'>DELIVERY</div>
             <div>
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi
@@ -84,23 +84,23 @@ const DetailsMenu: React.FC<DetailProps> = ({
           </div>
         )}
         {menu === 'assistance' && (
-          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+          <div className='font-quasimoda text-bordeux flex flex-col w-[60%] pt-20'>
             <div className='mb-4'>EMAIL US</div>
             <div>info@baziszt.com</div>
           </div>
         )}
         {menu === 'sizeMenu' && (
-          <div className='font-quasimoda text-bone flex flex-col w-[60%] pt-20'>
+          <div className='font-quasimoda text-bordeux flex flex-col w-[60%] pt-20'>
             <div className='mb-4'>SIZE CHART</div>
             <div></div>
           </div>
         )}
         {menu !== 'sizeMenu' && (
-          <div className='fixed font-quasimoda text-bone text-sm flex flex-col lg:flex-row md:justify-between w-[60%] bottom-10'>
+          <div className='fixed font-quasimoda text-bordeux text-sm flex flex-col lg:flex-row md:justify-between w-[60%] bottom-10'>
             <div
-              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 mb-4 md:mb-0 ${
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
                 menu === 'details'
-                  ? `border-b-2 border-bone hover:border-bone/70`
+                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
               onClick={() => {
@@ -111,9 +111,9 @@ const DetailsMenu: React.FC<DetailProps> = ({
               DETAILS
             </div>
             <div
-              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 mb-4 md:mb-0 ${
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
                 menu === 'delivery'
-                  ? `border-b-2 border-bone hover:border-bone/70`
+                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
               onClick={() => {
@@ -124,9 +124,9 @@ const DetailsMenu: React.FC<DetailProps> = ({
               DELIVERY & RETURNS
             </div>
             <div
-              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bone/70 ${
+              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 ${
                 menu === 'assistance'
-                  ? `border-b-2 border-bone hover:border-bone/70`
+                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
               onClick={() => {
