@@ -6,7 +6,7 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 
 import brownLine from '../../../../public/Hamburger/brownLine.png';
-import Logo from '../../../../public/Logos/camelLogoSmall.png';
+import Logo from '../../../../public/Logos/camelLogo.png';
 
 const Footer: React.FC = () => {
   const borderStyle = {

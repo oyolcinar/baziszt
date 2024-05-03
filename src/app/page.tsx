@@ -50,7 +50,7 @@ export default function Home() {
     };
   }, [logoVisible]);
 
-  const imageSize = Math.max(40 - scrollY / 100, 10);
+  const imageSize = Math.max(30 - scrollY / 100, 10);
 
   const isBeyondThreshold = scrollY > threshold;
 

@@ -76,7 +76,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
             {title.slice(1)}
           </div>
 
-          <div className='text-base text-bordeux font-quasimoda w-full md:w-1/2'>
+          <div className='text-base text-bordeux text-justify font-quasimoda w-full md:w-1/2'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit
             corporis, nostrum repudiandae cumque et dolor nulla ullam expedita?
             Quis ullam consectetur architecto aliquid. Iusto ad assumenda non
