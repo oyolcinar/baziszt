@@ -18,11 +18,13 @@ export default function Home() {
   const [scrollY, setScrollY] = useState(0);
   const [threshold, setThreshold] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
   const [logoVisible, setLogoVisible] = useState(false);
 
   useEffect(() => {
     const updateWindowHeight = () => {
       setWindowHeight(window.innerHeight);
+      setWindowWidth(window.innerWidth);
     };
 
     const handleScroll = () => {
@@ -50,12 +52,12 @@ export default function Home() {
     };
   }, [logoVisible]);
 
-  const imageSize = Math.max(30 - scrollY / 100, 10);
-
+  const imageSize =
+    windowWidth <= 768
+      ? Math.max(40 - scrollY / 100, 10)
+      : Math.max(30 - scrollY / 100, 10);
   const isBeyondThreshold = scrollY > threshold;
-
-  const topPixels = windowHeight * 0.1;
-
+  const topPixels = windowHeight * (windowWidth <= 768 ? 0.18 : 0.1);
   const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
 
   return (
