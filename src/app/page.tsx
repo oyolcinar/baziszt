@@ -54,7 +54,7 @@ export default function Home() {
 
   const isBeyondThreshold = scrollY > threshold;
 
-  const topPixels = windowHeight * 0.18;
+  const topPixels = windowHeight * 0.1;
 
   const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
 

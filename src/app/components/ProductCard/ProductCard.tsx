@@ -179,7 +179,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             ></span>
           ))}
         </div>
-        <div className='absolute bottom-4 right-0 p-2 text-bone font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+        <div className='absolute bottom-6 right-0 p-2 text-bone font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div className='text-sm'>{product.price}</div>
           <div
             style={{ zIndex: 3 }}
