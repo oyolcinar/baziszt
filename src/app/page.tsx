@@ -54,7 +54,7 @@ export default function Home() {
 
   const imageSize =
     windowWidth <= 768
-      ? Math.max(40 - scrollY / 100, 10)
+      ? Math.max(50 - scrollY / 100, 10)
       : Math.max(30 - scrollY / 100, 10);
   const isBeyondThreshold = scrollY > threshold;
   const topPixels = windowHeight * (windowWidth <= 768 ? 0.18 : 0.1);

@@ -740,7 +740,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
       </div>
-      <div className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-sandColor px-2'>
+      <div className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-bordeux px-2'>
         <div className='font-quasimoda text-bone text-[14px] ml-2'>
           {product.name}
         </div>
