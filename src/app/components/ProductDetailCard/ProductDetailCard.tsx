@@ -573,7 +573,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   </div>
                 </div>
                 <div
-                  className={`sticky top-[95%] -translate-y-1/2 flex justify-between`}
+                  className={`sticky top-[95%] -translate-y-1/2 flex justify-between items-end`}
                 >
                   <div
                     className='cursor-pointer ml-4 flex justify-center space-x-2 mt-4'
@@ -603,6 +603,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                     ))}
                   </div>
                   <div
+                    className='mr-4'
                     onClick={(e) => {
                       e.stopPropagation();
                       toggleFavorite();
