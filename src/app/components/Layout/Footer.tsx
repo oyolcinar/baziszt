@@ -5,12 +5,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 
+import brownLine1px from '../../../../public/Hamburger/1px/brownLine.png';
 import brownLine from '../../../../public/Hamburger/brownLine.png';
 import Logo from '../../../../public/Logos/camelLogo.png';
 
 const Footer: React.FC = () => {
   const borderStyle = {
-    backgroundImage: `url(${brownLine.src})`,
+    backgroundImage: `url(${brownLine1px.src})`,
     backgroundRepeat: 'repeat-x',
   };
 
