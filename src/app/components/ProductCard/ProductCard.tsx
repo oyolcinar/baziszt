@@ -12,8 +12,8 @@ export interface Product {
   images: string[];
   colors: string[];
   price: string;
-  details?: string;
-  category: string;
+  details: string;
+  category: string[];
   sizes: string[];
 }
 
@@ -114,14 +114,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         >
           <button
             onClick={(e) => handleImageChange('prev', e)}
-            className='text-bone p-2'
+            className='text-bordeux p-2'
             disabled={isTransitioning}
           >
             ←
           </button>
           <button
             onClick={(e) => handleImageChange('next', e)}
-            className='text-bone p-2'
+            className='text-bordeux p-2'
             disabled={isTransitioning}
           >
             →
@@ -179,7 +179,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             ></span>
           ))}
         </div>
-        <div className='absolute bottom-6 right-0 p-2 text-bone font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+        <div className='absolute bottom-6 right-0 p-2 text-bordeux font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div className='text-sm'>{product.price}</div>
           <div
             style={{ zIndex: 3 }}
@@ -192,11 +192,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             {isFavorite ? (
               <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4' />
             ) : (
-              <HeartIcon className='cursor-pointer text-bone h-4 w-4' />
+              <HeartIcon className='cursor-pointer text-bordeux h-4 w-4' />
             )}
           </div>
         </div>
-        <div className='absolute bottom-4 left-0 p-2 text-bone text-sm font-quasimoda opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+        <div className='absolute bottom-4 left-0 p-2 text-bordeux text-sm font-quasimoda opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div>{product.name}</div>
           <div className='flex gap-2'>
             {product.sizes.map((size, index) => (

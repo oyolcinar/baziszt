@@ -2,15 +2,16 @@
 
 import React from 'react';
 import { usePathname } from 'next/navigation';
-import { dummyProductsArray } from '@/app/dummyData/dummyData';
 import ProductDetailCard from '@/app/components/ProductDetailCard/ProductDetailCard';
+import { useProducts } from '../context/ProductContext';
 
 const ProductDetailServer = () => {
   const pathname = usePathname();
   const parts = pathname.split('/');
   const slug = parts[3];
+  const { products } = useProducts();
 
-  const product = dummyProductsArray.find((p) => p.slug === slug);
+  const product = products.find((p) => p.slug === slug);
 
   if (!product) {
     return <div className='text-8xl text-bordeux'>Product not found</div>;

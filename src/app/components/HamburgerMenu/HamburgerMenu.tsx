@@ -178,62 +178,53 @@ const HamburgerMenu: React.FC = () => {
             HOME
           </Link>
           <Link
-            href='/shop'
+            href='/shop/new'
             className='hover:opacity-70 transition duration-300'
+            onMouseEnter={() => {
+              setHoveredImage(newMenu.src);
+              setIsImageVisible(true);
+            }}
+            onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
-            SHOP
+            NEW
           </Link>
-          <div className='flex flex-col pl-6 text-base gap-4'>
-            <Link
-              href='/shop/new'
-              className='hover:opacity-70 transition duration-300'
-              onMouseEnter={() => {
-                setHoveredImage(newMenu.src);
-                setIsImageVisible(true);
-              }}
-              onMouseLeave={() => setIsImageVisible(false)}
-              onClick={toggleMenu}
-            >
-              • NEW
-            </Link>
-            <Link
-              href='/shop/tops'
-              className='hover:opacity-70 transition duration-300'
-              onMouseEnter={() => {
-                setHoveredImage(topsMenu.src);
-                setIsImageVisible(true);
-              }}
-              onMouseLeave={() => setIsImageVisible(false)}
-              onClick={toggleMenu}
-            >
-              • TOPS
-            </Link>
-            <Link
-              href='/shop/bottoms'
-              className='hover:opacity-70 transition duration-300'
-              onMouseEnter={() => {
-                setHoveredImage(bottomsMenu.src);
-                setIsImageVisible(true);
-              }}
-              onMouseLeave={() => setIsImageVisible(false)}
-              onClick={toggleMenu}
-            >
-              • BOTTOMS
-            </Link>
-            <Link
-              href='/shop/accessories'
-              className='hover:opacity-70 transition duration-300'
-              // onMouseEnter={() => {
-              //   setHoveredImage(accessoriesMenu.src);
-              //   setIsImageVisible(true);
-              // }}
-              // onMouseLeave={() => setIsImageVisible(false)}
-              onClick={toggleMenu}
-            >
-              • ACCESSORIES
-            </Link>
-          </div>
+          <Link
+            href='/shop/tops'
+            className='hover:opacity-70 transition duration-300'
+            onMouseEnter={() => {
+              setHoveredImage(topsMenu.src);
+              setIsImageVisible(true);
+            }}
+            onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            TOPS
+          </Link>
+          <Link
+            href='/shop/bottoms'
+            className='hover:opacity-70 transition duration-300'
+            onMouseEnter={() => {
+              setHoveredImage(bottomsMenu.src);
+              setIsImageVisible(true);
+            }}
+            onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            BOTTOMS
+          </Link>
+          <Link
+            href='/shop/accessories'
+            className='hover:opacity-70 transition duration-300'
+            // onMouseEnter={() => {
+            //   setHoveredImage(accessoriesMenu.src);
+            //   setIsImageVisible(true);
+            // }}
+            // onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            ACCESSORIES
+          </Link>
           <Link
             href='/lookbooks'
             className='hover:opacity-70 transition duration-300'

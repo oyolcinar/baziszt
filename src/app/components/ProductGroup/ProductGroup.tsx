@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 interface ProductGroupProps {
   products: Product[];
-  category: string;
+  category: string[];
   title: string;
 }
 
@@ -41,18 +41,17 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
   };
 
   useEffect(() => {
-    const filteredProducts =
-      category === 'all'
-        ? products
-        : products.filter((product) => product.category === category);
+    const filteredProducts = category.includes('all')
+      ? products
+      : products.filter((product) => product.category.some((cat) => category));
 
-    const sorted = [...filteredProducts].sort((a, b) => {
+    const sorted = filteredProducts.sort((a, b) => {
       const priceA = parseFloat(a.price.replace('€', '').replace(',', '.'));
       const priceB = parseFloat(b.price.replace('€', '').replace(',', '.'));
       return sortOrder === 'asc' ? priceA - priceB : priceB - priceA;
     });
 
-    setSortedProducts([...sorted]);
+    setSortedProducts(sorted);
   }, [sortOrder, products, category]);
 
   const handleSortChange = () => {

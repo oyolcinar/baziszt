@@ -1,9 +1,9 @@
+'use client';
 import ProductGroup from '@/app/components/ProductGroup/ProductGroup';
-
-import { dummyProductsArray } from '@/app/dummyData/dummyData';
+import { useProducts } from '../context/ProductContext';
 
 export default function Shop() {
-  return (
-    <ProductGroup products={dummyProductsArray} category='all' title={'SHOP'} />
-  );
+  const { products } = useProducts();
+
+  return <ProductGroup products={products} category={['all']} title={'SHOP'} />;
 }

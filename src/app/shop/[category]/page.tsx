@@ -1,30 +1,42 @@
 'use client';
-
 import { usePathname } from 'next/navigation';
-
 import ProductGroup from '@/app/components/ProductGroup/ProductGroup';
+import { useProducts } from '../../context/ProductContext';
 
-import { dummyProductsArray } from '@/app/dummyData/dummyData';
+type CategoryKey = 'new' | 'tops' | 'bottoms' | 'accessories';
+
+interface CategoryMapping {
+  [key: string]: string[];
+}
+
+const categoryMapping: CategoryMapping = {
+  new: ['SS24'],
+  tops: ['Shirts & Tops'],
+  bottoms: ['Shorts', 'Pants'],
+  accessories: ['Accessories'],
+};
 
 export default function Shop() {
   const pathname = usePathname();
   const parts = pathname.split('/');
-  const category = parts[2];
+  const categoryFromUrl = parts[2] as CategoryKey;
+  const { products } = useProducts();
 
-  if (
-    category !== 'tops' &&
-    category !== 'bottoms' &&
-    category !== 'accessories' &&
-    category !== 'new'
-  ) {
+  const categoriesToShow = categoryMapping[categoryFromUrl];
+
+  if (!categoriesToShow) {
     return <div className='text-8xl text-bordeux'>Category not found</div>;
   }
 
+  const filteredProducts = products.filter((product) =>
+    product.category.some((cat) => categoriesToShow.includes(cat)),
+  );
+
   return (
     <ProductGroup
-      products={dummyProductsArray}
-      category={category}
-      title={category.toUpperCase()}
+      products={filteredProducts}
+      category={categoriesToShow}
+      title={categoryFromUrl.toUpperCase()}
     />
   );
 }

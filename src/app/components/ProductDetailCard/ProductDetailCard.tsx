@@ -447,7 +447,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                         className={`h-2 w-2 rounded-full cursor-pointer border ${
                           scrollIndex === index
                             ? 'bg-bordeux border-bordeux'
-                            : 'bg-transparent border-bone'
+                            : 'bg-transparent border-bordeux'
                         }`}
                         aria-label={`Go to image ${index + 1}`}
                       ></button>
@@ -464,7 +464,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   {isFavorite ? (
                     <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
                   ) : (
-                    <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
+                    <HeartIcon className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
                   )}
                 </div>
               </div>
@@ -554,7 +554,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                         handleImageChange('prev', e);
                       }}
                       disabled={isTransitioning}
-                      className='cursor-pointer left-0 p-4 text-bone'
+                      className='cursor-pointer left-0 p-4 text-bordeux'
                       style={{ zIndex: 3 }}
                     >
                       ←
@@ -565,7 +565,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                         handleImageChange('next', e);
                       }}
                       disabled={isTransitioning}
-                      className='cursor-pointer right-0 p-4 text-bone'
+                      className='cursor-pointer right-0 p-4 text-bordeux'
                       style={{ zIndex: 3 }}
                     >
                       →
@@ -612,7 +612,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                     {isFavorite ? (
                       <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
                     ) : (
-                      <HeartIcon className='cursor-pointer text-bone h-4 w-4 mr-4' />
+                      <HeartIcon className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
                     )}
                   </div>
                 </div>
