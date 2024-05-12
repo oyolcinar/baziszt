@@ -1,6 +1,7 @@
 'use client';
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import fetchProducts from '../api/products/route';
+// import fetchProducts from '../api/products/route';
+import fetchProducts from '../../../lib/fetchProducts';
 
 interface Product {
   id: string;

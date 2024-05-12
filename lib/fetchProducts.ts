@@ -179,4 +179,4 @@ const fetchProducts = async () => {
   return transformProductsData(json);
 };
 
-export { fetchProducts as POST };
+export default fetchProducts;
