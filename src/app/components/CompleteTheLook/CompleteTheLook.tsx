@@ -2,6 +2,7 @@ import React from 'react';
 import { dummyProductsArray } from '../../dummyData/dummyData';
 import ProductCard from '../ProductCard/ProductCard';
 import { Product } from '../ProductCard/ProductCard';
+import { useProducts } from '@/app/context/ProductContext';
 
 interface CompleteTheLookProps {
   product: Product;
@@ -32,7 +33,8 @@ const findMatchingProducts = (
 };
 
 const CompleteTheLook: React.FC<CompleteTheLookProps> = ({ product }) => {
-  const matchingProducts = findMatchingProducts(dummyProductsArray, product);
+  const { products } = useProducts();
+  const matchingProducts = findMatchingProducts(products, product);
 
   return (
     <div className='md:mt-10 mb-20 flex flex-col items-center md:block'>
