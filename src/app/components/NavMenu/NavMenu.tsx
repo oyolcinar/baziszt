@@ -34,13 +34,13 @@ const NavMenu: React.FC = () => {
         } transition-transform duration-700 ease-in-out z-40`}
       >
         <div className='flex flex-col justify-start items-start text-base text-black font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
-          <Link
+          {/* <Link
             href='/'
             className='md:hidden hover:opacity-70 transition duration-300'
             onClick={toggleMenu}
           >
             HOME
-          </Link>
+          </Link> */}
           <div className='w-full flex justify-between'>
             <Link
               href='/shop/new'
