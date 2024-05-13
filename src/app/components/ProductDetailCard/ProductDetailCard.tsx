@@ -601,7 +601,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                             className={`h-2 w-2 rounded-full cursor-pointer border ${
                               currentImageIndex === index + 1
                                 ? 'bg-black border-black'
-                                : 'bg-transparent border-bone'
+                                : 'bg-transparent border-black'
                             }`}
                             aria-label={`Go to image ${index + 1}`}
                           ></button>
@@ -609,6 +609,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                       ))}
                     </div>
                   )}
+                  {product.images.length === 1 && <div></div>}
                   <div
                     className='mr-4'
                     onClick={(e) => {
