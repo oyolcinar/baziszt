@@ -32,11 +32,7 @@ const Navbar: React.FC = () => {
       {isNotHome && (
         <div
           // className='hidden md:block'
-          style={{
-            width: '240px',
-            height: '140px',
-            position: 'relative',
-          }}
+          className='relative w-[110px] h-[65px] md:w-[240px] md:h-[140px]'
         >
           <Link href='/'>
             <Image alt='baziszt' src={Logo} layout='fill' objectFit='contain' />
