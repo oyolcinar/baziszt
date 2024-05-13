@@ -23,7 +23,7 @@ const NavMenu: React.FC = () => {
   return (
     <>
       <div
-        className='cursor-pointer font-quasimoda font-bold text-black hover:opacity-70 transition duration-300 relative z-50 w-[120px]'
+        className='cursor-pointer font-quasimoda font-bold text-black text-[14px] md:text-base hover:opacity-70 transition duration-300 relative z-50 w-[79px] md:w-[120px]'
         onClick={toggleMenu}
       >
         {menuOpened ? 'CLOSE' : 'MENU'}

@@ -31,7 +31,7 @@ const Navbar: React.FC = () => {
       </div>
       {isNotHome && (
         <div
-          className='hidden md:block'
+          // className='hidden md:block'
           style={{
             width: '240px',
             height: '140px',
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
       )}
-      <div className='flex items-center justify-end font-quasimoda font-bold text-black gap-6 w-[120px]'>
+      <div className='flex items-center justify-end font-quasimoda font-bold text-[14px] md:text-base text-black gap-6 min-w-[79px] md:w-[120px]'>
         <div className='cursor-pointer hover:opacity-70 transition duration-300'>
           CART(0)
         </div>
