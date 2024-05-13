@@ -6,6 +6,7 @@ import Image from 'next/image';
 import React from 'react';
 
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
+import NavMenu from '../NavMenu/NavMenu';
 
 import Logo from '../../../../public/Logos/logoEditBordeux.png';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
@@ -20,9 +21,13 @@ const Navbar: React.FC = () => {
   const isNotHome = pathName !== '/';
 
   return (
-    <nav className='fixed top-0 left-0 right-0 flex justify-between items-center h-[80px] bg-opacity-0 text-black z-10 mx-[30px]'>
-      <div className='md:mr-[90px]'>
-        <HamburgerMenu />
+    <nav
+      className={`fixed top-0 left-0 right-0 flex justify-between items-center h-[80px] text-black z-10 px-[30px] ${
+        isNotHome ? 'bg-white' : 'bg-opacity-0'
+      }`}
+    >
+      <div>
+        <NavMenu />
       </div>
       {isNotHome && (
         <div
@@ -38,8 +43,11 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
       )}
-      <div className='flex items-center font-quasimoda text-bone gap-6'>
-        <Link
+      <div className='flex items-center justify-end font-quasimoda font-bold text-bordeux gap-6 w-[120px]'>
+        <div className='cursor-pointer hover:opacity-70 transition duration-300'>
+          CART(0)
+        </div>
+        {/* <Link
           href='/search'
           className='hover:opacity-70 transition duration-300'
         >
@@ -53,7 +61,7 @@ const Navbar: React.FC = () => {
         </Link>
         <Link href='/bag' className='hover:opacity-70 transition duration-300'>
           <ShoppingBagIcon className='h-6 w-6 text-bordeux font-bold' />
-        </Link>
+        </Link> */}
       </div>
     </nav>
   );

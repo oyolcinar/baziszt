@@ -10,10 +10,10 @@ import brownLine from '../../../../public/Hamburger/brownLine.png';
 import Logo from '../../../../public/Logos/camelLogo.png';
 
 const Footer: React.FC = () => {
-  const borderStyle = {
-    backgroundImage: `url(${brownLine1px.src})`,
-    backgroundRepeat: 'repeat-x',
-  };
+  // const borderStyle = {
+  //   backgroundImage: `url(${brownLine1px.src})`,
+  //   backgroundRepeat: 'repeat-x',
+  // };
 
   // const borderStyle2 = {
   //   backgroundImage: `url(${blueLine.src})`,
@@ -21,14 +21,14 @@ const Footer: React.FC = () => {
   // };
 
   return (
-    <nav>
+    <nav className='border-l-4 border-r-4 border-bordeux'>
       <div className='flex justify-center items-center flex-row text-center'>
         {/* <div className='flex-1 w-full'>
           <div className='w-full h-2' style={borderStyle}></div>
           <div className='w-full h-2' style={borderStyle2}></div>
         </div> */}
         <div className='flex-1 w-full'>
-          <div className='w-full h-2' style={borderStyle}></div>
+          {/* <div className='w-full h-2' style={borderStyle}></div> */}
         </div>
         <div className='py-4'>
           <Image alt='baziszt' src={Logo} width={100} height={60} />
@@ -38,7 +38,7 @@ const Footer: React.FC = () => {
           <div className='w-full h-2' style={borderStyle2}></div>
         </div> */}
         <div className='flex-1 w-full'>
-          <div className='w-full h-2' style={borderStyle}></div>
+          {/* <div className='w-full h-2' style={borderStyle}></div> */}
         </div>
       </div>
       <div className='h-[200px] flex justify-center items-center'>

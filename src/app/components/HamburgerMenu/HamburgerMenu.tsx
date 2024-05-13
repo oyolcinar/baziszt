@@ -226,11 +226,11 @@ const HamburgerMenu: React.FC = () => {
             ACCESSORIES
           </Link>
           <Link
-            href='/lookbooks'
+            href='/catalog'
             className='hover:opacity-70 transition duration-300'
             onClick={toggleMenu}
           >
-            LOOKBOOKS
+            CATALOG
           </Link>
           <Link
             href='/stockists'

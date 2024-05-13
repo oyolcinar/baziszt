@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger-with-children */
 import { useSwipeable } from 'react-swipeable';
 import React, {
   useState,
@@ -36,6 +37,8 @@ interface ProductDetailCardProps {
 }
 
 const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
+  const uniqueColors = Array.from(new Set(product.colors));
+  const uniqueSizes = Array.from(new Set(product.sizes));
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
   const [clickedIndex, setClickedIndex] = useState(0);
   const [scrollIndex, setScrollIndex] = useState(0);
@@ -49,8 +52,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     null,
   );
   const [translate, setTranslate] = useState({ x: 0, y: 0 });
-  const [colorSelection, setColorSelection] = useState(product.colors[0]);
-  const [sizeSelection, setSizeSelection] = useState(product.sizes[0]);
+  const [colorSelection, setColorSelection] = useState(uniqueColors[0]);
+  const [sizeSelection, setSizeSelection] = useState(uniqueSizes[0]);
   const [detailsMenu, setDetailsMenu] = useState('');
   const [isFavorite, setIsFavorite] = useState(false);
   const [windowSize, setWindowSize] = useState({
@@ -371,7 +374,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       <div className='flex flex-col md:flex-row'>
         <div
           ref={desktopCarouselRef}
-          className={`hidden md:block md:relative md:w-[58%] md:h-[${
+          className={`hidden md:block md:relative md:w-[58%] mt-[80px] md:h-[${
             imageHeight * product.images.length
           }px] ${isZoomed ? 'cursor-dragCustom' : 'cursor-zoomInCustom'}`}
           style={{
@@ -426,34 +429,36 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               <div
                 className={`sticky top-[95%] -translate-y-1/2 w-full flex justify-between items-end z-20`}
               >
-                <div
-                  className='cursor-pointer ml-4 flex-col items-center'
-                  onClick={(e) => {
-                    e.preventDefault;
-                    e.stopPropagation();
-                  }}
-                >
-                  {product.images.map((image, index) => (
-                    <div
-                      key={index}
-                      className='w-4 h-4 flex justify-center items-center'
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        scrollToImage(index);
-                        setClickedIndex(index);
-                      }}
-                    >
-                      <button
-                        className={`h-2 w-2 rounded-full cursor-pointer border ${
-                          scrollIndex === index
-                            ? 'bg-bordeux border-bordeux'
-                            : 'bg-transparent border-bordeux'
-                        }`}
-                        aria-label={`Go to image ${index + 1}`}
-                      ></button>
-                    </div>
-                  ))}
-                </div>
+                {product.images.length > 1 && (
+                  <div
+                    className='cursor-pointer ml-4 flex-col items-center'
+                    onClick={(e) => {
+                      e.preventDefault;
+                      e.stopPropagation();
+                    }}
+                  >
+                    {product.images.map((image, index) => (
+                      <div
+                        key={index}
+                        className='w-4 h-4 flex justify-center items-center'
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          scrollToImage(index);
+                          setClickedIndex(index);
+                        }}
+                      >
+                        <button
+                          className={`h-2 w-2 rounded-full cursor-pointer border ${
+                            scrollIndex === index
+                              ? 'bg-bordeux border-bordeux'
+                              : 'bg-transparent border-bordeux'
+                          }`}
+                          aria-label={`Go to image ${index + 1}`}
+                        ></button>
+                      </div>
+                    ))}
+                  </div>
+                )}
                 <div
                   className='w-full flex justify-end'
                   onClick={(e) => {
@@ -473,7 +478,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         </div>
         <div
           {...swipeHandlers}
-          className={`relative md:hidden w-full h-[${imageHeight}px]`}
+          className={`relative md:hidden w-full h-[${imageHeight}px] mt-[80px]`}
           style={{ width: imageWidth, overflow: 'hidden' }}
         >
           <div
@@ -575,33 +580,35 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 <div
                   className={`sticky top-[95%] -translate-y-1/2 flex justify-between items-end`}
                 >
-                  <div
-                    className='cursor-pointer ml-4 flex justify-center space-x-2 mt-4'
-                    onClick={(e) => {
-                      e.preventDefault;
-                      e.stopPropagation();
-                    }}
-                  >
-                    {product.images.map((image, index) => (
-                      <div
-                        key={index}
-                        className='w-4 h-4 flex justify-center items-center'
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          setCurrentImageIndex(index + 1);
-                        }}
-                      >
-                        <button
-                          className={`h-2 w-2 rounded-full cursor-pointer border ${
-                            currentImageIndex === index + 1
-                              ? 'bg-bordeux border-bordeux'
-                              : 'bg-transparent border-bone'
-                          }`}
-                          aria-label={`Go to image ${index + 1}`}
-                        ></button>
-                      </div>
-                    ))}
-                  </div>
+                  {product.images.length > 1 && (
+                    <div
+                      className='cursor-pointer ml-4 flex justify-center space-x-2 mt-4'
+                      onClick={(e) => {
+                        e.preventDefault;
+                        e.stopPropagation();
+                      }}
+                    >
+                      {product.images.map((image, index) => (
+                        <div
+                          key={index}
+                          className='w-4 h-4 flex justify-center items-center'
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setCurrentImageIndex(index + 1);
+                          }}
+                        >
+                          <button
+                            className={`h-2 w-2 rounded-full cursor-pointer border ${
+                              currentImageIndex === index + 1
+                                ? 'bg-bordeux border-bordeux'
+                                : 'bg-transparent border-bone'
+                            }`}
+                            aria-label={`Go to image ${index + 1}`}
+                          ></button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div
                     className='mr-4'
                     onClick={(e) => {
@@ -620,18 +627,22 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             </div>
           </div>
         </div>
-        <div className='sticky top-0 min-h-[760px] md:min-h-[900px] h-[100vh] flex flex-col items-center pt-20 w-[100%] md:w-[42%]'>
+        <div className='sticky top-0 min-h-[760px] md:min-h-[900px] h-[100vh] flex flex-col items-center justify-start pt-[80px] w-[100%] md:w-[42%]'>
           <div className='text-bordeux font-quasimoda w-[60%] mb-12'>
             <div className='mb-4'>{product.name}</div>
-            <div>{product.details}</div>
+            <div dangerouslySetInnerHTML={{ __html: product.details }}></div>
           </div>
           <div className='w-[60%] mb-12'>
             <div>
               <div className='font-quasimoda text-bordeux text-[12px] mb-4'>
-                {colorSelection.toUpperCase()}
+                {colorSelection
+                  ? colorSelection.toUpperCase()
+                  : product.colors.length <= 1
+                  ? 'ONE COLOR'
+                  : product.colors[0]}
               </div>
               <div className='flex gap-4'>
-                {product.colors.map((color, index) => (
+                {uniqueColors.map((color, index) => (
                   <div
                     key={index}
                     className={`inline-block pb-[6px] pl-[1px] pr-[1px] border-b-2 transition-colors duration-500 ease-in-out ${
@@ -662,18 +673,18 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           <div className='text-bordeux font-quasimoda w-[60%] mt-6'>
             <div className='flex justify-between mb-4'>
               <div className='text-[10px]'>SIZE</div>
-              <div
+              {/* <div
                 className='cursor-pointer text-[10px] hover:opacity-70 transition duration-300'
-                onClick={() => {
-                  setDetailsMenu('sizeMenu');
-                }}
+                // onClick={() => {
+                //   setDetailsMenu('sizeMenu');
+                // }}
               >
                 SIZE GUIDE
-              </div>
+              </div> */}
             </div>
             <div>
               <div className='flex gap-4'>
-                {product.sizes.map((size, index) => (
+                {uniqueSizes.map((size, index) => (
                   <div
                     key={index}
                     className={`cursor-pointer hover:opacity-70 transition duration-300 inline-block px-1 pb-2 ${
@@ -700,16 +711,16 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               <div className='font-quasimoda text-sm'>{product.price}</div>
             </div>
           </div>
-          <div className='font-quasimoda text-bordeux text-sm flex flex-col lg:flex-row md:justify-between w-[60%] mt-20'>
+          {/* <div className='font-quasimoda text-bordeux text-sm flex flex-col lg:flex-row md:justify-between w-[60%] mt-20'>
             <div
               className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
                 detailsMenu === 'details'
                   ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
-              onClick={() => {
-                setDetailsMenu('details');
-              }}
+              // onClick={() => {
+              //   setDetailsMenu('details');
+              // }}
             >
               DETAILS
             </div>
@@ -719,9 +730,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
-              onClick={() => {
-                setDetailsMenu('delivery');
-              }}
+              // onClick={() => {
+              //   setDetailsMenu('delivery');
+              // }}
             >
               DELIVERY & RETURNS
             </div>
@@ -731,13 +742,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   ? `border-b-2 border-bordeux hover:border-bordeux/70`
                   : `border-b border-transparent`
               }`}
-              onClick={() => {
-                setDetailsMenu('assistance');
-              }}
+              // onClick={() => {
+              //   setDetailsMenu('assistance');
+              // }}
             >
               ASSISTANCE
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-bordeux px-2'>
@@ -755,14 +766,14 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         </div>
       </div>
       <CompleteTheLook product={product} />
-      {detailsMenu && (
+      {/* {detailsMenu && (
         <DetailsMenu
           product={product}
           menu={detailsMenu}
           setMenu={setDetailsMenu}
           detailText={product.details}
         />
-      )}
+      )} */}
     </div>
   );
 };

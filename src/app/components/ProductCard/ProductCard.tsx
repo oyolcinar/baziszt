@@ -18,6 +18,8 @@ export interface Product {
 }
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+  const uniqueColors = Array.from(new Set(product.colors));
+  const uniqueSizes = Array.from(new Set(product.sizes));
   const [currentImageIndex, setCurrentImageIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
@@ -171,7 +173,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           {product.name}
         </div> */}
         <div className='absolute top-0 right-0 p-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
-          {product.colors.map((color, index) => (
+          {uniqueColors.map((color, index) => (
             <span
               key={index}
               className='block w-2 h-2 rounded-full'
@@ -199,7 +201,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         <div className='absolute bottom-4 left-0 p-2 text-bordeux text-sm font-quasimoda opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div>{product.name}</div>
           <div className='flex gap-2'>
-            {product.sizes.map((size, index) => (
+            {uniqueSizes.map((size, index) => (
               <div key={index}>{size}</div>
             ))}
           </div>
