@@ -6,7 +6,7 @@ import React from 'react';
 import ProductCard from './components/ProductCard/ProductCard';
 import { Product } from './components/ProductCard/ProductCard';
 
-import Logo from '../../public/Logos/logoEditBordeux.png';
+import Logo from '../../public/Logos/logoEditBlack.png';
 import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
 import TopsImage2 from '../../public/Images/topsImage2.png';
@@ -84,7 +84,7 @@ export default function Home() {
       </div>
 
       <div className='flex flex-col md:flex-row'>
-        <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300'>
+        <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
           <Link href='/shop/tops'>
             <div
               className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl '
@@ -99,7 +99,7 @@ export default function Home() {
             </div>
           </Link>
         </div>
-        <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300'>
+        <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
           <Link href='/shop/new'>
             <div
               className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -114,7 +114,7 @@ export default function Home() {
             </div>
           </Link>
         </div>
-        <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300'>
+        <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
           <Link href='/shop/bottoms'>
             <div
               className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -133,10 +133,10 @@ export default function Home() {
 
       <div className='w-full flex justify-center my-16'>
         <div className='flex w-3/4 flex-col items-center justify-center'>
-          <div className='font-altesse64 text-bordeux text-5xl sm:text-6xl md:text-8xl mb-4'>
+          <div className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'>
             Our Commitment
           </div>
-          <div className='text-bordeux font-quasimoda text-lg flex flex-col items-center text-justify'>
+          <div className='text-black font-quasimoda text-lg flex flex-col items-center text-justify'>
             <div className='mb-2 w-full md:w-1/2'>
               We had at heart to create an eco-responsible and socially
               conscious brand. We work with collectives of dyers and embroiders

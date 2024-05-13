@@ -23,7 +23,7 @@ const NavMenu: React.FC = () => {
   return (
     <>
       <div
-        className='cursor-pointer font-quasimoda font-bold text-bordeux hover:opacity-70 transition duration-300 relative z-50 w-[120px]'
+        className='cursor-pointer font-quasimoda font-bold text-black hover:opacity-70 transition duration-300 relative z-50 w-[120px]'
         onClick={toggleMenu}
       >
         {menuOpened ? 'CLOSE' : 'MENU'}
@@ -33,7 +33,7 @@ const NavMenu: React.FC = () => {
           menuOpened ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
-        <div className='flex flex-col justify-start items-start text-base text-bordeux font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
+        <div className='flex flex-col justify-start items-start text-base text-black font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <Link
             href='/'
             className='md:hidden hover:opacity-70 transition duration-300'

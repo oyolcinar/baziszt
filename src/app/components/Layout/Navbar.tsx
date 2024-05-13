@@ -8,7 +8,7 @@ import React from 'react';
 import HamburgerMenu from '../HamburgerMenu/HamburgerMenu';
 import NavMenu from '../NavMenu/NavMenu';
 
-import Logo from '../../../../public/Logos/logoEditBordeux.png';
+import Logo from '../../../../public/Logos/logoEditBlack.png';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { UserIcon } from '@heroicons/react/24/outline';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
           </Link>
         </div>
       )}
-      <div className='flex items-center justify-end font-quasimoda font-bold text-bordeux gap-6 w-[120px]'>
+      <div className='flex items-center justify-end font-quasimoda font-bold text-black gap-6 w-[120px]'>
         <div className='cursor-pointer hover:opacity-70 transition duration-300'>
           CART(0)
         </div>

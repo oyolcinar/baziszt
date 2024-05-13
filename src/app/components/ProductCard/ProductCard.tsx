@@ -116,14 +116,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         >
           <button
             onClick={(e) => handleImageChange('prev', e)}
-            className='text-bordeux p-2'
+            className='text-black p-2'
             disabled={isTransitioning}
           >
             ←
           </button>
           <button
             onClick={(e) => handleImageChange('next', e)}
-            className='text-bordeux p-2'
+            className='text-black p-2'
             disabled={isTransitioning}
           >
             →
@@ -181,7 +181,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             ></span>
           ))}
         </div>
-        <div className='absolute bottom-6 right-0 p-2 text-bordeux font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+        <div className='absolute bottom-6 right-0 p-2 text-black font-quasimoda flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div className='text-sm'>{product.price}</div>
           <div
             style={{ zIndex: 3 }}
@@ -192,13 +192,13 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             }}
           >
             {isFavorite ? (
-              <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4' />
+              <HeartIconSolid className='cursor-pointer text-black h-4 w-4' />
             ) : (
-              <HeartIcon className='cursor-pointer text-bordeux h-4 w-4' />
+              <HeartIcon className='cursor-pointer text-black h-4 w-4' />
             )}
           </div>
         </div>
-        <div className='absolute bottom-4 left-0 p-2 text-bordeux text-sm font-quasimoda opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
+        <div className='absolute bottom-4 left-0 p-2 text-black text-sm font-quasimoda opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div>{product.name}</div>
           <div className='flex gap-2'>
             {uniqueSizes.map((size, index) => (

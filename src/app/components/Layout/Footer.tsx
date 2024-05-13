@@ -47,26 +47,26 @@ const Footer: React.FC = () => {
             <div className='flex flex-col justify-center items-start gap-4 font-quasimoda text-base'>
               <Link
                 href='/'
-                className='text-bordeux hover:opacity-70 transition duration-300'
+                className='text-black hover:opacity-70 transition duration-300'
               >
                 TERMS OF SERVICE
               </Link>
               <Link
                 href='/'
-                className='text-bordeux hover:opacity-70 transition duration-300'
+                className='text-black hover:opacity-70 transition duration-300'
               >
                 PRIVACY POLICY
               </Link>
               <Link
                 href='/'
-                className='text-bordeux hover:opacity-70 transition duration-300'
+                className='text-black hover:opacity-70 transition duration-300'
               >
                 CONTACT
               </Link>
             </div>
           </div>
           <div>
-            <div className='text-bordeux text-base font-quasimoda mb-6'>
+            <div className='text-black text-base font-quasimoda mb-6'>
               FOLLOW US
             </div>
             <div className='flex flex-row gap-6'>
@@ -74,14 +74,14 @@ const Footer: React.FC = () => {
                 href='/'
                 className='w-[24px] cursor-pointer hover:opacity-70 transition duration-300'
               >
-                <FontAwesomeIcon className='text-bordeux' icon={faInstagram} />
+                <FontAwesomeIcon className='text-black' icon={faInstagram} />
               </Link>
               <Link
                 href='/'
                 className='w-[24px] cursor-pointer hover:opacity-70 transition duration-300'
               >
                 <FontAwesomeIcon
-                  className='text-bordeux'
+                  className='text-black'
                   icon={faFacebookSquare}
                 />
               </Link>
@@ -89,7 +89,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className='flex justify-center text-bordeux font-quasimoda text-sm mb-4'>
+      <div className='flex justify-center text-black font-quasimoda text-sm mb-4'>
         © 2024, baziszt
       </div>
     </nav>

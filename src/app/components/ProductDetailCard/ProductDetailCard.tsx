@@ -450,8 +450,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                         <button
                           className={`h-2 w-2 rounded-full cursor-pointer border ${
                             scrollIndex === index
-                              ? 'bg-bordeux border-bordeux'
-                              : 'bg-transparent border-bordeux'
+                              ? 'bg-black border-black'
+                              : 'bg-transparent border-black'
                           }`}
                           aria-label={`Go to image ${index + 1}`}
                         ></button>
@@ -467,9 +467,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   }}
                 >
                   {isFavorite ? (
-                    <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                    <HeartIconSolid className='cursor-pointer text-black h-4 w-4 mr-4' />
                   ) : (
-                    <HeartIcon className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                    <HeartIcon className='cursor-pointer text-black h-4 w-4 mr-4' />
                   )}
                 </div>
               </div>
@@ -559,7 +559,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                         handleImageChange('prev', e);
                       }}
                       disabled={isTransitioning}
-                      className='cursor-pointer left-0 p-4 text-bordeux'
+                      className='cursor-pointer left-0 p-4 text-black'
                       style={{ zIndex: 3 }}
                     >
                       ←
@@ -570,7 +570,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                         handleImageChange('next', e);
                       }}
                       disabled={isTransitioning}
-                      className='cursor-pointer right-0 p-4 text-bordeux'
+                      className='cursor-pointer right-0 p-4 text-black'
                       style={{ zIndex: 3 }}
                     >
                       →
@@ -600,7 +600,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                           <button
                             className={`h-2 w-2 rounded-full cursor-pointer border ${
                               currentImageIndex === index + 1
-                                ? 'bg-bordeux border-bordeux'
+                                ? 'bg-black border-black'
                                 : 'bg-transparent border-bone'
                             }`}
                             aria-label={`Go to image ${index + 1}`}
@@ -617,9 +617,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                     }}
                   >
                     {isFavorite ? (
-                      <HeartIconSolid className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                      <HeartIconSolid className='cursor-pointer text-black h-4 w-4 mr-4' />
                     ) : (
-                      <HeartIcon className='cursor-pointer text-bordeux h-4 w-4 mr-4' />
+                      <HeartIcon className='cursor-pointer text-black h-4 w-4 mr-4' />
                     )}
                   </div>
                 </div>
@@ -628,13 +628,13 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
         <div className='sticky top-0 min-h-[760px] md:min-h-[900px] h-[100vh] flex flex-col items-center justify-start pt-[80px] w-[100%] md:w-[42%]'>
-          <div className='text-bordeux font-quasimoda w-[60%] mb-12'>
+          <div className='text-black font-quasimoda w-[60%] mb-12'>
             <div className='mb-4'>{product.name}</div>
             <div dangerouslySetInnerHTML={{ __html: product.details }}></div>
           </div>
           <div className='w-[60%] mb-12'>
             <div>
-              <div className='font-quasimoda text-bordeux text-[12px] mb-4'>
+              <div className='font-quasimoda text-black text-[12px] mb-4'>
                 {colorSelection
                   ? colorSelection.toUpperCase()
                   : product.colors.length <= 1
@@ -647,7 +647,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                     key={index}
                     className={`inline-block pb-[6px] pl-[1px] pr-[1px] border-b-2 transition-colors duration-500 ease-in-out ${
                       colorSelection === color
-                        ? 'border-bordeux'
+                        ? 'border-black'
                         : 'border-transparent'
                     }`}
                     onClick={() => {
@@ -670,7 +670,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             </div>
           </div>
           <div className='border-b-[1px] border-gray-200 w-[60%]'></div>
-          <div className='text-bordeux font-quasimoda w-[60%] mt-6'>
+          <div className='text-black font-quasimoda w-[60%] mt-6'>
             <div className='flex justify-between mb-4'>
               <div className='text-[10px]'>SIZE</div>
               {/* <div
@@ -689,7 +689,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                     key={index}
                     className={`cursor-pointer hover:opacity-70 transition duration-300 inline-block px-1 pb-2 ${
                       sizeSelection === size
-                        ? `border-b-2 border-bordeux hover:bordeux/70 hover:border-bordeux/70 transition duration-300`
+                        ? `border-b-2 border-black hover:black/70 hover:border-black/70 transition duration-300`
                         : 'border-b-2 border-transparent'
                     }`}
                     onClick={() => {
@@ -702,7 +702,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               </div>
             </div>
           </div>
-          <div className='hidden border border-bordeux h-16 w-[60%] mt-16 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-bordeux text-bordeux hover:text-bone'>
+          <div className='hidden border border-black h-16 w-[60%] mt-16 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone'>
             <div className='flex justify-between items-center w-[80%]'>
               <div className='flex gap-2'>
                 <ShoppingBagIcon className='h-4 w-4 font-bold' />
@@ -751,11 +751,11 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div> */}
         </div>
       </div>
-      <div className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-bordeux px-2'>
+      <div className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-black px-2'>
         <div className='font-quasimoda text-bone text-[14px] ml-2'>
           {product.name}
         </div>
-        <div className='border border-bordeux h-16 w-[100%] flex justify-center items-center transition duration-300 ease-in-out bg-bordeux hover:bg-bordeux text-bone hover:text-bone'>
+        <div className='border border-black h-16 w-[100%] flex justify-center items-center transition duration-300 ease-in-out bg-black hover:bg-black text-bone hover:text-bone'>
           <div className='flex justify-between items-center w-[80%]'>
             <div className='flex gap-2'>
               <ShoppingBagIcon className='h-4 w-4 font-bold' />
