@@ -8,7 +8,8 @@ import React, {
   createRef,
 } from 'react';
 import Image from 'next/image';
-import { Product } from '../ProductCard/ProductCard';
+import { Product } from '@/app/context/ProductContext';
+import { useCart } from '../../context/CartContext';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -60,6 +61,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     width: 0,
     height: 0,
   });
+  const { addToCart } = useCart();
 
   const imageRefs = useRef<Array<React.RefObject<HTMLDivElement>>>(
     product.images.map(() => createRef<HTMLDivElement>()),
@@ -368,6 +370,58 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     },
     trackTouch: !isZoomed,
   });
+
+  useEffect(() => {
+    if (uniqueColors.length === 1) {
+      setColorSelection(uniqueColors[0]);
+    }
+    if (uniqueSizes.length === 1) {
+      setSizeSelection(uniqueSizes[0]);
+    }
+  }, [uniqueColors, uniqueSizes]);
+
+  let selectedVariant = product.variants.find(
+    (variant) =>
+      variant.selectedOptions.some(
+        (option) => option.name === 'Color' && option.value === colorSelection,
+      ) &&
+      variant.selectedOptions.some(
+        (option) => option.name === 'Size' && option.value === sizeSelection,
+      ),
+  );
+
+  const handleAddToCart = async () => {
+    if (!selectedVariant && product.variants.length === 1) {
+      selectedVariant = product.variants[0];
+    }
+
+    if (!selectedVariant) {
+      selectedVariant = {
+        id: product.id,
+        title: product.name,
+        price: product.price,
+        selectedOptions: [
+          { name: 'Color', value: colorSelection },
+          { name: 'Size', value: sizeSelection },
+        ],
+      };
+    }
+
+    try {
+      await addToCart({
+        variantId: selectedVariant.id,
+        quantity: 1,
+        title: product.name,
+        image: product.images[0],
+        price: selectedVariant.price,
+        size: sizeSelection,
+        currency: selectedVariant.price.split(' ')[1],
+      });
+      console.log('Added to cart successfully');
+    } catch (error) {
+      console.error('Failed to add to cart:', error);
+    }
+  };
 
   return (
     <div>
@@ -703,7 +757,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               </div>
             </div>
           </div>
-          <div className='hidden border border-black h-16 w-[60%] mt-16 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone'>
+          <div
+            className='hidden border border-black h-16 w-[60%] mt-16 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone cursor-pointer'
+            onClick={handleAddToCart}
+          >
             <div className='flex justify-between items-center w-[80%]'>
               <div className='flex gap-2'>
                 <ShoppingBagIcon className='h-4 w-4 font-bold' />
@@ -752,7 +809,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div> */}
         </div>
       </div>
-      <div className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-black px-2'>
+      <div
+        className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-black px-2'
+        onClick={handleAddToCart}
+      >
         <div className='font-quasimoda text-bone text-[14px] ml-2'>
           {product.name}
         </div>

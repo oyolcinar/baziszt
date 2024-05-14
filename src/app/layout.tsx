@@ -4,6 +4,8 @@ import './globals.css';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
 import { ProductProvider } from './context/ProductContext';
+import { UserProvider } from './context/UserContext';
+import { CartProvider } from './context/CartContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -23,9 +25,15 @@ export default function RootLayout({
         <link rel='stylesheet' href='https://use.typekit.net/bbr3pbr.css' />
       </head>
       <body className={inter.className}>
-        <Navbar />
-        <ProductProvider>{children}</ProductProvider>
-        <Footer />
+        <UserProvider>
+          <CartProvider>
+            <ProductProvider>
+              <Navbar />
+              {children}
+              <Footer />
+            </ProductProvider>
+          </CartProvider>
+        </UserProvider>
       </body>
     </html>
   );

@@ -3,7 +3,17 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 // import fetchProducts from '../api/products/route';
 import fetchProducts from '../../../lib/fetchProducts';
 
-interface Product {
+interface ProductVariant {
+  id: string;
+  title: string;
+  price: string;
+  selectedOptions: Array<{
+    name: string;
+    value: string;
+  }>;
+}
+
+export interface Product {
   id: string;
   slug: string;
   name: string;
@@ -13,6 +23,7 @@ interface Product {
   details: string;
   category: string[];
   sizes: string[];
+  variants: ProductVariant[];
 }
 
 interface ProductGroupProps {

@@ -4,18 +4,7 @@ import React, { useState, useEffect, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
-
-export interface Product {
-  id: string;
-  slug: string;
-  name: string;
-  images: string[];
-  colors: string[];
-  price: string;
-  details: string;
-  category: string[];
-  sizes: string[];
-}
+import { Product } from '@/app/context/ProductContext';
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const uniqueColors = Array.from(new Set(product.colors));

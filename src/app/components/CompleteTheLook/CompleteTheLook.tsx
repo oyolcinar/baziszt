@@ -1,7 +1,6 @@
 import React from 'react';
-import { dummyProductsArray } from '../../dummyData/dummyData';
 import ProductCard from '../ProductCard/ProductCard';
-import { Product } from '../ProductCard/ProductCard';
+import { Product } from '@/app/context/ProductContext';
 import { useProducts } from '@/app/context/ProductContext';
 
 interface CompleteTheLookProps {
@@ -23,7 +22,6 @@ const findMatchingProducts = (
       result.push(product);
       if (result.length === 3) break;
     } else {
-      //test için else atıldı
       result.push(product);
       if (result.length === 3) break;
     }

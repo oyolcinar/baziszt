@@ -53,6 +53,15 @@ interface TransformedProduct {
   details: string;
   category: string[];
   sizes: string[];
+  variants: Array<{
+    id: string;
+    title: string;
+    price: string;
+    selectedOptions: Array<{
+      name: string;
+      value: string;
+    }>;
+  }>;
 }
 
 interface ShopifyApiResponse {
@@ -90,6 +99,12 @@ const transformProductsData = (
             ?.value,
       )
       .filter((size): size is string => size !== undefined),
+    variants: node.variants.edges.map((edge) => ({
+      id: edge.node.id,
+      title: edge.node.title,
+      price: `${edge.node.priceV2.amount} ${edge.node.priceV2.currencyCode}`,
+      selectedOptions: edge.node.selectedOptions,
+    })),
   }));
 };
 
