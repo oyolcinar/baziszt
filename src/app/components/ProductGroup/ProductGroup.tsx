@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
-import { Product } from '../ProductCard/ProductCard';
+import { Product } from '@/app/context/ProductContext';
 import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';
 
