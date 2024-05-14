@@ -4,7 +4,6 @@ import Image from 'next/image';
 import React from 'react';
 
 import ProductCard from './components/ProductCard/ProductCard';
-import { Product } from './components/ProductCard/ProductCard';
 
 import Logo from '../../public/Logos/logoEditBlack.png';
 import Hero from '../../public/Images/heroMock.png';
