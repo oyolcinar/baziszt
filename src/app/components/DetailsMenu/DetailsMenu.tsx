@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import XButton from '../XButton/XButton';
-import { Product } from '../ProductCard/ProductCard';
+import { Product } from '@/app/context/ProductContext';
 
 export interface DetailProps {
   detailText?: string;
