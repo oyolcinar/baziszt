@@ -31,7 +31,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
       const allText = breadcrumbs.length === 1 ? ' > ALL ' : '';
 
       return (
-        <span key={index} className='text-black text-base font-quasimoda'>
+        <span key={index} className='text-black text-base font-futura'>
           <Link href={pathTo}>{crumb.toUpperCase()}</Link>
           {separator}
           {allText}
@@ -75,7 +75,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
             {title.slice(1)}
           </div>
 
-          <div className='text-base text-black text-justify font-quasimoda w-full md:w-1/2'>
+          <div className='text-base text-black text-justify font-futura w-full md:w-1/2'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit
             corporis, nostrum repudiandae cumque et dolor nulla ullam expedita?
             Quis ullam consectetur architecto aliquid. Iusto ad assumenda non
@@ -85,12 +85,12 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
       </div>
 
       <div className='flex justify-between items-center w-full px-6 mb-4 mt-20'>
-        <div className='text-xl text-black font-quasimoda'>
+        <div className='text-xl text-black font-futura'>
           {renderBreadcrumbs()}
         </div>
         <button
           onClick={handleSortChange}
-          className='text-black font-quasimoda px-4 py-2 rounded hover:opacity-70 transition duration-300 ease-in-out text-center'
+          className='text-black font-futura px-4 py-2 rounded hover:opacity-70 transition duration-300 ease-in-out text-center'
         >
           PRICE {sortOrder === 'asc' ? '↑' : '↓'}
         </button>

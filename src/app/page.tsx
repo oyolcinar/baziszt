@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import React from 'react';
 
+import { useScroll } from './context/ScrollContext';
 import ProductCard from './components/ProductCard/ProductCard';
 
 import Logo from '../../public/Logos/logoEditBlack.png';
@@ -19,6 +20,22 @@ export default function Home() {
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   const [logoVisible, setLogoVisible] = useState(false);
+  const { setIsPastThreshold } = useScroll();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      setIsPastThreshold(
+        windowWidth <= 768 && window.scrollY > window.innerHeight,
+      );
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [setIsPastThreshold, windowWidth]);
 
   useEffect(() => {
     const updateWindowHeight = () => {
@@ -56,8 +73,10 @@ export default function Home() {
       ? Math.max(50 - scrollY / 100, 10)
       : Math.max(30 - scrollY / 100, 10);
   const isBeyondThreshold = scrollY > threshold;
-  const topPixels = windowHeight * (windowWidth <= 768 ? 0.18 : 0.1);
-  const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
+  const topPixels = windowHeight * (windowWidth <= 768 ? 0.18 : 0.16);
+  const topStyle = isBeyondThreshold
+    ? threshold + topPixels
+    : topPixels - windowHeight * 0.02;
 
   return (
     <main>
@@ -135,7 +154,7 @@ export default function Home() {
           <div className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'>
             Our Commitment
           </div>
-          <div className='text-black font-quasimoda text-lg flex flex-col items-center text-justify'>
+          <div className='text-black font-futura text-lg flex flex-col items-center text-justify'>
             <div className='mb-2 w-full md:w-1/2'>
               We had at heart to create an eco-responsible and socially
               conscious brand. We work with collectives of dyers and embroiders

@@ -20,29 +20,35 @@ const CartMenu: React.FC = () => {
   return (
     <>
       <div
-        className='flex items-center justify-end font-quasimoda font-bold text-[14px] md:text-base text-black gap-6 min-w-[79px] md:w-[120px] z-50'
+        className='flex items-center justify-end font-futura font-bold text-[14px] md:text-base text-black gap-6 min-w-[79px] md:w-[120px] z-50'
         onClick={toggleCartMenu}
       >
-        <div className='cursor-pointer hover:opacity-70 transition duration-300'>
-          CART(
-          {cart
-            ? cart.items.reduce((total, item) => total + item.quantity, 0)
-            : 0}
-          )
-        </div>
+        {!menuOpened ? (
+          <div className='cursor-pointer hover:opacity-70 transition duration-300'>
+            CART(
+            {cart
+              ? cart.items.reduce((total, item) => total + item.quantity, 0)
+              : 0}
+            )
+          </div>
+        ) : (
+          <div className='cursor-pointer hover:opacity-70 transition duration-300'>
+            CLOSE
+          </div>
+        )}
       </div>
       <div
         className={`fixed top-0 right-0 h-[100vh] w-full md:w-[42%] bg-white transform flex justify-start items-center pr-[30px] ${
           menuOpened ? 'translate-x-0' : 'translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
-        <div className='flex flex-col justify-start items-start text-base text-black font-quasimoda gap-6 overflow-y-auto h-full w-full pt-[100px]'>
+        <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <div className='w-full flex justify-between items-center'>
             <div className='text-lg font-bold'>Your Cart</div>
-            <XMarkIcon
+            {/* <XMarkIcon
               className='h-6 w-6 cursor-pointer'
               onClick={toggleCartMenu}
-            />
+            /> */}
           </div>
           <div className='w-full'>
             {cart && cart.items.length > 0 ? (

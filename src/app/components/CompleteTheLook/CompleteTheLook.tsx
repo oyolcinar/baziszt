@@ -36,7 +36,7 @@ const CompleteTheLook: React.FC<CompleteTheLookProps> = ({ product }) => {
 
   return (
     <div className='md:mt-10 mb-20 flex flex-col items-center md:block'>
-      <div className='text-black font-quasimoda text-lg md:ml-10 mb-10'>
+      <div className='text-black font-futura text-lg md:ml-10 mb-10'>
         COMPLETE THE LOOK
       </div>
       <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-3 lg:grid-cols-3 md:pl-0 p-2 gap-2'>

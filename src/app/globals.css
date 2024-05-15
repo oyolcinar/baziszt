@@ -37,6 +37,24 @@ body {
   }
 }
 
+@layer components {
+  .custom-list {
+    @apply list-none pl-0;
+  }
+
+  .custom-list li {
+    @apply flex justify-center items-center relative text-sm;
+    padding-left: 1rem;
+  }
+
+  .custom-list li::before {
+    content: '-';
+    margin-right: 0.5rem;
+    position: absolute;
+    left: 0;
+  }
+}
+
 @keyframes slideInLeft {
   from {
     transform: translateX(-100%);

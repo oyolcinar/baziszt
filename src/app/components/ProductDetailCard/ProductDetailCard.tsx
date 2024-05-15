@@ -1,5 +1,6 @@
 /* eslint-disable react/no-danger-with-children */
 import { useSwipeable } from 'react-swipeable';
+import htmlParser, { domToReact, DOMNode, Element } from 'html-react-parser';
 import React, {
   useState,
   useEffect,
@@ -61,11 +62,15 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     width: 0,
     height: 0,
   });
+
+  const [expandedSections, setExpandedSections] = useState<string[]>([]);
   const { addToCart } = useCart();
 
   const imageRefs = useRef<Array<React.RefObject<HTMLDivElement>>>(
     product.images.map(() => createRef<HTMLDivElement>()),
   );
+
+  const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   useEffect(() => {
     const currentRefs = imageRefs.current;
@@ -423,6 +428,105 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     }
   };
 
+  const toggleSection = (section: string) => {
+    setExpandedSections((prevSections) =>
+      prevSections.includes(section)
+        ? prevSections.filter((sec) => sec !== section)
+        : [...prevSections, section],
+    );
+  };
+
+  useEffect(() => {
+    expandedSections.forEach((section) => {
+      const sectionRef = sectionRefs.current[section];
+      if (sectionRef) {
+        sectionRef.style.maxHeight = `${sectionRef.scrollHeight}px`;
+      }
+    });
+  }, [expandedSections]);
+
+  useEffect(() => {
+    Object.keys(sectionRefs.current).forEach((section) => {
+      const sectionRef = sectionRefs.current[section];
+      if (sectionRef && !expandedSections.includes(section)) {
+        sectionRef.style.maxHeight = '0px';
+      }
+    });
+  }, [expandedSections]);
+
+  const transformDetailsHtml = (html: string): React.ReactNode => {
+    const parsedHtml = htmlParser(html, {
+      replace: (domNode) => {
+        if (
+          domNode &&
+          'type' in domNode &&
+          domNode.type === 'tag' &&
+          domNode.name === 'p'
+        ) {
+          if (!domNode.attribs) {
+            domNode.attribs = {};
+          }
+          domNode.attribs.className = 'mb-2'; // Default class for paragraphs
+        }
+        return domNode;
+      },
+    });
+
+    const contentArray: React.ReactNode[] = Array.isArray(parsedHtml)
+      ? parsedHtml
+      : [parsedHtml];
+    const transformedContent: React.ReactNode[] = [];
+
+    let firstParagraphFound = false;
+    let secondParagraphFound = false;
+
+    contentArray.forEach((node, index) => {
+      if (React.isValidElement(node) && node.type === 'p') {
+        if (!firstParagraphFound) {
+          transformedContent.push(
+            React.cloneElement(node, {
+              ...node.props,
+              className: 'mb-2 text-sm',
+            }), // Add text-sm class for 12px font size
+          );
+          firstParagraphFound = true;
+        } else if (!secondParagraphFound) {
+          // Handle the second paragraph
+          const secondParagraphContent = node.props.children;
+
+          const listItems = React.Children.toArray(secondParagraphContent)
+            .filter(
+              (child) =>
+                React.isValidElement(child) &&
+                typeof child.props.children === 'string' &&
+                child.props.children.trim() !== '',
+            )
+            .map((child, i) => (
+              <li className='mb-2' key={`list-item-${i}`}>
+                {child}
+              </li>
+            ));
+
+          transformedContent.push(
+            <ul className='custom-list' key={index}>
+              {listItems}
+            </ul>,
+          );
+
+          secondParagraphFound = true;
+        } else {
+          transformedContent.push(node);
+        }
+      } else {
+        transformedContent.push(node);
+      }
+    });
+
+    return <>{transformedContent}</>;
+  };
+
+  console.log(product.details);
+
   return (
     <div>
       <div className='flex flex-col md:flex-row'>
@@ -683,13 +787,65 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
         <div className='sticky top-0 min-h-[760px] md:min-h-[900px] h-[100vh] flex flex-col items-center justify-start pt-[80px] w-[100%] md:w-[42%]'>
-          <div className='text-black font-quasimoda w-[60%] mb-12'>
-            <div className='mb-4'>{product.name}</div>
-            <div dangerouslySetInnerHTML={{ __html: product.details }}></div>
+          <div className='text-black font-futura w-[60%] mb-4 flex flex-col items-center'>
+            <div className='mb-4 text-lg font-bold'>
+              {product.name.toUpperCase()}
+            </div>
+            <div
+              className='hidden border border-black h-16 w-[100%] mb-4 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone cursor-pointer'
+              onClick={handleAddToCart}
+            >
+              <div className='flex justify-between items-center w-[80%]'>
+                <div className='flex gap-2'>
+                  <ShoppingBagIcon className='h-4 w-4 font-bold' />
+                  <div className='font-futura text-sm'>ADD</div>
+                </div>
+                <div className='font-futura text-sm'>{product.price}</div>
+              </div>
+            </div>
+            <div className='border-b-[1px] border-gray-200 w-[100%] mb-4'></div>
+            <div
+              className='cursor-pointer w-[100%]'
+              onClick={() => toggleSection('description')}
+            >
+              <div className='flex justify-between items-center w-[100%]'>
+                <div className='text-[12px] font-bold'>DESCRIPTION</div>
+                <div>
+                  {expandedSections.includes('description') ? '-' : '+'}
+                </div>
+              </div>
+              <div
+                ref={(el) => (sectionRefs.current['description'] = el)}
+                className={`overflow-hidden transition-max-height duration-300 ease-in-out ${
+                  expandedSections.includes('description')
+                    ? 'max-h-screen'
+                    : 'max-h-0'
+                }`}
+              >
+                <div>{transformDetailsHtml(product.details)}</div>
+              </div>
+            </div>
           </div>
-          <div className='w-[60%] mb-12'>
-            <div>
-              <div className='font-quasimoda text-black text-[12px] mb-4'>
+          <div className='border-b-[1px] border-gray-200 w-[60%]'></div>
+          <div className='cursor-pointer w-[60%] my-4'>
+            <div
+              className='flex justify-between items-center'
+              onClick={() => toggleSection('color')}
+            >
+              <div className='text-[12px] text-black font-futura font-bold'>
+                COLOR
+              </div>
+              <div className='text-black'>
+                {expandedSections.includes('color') ? '-' : '+'}
+              </div>
+            </div>
+            <div
+              ref={(el) => (sectionRefs.current['color'] = el)}
+              className={`overflow-hidden transition-max-height duration-300 ease-in-out ${
+                expandedSections.includes('color') ? 'max-h-screen' : 'max-h-0'
+              }`}
+            >
+              <div className='font-futura text-black text-[12px] mb-2'>
                 {colorSelection
                   ? colorSelection.toUpperCase()
                   : product.colors.length <= 1
@@ -700,7 +856,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 {uniqueColors.map((color, index) => (
                   <div
                     key={index}
-                    className={`inline-block pb-[6px] pl-[1px] pr-[1px] border-b-2 transition-colors duration-500 ease-in-out ${
+                    className={`inline-block pb-[5px] pl-[1px] pr-[1px] border-b-2 transition-colors duration-500 ease-in-out ${
                       colorSelection === color
                         ? 'border-black'
                         : 'border-transparent'
@@ -725,24 +881,29 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             </div>
           </div>
           <div className='border-b-[1px] border-gray-200 w-[60%]'></div>
-          <div className='text-black font-quasimoda w-[60%] mt-6'>
-            <div className='flex justify-between mb-4'>
-              <div className='text-[10px]'>SIZE</div>
-              {/* <div
-                className='cursor-pointer text-[10px] hover:opacity-70 transition duration-300'
-                // onClick={() => {
-                //   setDetailsMenu('sizeMenu');
-                // }}
-              >
-                SIZE GUIDE
-              </div> */}
+          <div className='cursor-pointer w-[60%] my-4'>
+            <div
+              className='flex justify-between items-center'
+              onClick={() => toggleSection('size')}
+            >
+              <div className='text-[12px] text-black font-futura font-bold'>
+                SIZE
+              </div>
+              <div className='text-black'>
+                {expandedSections.includes('size') ? '-' : '+'}
+              </div>
             </div>
-            <div>
-              <div className='flex gap-4'>
+            <div
+              ref={(el) => (sectionRefs.current['size'] = el)}
+              className={`overflow-hidden transition-max-height duration-300 ease-in-out ${
+                expandedSections.includes('size') ? 'max-h-screen' : 'max-h-0'
+              }`}
+            >
+              <div className='flex gap-4 text-[12px] font-futura text-black'>
                 {uniqueSizes.map((size, index) => (
                   <div
                     key={index}
-                    className={`cursor-pointer hover:opacity-70 transition duration-300 inline-block px-1 pb-2 ${
+                    className={`cursor-pointer hover:opacity-70 transition duration-300 inline-block px-1 ${
                       sizeSelection === size
                         ? `border-b-2 border-black hover:black/70 hover:border-black/70 transition duration-300`
                         : 'border-b-2 border-transparent'
@@ -757,72 +918,26 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               </div>
             </div>
           </div>
-          <div
-            className='hidden border border-black h-16 w-[60%] mt-16 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone cursor-pointer'
-            onClick={handleAddToCart}
-          >
-            <div className='flex justify-between items-center w-[80%]'>
-              <div className='flex gap-2'>
-                <ShoppingBagIcon className='h-4 w-4 font-bold' />
-                <div className='font-quasimoda text-sm'>ADD</div>
-              </div>
-              <div className='font-quasimoda text-sm'>{product.price}</div>
-            </div>
-          </div>
-          {/* <div className='font-quasimoda text-bordeux text-sm flex flex-col lg:flex-row md:justify-between w-[60%] mt-20'>
-            <div
-              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
-                detailsMenu === 'details'
-                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
-                  : `border-b border-transparent`
-              }`}
-              // onClick={() => {
-              //   setDetailsMenu('details');
-              // }}
-            >
-              DETAILS
-            </div>
-            <div
-              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 mb-4 md:mb-0 ${
-                detailsMenu === 'delivery'
-                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
-                  : `border-b border-transparent`
-              }`}
-              // onClick={() => {
-              //   setDetailsMenu('delivery');
-              // }}
-            >
-              DELIVERY & RETURNS
-            </div>
-            <div
-              className={`cursor-pointer hover:opacity-70 transition duration-300 hover:border-b-2 hover:border-bordeux/70 ${
-                detailsMenu === 'assistance'
-                  ? `border-b-2 border-bordeux hover:border-bordeux/70`
-                  : `border-b border-transparent`
-              }`}
-              // onClick={() => {
-              //   setDetailsMenu('assistance');
-              // }}
-            >
-              ASSISTANCE
-            </div>
-          </div> */}
         </div>
       </div>
       <div
-        className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-black px-2'
+        className='sticky bottom-0 h-[100px] mb-12 sm:hidden bg-bone px-2 border border-black'
         onClick={handleAddToCart}
       >
-        <div className='font-quasimoda text-bone text-[14px] ml-2'>
-          {product.name}
+        <div className='flex justify-between font-futura text-black text-[14px] ml-2 pt-1'>
+          <div>{product.name.toUpperCase()}</div>
+          <div className='flex gap-2 mr-2'>
+            <div>{colorSelection.toUpperCase()}</div>
+            <div>{sizeSelection}</div>
+          </div>
         </div>
-        <div className='border border-black h-16 w-[100%] flex justify-center items-center transition duration-300 ease-in-out bg-black hover:bg-black text-bone hover:text-bone'>
+        <div className='border border-black h-16 w-[100%] flex justify-center items-center transition duration-300 ease-in-out bg-bone hover:bg-black text-black hover:text-bone'>
           <div className='flex justify-between items-center w-[80%]'>
-            <div className='flex gap-2'>
+            <div className='flex gap-2 pb-2'>
               <ShoppingBagIcon className='h-4 w-4 font-bold' />
-              <div className='font-quasimoda text-sm'>ADD</div>
+              <div className='font-futura text-sm'>ADD</div>
             </div>
-            <div className='font-quasimoda text-sm'>{product.price}</div>
+            <div className='font-futura text-sm'>{product.price}</div>
           </div>
         </div>
       </div>
