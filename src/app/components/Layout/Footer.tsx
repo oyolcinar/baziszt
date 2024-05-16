@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
   // };
 
   return (
-    <nav className='border-l-4 border-r-4 border-bordeux mx-2'>
+    <nav className='border-l-8 border-r-8 border-bordeux mx-8'>
       <div className='flex justify-center items-center flex-row text-center'>
         {/* <div className='flex-1 w-full'>
           <div className='w-full h-2' style={borderStyle}></div>

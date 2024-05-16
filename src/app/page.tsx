@@ -2,9 +2,11 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import React from 'react';
+import Link from 'next/link';
 
 import { useScroll } from './context/ScrollContext';
 import ProductCard from './components/ProductCard/ProductCard';
+import NewsletterPopup from './components/NewsletterPopUp/NewsletterPopUp';
 
 import Logo from '../../public/Logos/logoEditBlack.png';
 import Hero from '../../public/Images/heroMock.png';
@@ -12,7 +14,6 @@ import TopsImage from '../../public/Images/topsImage.png';
 import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
-import Link from 'next/link';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
@@ -20,6 +21,7 @@ export default function Home() {
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   const [logoVisible, setLogoVisible] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
   const { setIsPastThreshold } = useScroll();
 
   useEffect(() => {
@@ -68,6 +70,10 @@ export default function Home() {
     };
   }, [logoVisible]);
 
+  useEffect(() => {
+    setShowPopup(true);
+  }, []);
+
   const imageSize =
     windowWidth <= 768
       ? Math.max(50 - scrollY / 100, 10)
@@ -78,6 +84,7 @@ export default function Home() {
 
   return (
     <main>
+      {showPopup && <NewsletterPopup />}
       <div style={{ position: 'relative' }}>
         <div
           style={{
@@ -164,24 +171,6 @@ export default function Home() {
               vintage fabrics that tell the stories of the past but are made to
               live in the present and for many years to come.
             </div>
-            {/* <div className='mb-2 text-center'>
-              We had at heart to create an eco-responsible and socially
-              conscious brand.
-            </div>
-            <div className='mb-2 text-center'>
-              We work with collectives of dyers and embroiders in forsaken
-              villages in India.
-            </div>
-            <div className='mb-2 text-center'>
-              Most of the pieces in this collection were made from hemp, a
-              material that is on the rise<br></br>not only for its nice feel on
-              the skin but also thanks to the plant not being water intensive.
-            </div>
-            <div className='text-center'>
-              We create unique clothes from vintage fabrics that tell the
-              stories of the past but are made to<br></br>live in the present
-              and for many years to come
-            </div> */}
           </div>
         </div>
       </div>

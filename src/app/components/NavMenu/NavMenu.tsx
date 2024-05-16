@@ -41,72 +41,58 @@ const NavMenu: React.FC = () => {
           >
             HOME
           </Link> */}
+          <Link
+            href='/shop/new'
+            className='hover:opacity-70 transition duration-300'
+            onMouseEnter={() => {
+              setHoveredImage(newMenu.src);
+              setIsImageVisible(true);
+            }}
+            onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            NEW
+          </Link>
+          <Link
+            href='/shop/tops'
+            className='hover:opacity-70 transition duration-300'
+            onMouseEnter={() => {
+              setHoveredImage(topsMenu.src);
+              setIsImageVisible(true);
+            }}
+            onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            TOPS
+          </Link>
+          <Link
+            href='/shop/bottoms'
+            className='hover:opacity-70 transition duration-300'
+            onMouseEnter={() => {
+              setHoveredImage(bottomsMenu.src);
+              setIsImageVisible(true);
+            }}
+            onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            BOTTOMS
+          </Link>
+
+          <Link
+            href='/shop/accessories'
+            className='hover:opacity-70 transition duration-300'
+            // onMouseEnter={() => {
+            //   setHoveredImage(accessoriesMenu.src);
+            //   setIsImageVisible(true);
+            // }}
+            // onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            ACCESSORIES
+          </Link>
           <div className='w-full flex justify-between'>
             <Link
-              href='/shop/new'
-              className='hover:opacity-70 transition duration-300'
-              onMouseEnter={() => {
-                setHoveredImage(newMenu.src);
-                setIsImageVisible(true);
-              }}
-              onMouseLeave={() => setIsImageVisible(false)}
-              onClick={toggleMenu}
-            >
-              NEW
-            </Link>
-            <Link
-              href='/'
-              className='hover:opacity-70 transition duration-300 pr-[30px]'
-              onClick={toggleMenu}
-            >
-              terms
-            </Link>
-          </div>
-          <div className='w-full flex justify-between'>
-            <Link
-              href='/shop/tops'
-              className='hover:opacity-70 transition duration-300'
-              onMouseEnter={() => {
-                setHoveredImage(topsMenu.src);
-                setIsImageVisible(true);
-              }}
-              onMouseLeave={() => setIsImageVisible(false)}
-              onClick={toggleMenu}
-            >
-              TOPS
-            </Link>
-            <Link
-              href='/'
-              className='hover:opacity-70 transition duration-300 pr-[30px]'
-              onClick={toggleMenu}
-            >
-              privacy
-            </Link>
-          </div>
-          <div className='w-full flex justify-between'>
-            <Link
-              href='/shop/bottoms'
-              className='hover:opacity-70 transition duration-300'
-              onMouseEnter={() => {
-                setHoveredImage(bottomsMenu.src);
-                setIsImageVisible(true);
-              }}
-              onMouseLeave={() => setIsImageVisible(false)}
-              onClick={toggleMenu}
-            >
-              BOTTOMS
-            </Link>
-            <Link
-              href='/'
-              className='hover:opacity-70 transition duration-300 pr-[30px]'
-              onClick={toggleMenu}
-            >
-              contact
-            </Link>
-          </div>
-          <div className='w-full flex justify-between'>
-            <Link
-              href='/shop/accessories'
+              href='/shop/oneOfone'
               className='hover:opacity-70 transition duration-300'
               // onMouseEnter={() => {
               //   setHoveredImage(accessoriesMenu.src);
@@ -115,14 +101,14 @@ const NavMenu: React.FC = () => {
               // onMouseLeave={() => setIsImageVisible(false)}
               onClick={toggleMenu}
             >
-              ACCESSORIES
+              ONE OF ONE
             </Link>
             <Link
               href='/'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               onClick={toggleMenu}
             >
-              instagram
+              terms
             </Link>
           </div>
           <div className='w-full flex justify-between'>
@@ -138,30 +124,57 @@ const NavMenu: React.FC = () => {
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               onClick={toggleMenu}
             >
+              privacy
+            </Link>
+          </div>
+          <div className='w-full flex justify-between'>
+            <Link
+              href='/stockists'
+              className='hover:opacity-70 transition duration-300'
+              onClick={toggleMenu}
+            >
+              STOCKISTS
+            </Link>
+            <Link
+              href='/'
+              className='hover:opacity-70 transition duration-300 pr-[30px]'
+              onClick={toggleMenu}
+            >
+              contact
+            </Link>
+          </div>
+          <div className='w-full flex justify-between'>
+            <Link
+              href='/press'
+              className='hover:opacity-70 transition duration-300'
+              onClick={toggleMenu}
+            >
+              PRESS
+            </Link>
+            <Link
+              href='/'
+              className='hover:opacity-70 transition duration-300 pr-[30px]'
+              onClick={toggleMenu}
+            >
+              instagram
+            </Link>
+          </div>
+          <div className='w-full flex justify-between'>
+            <Link
+              href='/journal'
+              className='hover:opacity-70 transition duration-300'
+              onClick={toggleMenu}
+            >
+              JOURNAL
+            </Link>
+            <Link
+              href='/'
+              className='hover:opacity-70 transition duration-300 pr-[30px]'
+              onClick={toggleMenu}
+            >
               facebook
             </Link>
           </div>
-          <Link
-            href='/stockists'
-            className='hover:opacity-70 transition duration-300'
-            onClick={toggleMenu}
-          >
-            STOCKISTS
-          </Link>
-          <Link
-            href='/press'
-            className='hover:opacity-70 transition duration-300'
-            onClick={toggleMenu}
-          >
-            PRESS
-          </Link>
-          <Link
-            href='/journal'
-            className='hover:opacity-70 transition duration-300'
-            onClick={toggleMenu}
-          >
-            JOURNAL
-          </Link>
           <div
             className={`hidden sm:block w-full h-[150px] overflow-hidden transition-opacity duration-300 ${
               isImageVisible ? 'opacity-100' : 'opacity-0'

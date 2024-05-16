@@ -7,6 +7,7 @@ import { ProductProvider } from './context/ProductContext';
 import { UserProvider } from './context/UserContext';
 import { CartProvider } from './context/CartContext';
 import { ScrollProvider } from './context/ScrollContext';
+import { BannerProvider } from './context/BannerContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -26,17 +27,19 @@ export default function RootLayout({
         <link rel='stylesheet' href='https://use.typekit.net/bbr3pbr.css' />
       </head>
       <body className={inter.className}>
-        <ScrollProvider>
-          <UserProvider>
-            <CartProvider>
-              <ProductProvider>
-                <Navbar />
-                {children}
-                <Footer />
-              </ProductProvider>
-            </CartProvider>
-          </UserProvider>
-        </ScrollProvider>
+        <BannerProvider>
+          <ScrollProvider>
+            <UserProvider>
+              <CartProvider>
+                <ProductProvider>
+                  <Navbar />
+                  {children}
+                  <Footer />
+                </ProductProvider>
+              </CartProvider>
+            </UserProvider>
+          </ScrollProvider>
+        </BannerProvider>
       </body>
     </html>
   );

@@ -3,7 +3,7 @@ import { usePathname } from 'next/navigation';
 import ProductGroup from '@/app/components/ProductGroup/ProductGroup';
 import { useProducts } from '../../context/ProductContext';
 
-type CategoryKey = 'new' | 'tops' | 'bottoms' | 'accessories';
+type CategoryKey = 'new' | 'tops' | 'bottoms' | 'accessories' | 'oneOfone';
 
 interface CategoryMapping {
   [key: string]: string[];
@@ -14,6 +14,7 @@ const categoryMapping: CategoryMapping = {
   tops: ['Shirts & Tops'],
   bottoms: ['Shorts', 'Pants'],
   accessories: ['Accessories'],
+  oneOfone: ['One-of-one'],
 };
 
 export default function Shop() {
@@ -32,11 +33,16 @@ export default function Shop() {
     product.category.some((cat) => categoriesToShow.includes(cat)),
   );
 
+  const categoryTitle =
+    categoryFromUrl === 'oneOfone'
+      ? 'one of one'
+      : categoryFromUrl.toUpperCase();
+
   return (
     <ProductGroup
       products={filteredProducts}
       category={categoriesToShow}
-      title={categoryFromUrl.toUpperCase()}
+      title={categoryTitle}
     />
   );
 }

@@ -63,7 +63,11 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     height: 0,
   });
 
-  const [expandedSections, setExpandedSections] = useState<string[]>([]);
+  const [expandedSections, setExpandedSections] = useState<string[]>([
+    'description',
+    'size',
+    'color',
+  ]);
   const { addToCart } = useCart();
 
   const imageRefs = useRef<Array<React.RefObject<HTMLDivElement>>>(
@@ -466,7 +470,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           if (!domNode.attribs) {
             domNode.attribs = {};
           }
-          domNode.attribs.className = 'mb-2'; // Default class for paragraphs
+          domNode.attribs.className = 'mb-2';
         }
         return domNode;
       },
@@ -792,19 +796,6 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               {product.name.toUpperCase()}
             </div>
             <div
-              className='hidden border border-black h-16 w-[100%] mb-4 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone cursor-pointer'
-              onClick={handleAddToCart}
-            >
-              <div className='flex justify-between items-center w-[80%]'>
-                <div className='flex gap-2'>
-                  <ShoppingBagIcon className='h-4 w-4 font-bold' />
-                  <div className='font-futura text-sm'>ADD</div>
-                </div>
-                <div className='font-futura text-sm'>{product.price}</div>
-              </div>
-            </div>
-            <div className='border-b-[1px] border-gray-200 w-[100%] mb-4'></div>
-            <div
               className='cursor-pointer w-[100%]'
               onClick={() => toggleSection('description')}
             >
@@ -915,6 +906,19 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                     <span key={index}>{size}</span>
                   </div>
                 ))}
+              </div>
+            </div>
+            <div className='border-b-[1px] border-gray-200 w-[100%] my-4'></div>
+            <div
+              className='hidden border border-black h-16 w-[100%] mb-4 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone cursor-pointer'
+              onClick={handleAddToCart}
+            >
+              <div className='flex justify-between items-center w-[80%]'>
+                <div className='flex gap-2'>
+                  <ShoppingBagIcon className='h-4 w-4 font-bold' />
+                  <div className='font-futura text-sm'>ADD</div>
+                </div>
+                <div className='font-futura text-sm'>{product.price}</div>
               </div>
             </div>
           </div>

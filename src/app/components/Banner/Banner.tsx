@@ -1,21 +1,22 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
+import { useBanner } from '../../context/BannerContext';
 
 const Banner: React.FC = () => {
-  const [visible, setVisible] = useState(true);
   const bannerRef = useRef<HTMLDivElement | null>(null);
-
-  const handleScroll = () => {
-    if (window.scrollY > 50) {
-      setVisible(false);
-    } else {
-      setVisible(true);
-    }
-  };
+  const { setBannerHeight, isVisible, setIsVisible } = useBanner();
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+    };
+
     if (bannerRef.current) {
-      bannerRef.current.style.maxHeight = '30px';
+      setBannerHeight(bannerRef.current.scrollHeight);
     }
 
     window.addEventListener('scroll', handleScroll);
@@ -23,27 +24,22 @@ const Banner: React.FC = () => {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, []);
+  }, [setBannerHeight, setIsVisible]);
 
   useEffect(() => {
     if (bannerRef.current) {
-      if (visible) {
-        bannerRef.current.style.maxHeight = '30px';
-      } else {
-        bannerRef.current.style.maxHeight = '0px';
-      }
+      bannerRef.current.style.maxHeight = isVisible ? '30px' : '0px';
     }
-  }, [visible]);
+  }, [isVisible]);
 
   return (
     <div
       ref={bannerRef}
-      className={`fixed top-[80px] left-0 right-0 bg-black text-white flex justify-center items-center transition-all duration-100 ease-in-out overflow-hidden`}
-      style={{ maxHeight: '0px' }}
+      className={`fixed top-0 left-0 right-0 bg-black text-white flex justify-center items-center transition-all duration-100 ease-in-out overflow-hidden z-20`}
     >
       <div
         className='flex justify-center font-futura items-center w-full max-w-6xl px-4 cursor-pointer'
-        onClick={() => setVisible(false)}
+        onClick={() => setIsVisible(false)}
       >
         <span>FREE SHIPPING WORLDWIDE</span>
       </div>
