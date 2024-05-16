@@ -8,6 +8,11 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      zIndex: {
+        '60': '60',
+        '70': '70',
+        '100': '100',
+      },
       cursor: {
         zoomInCustom: 'url(/Cursors/zoomin1.png), auto',
         dragCustom: 'url(/Cursors/drag1.png), auto',

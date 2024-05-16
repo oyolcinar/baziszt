@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useMenu } from '../../context/MenuContext';
 
 import newMenu from '../../../../public/Images/newMenu.png';
 import topsMenu from '../../../../public/Images/topsMenu.png';
@@ -11,20 +12,25 @@ const NavMenu: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [hoveredImage, setHoveredImage] = useState('');
   const [isImageVisible, setIsImageVisible] = useState(false);
+  const { navMenuOpened, openNavMenu, closeNavMenu } = useMenu();
 
   const toggleMenu = () => {
-    setMenuOpened(!menuOpened);
+    if (navMenuOpened) {
+      closeNavMenu();
+    } else {
+      openNavMenu();
+    }
   };
 
   useEffect(() => {
     const handleScroll = (event: Event) => {
-      if (menuOpened) {
+      if (navMenuOpened) {
         event.preventDefault();
         event.stopPropagation();
       }
     };
 
-    if (menuOpened) {
+    if (navMenuOpened) {
       window.addEventListener('scroll', handleScroll, { passive: false });
       window.addEventListener('wheel', handleScroll, { passive: false });
       window.addEventListener('touchmove', handleScroll, { passive: false });
@@ -39,26 +45,28 @@ const NavMenu: React.FC = () => {
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('touchmove', handleScroll);
     };
-  }, [menuOpened]);
+  }, [navMenuOpened]);
 
   return (
     <>
       <div
-        className='cursor-pointer font-futura font-bold text-black text-[14px] md:text-base hover:opacity-70 transition duration-300 relative z-50 w-[79px] md:w-[120px]'
+        className={`cursor-pointer font-futura font-bold text-black text-[14px] md:text-base hover:opacity-70 transition duration-300 relative w-[79px] md:w-[120px] ${
+          navMenuOpened ? 'z-70' : 'z-40'
+        }`}
         onClick={toggleMenu}
       >
-        {menuOpened ? 'CLOSE' : 'MENU'}
+        {navMenuOpened ? 'CLOSE' : 'MENU'}
       </div>
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-30 ${
-          menuOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-20 ${
+          navMenuOpened ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
         }`}
         onClick={toggleMenu}
       ></div>
       <div
         className={`fixed top-0 left-0 h-[100vh] w-full md:w-[30%] bg-bone transform flex justify-start items-center pl-[30px] ${
-          menuOpened ? 'translate-x-0' : '-translate-x-full'
-        } transition-transform duration-700 ease-in-out z-40`}
+          navMenuOpened ? 'translate-x-0 z-60' : '-translate-x-full'
+        } transition-transform duration-700 ease-in-out z-50`}
       >
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <Link

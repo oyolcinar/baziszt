@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../context/CartContext';
+import { useMenu } from '../../context/MenuContext';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 
@@ -16,16 +17,25 @@ const CartMenu: React.FC = () => {
     decrementItem,
     removeItem,
   } = useCart();
+  const { cartMenuOpened, openCartMenu, closeCartMenu } = useMenu();
+
+  const toggleMenu = () => {
+    if (cartMenuOpened) {
+      closeCartMenu();
+    } else {
+      openCartMenu();
+    }
+  };
 
   useEffect(() => {
     const handleScroll = (event: Event) => {
-      if (menuOpened) {
+      if (cartMenuOpened) {
         event.preventDefault();
         event.stopPropagation();
       }
     };
 
-    if (menuOpened) {
+    if (cartMenuOpened) {
       window.addEventListener('scroll', handleScroll, { passive: false });
       window.addEventListener('wheel', handleScroll, { passive: false });
       window.addEventListener('touchmove', handleScroll, { passive: false });
@@ -40,15 +50,17 @@ const CartMenu: React.FC = () => {
       window.removeEventListener('wheel', handleScroll);
       window.removeEventListener('touchmove', handleScroll);
     };
-  }, [menuOpened]);
+  }, [cartMenuOpened]);
 
   return (
     <>
       <div
-        className='flex items-center justify-end font-futura font-bold text-[14px] md:text-base text-black gap-6 min-w-[79px] md:w-[120px] z-50'
-        onClick={toggleCartMenu}
+        className={`flex items-center justify-end font-futura font-bold text-[14px] md:text-base text-black gap-6 min-w-[79px] md:w-[120px] ${
+          cartMenuOpened ? 'z-70' : 'z-40'
+        }`}
+        onClick={toggleMenu}
       >
-        {!menuOpened ? (
+        {!cartMenuOpened ? (
           <div className='cursor-pointer hover:opacity-70 transition duration-300'>
             CART(
             {cart
@@ -63,15 +75,15 @@ const CartMenu: React.FC = () => {
         )}
       </div>
       <div
-        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-30 ${
-          menuOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-20 ${
+          cartMenuOpened ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
         }`}
         onClick={toggleCartMenu}
       ></div>
       <div
         className={`fixed top-0 right-0 h-[100vh] w-full md:w-[42%] bg-white transform flex justify-start items-center pr-[30px] ${
-          menuOpened ? 'translate-x-0' : 'translate-x-full'
-        } transition-transform duration-700 ease-in-out z-40`}
+          cartMenuOpened ? 'translate-x-0 z-60' : 'translate-x-full'
+        } transition-transform duration-700 ease-in-out z-50`}
       >
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <div className='w-full flex justify-between items-center'>
