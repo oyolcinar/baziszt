@@ -62,7 +62,6 @@ const CartMenu: React.FC = () => {
           </div>
         )}
       </div>
-      {/* Background overlay */}
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-30 ${
           menuOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'
@@ -77,10 +76,6 @@ const CartMenu: React.FC = () => {
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <div className='w-full flex justify-between items-center'>
             <div className='text-lg font-bold'>Your Cart</div>
-            <XMarkIcon
-              className='h-6 w-6 cursor-pointer'
-              onClick={toggleCartMenu}
-            />
           </div>
           <div className='w-full'>
             {cart && cart.items.length > 0 ? (

@@ -30,9 +30,12 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
 
       const allText = breadcrumbs.length === 1 ? ' > ALL ' : '';
 
+      const displayCrumb =
+        crumb.toLowerCase() === 'oneofone' ? 'ONE OF ONE' : crumb.toUpperCase();
+
       return (
         <span key={index} className='text-black text-base font-futura'>
-          <Link href={pathTo}>{crumb.toUpperCase()}</Link>
+          <Link href={pathTo}>{displayCrumb}</Link>
           {separator}
           {allText}
         </span>
@@ -58,21 +61,20 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
     setSortOrder((prevSortOrder) => (prevSortOrder === 'asc' ? 'desc' : 'asc'));
   };
 
+  const formattedTitle =
+    title === 'One of One'
+      ? title
+      : title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
+
   return (
     <>
       <div className='flex justify-center items-center mt-28 md:mt-32'>
         <div className='flex flex-col md:flex-row w-[80%] md:w-[50%] justify-center items-center gap-4'>
-          {/* <div className='text-4xl md:text-5xl text-bordeux font-altesse24 w-full md:w-1/2'>
-            {title}
-          </div> */}
           <div
             className='text-6xl md:text-7xl text-black font-altesse24 w-full md:w-1/2'
-            style={{ textTransform: 'lowercase' }}
+            style={{ textTransform: 'none' }}
           >
-            <span style={{ textTransform: 'capitalize' }}>
-              {title.slice(0, 1)}
-            </span>
-            {title.slice(1)}
+            {formattedTitle}
           </div>
 
           <div className='text-base text-black text-justify font-futura w-full md:w-1/2'>
@@ -84,13 +86,13 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
         </div>
       </div>
 
-      <div className='flex justify-between items-center w-full px-6 mb-4 mt-20'>
+      <div className='flex justify-between items-center w-full px-[30px] mb-4 mt-20'>
         <div className='text-xl text-black font-futura'>
           {renderBreadcrumbs()}
         </div>
         <button
           onClick={handleSortChange}
-          className='text-black font-futura px-4 py-2 rounded hover:opacity-70 transition duration-300 ease-in-out text-center'
+          className='text-black font-futura py-2 rounded hover:opacity-70 transition duration-300 ease-in-out text-center'
         >
           PRICE {sortOrder === 'asc' ? '↑' : '↓'}
         </button>

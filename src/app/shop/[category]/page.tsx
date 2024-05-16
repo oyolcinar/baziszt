@@ -35,7 +35,7 @@ export default function Shop() {
 
   const categoryTitle =
     categoryFromUrl === 'oneOfone'
-      ? 'one of one'
+      ? 'One of One'
       : categoryFromUrl.toUpperCase();
 
   return (
