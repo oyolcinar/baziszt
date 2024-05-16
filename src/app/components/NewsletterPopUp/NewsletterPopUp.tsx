@@ -3,20 +3,41 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 
 const NewsletterPopup: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [isDisplayed, setIsDisplayed] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    const timer = setTimeout(() => {
+      setIsDisplayed(true);
+      setTimeout(() => {
+        setIsAnimating(true);
+      }, 10);
+    }, 2000);
+
+    return () => clearTimeout(timer);
   }, []);
 
   const handleClose = () => {
-    setIsVisible(false);
+    setIsAnimating(false);
+    setTimeout(() => {
+      setIsVisible(false);
+      setIsDisplayed(false);
+    }, 300);
   };
 
-  if (!isVisible) return null;
+  if (!isDisplayed) return null;
 
   return (
-    <div className='fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 font-futura text-black'>
-      <div className='relative bg-bone pt-6 px-8 pb-2 shadow-lg text-center'>
+    <div
+      className={`fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 font-futura text-black transition-opacity duration-300 ${
+        isAnimating ? 'opacity-100' : 'opacity-0'
+      }`}
+    >
+      <div
+        className={`relative bg-bone pt-6 px-8 pb-2 shadow-lg text-center transition-transform duration-300 ${
+          isAnimating ? 'scale-100' : 'scale-90'
+        }`}
+      >
         <button
           onClick={handleClose}
           className='absolute top-2 right-2 hover:opacity-70 transition duration-300'

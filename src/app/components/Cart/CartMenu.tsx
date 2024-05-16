@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '../../context/CartContext';
@@ -16,6 +16,31 @@ const CartMenu: React.FC = () => {
     decrementItem,
     removeItem,
   } = useCart();
+
+  useEffect(() => {
+    const handleScroll = (event: Event) => {
+      if (menuOpened) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    };
+
+    if (menuOpened) {
+      window.addEventListener('scroll', handleScroll, { passive: false });
+      window.addEventListener('wheel', handleScroll, { passive: false });
+      window.addEventListener('touchmove', handleScroll, { passive: false });
+    } else {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    };
+  }, [menuOpened]);
 
   return (
     <>
@@ -37,6 +62,13 @@ const CartMenu: React.FC = () => {
           </div>
         )}
       </div>
+      {/* Background overlay */}
+      <div
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-30 ${
+          menuOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={toggleCartMenu}
+      ></div>
       <div
         className={`fixed top-0 right-0 h-[100vh] w-full md:w-[42%] bg-white transform flex justify-start items-center pr-[30px] ${
           menuOpened ? 'translate-x-0' : 'translate-x-full'
@@ -45,10 +77,10 @@ const CartMenu: React.FC = () => {
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <div className='w-full flex justify-between items-center'>
             <div className='text-lg font-bold'>Your Cart</div>
-            {/* <XMarkIcon
+            <XMarkIcon
               className='h-6 w-6 cursor-pointer'
               onClick={toggleCartMenu}
-            /> */}
+            />
           </div>
           <div className='w-full'>
             {cart && cart.items.length > 0 ? (
@@ -123,6 +155,7 @@ const CartMenu: React.FC = () => {
             <Link
               href='/checkout'
               className='w-full bg-black text-white py-2 hover:bg-gray-800 transition duration-300 text-center block'
+              onClick={toggleCartMenu}
             >
               Proceed to Checkout
             </Link>

@@ -60,7 +60,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
 
   return (
     <>
-      <div className='flex justify-center items-center mt-24 md:mt-32'>
+      <div className='flex justify-center items-center mt-28 md:mt-32'>
         <div className='flex flex-col md:flex-row w-[80%] md:w-[50%] justify-center items-center gap-4'>
           {/* <div className='text-4xl md:text-5xl text-bordeux font-altesse24 w-full md:w-1/2'>
             {title}

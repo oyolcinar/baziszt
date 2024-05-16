@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -13,12 +13,33 @@ const NavMenu: React.FC = () => {
   const [isImageVisible, setIsImageVisible] = useState(false);
 
   const toggleMenu = () => {
-    if (!menuOpened) {
-      setMenuOpened(true);
-    } else {
-      setMenuOpened(false);
-    }
+    setMenuOpened(!menuOpened);
   };
+
+  useEffect(() => {
+    const handleScroll = (event: Event) => {
+      if (menuOpened) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+    };
+
+    if (menuOpened) {
+      window.addEventListener('scroll', handleScroll, { passive: false });
+      window.addEventListener('wheel', handleScroll, { passive: false });
+      window.addEventListener('touchmove', handleScroll, { passive: false });
+    } else {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('wheel', handleScroll);
+      window.removeEventListener('touchmove', handleScroll);
+    };
+  }, [menuOpened]);
 
   return (
     <>
@@ -29,18 +50,17 @@ const NavMenu: React.FC = () => {
         {menuOpened ? 'CLOSE' : 'MENU'}
       </div>
       <div
+        className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-30 ${
+          menuOpened ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}
+        onClick={toggleMenu}
+      ></div>
+      <div
         className={`fixed top-0 left-0 h-[100vh] w-full md:w-[30%] bg-bone transform flex justify-start items-center pl-[30px] ${
           menuOpened ? 'translate-x-0' : '-translate-x-full'
         } transition-transform duration-700 ease-in-out z-40`}
       >
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
-          {/* <Link
-            href='/'
-            className='md:hidden hover:opacity-70 transition duration-300'
-            onClick={toggleMenu}
-          >
-            HOME
-          </Link> */}
           <Link
             href='/shop/new'
             className='hover:opacity-70 transition duration-300'
@@ -77,15 +97,9 @@ const NavMenu: React.FC = () => {
           >
             BOTTOMS
           </Link>
-
           <Link
             href='/shop/accessories'
             className='hover:opacity-70 transition duration-300'
-            // onMouseEnter={() => {
-            //   setHoveredImage(accessoriesMenu.src);
-            //   setIsImageVisible(true);
-            // }}
-            // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
             ACCESSORIES
@@ -94,11 +108,6 @@ const NavMenu: React.FC = () => {
             <Link
               href='/shop/oneOfone'
               className='hover:opacity-70 transition duration-300'
-              // onMouseEnter={() => {
-              //   setHoveredImage(accessoriesMenu.src);
-              //   setIsImageVisible(true);
-              // }}
-              // onMouseLeave={() => setIsImageVisible(false)}
               onClick={toggleMenu}
             >
               ONE OF ONE

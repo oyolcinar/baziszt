@@ -5,6 +5,7 @@ import { useBanner } from '../../context/BannerContext';
 const Banner: React.FC = () => {
   const bannerRef = useRef<HTMLDivElement | null>(null);
   const { setBannerHeight, isVisible, setIsVisible } = useBanner();
+  const [isRemoved, setIsRemoved] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,6 +33,16 @@ const Banner: React.FC = () => {
     }
   }, [isVisible]);
 
+  const handleClose = () => {
+    setIsVisible(false);
+    setTimeout(() => {
+      setIsRemoved(true);
+      setBannerHeight(0);
+    }, 100);
+  };
+
+  if (isRemoved) return null;
+
   return (
     <div
       ref={bannerRef}
@@ -39,7 +50,7 @@ const Banner: React.FC = () => {
     >
       <div
         className='flex justify-center font-futura items-center w-full max-w-6xl px-4 cursor-pointer'
-        onClick={() => setIsVisible(false)}
+        onClick={handleClose}
       >
         <span>FREE SHIPPING WORLDWIDE</span>
       </div>
