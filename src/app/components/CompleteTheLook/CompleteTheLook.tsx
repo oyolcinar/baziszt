@@ -18,10 +18,13 @@ const findMatchingProducts = (
   );
 
   for (let product of filteredProducts) {
-    if (currentProduct.colors.some((color) => product.colors.includes(color))) {
+    if (
+      product.colors.length > 0 &&
+      currentProduct.colors.some((color) => product.colors.includes(color))
+    ) {
       result.push(product);
       if (result.length === 3) break;
-    } else {
+    } else if (product.colors.length > 0) {
       result.push(product);
       if (result.length === 3) break;
     }

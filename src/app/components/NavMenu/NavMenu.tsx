@@ -51,23 +51,29 @@ const NavMenu: React.FC = () => {
     <>
       <div
         className={`cursor-pointer font-futura font-bold text-black text-[14px] md:text-base hover:opacity-70 transition duration-300 relative w-[79px] md:w-[120px] ${
-          navMenuOpened ? 'z-70' : 'z-40'
+          navMenuOpened ? 'z-30' : 'z-20'
         }`}
         onClick={toggleMenu}
       >
-        {navMenuOpened ? 'CLOSE' : 'MENU'}
+        MENU
       </div>
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-20 ${
-          navMenuOpened ? 'opacity-100 z-40' : 'opacity-0 pointer-events-none'
+          navMenuOpened ? 'opacity-100 z-20' : 'opacity-0 pointer-events-none'
         }`}
         onClick={toggleMenu}
       ></div>
       <div
         className={`fixed top-0 left-0 h-[100vh] w-full md:w-[30%] bg-bone transform flex justify-start items-center pl-[30px] ${
-          navMenuOpened ? 'translate-x-0 z-60' : '-translate-x-full'
-        } transition-transform duration-700 ease-in-out z-50`}
+          navMenuOpened ? 'translate-x-0 z-30' : '-translate-x-full'
+        } transition-transform duration-700 ease-in-out z-30`}
       >
+        <div
+          className='fixed top-[28px] left-[30px] font-futura font-bold cursor-pointer hover:opacity-70 transition duration-300'
+          onClick={toggleMenu}
+        >
+          CLOSE
+        </div>
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
           <Link
             href='/shop/new'

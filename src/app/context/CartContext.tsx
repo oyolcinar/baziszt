@@ -10,6 +10,7 @@ interface CartItem {
   price: string;
   size: string;
   currency: string;
+  color: string;
 }
 
 interface Cart {

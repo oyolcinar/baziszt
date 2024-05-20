@@ -11,6 +11,7 @@ import React, {
 import Image from 'next/image';
 import { Product } from '@/app/context/ProductContext';
 import { useCart } from '../../context/CartContext';
+import { useMenu } from '../../context/MenuContext';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -69,6 +70,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     'color',
   ]);
   const { addToCart } = useCart();
+  const { cartMenuOpened, openCartMenu, closeCartMenu } = useMenu();
 
   const imageRefs = useRef<Array<React.RefObject<HTMLDivElement>>>(
     product.images.map(() => createRef<HTMLDivElement>()),
@@ -420,6 +422,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       await addToCart({
         variantId: selectedVariant.id,
         quantity: 1,
+        color: colorSelection,
         title: product.name,
         image: product.images[0],
         price: selectedVariant.price,
@@ -427,6 +430,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         currency: selectedVariant.price.split(' ')[1],
       });
       console.log('Added to cart successfully');
+      openCartMenu();
     } catch (error) {
       console.error('Failed to add to cart:', error);
     }
@@ -791,7 +795,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           </div>
         </div>
         <div className='sticky top-0 min-h-[760px] md:min-h-[900px] h-[100vh] flex flex-col items-center justify-start pt-[80px] w-[100%] md:w-[42%]'>
-          <div className='text-black font-futura w-[60%] mb-4 flex flex-col items-center'>
+          <div className='text-black font-futura w-[60%] md:mt-6 mb-4 flex flex-col items-center'>
             <div className='mb-4 text-lg font-bold'>
               {product.name.toUpperCase()}
             </div>
@@ -931,7 +935,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         <div className='flex justify-between font-futura text-black text-[14px] ml-2 pt-1'>
           <div>{product.name.toUpperCase()}</div>
           <div className='flex gap-2 mr-2'>
-            <div>{colorSelection.toUpperCase()}</div>
+            <div>
+              {colorSelection ? colorSelection.toUpperCase() : 'ONE COLOR'}
+            </div>
             <div>{sizeSelection}</div>
           </div>
         </div>
