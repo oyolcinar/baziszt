@@ -29,7 +29,7 @@ const Banner: React.FC = () => {
 
   useEffect(() => {
     if (bannerRef.current) {
-      bannerRef.current.style.maxHeight = isVisible ? '30px' : '0px';
+      bannerRef.current.style.maxHeight = isVisible ? '16px' : '0px';
     }
   }, [isVisible]);
 
@@ -49,7 +49,7 @@ const Banner: React.FC = () => {
       className={`fixed top-0 left-0 right-0 bg-black text-white flex justify-center items-center transition-all duration-100 ease-in-out overflow-hidden z-20`}
     >
       <div
-        className='flex justify-center font-futura items-center w-full max-w-6xl px-4 cursor-pointer'
+        className='flex justify-center font-futura items-center w-full max-w-4xl px-4 cursor-pointer'
         onClick={handleClose}
       >
         <span>FREE SHIPPING WORLDWIDE</span>

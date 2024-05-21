@@ -236,7 +236,7 @@ const CartMenu: React.FC = () => {
           <div className='w-full mt-4'>
             <Link
               href='/checkout'
-              className='w-full border b-1 border-black bg-black text-white py-2 hover:text-black hover:bg-white transition duration-300 text-center block'
+              className='w-full border b-1 border-black bg-black text-white py-2 hover:text-black hover:bg-white transition duration-300 text-center block my-4'
               onClick={toggleMenu}
             >
               PROCEED TO CHECKOUT
