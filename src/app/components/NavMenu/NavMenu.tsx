@@ -65,7 +65,7 @@ const NavMenu: React.FC = () => {
   return (
     <>
       <div
-        className={`cursor-pointer font-futura font-bold text-black text-[14px] md:text-base hover:opacity-70 transition duration-300 relative w-[79px] md:w-[120px] ${
+        className={`cursor-pointer font-futura font-bold text-bordeux text-[14px] md:text-base hover:opacity-70 transition duration-300 relative w-[79px] md:w-[120px] ${
           navMenuOpened ? 'z-30' : 'z-20'
         }`}
         onClick={toggleMenu}
@@ -84,7 +84,7 @@ const NavMenu: React.FC = () => {
         } transition-transform duration-700 ease-in-out z-30`}
       >
         <div
-          className='fixed top-[28px] left-[30px] font-futura font-bold cursor-pointer hover:opacity-70 transition duration-300'
+          className='fixed top-[28px] left-[30px] text-black font-futura font-bold cursor-pointer hover:opacity-70 transition duration-300'
           onClick={toggleMenu}
         >
           CLOSE
@@ -236,7 +236,7 @@ const NavMenu: React.FC = () => {
               facebook
             </Link>
           </div>
-          <div className='w-full pr-[30px]'>
+          {/* <div className='w-full pr-[30px]'>
             <div className='text-black text-base font-futura'>
               SUBSCRIBE TO OUR NEWSLETTER
             </div>
@@ -250,7 +250,7 @@ const NavMenu: React.FC = () => {
                 <FontAwesomeIcon icon={faArrowRight} className='text-black' />
               </button>
             </div>
-          </div>
+          </div> */}
           {/* <div
             className={`hidden sm:block w-full h-[150px] overflow-hidden transition-opacity duration-300 ${
               isImageVisible ? 'opacity-100' : 'opacity-0'
@@ -273,6 +273,21 @@ const NavMenu: React.FC = () => {
               </div>
             )}
           </div> */}
+        </div>
+        <div className='absolute bottom-[35px] left-0 w-full px-[30px]'>
+          <div className='text-black text-base font-futura'>
+            SUBSCRIBE TO OUR NEWSLETTER
+          </div>
+          <div className='flex items-center border-b-2 border-black py-1'>
+            <input
+              type='email'
+              placeholder='your email'
+              className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+            />
+            <button className='w-[20px] cursor-pointer ml-2'>
+              <FontAwesomeIcon icon={faArrowRight} className='text-black' />
+            </button>
+          </div>
         </div>
         <div className='absolute bottom-0 left-0 flex justify-center font-futura items-center w-full max-w-4xl px-4 bg-black text-bone cursor-pointer'>
           <span>FREE SHIPPING WORLDWIDE</span>

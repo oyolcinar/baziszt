@@ -97,7 +97,7 @@ const CartMenu: React.FC = () => {
         }`}
         onClick={toggleMenu}
       >
-        <div className='cursor-pointer hover:opacity-70 transition duration-300'>
+        <div className='text-bordeux cursor-pointer hover:opacity-70 transition duration-300'>
           CART(
           {cart
             ? cart.items.reduce((total, item) => total + item.quantity, 0)
