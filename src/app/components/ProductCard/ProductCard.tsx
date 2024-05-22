@@ -105,14 +105,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         >
           <button
             onClick={(e) => handleImageChange('prev', e)}
-            className='text-black p-2'
+            className='text-transparent p-2'
             disabled={isTransitioning}
           >
             ←
           </button>
           <button
             onClick={(e) => handleImageChange('next', e)}
-            className='text-black p-2'
+            className='text-transparent p-2'
             disabled={isTransitioning}
           >
             →
