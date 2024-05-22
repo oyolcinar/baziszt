@@ -89,7 +89,7 @@ const NavMenu: React.FC = () => {
         >
           CLOSE
         </div>
-        <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
+        <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[70px]'>
           <form className='w-full pr-[30px]' onSubmit={handleSearch}>
             <div className='flex items-center border-b-2 border-black py-1'>
               <input
