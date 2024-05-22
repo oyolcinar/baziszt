@@ -137,7 +137,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   const imageWidth =
     windowSize.width < 768
-      ? windowSize.width
+      ? windowSize.width - 20
       : Math.round(windowSize.width * 0.58);
   const imageHeight =
     windowSize.width < 768

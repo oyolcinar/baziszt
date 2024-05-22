@@ -98,7 +98,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
         </button>
       </div>
       <div className='flex justify-center w-full mb-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-3 lg:grid-cols-3 p-2 gap-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-3 lg:grid-cols-3 p-0 md:p-2 gap-2'>
           {sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
