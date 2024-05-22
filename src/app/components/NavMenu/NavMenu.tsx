@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useMenu } from '../../context/MenuContext';
 
 import newMenu from '../../../../public/Images/newMenu.png';
@@ -15,13 +16,24 @@ const NavMenu: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [hoveredImage, setHoveredImage] = useState('');
   const [isImageVisible, setIsImageVisible] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
   const { navMenuOpened, openNavMenu, closeNavMenu } = useMenu();
+
+  const router = useRouter();
 
   const toggleMenu = () => {
     if (navMenuOpened) {
       closeNavMenu();
     } else {
       openNavMenu();
+    }
+  };
+
+  const handleSearch = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/search?query=${searchTerm}`);
+      closeNavMenu();
     }
   };
 
@@ -78,18 +90,20 @@ const NavMenu: React.FC = () => {
           CLOSE
         </div>
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
-          <div className='w-full pr-[30px]'>
+          <form className='w-full pr-[30px]' onSubmit={handleSearch}>
             <div className='flex items-center border-b-2 border-black py-1'>
               <input
                 type='text'
                 placeholder='search'
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
               />
-              <button className='w-[20px] cursor-pointer ml-2'>
+              <button type='submit' className='w-[20px] cursor-pointer ml-2'>
                 <MagnifyingGlassIcon className='text-black' />
               </button>
             </div>
-          </div>
+          </form>
           <Link
             href='/shop/new'
             className='hover:opacity-70 transition duration-300'
