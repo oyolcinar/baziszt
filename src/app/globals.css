@@ -11,6 +11,8 @@
 html {
   --scroll-behavior: smooth !important;
   scroll-behavior: smooth !important;
+  border-left: 10px solid #370008;
+  border-right: 10px solid #370008;
 }
 
 @media (prefers-color-scheme: dark) {

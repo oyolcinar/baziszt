@@ -8,7 +8,7 @@ import { useScroll } from './context/ScrollContext';
 import ProductCard from './components/ProductCard/ProductCard';
 import NewsletterPopup from './components/NewsletterPopUp/NewsletterPopUp';
 
-import Logo from '../../public/Logos/logoEditBlack.png';
+import Logo from '../../public/Logos/logoEditBordeux1.png';
 import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
 import TopsImage2 from '../../public/Images/topsImage2.png';
@@ -123,17 +123,17 @@ export default function Home() {
           </Link>
         </div>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
-          <Link href='/shop/new'>
+          <Link href='/shop/accessories'>
             <div
               className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
               style={{
                 zIndex: 2,
               }}
             >
-              New
+              Accessories
             </div>
             <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-              <Image alt='New' src={AccessoriesImage} />
+              <Image alt='Accessories' src={AccessoriesImage} />
             </div>
           </Link>
         </div>

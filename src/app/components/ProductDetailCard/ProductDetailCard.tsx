@@ -796,8 +796,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         </div>
         <div className='sticky top-0 min-h-[760px] md:min-h-[900px] h-[100vh] flex flex-col items-center justify-start pt-[80px] w-[100%] md:w-[42%]'>
           <div className='text-black font-futura w-[60%] md:mt-12 mb-4 flex flex-col items-center'>
-            <div className='mb-4 text-lg font-bold'>
-              {product.name.toUpperCase()}
+            <div className='mb-4 text-4xl font-bold font-altesse24'>
+              {product.name[0].toUpperCase() + product.name.slice(1)}
             </div>
             <div
               className='cursor-pointer w-[100%]'

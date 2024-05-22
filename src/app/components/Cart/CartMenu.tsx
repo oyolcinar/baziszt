@@ -112,7 +112,7 @@ const CartMenu: React.FC = () => {
         onClick={toggleMenu}
       ></div>
       <div
-        className={`fixed top-0 right-0 h-[100vh] w-full md:w-[42%] bg-white transform flex justify-start items-center pr-[30px] overflow-y-auto ${
+        className={`fixed top-0 right-0 h-[100vh] w-full md:w-[42%] bg-bone transform flex justify-start items-center pr-[30px] overflow-y-auto ${
           cartMenuOpened ? 'translate-x-0 z-30' : 'translate-x-full'
         } transition-transform duration-700 ease-in-out z-30`}
       >
@@ -122,7 +122,7 @@ const CartMenu: React.FC = () => {
         >
           <XMarkIcon className='text-black h-6 w-6 font-bold mt-1' />
         </div>
-        <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 h-full w-full pt-[30px] font-futura mx-6'>
+        <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 h-full w-full pt-[30px] font-futura ml-[30px]'>
           <div className='w-full flex justify-between items-center'>
             <div className='text-lg font-bold'>Your Cart</div>
           </div>

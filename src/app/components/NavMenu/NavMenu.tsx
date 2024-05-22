@@ -7,6 +7,9 @@ import { useMenu } from '../../context/MenuContext';
 import newMenu from '../../../../public/Images/newMenu.png';
 import topsMenu from '../../../../public/Images/topsMenu.png';
 import bottomsMenu from '../../../../public/Images/bottomsMenu.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 const NavMenu: React.FC = () => {
   const [menuOpened, setMenuOpened] = useState(false);
@@ -75,14 +78,26 @@ const NavMenu: React.FC = () => {
           CLOSE
         </div>
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[100px]'>
+          <div className='w-full pr-[30px]'>
+            <div className='flex items-center border-b-2 border-black py-1'>
+              <input
+                type='text'
+                placeholder='search'
+                className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+              />
+              <button className='w-[20px] cursor-pointer ml-2'>
+                <MagnifyingGlassIcon className='text-black' />
+              </button>
+            </div>
+          </div>
           <Link
             href='/shop/new'
             className='hover:opacity-70 transition duration-300'
-            onMouseEnter={() => {
-              setHoveredImage(newMenu.src);
-              setIsImageVisible(true);
-            }}
-            onMouseLeave={() => setIsImageVisible(false)}
+            // onMouseEnter={() => {
+            //   setHoveredImage(newMenu.src);
+            //   setIsImageVisible(true);
+            // }}
+            // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
             NEW
@@ -90,11 +105,11 @@ const NavMenu: React.FC = () => {
           <Link
             href='/shop/tops'
             className='hover:opacity-70 transition duration-300'
-            onMouseEnter={() => {
-              setHoveredImage(topsMenu.src);
-              setIsImageVisible(true);
-            }}
-            onMouseLeave={() => setIsImageVisible(false)}
+            // onMouseEnter={() => {
+            //   setHoveredImage(topsMenu.src);
+            //   setIsImageVisible(true);
+            // }}
+            // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
             TOPS
@@ -102,22 +117,31 @@ const NavMenu: React.FC = () => {
           <Link
             href='/shop/bottoms'
             className='hover:opacity-70 transition duration-300'
-            onMouseEnter={() => {
-              setHoveredImage(bottomsMenu.src);
-              setIsImageVisible(true);
-            }}
-            onMouseLeave={() => setIsImageVisible(false)}
+            // onMouseEnter={() => {
+            //   setHoveredImage(bottomsMenu.src);
+            //   setIsImageVisible(true);
+            // }}
+            // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
             BOTTOMS
           </Link>
-          <Link
-            href='/shop/accessories'
-            className='hover:opacity-70 transition duration-300'
-            onClick={toggleMenu}
-          >
-            ACCESSORIES
-          </Link>
+          <div className='w-full flex justify-between'>
+            <Link
+              href='/shop/accessories'
+              className='hover:opacity-70 transition duration-300'
+              onClick={toggleMenu}
+            >
+              ACCESSORIES
+            </Link>
+            <Link
+              href='/'
+              className='hover:opacity-70 transition duration-300 pr-[30px]'
+              onClick={toggleMenu}
+            >
+              account
+            </Link>
+          </div>
           <div className='w-full flex justify-between'>
             <Link
               href='/shop/oneOfone'
@@ -198,7 +222,22 @@ const NavMenu: React.FC = () => {
               facebook
             </Link>
           </div>
-          <div
+          <div className='w-full pr-[30px]'>
+            <div className='text-black text-base font-futura'>
+              SUBSCRIBE TO OUR NEWSLETTER
+            </div>
+            <div className='flex items-center border-b-2 border-black py-1'>
+              <input
+                type='email'
+                placeholder='your email'
+                className='bg-transparent outline-none flex-1 text-black placeholder-gray text-[14px]'
+              />
+              <button className='w-[20px] cursor-pointer ml-2'>
+                <FontAwesomeIcon icon={faArrowRight} className='text-black' />
+              </button>
+            </div>
+          </div>
+          {/* <div
             className={`hidden sm:block w-full h-[150px] overflow-hidden transition-opacity duration-300 ${
               isImageVisible ? 'opacity-100' : 'opacity-0'
             }`}
@@ -219,7 +258,10 @@ const NavMenu: React.FC = () => {
                 </div>
               </div>
             )}
-          </div>
+          </div> */}
+        </div>
+        <div className='absolute bottom-0 left-0 flex justify-center font-futura items-center w-full max-w-4xl px-4 bg-black text-bone cursor-pointer'>
+          <span>FREE SHIPPING WORLDWIDE</span>
         </div>
       </div>
     </>

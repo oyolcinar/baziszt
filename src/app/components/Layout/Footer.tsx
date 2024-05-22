@@ -8,7 +8,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import brownLine1px from '../../../../public/Hamburger/1px/brownLine.png';
 import brownLine from '../../../../public/Hamburger/brownLine.png';
-import Logo from '../../../../public/Logos/camelLogo.png';
+import Logo from '../../../../public/Logos/camelLogoType1.png';
 
 const Footer: React.FC = () => {
   // const borderStyle = {
@@ -22,7 +22,7 @@ const Footer: React.FC = () => {
   // };
 
   return (
-    <nav className='border-l-8 border-r-8 border-bordeux mx-8'>
+    <nav>
       <div className='flex justify-center items-center flex-row text-center'>
         {/* <div className='flex-1 w-full'>
           <div className='w-full h-2' style={borderStyle}></div>
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
           {/* <div className='w-full h-2' style={borderStyle}></div> */}
         </div>
         <div className='py-4'>
-          <Image alt='baziszt' src={Logo} width={100} height={60} />
+          <Image alt='baziszt' src={Logo} width={80} height={50} />
         </div>
         {/* <div className='flex-1 w-full'>
           <div className='w-full h-2' style={borderStyle}></div>
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
           {/* <div className='w-full h-2' style={borderStyle}></div> */}
         </div>
       </div>
-      <div className='h-[300px] md:h-[200px] flex justify-center items-center'>
+      {/* <div className='h-[300px] md:h-[200px] flex justify-center items-center'>
         <div className='w-[80%] flex flex-col md:flex-row justify-between items-start mt-12 md:mt-0'>
           <div className='flex justify-center items-center'>
             <div className='flex flex-col justify-center items-start gap-4 font-futura text-[14px]'>
@@ -101,7 +101,7 @@ const Footer: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       <div className='flex justify-center text-black font-futura text-sm mb-4'>
         © 2024, baziszt
       </div>

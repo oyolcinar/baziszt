@@ -11,7 +11,7 @@ import Banner from '../Banner/Banner';
 
 import { useBanner } from '../../context/BannerContext';
 
-import Logo from '../../../../public/Logos/logoEditBlack.png';
+import Logo from '../../../../public/Logos/logoEditBordeux1.png';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { UserIcon } from '@heroicons/react/24/outline';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
       {isNotHome && <Banner />}
       <nav
         style={{ top: isVisible ? `${bannerHeight}px` : '0px' }}
-        className={`fixed left-0 right-0 flex justify-between items-center bg-white h-[80px] text-black z-10 px-[30px] transition-all duration-300 ${
+        className={`fixed left-0 right-0 flex justify-between items-center bg-white h-[80px] text-black z-10 px-[30px] transition-all duration-300 border-l-[10px] border-r-[10px] border-bordeux ${
           isNotHome || isPastThreshold ? 'bg-opacity-100' : 'bg-opacity-0'
         }`}
       >
