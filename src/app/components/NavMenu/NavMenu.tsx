@@ -117,6 +117,18 @@ const NavMenu: React.FC = () => {
             NEW
           </Link>
           <Link
+            href='/shop/oneOfone'
+            className='ml-4 hover:opacity-70 transition duration-300'
+            // onMouseEnter={() => {
+            //   setHoveredImage(topsMenu.src);
+            //   setIsImageVisible(true);
+            // }}
+            // onMouseLeave={() => setIsImageVisible(false)}
+            onClick={toggleMenu}
+          >
+            ⤷ ONE OF ONE
+          </Link>
+          <Link
             href='/shop/tops'
             className='hover:opacity-70 transition duration-300'
             // onMouseEnter={() => {
@@ -128,25 +140,18 @@ const NavMenu: React.FC = () => {
           >
             TOPS
           </Link>
-          <Link
-            href='/shop/bottoms'
-            className='hover:opacity-70 transition duration-300'
-            // onMouseEnter={() => {
-            //   setHoveredImage(bottomsMenu.src);
-            //   setIsImageVisible(true);
-            // }}
-            // onMouseLeave={() => setIsImageVisible(false)}
-            onClick={toggleMenu}
-          >
-            BOTTOMS
-          </Link>
           <div className='w-full flex justify-between'>
             <Link
-              href='/shop/accessories'
+              href='/shop/bottoms'
               className='hover:opacity-70 transition duration-300'
+              // onMouseEnter={() => {
+              //   setHoveredImage(bottomsMenu.src);
+              //   setIsImageVisible(true);
+              // }}
+              // onMouseLeave={() => setIsImageVisible(false)}
               onClick={toggleMenu}
             >
-              ACCESSORIES
+              BOTTOMS
             </Link>
             <Link
               href='/'
@@ -158,11 +163,11 @@ const NavMenu: React.FC = () => {
           </div>
           <div className='w-full flex justify-between'>
             <Link
-              href='/shop/oneOfone'
+              href='/shop/accessories'
               className='hover:opacity-70 transition duration-300'
               onClick={toggleMenu}
             >
-              ONE OF ONE
+              ACCESSORIES
             </Link>
             <Link
               href='/'
@@ -289,9 +294,9 @@ const NavMenu: React.FC = () => {
             </button>
           </div>
         </div>
-        <div className='absolute bottom-0 left-0 flex justify-center font-futura items-center w-full max-w-4xl px-4 bg-black text-bone cursor-pointer'>
+        {/* <div className='absolute bottom-0 left-0 flex justify-center font-futura items-center w-full max-w-4xl px-4 bg-black text-bone cursor-pointer'>
           <span>FREE SHIPPING WORLDWIDE</span>
-        </div>
+        </div> */}
       </div>
     </>
   );

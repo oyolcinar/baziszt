@@ -533,8 +533,6 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     return <>{transformedContent}</>;
   };
 
-  console.log(product.details);
-
   return (
     <div>
       <div className='flex flex-col md:flex-row'>
@@ -799,6 +797,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             <div className='mb-4 text-4xl font-altesse24'>
               {product.name[0].toUpperCase() + product.name.slice(1)}
             </div>
+            <div className='mb-4 font-futura font-bold'>{product.price}</div>
             <div
               className='cursor-pointer w-[100%]'
               onClick={() => toggleSection('description')}
@@ -894,7 +893,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 expandedSections.includes('size') ? 'max-h-screen' : 'max-h-0'
               }`}
             >
-              <div className='flex gap-4 text-[12px] font-futura text-black'>
+              <div className='flex gap-4 text-[12px] font-futura text-black mb-4'>
                 {uniqueSizes.map((size, index) => (
                   <div
                     key={index}
@@ -910,6 +909,38 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                     <span key={index}>{size}</span>
                   </div>
                 ))}
+              </div>
+              <div className='font-futura text-black text-[12px] w-full text-left'>
+                <table className='w-full'>
+                  <thead>
+                    <tr className='border border-transparent border-b-black mb-2'>
+                      <th className='w-1/6'>CHART</th>
+                      <th className='w-1/6'>XS</th>
+                      <th className='w-1/6'>SM</th>
+                      <th className='w-1/6'>MD</th>
+                      <th className='w-1/6'>LG</th>
+                      <th className='w-1/6'>XL</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className='border border-transparent border-b-black mb-2'>
+                      <td className='w-1/6'>CHEST&quot;</td>
+                      <td className='w-1/6'>21&quot;</td>
+                      <td className='w-1/6'>22&quot;</td>
+                      <td className='w-1/6'>23.25&quot;</td>
+                      <td className='w-1/6'>24&quot;</td>
+                      <td className='w-1/6'>25&quot;</td>
+                    </tr>
+                    <tr className='mb-2'>
+                      <td className='w-1/6'>LENGTH&quot;</td>
+                      <td className='w-1/6'>23&quot;</td>
+                      <td className='w-1/6'>24&quot;</td>
+                      <td className='w-1/6'>25&quot;</td>
+                      <td className='w-1/6'>26.5&quot;</td>
+                      <td className='w-1/6'>27.5&quot;</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
             <div className='border-b-[1px] border-gray-200 w-[100%] my-4'></div>

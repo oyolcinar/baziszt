@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -22,6 +22,7 @@ export default function Home() {
   const { setIsPastThreshold } = useScroll();
 
   const sections = useRef<HTMLDivElement[]>([]);
+  const thresholds = useRef<HTMLDivElement[]>([]);
   const [currentSection, setCurrentSection] = useState(0);
 
   useEffect(() => {
@@ -51,9 +52,12 @@ export default function Home() {
     };
 
     const updateThreshold = () => {
-      const pageHeight = document.body.scrollHeight;
-      const calculatedThreshold = pageHeight * 0.55;
-      setThreshold(calculatedThreshold);
+      const targetDiv = thresholds.current[0];
+      if (targetDiv) {
+        const calculatedThreshold = targetDiv.offsetTop;
+        setThreshold(calculatedThreshold);
+        console.log('Calculated Threshold:', calculatedThreshold); // Debugging log
+      }
     };
 
     window.addEventListener('resize', updateWindowHeight);
@@ -80,10 +84,33 @@ export default function Home() {
       ? Math.max(50 - scrollY / 100, 10)
       : Math.max(30 - scrollY / 100, 10);
   const isBeyondThreshold = scrollY > threshold;
-  const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
+  const topPixels = windowHeight * (windowWidth <= 768 ? 0.1 : 0.1);
   const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
 
-  const scrollToSection = (sectionIndex: number) => {
+  const customScrollTo = (targetPosition: number, duration: number) => {
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    let startTime: number | null = null;
+
+    const animation = (currentTime: number) => {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const run = ease(timeElapsed, startPosition, distance, duration);
+      window.scrollTo(0, run);
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    };
+
+    const ease = (t: number, b: number, c: number, d: number) => {
+      t /= d / 2;
+      if (t < 1) return (c / 2) * t * t + b;
+      t--;
+      return (-c / 2) * (t * (t - 2) - 1) + b;
+    };
+
+    requestAnimationFrame(animation);
+  };
+
+  const scrollToSection = useCallback((sectionIndex: number) => {
     if (sections.current[sectionIndex]) {
       sections.current.forEach((section, index) => {
         if (index === sectionIndex) {
@@ -93,13 +120,11 @@ export default function Home() {
         }
       });
 
-      window.scrollTo({
-        top: sections.current[sectionIndex].offsetTop,
-        behavior: 'smooth',
-      });
+      const targetPosition = sections.current[sectionIndex].offsetTop;
+      customScrollTo(targetPosition, 1000); // Adjust the duration as needed
       setCurrentSection(sectionIndex);
     }
-  };
+  }, []);
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
@@ -116,7 +141,9 @@ export default function Home() {
     };
 
     const handleTouchMove = (event: TouchEvent) => {
-      event.preventDefault();
+      if (!showPopup) {
+        event.preventDefault();
+      }
       const touchEndY = event.changedTouches[0].clientY;
       if (touchEndY < windowHeight / 2) {
         // Swipe up
@@ -136,7 +163,7 @@ export default function Home() {
       window.removeEventListener('wheel', handleWheel);
       window.removeEventListener('touchend', handleTouchMove);
     };
-  }, [currentSection, windowHeight]);
+  }, [currentSection, windowHeight, scrollToSection, showPopup]);
 
   return (
     <main>
@@ -217,7 +244,10 @@ export default function Home() {
         className='w-full flex justify-center my-[200px] section md:h-[100vh]'
         ref={(el) => (sections.current[2] = el!)}
       >
-        <div className='flex w-3/4 flex-col items-center justify-center'>
+        <div
+          className='flex w-3/4 flex-col items-center justify-center'
+          ref={(el) => (thresholds.current[0] = el!)}
+        >
           <div className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'>
             Our Commitment
           </div>
@@ -236,6 +266,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div ref={(el) => (sections.current[3] = el!)}></div>
     </main>
   );
 }
