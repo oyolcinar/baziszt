@@ -1,17 +1,14 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import React from 'react';
 import Link from 'next/link';
 
 import { useScroll } from './context/ScrollContext';
-import ProductCard from './components/ProductCard/ProductCard';
 import NewsletterPopup from './components/NewsletterPopUp/NewsletterPopUp';
 
 import Logo from '../../public/Logos/logoEditBordeux1.png';
 import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
-import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 
@@ -23,6 +20,9 @@ export default function Home() {
   const [logoVisible, setLogoVisible] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { setIsPastThreshold } = useScroll();
+
+  const sections = useRef<HTMLDivElement[]>([]);
+  const [currentSection, setCurrentSection] = useState(0);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -49,6 +49,7 @@ export default function Home() {
       setScrollY(window.scrollY);
       if (!logoVisible) setLogoVisible(true);
     };
+
     const updateThreshold = () => {
       const pageHeight = document.body.scrollHeight;
       const calculatedThreshold = pageHeight * 0.55;
@@ -79,8 +80,63 @@ export default function Home() {
       ? Math.max(50 - scrollY / 100, 10)
       : Math.max(30 - scrollY / 100, 10);
   const isBeyondThreshold = scrollY > threshold;
-  const topPixels = windowHeight * (windowWidth <= 768 ? 0.18 : 0.1);
+  const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
   const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
+
+  const scrollToSection = (sectionIndex: number) => {
+    if (sections.current[sectionIndex]) {
+      sections.current.forEach((section, index) => {
+        if (index === sectionIndex) {
+          section.classList.add('visible');
+        } else {
+          section.classList.remove('visible');
+        }
+      });
+
+      window.scrollTo({
+        top: sections.current[sectionIndex].offsetTop,
+        behavior: 'smooth',
+      });
+      setCurrentSection(sectionIndex);
+    }
+  };
+
+  useEffect(() => {
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      if (event.deltaY > 0) {
+        // Scroll down
+        scrollToSection(
+          Math.min(currentSection + 1, sections.current.length - 1),
+        );
+      } else {
+        // Scroll up
+        scrollToSection(Math.max(currentSection - 1, 0));
+      }
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      event.preventDefault();
+      const touchEndY = event.changedTouches[0].clientY;
+      if (touchEndY < windowHeight / 2) {
+        // Swipe up
+        scrollToSection(
+          Math.min(currentSection + 1, sections.current.length - 1),
+        );
+      } else {
+        // Swipe down
+        scrollToSection(Math.max(currentSection - 1, 0));
+      }
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchend', handleTouchMove, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchend', handleTouchMove);
+    };
+  }, [currentSection, windowHeight]);
 
   return (
     <main>
@@ -102,11 +158,14 @@ export default function Home() {
           <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
         </div>
       </div>
-      <div className='relative w-full h-screen top-0 left-0'>
+      <div
+        className='relative w-full h-screen top-0 left-0 section'
+        ref={(el) => (sections.current[0] = el!)}
+      >
         <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
       </div>
-
-      <div className='flex flex-col md:flex-row'>
+      <div ref={(el) => (sections.current[1] = el!)}></div>
+      <div className='flex flex-col md:flex-row mt-[100px] section md:h-[100vh]'>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
           <Link href='/shop/tops'>
             <div
@@ -154,13 +213,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='w-full flex justify-center my-16'>
+      <div
+        className='w-full flex justify-center my-[200px] section md:h-[100vh]'
+        ref={(el) => (sections.current[2] = el!)}
+      >
         <div className='flex w-3/4 flex-col items-center justify-center'>
           <div className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'>
             Our Commitment
           </div>
           <div className='text-black font-futura text-lg flex flex-col items-center text-justify'>
-            <div className='mb-2 w-full md:w-1/2'>
+            <div className='mb-2 w-full md:w-1/2 md:text-2xl'>
               We had at heart to create an eco-responsible and socially
               conscious brand. We work with collectives of dyers and embroiders
               in forsaken villages in India. We work with collectives of dyers

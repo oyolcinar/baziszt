@@ -8,7 +8,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import brownLine1px from '../../../../public/Hamburger/1px/brownLine.png';
 import brownLine from '../../../../public/Hamburger/brownLine.png';
-import Logo from '../../../../public/Logos/camelLogoType1.png';
+import Logo from '../../../../public/Logos/camelLogoSmall.png';
 
 const Footer: React.FC = () => {
   // const borderStyle = {

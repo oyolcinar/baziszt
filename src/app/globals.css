@@ -33,6 +33,10 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+.section {
+  overflow-y: auto;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
