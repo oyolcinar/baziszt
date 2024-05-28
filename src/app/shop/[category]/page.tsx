@@ -2,6 +2,7 @@
 import { usePathname } from 'next/navigation';
 import ProductGroup from '@/app/components/ProductGroup/ProductGroup';
 import { useProducts } from '../../context/ProductContext';
+import { useEffect } from 'react';
 
 type CategoryKey = 'new' | 'tops' | 'bottoms' | 'accessories' | 'oneOfone';
 
