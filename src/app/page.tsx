@@ -4,9 +4,9 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { useScroll } from './context/ScrollContext';
+import { useThreshold } from './context/ThresholdContext';
 import NewsletterPopup from './components/NewsletterPopUp/NewsletterPopUp';
 
-import Logo from '../../public/Logos/logoEditBordeux1.png';
 import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
@@ -14,15 +14,16 @@ import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0);
-  const [threshold, setThreshold] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
-  const [logoVisible, setLogoVisible] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const { setIsPastThreshold } = useScroll();
+  const { thresholds, isThresholdReached, setThresholdReached } =
+    useThreshold();
+  const initialTouchY = useRef<number | null>(null);
+  const touchThreshold = 50;
 
   const sections = useRef<HTMLDivElement[]>([]);
-  const thresholds = useRef<HTMLDivElement[]>([]);
   const [currentSection, setCurrentSection] = useState(0);
 
   useEffect(() => {
@@ -31,6 +32,16 @@ export default function Home() {
       setIsPastThreshold(
         windowWidth <= 768 && window.scrollY > window.innerHeight,
       );
+
+      const thresholdElement = thresholds.current[0];
+      if (thresholdElement) {
+        const thresholdPosition = thresholdElement.offsetTop;
+        if (window.scrollY >= thresholdPosition && !isThresholdReached) {
+          setThresholdReached(true);
+        } else if (window.scrollY < thresholdPosition && isThresholdReached) {
+          setThresholdReached(false);
+        }
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -38,7 +49,13 @@ export default function Home() {
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [setIsPastThreshold, windowWidth]);
+  }, [
+    setIsPastThreshold,
+    windowWidth,
+    thresholds,
+    isThresholdReached,
+    setThresholdReached,
+  ]);
 
   useEffect(() => {
     const updateWindowHeight = () => {
@@ -46,46 +63,17 @@ export default function Home() {
       setWindowWidth(window.innerWidth);
     };
 
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      if (!logoVisible) setLogoVisible(true);
-    };
-
-    const updateThreshold = () => {
-      const targetDiv = thresholds.current[0];
-      if (targetDiv) {
-        const calculatedThreshold = targetDiv.offsetTop;
-        setThreshold(calculatedThreshold);
-        console.log('Calculated Threshold:', calculatedThreshold); // Debugging log
-      }
-    };
-
-    window.addEventListener('resize', updateWindowHeight);
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', updateThreshold);
-
     updateWindowHeight();
-    updateThreshold();
-    window.dispatchEvent(new Event('scroll'));
+    window.addEventListener('resize', updateWindowHeight);
 
     return () => {
       window.removeEventListener('resize', updateWindowHeight);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', updateThreshold);
     };
-  }, [logoVisible]);
+  }, []);
 
   useEffect(() => {
     setShowPopup(true);
   }, []);
-
-  const imageSize =
-    windowWidth <= 768
-      ? Math.max(50 - scrollY / 100, 10)
-      : Math.max(30 - scrollY / 100, 10);
-  const isBeyondThreshold = scrollY > threshold;
-  const topPixels = windowHeight * (windowWidth <= 768 ? 0.1 : 0.1);
-  const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
 
   const customScrollTo = (targetPosition: number, duration: number) => {
     const startPosition = window.scrollY;
@@ -140,51 +128,44 @@ export default function Home() {
       }
     };
 
+    const handleTouchStart = (event: TouchEvent) => {
+      initialTouchY.current = event.touches[0].clientY;
+    };
+
     const handleTouchMove = (event: TouchEvent) => {
-      if (!showPopup) {
-        event.preventDefault();
-      }
-      const touchEndY = event.changedTouches[0].clientY;
-      if (touchEndY < windowHeight / 2) {
-        // Swipe up
-        scrollToSection(
-          Math.min(currentSection + 1, sections.current.length - 1),
-        );
-      } else {
-        // Swipe down
-        scrollToSection(Math.max(currentSection - 1, 0));
+      if (!initialTouchY.current) return;
+
+      const currentTouchY = event.touches[0].clientY;
+      const deltaY = initialTouchY.current - currentTouchY;
+
+      if (Math.abs(deltaY) > touchThreshold) {
+        if (deltaY > 0) {
+          // Scroll down
+          scrollToSection(
+            Math.min(currentSection + 1, sections.current.length - 1),
+          );
+        } else {
+          // Scroll up
+          scrollToSection(Math.max(currentSection - 1, 0));
+        }
+        initialTouchY.current = null;
       }
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchend', handleTouchMove, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchend', handleTouchMove);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
   }, [currentSection, windowHeight, scrollToSection, showPopup]);
 
   return (
     <main>
       {showPopup && <NewsletterPopup />}
-      <div style={{ position: 'relative' }}>
-        <div
-          style={{
-            width: `${imageSize}vw`,
-            height: `${imageSize}vh`,
-            position: isBeyondThreshold ? 'absolute' : 'fixed',
-            top: topStyle,
-            left: '50%',
-            transform: 'translate(-50%, -50%)',
-            zIndex: 4,
-            opacity: logoVisible ? 1 : 0,
-            transition: 'transform 0.5s ease, opacity 0.5s ease',
-          }}
-        >
-          <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
-        </div>
-      </div>
       <div
         className='relative w-full h-screen top-0 left-0 section'
         ref={(el) => (sections.current[0] = el!)}
@@ -241,27 +222,27 @@ export default function Home() {
       </div>
 
       <div
-        className='w-full flex justify-center my-[200px] section md:h-[100vh]'
+        className='w-full flex justify-center my-[200px] section h-[100vh]'
         ref={(el) => (sections.current[2] = el!)}
       >
-        <div
-          className='flex w-3/4 flex-col items-center justify-center'
-          ref={(el) => (thresholds.current[0] = el!)}
-        >
-          <div className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'>
+        <div className='flex w-3/4 flex-col items-center justify-center'>
+          <div
+            className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'
+            ref={(el) => (thresholds.current[0] = el!)}
+          >
             Our Commitment
           </div>
           <div className='text-black font-futura text-lg flex flex-col items-center text-justify'>
             <div className='mb-2 w-full md:w-1/2 md:text-2xl'>
-              We had at heart to create an eco-responsible and socially
-              conscious brand. We work with collectives of dyers and embroiders
-              in forsaken villages in India. We work with collectives of dyers
-              and embroiders in forsaken villages in India. Most of the pieces
-              in this collection were made from hemp, a material that is on the
-              rise not only for its nice feel on the skin but also thanks to the
-              plant not being water intensive. We create unique clothes from
-              vintage fabrics that tell the stories of the past but are made to
-              live in the present and for many years to come.
+              The Baziszt mission is rooted in creating an eco-responsible and
+              socially conscious brand while simultaneously creating unique,
+              one-of-a-kind clothing items that are crafted to live on for many
+              years to come. We work with collectives of dyers and embroiderers
+              in India to create vibrant and elegant garments from vintage
+              fabrics that are made to live in the present but that still tell
+              stories of the past. For our most recent collection, a majority of
+              the items are made from hemp, a natural material known for its
+              softness and ability to grow with minimal water.
             </div>
           </div>
         </div>

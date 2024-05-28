@@ -78,10 +78,15 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
           </div>
 
           <div className='text-base text-black text-justify font-futura w-full md:w-1/2'>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae fugit
-            corporis, nostrum repudiandae cumque et dolor nulla ullam expedita?
-            Quis ullam consectetur architecto aliquid. Iusto ad assumenda non
-            quo dolorem.
+            {title === 'TOPS' &&
+              'Our latest collection features bold tops, whether adorned with hand-embroidered details, striking graphics, or vibrant hand-painted accents.'}
+            {title === 'BOTTOMS' &&
+              'Crafted from a blend of natural fibers like cotton, hemp, and artisanal fabrics, a collection of versatile bottoms feature nature-inspired motifs and intricate embroidered botanicals that elevate everyday style.'}
+            {title === 'ACCESSORIES' &&
+              'Our accessories collection demonstrates our commitment to sustainability and social consciousness, while also featuring high-quality materials that will last for years to come.'}
+            {title === 'One of One' &&
+              'We partnered with skilled artisans to create one-of-one pieces that celebrate the beauty of individuality and the artistry of hand craftsmanship, each piece a testament to the collaboration between artisanal mastery and creative vision.'}
+            {breadcrumbs[0] === 'search' && `Search results for "${title}"`}
           </div>
         </div>
       </div>
@@ -102,6 +107,14 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
           {sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
+        </div>
+      </div>
+      <div className='w-full mb-20 font-futura text-black mx-6 text-center'>
+        <div className='grid grid-cols-2 md:grid-cols-4 md:p-2 gap-2'>
+          <div>Packaging</div>
+          <div>Free Online Returns</div>
+          <div>Free exchange in store</div>
+          <div>Free shipping</div>
         </div>
       </div>
     </>

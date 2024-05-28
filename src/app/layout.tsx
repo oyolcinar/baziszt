@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Navbar from './components/Layout/Navbar';
 import Footer from './components/Layout/Footer';
+import { ThresholdProvider } from './context/ThresholdContext';
 import { ProductProvider } from './context/ProductContext';
 import { UserProvider } from './context/UserContext';
 import { CartProvider } from './context/CartContext';
@@ -28,21 +29,23 @@ export default function RootLayout({
         <link rel='stylesheet' href='https://use.typekit.net/bbr3pbr.css' />
       </head>
       <body className={inter.className}>
-        <MenuProvider>
-          <BannerProvider>
-            <ScrollProvider>
-              <UserProvider>
-                <CartProvider>
-                  <ProductProvider>
-                    <Navbar />
-                    {children}
-                    <Footer />
-                  </ProductProvider>
-                </CartProvider>
-              </UserProvider>
-            </ScrollProvider>
-          </BannerProvider>
-        </MenuProvider>
+        <ThresholdProvider>
+          <MenuProvider>
+            <BannerProvider>
+              <ScrollProvider>
+                <UserProvider>
+                  <CartProvider>
+                    <ProductProvider>
+                      <Navbar />
+                      {children}
+                      <Footer />
+                    </ProductProvider>
+                  </CartProvider>
+                </UserProvider>
+              </ScrollProvider>
+            </BannerProvider>
+          </MenuProvider>
+        </ThresholdProvider>
       </body>
     </html>
   );

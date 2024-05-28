@@ -46,10 +46,10 @@ const Banner: React.FC = () => {
   return (
     <div
       ref={bannerRef}
-      className={`fixed top-0 left-0 right-0 bg-bordeux text-bone flex justify-center items-center transition-all duration-100 ease-in-out overflow-hidden z-10`}
+      className={`fixed top-0 left-0 right-0 bg-bordeux text-[12px] md:text-[15px] text-bone flex justify-center items-center transition-all duration-100 ease-in-out overflow-hidden z-10`}
     >
       <div
-        className='flex justify-center font-futura font-bold items-center w-full max-w-4xl px-4 cursor-pointer'
+        className='flex justify-center font-futura font-bold items-center w-full max-w-4xl cursor-pointer'
         // onClick={handleClose}
       >
         <span>FREE SHIPPING WORLDWIDE FOR ORDERS OVER €600</span>
