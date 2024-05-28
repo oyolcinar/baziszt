@@ -83,16 +83,13 @@ export default function Home() {
     const animation = (currentTime: number) => {
       if (startTime === null) startTime = currentTime;
       const timeElapsed = currentTime - startTime;
-      const run = ease(timeElapsed, startPosition, distance, duration);
+      const run = easeLinear(timeElapsed, startPosition, distance, duration);
       window.scrollTo(0, run);
       if (timeElapsed < duration) requestAnimationFrame(animation);
     };
 
-    const ease = (t: number, b: number, c: number, d: number) => {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t + b;
-      t--;
-      return (-c / 2) * (t * (t - 2) - 1) + b;
+    const easeLinear = (t: number, b: number, c: number, d: number) => {
+      return (c * t) / d + b;
     };
 
     requestAnimationFrame(animation);
@@ -110,7 +107,7 @@ export default function Home() {
         });
 
         const targetPosition = sections.current[sectionIndex].offsetTop;
-        const duration = windowWidth <= 768 ? 500 : 1000; // Shorter duration for mobile
+        const duration = windowWidth <= 768 ? 300 : 800; // Shorter duration for mobile
         customScrollTo(targetPosition, duration);
         setCurrentSection(sectionIndex);
       }
