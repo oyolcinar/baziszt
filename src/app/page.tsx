@@ -100,7 +100,7 @@ export default function Home() {
         <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
       </div>
 
-      <div className='flex flex-col md:flex-row'>
+      <div className='flex flex-col md:flex-row h-screen'>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
           <Link href='/shop/tops'>
             <div
@@ -148,7 +148,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className='w-full flex justify-center my-16'>
+      <div className='w-full flex justify-center h-screen'>
         <div className='flex w-3/4 flex-col items-center justify-center'>
           <div className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'>
             Our Commitment
