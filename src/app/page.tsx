@@ -98,32 +98,34 @@ export default function Home() {
     requestAnimationFrame(animation);
   };
 
-  const scrollToSection = useCallback((sectionIndex: number) => {
-    if (sections.current[sectionIndex]) {
-      sections.current.forEach((section, index) => {
-        if (index === sectionIndex) {
-          section.classList.add('visible');
-        } else {
-          section.classList.remove('visible');
-        }
-      });
+  const scrollToSection = useCallback(
+    (sectionIndex: number) => {
+      if (sections.current[sectionIndex]) {
+        sections.current.forEach((section, index) => {
+          if (index === sectionIndex) {
+            section.classList.add('visible');
+          } else {
+            section.classList.remove('visible');
+          }
+        });
 
-      const targetPosition = sections.current[sectionIndex].offsetTop;
-      customScrollTo(targetPosition, 1000); // Adjust the duration as needed
-      setCurrentSection(sectionIndex);
-    }
-  }, []);
+        const targetPosition = sections.current[sectionIndex].offsetTop;
+        const duration = windowWidth <= 768 ? 500 : 1000; // Shorter duration for mobile
+        customScrollTo(targetPosition, duration);
+        setCurrentSection(sectionIndex);
+      }
+    },
+    [windowWidth],
+  );
 
   useEffect(() => {
     const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
       if (event.deltaY > 0) {
-        // Scroll down
         scrollToSection(
           Math.min(currentSection + 1, sections.current.length - 1),
         );
       } else {
-        // Scroll up
         scrollToSection(Math.max(currentSection - 1, 0));
       }
     };
@@ -140,12 +142,10 @@ export default function Home() {
 
       if (Math.abs(deltaY) > touchThreshold) {
         if (deltaY > 0) {
-          // Scroll down
           scrollToSection(
             Math.min(currentSection + 1, sections.current.length - 1),
           );
         } else {
-          // Scroll up
           scrollToSection(Math.max(currentSection - 1, 0));
         }
         initialTouchY.current = null;
