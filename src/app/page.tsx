@@ -170,7 +170,7 @@ export default function Home() {
         <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
       </div>
       <div ref={(el) => (sections.current[1] = el!)}></div>
-      <div className='flex flex-col md:flex-row mt-[100px] section md:h-[100vh]'>
+      <div className='flex flex-row md:flex-row mt-[100px] section h-[100vh]'>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
           <Link href='/shop/tops'>
             <div
