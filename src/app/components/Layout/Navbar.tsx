@@ -28,22 +28,13 @@ const Navbar: React.FC = () => {
   const [threshold, setThreshold] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
-  const [imageSize, setImageSize] = useState(50);
 
   useEffect(() => {
     const handleScroll = () => {
-      const newScrollY = window.scrollY;
-      setScrollY(newScrollY);
-      setIsPastThreshold(windowWidth <= 768 && newScrollY > window.innerHeight);
-
-      const amplifiedScrollY = newScrollY * 8;
-
-      const newSize =
-        windowWidth <= 768
-          ? Math.max(50 - amplifiedScrollY / 100, 10)
-          : Math.max(30 - amplifiedScrollY / 100, 10);
-
-      setImageSize(newSize);
+      setScrollY(window.scrollY);
+      setIsPastThreshold(
+        windowWidth <= 768 && window.scrollY > window.innerHeight,
+      );
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -54,9 +45,13 @@ const Navbar: React.FC = () => {
   }, [setIsPastThreshold, windowWidth]);
 
   useEffect(() => {
-    const updateWindowDimensions = () => {
+    const updateWindowHeight = () => {
       setWindowHeight(window.innerHeight);
       setWindowWidth(window.innerWidth);
+    };
+
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
     };
 
     const updateThreshold = () => {
@@ -67,18 +62,25 @@ const Navbar: React.FC = () => {
       }
     };
 
-    window.addEventListener('resize', updateWindowDimensions);
+    window.addEventListener('resize', updateWindowHeight);
+    window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', updateThreshold);
 
-    updateWindowDimensions();
+    updateWindowHeight();
     updateThreshold();
     window.dispatchEvent(new Event('scroll'));
 
     return () => {
-      window.removeEventListener('resize', updateWindowDimensions);
+      window.removeEventListener('resize', updateWindowHeight);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', updateThreshold);
     };
   }, [thresholds]);
+
+  const imageSize =
+    windowWidth <= 768
+      ? Math.max(50 - scrollY / 100, 10)
+      : Math.max(30 - scrollY / 100, 10);
 
   return (
     <>
@@ -95,15 +97,14 @@ const Navbar: React.FC = () => {
           <div style={{ position: 'relative' }}>
             <div
               style={{
-                width: `${imageSize * 1.2}vw`,
+                width: `${imageSize}vw`,
                 height: `${windowWidth <= 768 ? '10vh' : `${imageSize}vh`}`,
                 position: 'fixed',
                 top: 0,
                 left: '50%',
                 transform: 'translate(-50%, 0)',
                 opacity: isThresholdReached ? 0 : 1,
-                transition:
-                  'width 0.5s ease, height 0.5s ease, opacity 0.5s ease',
+                transition: 'transform 0.5s ease, opacity 0.5s ease',
               }}
             >
               <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
