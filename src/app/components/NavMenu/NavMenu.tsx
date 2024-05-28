@@ -107,6 +107,7 @@ const NavMenu: React.FC = () => {
           <Link
             href='/shop/new'
             className='hover:opacity-70 transition duration-300'
+            scroll={true}
             // onMouseEnter={() => {
             //   setHoveredImage(newMenu.src);
             //   setIsImageVisible(true);
@@ -119,6 +120,7 @@ const NavMenu: React.FC = () => {
           <Link
             href='/shop/oneOfone'
             className='ml-4 hover:opacity-70 transition duration-300'
+            scroll={true}
             // onMouseEnter={() => {
             //   setHoveredImage(topsMenu.src);
             //   setIsImageVisible(true);
@@ -131,6 +133,7 @@ const NavMenu: React.FC = () => {
           <Link
             href='/shop/tops'
             className='hover:opacity-70 transition duration-300'
+            scroll={true}
             // onMouseEnter={() => {
             //   setHoveredImage(topsMenu.src);
             //   setIsImageVisible(true);
@@ -144,6 +147,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/shop/bottoms'
               className='hover:opacity-70 transition duration-300'
+              scroll={true}
               // onMouseEnter={() => {
               //   setHoveredImage(bottomsMenu.src);
               //   setIsImageVisible(true);
@@ -156,6 +160,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
               onClick={toggleMenu}
             >
               account
@@ -165,6 +170,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/shop/accessories'
               className='hover:opacity-70 transition duration-300'
+              scroll={true}
               onClick={toggleMenu}
             >
               ACCESSORIES
@@ -172,6 +178,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
               onClick={toggleMenu}
             >
               terms
@@ -181,6 +188,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/catalog'
               className='hover:opacity-70 transition duration-300'
+              scroll={true}
               onClick={toggleMenu}
             >
               CATALOG
@@ -188,6 +196,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
               onClick={toggleMenu}
             >
               privacy
@@ -197,6 +206,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/stockists'
               className='hover:opacity-70 transition duration-300'
+              scroll={true}
               onClick={toggleMenu}
             >
               STOCKISTS
@@ -204,6 +214,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
               onClick={toggleMenu}
             >
               contact
@@ -213,6 +224,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/press'
               className='hover:opacity-70 transition duration-300'
+              scroll={true}
               onClick={toggleMenu}
             >
               PRESS
@@ -220,6 +232,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
               onClick={toggleMenu}
             >
               instagram
@@ -229,6 +242,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/journal'
               className='hover:opacity-70 transition duration-300'
+              scroll={true}
               onClick={toggleMenu}
             >
               JOURNAL
@@ -236,6 +250,7 @@ const NavMenu: React.FC = () => {
             <Link
               href='/'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
               onClick={toggleMenu}
             >
               facebook

@@ -172,7 +172,7 @@ export default function Home() {
       <div ref={(el) => (sections.current[1] = el!)}></div>
       <div className='flex flex-row md:flex-row mt-[100px] section h-[100vh]'>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
-          <Link href='/shop/tops'>
+          <Link href='/shop/tops' scroll={true}>
             <div
               className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl '
               style={{
@@ -187,7 +187,7 @@ export default function Home() {
           </Link>
         </div>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
-          <Link href='/shop/accessories'>
+          <Link href='/shop/accessories' scroll={true}>
             <div
               className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
               style={{
@@ -202,7 +202,7 @@ export default function Home() {
           </Link>
         </div>
         <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300'>
-          <Link href='/shop/bottoms'>
+          <Link href='/shop/bottoms' scroll={true}>
             <div
               className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
               style={{

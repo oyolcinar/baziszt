@@ -87,7 +87,11 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   // }, [currentImageIndex]);
 
   return (
-    <Link href={`/shop/${product.category}/${product.slug}`} passHref>
+    <Link
+      href={`/shop/${product.category}/${product.slug}`}
+      scroll={true}
+      passHref
+    >
       <div
         {...swipeHandlers}
         className='relative cursor-pointer group'

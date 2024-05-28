@@ -8,6 +8,10 @@
   --background-end-rgb: 255, 255, 255;
 }
 
+body::-webkit-scrollbar {
+  display: none;
+}
+
 html {
   --scroll-behavior: smooth !important;
   scroll-behavior: smooth !important;
