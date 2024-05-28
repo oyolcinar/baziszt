@@ -229,8 +229,8 @@ export default function Home() {
           >
             Our Commitment
           </div>
-          <div className='text-black font-futura text-lg flex flex-col items-center text-justify'>
-            <div className='mb-2 w-full md:w-1/2 md:text-2xl'>
+          <div className='text-black font-futura text-base md:text-2xl flex flex-col items-center text-justify'>
+            <div className='mb-2 w-full md:w-1/2'>
               The Baziszt mission is rooted in creating an eco-responsible and
               socially conscious brand while simultaneously creating unique,
               one-of-a-kind clothing items that are crafted to live on for many
