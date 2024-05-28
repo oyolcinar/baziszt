@@ -21,7 +21,7 @@ export default function Home() {
   const { thresholds, isThresholdReached, setThresholdReached } =
     useThreshold();
   const initialTouchY = useRef<number | null>(null);
-  const touchThreshold = 50;
+  const touchThreshold = 100;
 
   const sections = useRef<HTMLDivElement[]>([]);
   const [currentSection, setCurrentSection] = useState(0);
@@ -107,7 +107,7 @@ export default function Home() {
         });
 
         const targetPosition = sections.current[sectionIndex].offsetTop;
-        const duration = windowWidth <= 768 ? 300 : 800; // Shorter duration for mobile
+        const duration = windowWidth <= 768 ? 500 : 800; // Shorter duration for mobile
         customScrollTo(targetPosition, duration);
         setCurrentSection(sectionIndex);
       }

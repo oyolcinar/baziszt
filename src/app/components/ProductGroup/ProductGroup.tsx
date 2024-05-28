@@ -109,7 +109,7 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
           ))}
         </div>
       </div>
-      <div className='w-full mb-20 font-futura text-black mx-6 text-center'>
+      <div className='w-full mb-20 font-futura text-black text-center'>
         <div className='grid grid-cols-2 md:grid-cols-4 md:p-2'>
           <div>Packaging</div>
           <div>Free Online Returns</div>
