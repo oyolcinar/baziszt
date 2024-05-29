@@ -23,7 +23,7 @@ import { Swiper as SwiperType } from 'swiper';
 
 export default function Home() {
   const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-  const [logoSize, setLogoSize] = useState(30);
+  const [logoSize, setLogoSize] = useState(0);
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   const [logoVisible, setLogoVisible] = useState(false);
@@ -39,6 +39,9 @@ export default function Home() {
     if (window.innerWidth < 768) {
       setLogoSize(50);
     }
+    if (window.innerWidth >= 768) {
+      setLogoSize(30);
+    }
     setLogoVisible(true);
 
     window.addEventListener('resize', updateWindowDimensions);
@@ -53,11 +56,14 @@ export default function Home() {
       swiperInstance.on('slideChange', () => {
         const activeIndex = swiperInstance.activeIndex;
         const totalSlides = swiperInstance.slides.length;
-        const newSize = Math.max(30 - (activeIndex / totalSlides) * 20, 10);
+        const newSize =
+          windowWidth < 768
+            ? Math.max(50 - (activeIndex / totalSlides) * 30, 10)
+            : Math.max(30 - (activeIndex / totalSlides) * 20, 10);
         setLogoSize(newSize);
       });
     }
-  }, [swiperInstance]);
+  }, [swiperInstance, windowWidth]);
 
   useEffect(() => {
     setShowPopup(true);
