@@ -27,7 +27,7 @@ const Navbar: React.FC = () => {
       <nav
         style={{ top: isNotHome ? `16px` : '0px' }}
         className={`fixed left-0 right-0 flex justify-between items-center bg-white h-[80px] text-black z-10 px-[30px] transition-all duration-300 border-l-[10px] border-r-[10px] border-bordeux ${
-          isNotHome || isPastThreshold ? 'bg-opacity-100' : 'bg-opacity-0'
+          isNotHome ? 'bg-opacity-100' : 'bg-opacity-0'
         }`}
       >
         <div>
