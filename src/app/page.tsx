@@ -110,15 +110,22 @@ export default function Home() {
     const handleTouchEnd = (event: TouchEvent) => {
       if (isTouching && startY !== null && currentY !== null) {
         const deltaY = startY - currentY;
-        const threshold = 50;
+        const threshold = 30; // Lowered threshold for better responsiveness
 
         if (Math.abs(deltaY) > threshold) {
           event.preventDefault();
           if (isScrolling.current) return;
 
           const currentSection = Math.round(window.scrollY / windowHeight);
-          const targetSection =
+          let targetSection =
             deltaY > 0 ? currentSection + 1 : currentSection - 1;
+          targetSection = Math.max(
+            0,
+            Math.min(
+              targetSection,
+              Math.floor(document.body.scrollHeight / windowHeight) - 1,
+            ),
+          );
           const targetPos = targetSection * windowHeight;
 
           smoothScrollTo(targetPos);
