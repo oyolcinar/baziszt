@@ -16,11 +16,11 @@ import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-  const [windowHeight, setWindowHeight] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
-  const [logoVisible, setLogoVisible] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+  const [scrollY, setScrollY] = useState<number>(0);
+  const [windowHeight, setWindowHeight] = useState<number>(0);
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const [logoVisible, setLogoVisible] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState<boolean>(false);
   const { setIsPastThreshold } = useScroll();
 
   useEffect(() => {
@@ -48,16 +48,33 @@ export default function Home() {
   }, [setIsPastThreshold]);
 
   useEffect(() => {
-    const handleWheel = (event: any) => {
+    const smoothScrollTo = (targetPos: number) => {
+      const startPos = window.scrollY;
+      const distance = targetPos - startPos;
+      const duration = 300;
+      let start: number | null = null;
+
+      const step = (timestamp: number) => {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percent = Math.min(progress / duration, 1);
+        window.scrollTo(0, startPos + distance * percent);
+        if (progress < duration) {
+          requestAnimationFrame(step);
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const handleWheel = (event: WheelEvent) => {
       event.preventDefault();
       const delta = Math.sign(event.deltaY);
       const currentSection = Math.round(window.scrollY / windowHeight);
       const targetSection = currentSection + delta;
+      const targetPos = targetSection * windowHeight;
 
-      window.scrollTo({
-        top: targetSection * windowHeight,
-        behavior: 'smooth',
-      });
+      smoothScrollTo(targetPos);
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
@@ -93,7 +110,7 @@ export default function Home() {
             transform: 'translate(-50%, -50%)',
             zIndex: 4,
             opacity: logoVisible ? 1 : 0,
-            transition: 'transform 0.3s ease, opacity 0.3s ease', // Updated transition timing
+            transition: 'transform 0.3s ease, opacity 0.3s ease',
           }}
         >
           <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
@@ -108,7 +125,7 @@ export default function Home() {
           <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
             <Link href='/shop/tops'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl '
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                 style={{
                   zIndex: 2,
                 }}
@@ -157,7 +174,7 @@ export default function Home() {
           <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease h-screen'>
             <Link href='/shop/tops'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl '
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                 style={{
                   zIndex: 2,
                 }}
