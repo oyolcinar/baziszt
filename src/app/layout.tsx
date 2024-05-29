@@ -38,7 +38,7 @@ export default function RootLayout({
                     <ProductProvider>
                       <Navbar />
                       {children}
-                      <Footer />
+                      {/* <Footer /> */}
                     </ProductProvider>
                   </CartProvider>
                 </UserProvider>
