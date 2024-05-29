@@ -87,15 +87,21 @@ export default function Home() {
 
     let startY: number | null = null;
     let currentY: number | null = null;
+    let initialMove = true;
 
     const handleTouchStart = (event: TouchEvent) => {
       startY = event.touches[0].clientY;
       document.body.style.overflow = 'hidden';
+      initialMove = true;
     };
 
     const handleTouchMove = (event: TouchEvent) => {
       if (startY !== null) {
         currentY = event.touches[0].clientY;
+        if (initialMove) {
+          initialMove = false;
+          startY = currentY; // Reset startY to avoid initial jump
+        }
       }
     };
 
