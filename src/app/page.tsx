@@ -154,7 +154,7 @@ export default function Home() {
     <main>
       {showPopup && <NewsletterPopup />}
 
-      <div style={{ position: 'relative' }}>
+      <div>
         <div
           style={{
             width: `${imageSize}vw`,
