@@ -52,6 +52,12 @@ export default function Home() {
     const smoothScrollTo = (targetPos: number) => {
       if (isScrolling.current) return;
 
+      // Ensure targetPos is within the valid range
+      targetPos = Math.max(
+        0,
+        Math.min(targetPos, document.body.scrollHeight - window.innerHeight),
+      );
+
       isScrolling.current = true;
       const startPos = window.scrollY;
       const distance = targetPos - startPos;
@@ -87,21 +93,15 @@ export default function Home() {
 
     let startY: number | null = null;
     let currentY: number | null = null;
-    let initialMove = true;
 
     const handleTouchStart = (event: TouchEvent) => {
       startY = event.touches[0].clientY;
       document.body.style.overflow = 'hidden';
-      initialMove = true;
     };
 
     const handleTouchMove = (event: TouchEvent) => {
       if (startY !== null) {
         currentY = event.touches[0].clientY;
-        if (initialMove) {
-          initialMove = false;
-          startY = currentY; // Reset startY to avoid initial jump
-        }
       }
     };
 
@@ -115,7 +115,8 @@ export default function Home() {
           if (isScrolling.current) return;
 
           const currentSection = Math.round(window.scrollY / windowHeight);
-          const targetSection = currentSection + (deltaY > 0 ? 1 : -1);
+          const targetSection =
+            deltaY > 0 ? currentSection + 1 : currentSection - 1;
           const targetPos = targetSection * windowHeight;
 
           smoothScrollTo(targetPos);
@@ -143,7 +144,6 @@ export default function Home() {
   useEffect(() => {
     setShowPopup(true);
   }, []);
-
   const imageSize =
     windowWidth <= 768
       ? Math.max(50 - scrollY / 100, 10)
