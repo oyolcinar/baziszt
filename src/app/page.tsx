@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
@@ -15,13 +15,6 @@ import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 
-const isMobileDevice = () => {
-  return (
-    typeof window.orientation !== 'undefined' ||
-    navigator.userAgent.indexOf('IEMobile') !== -1
-  );
-};
-
 export default function Home() {
   const [scrollY, setScrollY] = useState<number>(0);
   const [windowHeight, setWindowHeight] = useState<number>(0);
@@ -29,6 +22,7 @@ export default function Home() {
   const [logoVisible, setLogoVisible] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const { setIsPastThreshold } = useScroll();
+  const isScrolling = useRef<boolean>(false);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -55,73 +49,89 @@ export default function Home() {
   }, [setIsPastThreshold]);
 
   useEffect(() => {
-    if (!isMobileDevice()) {
-      const smoothScrollTo = (targetPos: number) => {
-        const startPos = window.scrollY;
-        const distance = targetPos - startPos;
-        const duration = 300;
-        let start: number | null = null;
+    const smoothScrollTo = (targetPos: number) => {
+      if (isScrolling.current) return;
 
-        const step = (timestamp: number) => {
-          if (!start) start = timestamp;
-          const progress = timestamp - start;
-          const percent = Math.min(progress / duration, 1);
-          window.scrollTo(0, startPos + distance * percent);
-          if (progress < duration) {
-            requestAnimationFrame(step);
-          }
-        };
+      isScrolling.current = true;
+      const startPos = window.scrollY;
+      const distance = targetPos - startPos;
+      const duration = 300;
+      let start: number | null = null;
 
-        requestAnimationFrame(step);
+      const step = (timestamp: number) => {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percent = Math.min(progress / duration, 1);
+        window.scrollTo(0, startPos + distance * percent);
+        if (progress < duration) {
+          requestAnimationFrame(step);
+        } else {
+          isScrolling.current = false;
+        }
       };
 
-      const handleWheel = (event: WheelEvent) => {
-        event.preventDefault();
-        const delta = Math.sign(event.deltaY);
-        const currentSection = Math.round(window.scrollY / windowHeight);
-        const targetSection = currentSection + delta;
-        const targetPos = targetSection * windowHeight;
+      requestAnimationFrame(step);
+    };
 
-        smoothScrollTo(targetPos);
-      };
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      if (isScrolling.current) return;
 
-      window.addEventListener('wheel', handleWheel, { passive: false });
+      const delta = Math.sign(event.deltaY);
+      const currentSection = Math.round(window.scrollY / windowHeight);
+      const targetSection = currentSection + delta;
+      const targetPos = targetSection * windowHeight;
 
-      return () => {
-        window.removeEventListener('wheel', handleWheel);
-      };
-    } else {
-      const handleTouchStart = (event: TouchEvent) => {
-        const startY = event.touches[0].clientY;
-        const handleTouchMove = (moveEvent: TouchEvent) => {
-          const moveY = moveEvent.touches[0].clientY;
-          const deltaY = startY - moveY;
-          if (Math.abs(deltaY) > windowHeight / 4) {
-            const currentSection = Math.round(window.scrollY / windowHeight);
-            const targetSection = currentSection + (deltaY > 0 ? 1 : -1);
-            window.scrollTo({
-              top: targetSection * windowHeight,
-              behavior: 'smooth',
-            });
-            window.removeEventListener('touchmove', handleTouchMove);
-          }
-        };
-        window.addEventListener('touchmove', handleTouchMove);
-        window.addEventListener(
-          'touchend',
-          () => {
-            window.removeEventListener('touchmove', handleTouchMove);
-          },
-          { once: true },
-        );
-      };
+      smoothScrollTo(targetPos);
+    };
 
-      window.addEventListener('touchstart', handleTouchStart);
+    let startY: number | null = null;
+    let currentY: number | null = null;
 
-      return () => {
-        window.removeEventListener('touchstart', handleTouchStart);
-      };
-    }
+    const handleTouchStart = (event: TouchEvent) => {
+      startY = event.touches[0].clientY;
+      document.body.style.overflow = 'hidden';
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (startY !== null) {
+        currentY = event.touches[0].clientY;
+      }
+    };
+
+    const handleTouchEnd = (event: TouchEvent) => {
+      if (startY !== null && currentY !== null) {
+        const deltaY = startY - currentY;
+        const threshold = 50;
+
+        if (Math.abs(deltaY) > threshold) {
+          event.preventDefault();
+          if (isScrolling.current) return;
+
+          const currentSection = Math.round(window.scrollY / windowHeight);
+          const targetSection = currentSection + (deltaY > 0 ? 1 : -1);
+          const targetPos = targetSection * windowHeight;
+
+          smoothScrollTo(targetPos);
+        }
+      }
+      startY = null;
+      currentY = null;
+      document.body.style.overflow = '';
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd);
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      document.body.style.overflow = '';
+    };
   }, [windowHeight]);
 
   useEffect(() => {
