@@ -75,6 +75,7 @@ export default function Home() {
     <main>
       {showPopup && <NewsletterPopup />}
       <Swiper
+        speed={1000}
         onSwiper={setSwiperInstance}
         spaceBetween={10}
         slidesPerView={1}
