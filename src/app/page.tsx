@@ -92,20 +92,23 @@ export default function Home() {
 
     let startY: number | null = null;
     let currentY: number | null = null;
+    let isTouching = false;
 
     const handleTouchStart = (event: TouchEvent) => {
       startY = event.touches[0].clientY;
+      isTouching = true;
       document.body.style.overflow = 'hidden';
     };
 
     const handleTouchMove = (event: TouchEvent) => {
-      if (startY !== null) {
+      if (isTouching && startY !== null) {
         currentY = event.touches[0].clientY;
+        event.preventDefault(); // Prevent default scrolling behavior
       }
     };
 
     const handleTouchEnd = (event: TouchEvent) => {
-      if (startY !== null && currentY !== null) {
+      if (isTouching && startY !== null && currentY !== null) {
         const deltaY = startY - currentY;
         const threshold = 50;
 
@@ -123,6 +126,7 @@ export default function Home() {
       }
       startY = null;
       currentY = null;
+      isTouching = false;
       document.body.style.overflow = '';
     };
 
@@ -143,6 +147,7 @@ export default function Home() {
   useEffect(() => {
     setShowPopup(true);
   }, []);
+
   const imageSize =
     windowWidth <= 768
       ? Math.max(50 - scrollY / 100, 10)
