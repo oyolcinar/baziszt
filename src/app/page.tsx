@@ -19,10 +19,11 @@ import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 import Footer from './components/Layout/Footer';
+import { Swiper as SwiperType } from 'swiper';
 
 export default function Home() {
-  const [scrollY, setScrollY] = useState(0);
-  const [threshold, setThreshold] = useState(0);
+  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
+  const [logoSize, setLogoSize] = useState(30);
   const [windowHeight, setWindowHeight] = useState(0);
   const [windowWidth, setWindowWidth] = useState(0);
   const [logoVisible, setLogoVisible] = useState(false);
@@ -30,62 +31,41 @@ export default function Home() {
   const { setIsPastThreshold } = useScroll();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-
-      setIsPastThreshold(
-        windowWidth <= 768 && window.scrollY > window.innerHeight,
-      );
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [setIsPastThreshold, windowWidth]);
-  useEffect(() => {
-    const updateWindowHeight = () => {
+    const updateWindowDimensions = () => {
       setWindowHeight(window.innerHeight);
       setWindowWidth(window.innerWidth);
     };
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-      if (!logoVisible) setLogoVisible(true);
-    };
-    const updateThreshold = () => {
-      const pageHeight = document.body.scrollHeight;
-      const calculatedThreshold = pageHeight * 0.55;
+    setLogoVisible(true);
 
-      setThreshold(calculatedThreshold);
-    };
-    window.addEventListener('resize', updateWindowHeight);
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', updateThreshold);
-    updateWindowHeight();
-    updateThreshold();
-    window.dispatchEvent(new Event('scroll'));
+    window.addEventListener('resize', updateWindowDimensions);
+    updateWindowDimensions();
     return () => {
-      window.removeEventListener('resize', updateWindowHeight);
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', updateThreshold);
+      window.removeEventListener('resize', updateWindowDimensions);
     };
-  }, [logoVisible]);
+  }, []);
+
+  useEffect(() => {
+    if (swiperInstance) {
+      swiperInstance.on('slideChange', () => {
+        const activeIndex = swiperInstance.activeIndex;
+        const totalSlides = swiperInstance.slides.length;
+        const newSize = Math.max(30 - (activeIndex / totalSlides) * 20, 10);
+        setLogoSize(newSize);
+      });
+    }
+  }, [swiperInstance]);
 
   useEffect(() => {
     setShowPopup(true);
   }, []);
 
-  const imageSize =
-    windowWidth <= 768
-      ? Math.max(50 - scrollY / 100, 10)
-      : Math.max(30 - scrollY / 100, 10);
-  const isBeyondThreshold = scrollY > threshold;
   const topPixels = windowHeight * (windowWidth <= 768 ? 0.18 : 0.1);
-  const topStyle = isBeyondThreshold ? threshold + topPixels : topPixels;
 
   return (
     <main>
       {showPopup && <NewsletterPopup />}
       <Swiper
+        onSwiper={setSwiperInstance}
         spaceBetween={10}
         slidesPerView={1}
         direction={'vertical'}
@@ -97,10 +77,10 @@ export default function Home() {
         <div>
           <div
             style={{
-              width: `${imageSize}vw`,
-              height: `${imageSize}vh`,
-              position: isBeyondThreshold ? 'absolute' : 'fixed',
-              top: topStyle,
+              width: `${logoSize}vw`,
+              height: `${logoSize}vh`,
+              position: 'fixed',
+              top: topPixels,
               left: '50%',
               transform: 'translate(-50%, -50%)',
               zIndex: 4,
