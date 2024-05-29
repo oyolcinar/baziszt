@@ -119,7 +119,7 @@ const NavMenu: React.FC = () => {
           </Link>
           <Link
             href='/shop/oneOfone'
-            className='ml-4 hover:opacity-70 transition duration-300'
+            className='hover:opacity-70 transition duration-300'
             scroll={true}
             // onMouseEnter={() => {
             //   setHoveredImage(topsMenu.src);
@@ -128,7 +128,7 @@ const NavMenu: React.FC = () => {
             // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
-            ⤷ ONE OF ONE
+            ONE OF ONE
           </Link>
           <Link
             href='/shop/tops'
