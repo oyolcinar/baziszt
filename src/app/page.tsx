@@ -89,7 +89,6 @@ export default function Home() {
 
     const handleTouchStart = (event: TouchEvent) => {
       startY = event.touches[0].clientY;
-      document.body.style.overflow = 'hidden';
     };
 
     const handleTouchMove = (event: TouchEvent) => {
@@ -116,7 +115,6 @@ export default function Home() {
       }
       startY = null;
       currentY = null;
-      document.body.style.overflow = '';
     };
 
     window.addEventListener('wheel', handleWheel, { passive: false });
@@ -129,7 +127,6 @@ export default function Home() {
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('touchend', handleTouchEnd);
-      document.body.style.overflow = '';
     };
   }, [windowHeight]);
 
