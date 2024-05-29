@@ -110,7 +110,7 @@ export default function Home() {
     const handleTouchEnd = (event: TouchEvent) => {
       if (isTouching && startY !== null && currentY !== null) {
         const deltaY = startY - currentY;
-        const threshold = 30; // Lowered threshold for better responsiveness
+        const threshold = 30; // Lower threshold for better responsiveness
 
         if (Math.abs(deltaY) > threshold) {
           event.preventDefault();
@@ -154,7 +154,6 @@ export default function Home() {
   useEffect(() => {
     setShowPopup(true);
   }, []);
-
   const imageSize =
     windowWidth <= 768
       ? Math.max(50 - scrollY / 100, 10)
