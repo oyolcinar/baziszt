@@ -52,7 +52,6 @@ export default function Home() {
     const smoothScrollTo = (targetPos: number) => {
       if (isScrolling.current) return;
 
-      // Ensure targetPos is within the valid range
       targetPos = Math.max(
         0,
         Math.min(targetPos, document.body.scrollHeight - window.innerHeight),
