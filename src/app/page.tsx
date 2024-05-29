@@ -28,6 +28,7 @@ export default function Home() {
   const [windowWidth, setWindowWidth] = useState(0);
   const [logoVisible, setLogoVisible] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
+  const [swiperHeight, setSwiperHeight] = useState('100vh');
   const { setIsPastThreshold } = useScroll();
 
   useEffect(() => {
@@ -35,6 +36,9 @@ export default function Home() {
       setWindowHeight(window.innerHeight);
       setWindowWidth(window.innerWidth);
     };
+    if (window.innerWidth < 768) {
+      setLogoSize(50);
+    }
     setLogoVisible(true);
 
     window.addEventListener('resize', updateWindowDimensions);
@@ -59,7 +63,7 @@ export default function Home() {
     setShowPopup(true);
   }, []);
 
-  const topPixels = windowHeight * (windowWidth <= 768 ? 0.18 : 0.1);
+  const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
 
   return (
     <main>
@@ -72,7 +76,7 @@ export default function Home() {
         modules={[Pagination, Mousewheel]}
         pagination={{}}
         mousewheel
-        style={{ height: '100vh' }}
+        style={{ height: swiperHeight }}
       >
         <div>
           <div
