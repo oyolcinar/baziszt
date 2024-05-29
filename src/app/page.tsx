@@ -11,7 +11,6 @@ import NewsletterPopup from './components/NewsletterPopUp/NewsletterPopUp';
 import Logo from '../../public/Logos/logoEditBordeux1.png';
 import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
-import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 
@@ -22,7 +21,6 @@ export default function Home() {
   const [logoVisible, setLogoVisible] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const { setIsPastThreshold } = useScroll();
-  const isScrolling = useRef<boolean>(false);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -49,92 +47,6 @@ export default function Home() {
   }, [setIsPastThreshold]);
 
   useEffect(() => {
-    const smoothScrollTo = (targetPos: number) => {
-      if (isScrolling.current) return;
-
-      isScrolling.current = true;
-      const startPos = window.scrollY;
-      const distance = targetPos - startPos;
-      const duration = 300;
-      let start: number | null = null;
-
-      const step = (timestamp: number) => {
-        if (!start) start = timestamp;
-        const progress = timestamp - start;
-        const percent = Math.min(progress / duration, 1);
-        window.scrollTo(0, startPos + distance * percent);
-        if (progress < duration) {
-          requestAnimationFrame(step);
-        } else {
-          isScrolling.current = false;
-        }
-      };
-
-      requestAnimationFrame(step);
-    };
-
-    const handleWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      if (isScrolling.current) return;
-
-      const delta = Math.sign(event.deltaY);
-      const currentSection = Math.round(window.scrollY / windowHeight);
-      const targetSection = currentSection + delta;
-      const targetPos = targetSection * windowHeight;
-
-      smoothScrollTo(targetPos);
-    };
-
-    let startY: number | null = null;
-    let currentY: number | null = null;
-
-    const handleTouchStart = (event: TouchEvent) => {
-      startY = event.touches[0].clientY;
-      document.body.style.overflow = 'hidden';
-    };
-
-    const handleTouchMove = (event: TouchEvent) => {
-      if (startY !== null) {
-        currentY = event.touches[0].clientY;
-      }
-    };
-
-    const handleTouchEnd = (event: TouchEvent) => {
-      if (startY !== null && currentY !== null) {
-        const deltaY = startY - currentY;
-        const threshold = 50;
-
-        if (Math.abs(deltaY) > threshold) {
-          event.preventDefault();
-          if (isScrolling.current) return;
-
-          const currentSection = Math.round(window.scrollY / windowHeight);
-          const targetSection = currentSection + (deltaY > 0 ? 1 : -1);
-          const targetPos = targetSection * windowHeight;
-
-          smoothScrollTo(targetPos);
-        }
-      }
-      startY = null;
-      currentY = null;
-      document.body.style.overflow = '';
-    };
-
-    window.addEventListener('wheel', handleWheel, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
-    window.addEventListener('touchend', handleTouchEnd);
-
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
-      window.removeEventListener('touchend', handleTouchEnd);
-      document.body.style.overflow = '';
-    };
-  }, [windowHeight]);
-
-  useEffect(() => {
     setShowPopup(true);
   }, []);
 
@@ -144,7 +56,6 @@ export default function Home() {
       : Math.max(30 - scrollY / 100, 10);
 
   const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
-
   return (
     <main>
       {showPopup && <NewsletterPopup />}
@@ -270,8 +181,8 @@ export default function Home() {
           </div>
         ))}
       {windowWidth <= 768 && !(windowHeight <= 400) && (
-        <div className='lg:hidden w-full'>
-          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease min-h-screen'>
+        <div className='lg:hidden w-full snap-y snap-mandatory overflow-y-scroll h-screen'>
+          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease snap-start min-h-screen'>
             <Link href='/shop/tops'>
               <div
                 className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -286,7 +197,7 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease min-h-screen'>
+          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease snap-start min-h-screen'>
             <Link href='/shop/accessories'>
               <div
                 className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -301,7 +212,7 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease min-h-screen'>
+          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease snap-start min-h-screen'>
             <Link href='/shop/bottoms'>
               <div
                 className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
