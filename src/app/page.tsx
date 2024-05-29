@@ -21,6 +21,7 @@ export default function Home() {
   const [logoVisible, setLogoVisible] = useState<boolean>(false);
   const [showPopup, setShowPopup] = useState<boolean>(false);
   const { setIsPastThreshold } = useScroll();
+  const isScrolling = useRef<boolean>(false);
 
   useEffect(() => {
     const updateWindowDimensions = () => {
@@ -47,6 +48,92 @@ export default function Home() {
   }, [setIsPastThreshold]);
 
   useEffect(() => {
+    const smoothScrollTo = (targetPos: number) => {
+      if (isScrolling.current) return;
+
+      isScrolling.current = true;
+      const startPos = window.scrollY;
+      const distance = targetPos - startPos;
+      const duration = 300;
+      let start: number | null = null;
+
+      const step = (timestamp: number) => {
+        if (!start) start = timestamp;
+        const progress = timestamp - start;
+        const percent = Math.min(progress / duration, 1);
+        window.scrollTo(0, startPos + distance * percent);
+        if (progress < duration) {
+          requestAnimationFrame(step);
+        } else {
+          isScrolling.current = false;
+        }
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const handleWheel = (event: WheelEvent) => {
+      event.preventDefault();
+      if (isScrolling.current) return;
+
+      const delta = Math.sign(event.deltaY);
+      const currentSection = Math.round(window.scrollY / windowHeight);
+      const targetSection = currentSection + delta;
+      const targetPos = targetSection * windowHeight;
+
+      smoothScrollTo(targetPos);
+    };
+
+    let startY: number | null = null;
+    let currentY: number | null = null;
+
+    const handleTouchStart = (event: TouchEvent) => {
+      startY = event.touches[0].clientY;
+      document.body.style.overflow = 'hidden';
+    };
+
+    const handleTouchMove = (event: TouchEvent) => {
+      if (startY !== null) {
+        currentY = event.touches[0].clientY;
+      }
+    };
+
+    const handleTouchEnd = (event: TouchEvent) => {
+      if (startY !== null && currentY !== null) {
+        const deltaY = startY - currentY;
+        const threshold = 50;
+
+        if (Math.abs(deltaY) > threshold) {
+          event.preventDefault();
+          if (isScrolling.current) return;
+
+          const currentSection = Math.round(window.scrollY / windowHeight);
+          const targetSection = currentSection + (deltaY > 0 ? 1 : -1);
+          const targetPos = targetSection * windowHeight;
+
+          smoothScrollTo(targetPos);
+        }
+      }
+      startY = null;
+      currentY = null;
+      document.body.style.overflow = '';
+    };
+
+    window.addEventListener('wheel', handleWheel, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart, { passive: false });
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('touchend', handleTouchEnd, { passive: false });
+
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('touchend', handleTouchEnd);
+      document.body.style.overflow = '';
+    };
+  }, [windowHeight]);
+
+  useEffect(() => {
     setShowPopup(true);
   }, []);
 
@@ -56,8 +143,9 @@ export default function Home() {
       : Math.max(30 - scrollY / 100, 10);
 
   const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
+
   return (
-    <main>
+    <main className='snap-y snap-mandatory overflow-y-scroll md:overflow-visible'>
       {showPopup && <NewsletterPopup />}
 
       <div style={{ position: 'relative' }}>
@@ -77,16 +165,16 @@ export default function Home() {
           <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
         </div>
       </div>
-      <div className='relative w-full h-screen top-0 left-0 transition duration-300 ease'>
+      <div className='relative w-full h-screen top-0 left-0 transition duration-300 ease snap-start'>
         <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
       </div>
 
       {windowWidth > 768 && (
-        <div className='flex flex-row h-screen transition duration-300 ease'>
+        <div className='flex flex-row h-screen transition duration-300 ease snap-start md:flex-nowrap'>
           <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
             <Link href='/shop/tops'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                 style={{
                   zIndex: 2,
                 }}
@@ -101,7 +189,7 @@ export default function Home() {
           <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
             <Link href='/shop/accessories'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                 style={{
                   zIndex: 2,
                 }}
@@ -116,7 +204,7 @@ export default function Home() {
           <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
             <Link href='/shop/bottoms'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                 style={{
                   zIndex: 2,
                 }}
@@ -130,13 +218,14 @@ export default function Home() {
           </div>
         </div>
       )}
+
       {windowWidth > 768 ||
         (windowHeight < 400 && (
-          <div className='flex flex-row h-screen transition duration-300 ease'>
+          <div className='flex flex-row h-screen transition duration-300 ease snap-start md:flex-nowrap'>
             <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
               <Link href='/shop/tops'>
                 <div
-                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                   style={{
                     zIndex: 2,
                   }}
@@ -151,7 +240,7 @@ export default function Home() {
             <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
               <Link href='/shop/accessories'>
                 <div
-                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                   style={{
                     zIndex: 2,
                   }}
@@ -166,7 +255,7 @@ export default function Home() {
             <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
               <Link href='/shop/bottoms'>
                 <div
-                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                   style={{
                     zIndex: 2,
                   }}
@@ -180,8 +269,9 @@ export default function Home() {
             </div>
           </div>
         ))}
+
       {windowWidth <= 768 && !(windowHeight <= 400) && (
-        <div className='lg:hidden w-full snap-y snap-mandatory overflow-y-scroll h-screen'>
+        <div className='lg:hidden w-full'>
           <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease snap-start min-h-screen'>
             <Link href='/shop/tops'>
               <div
@@ -230,12 +320,12 @@ export default function Home() {
         </div>
       )}
 
-      <div className='w-full flex justify-center h-screen transition duration-300 ease'>
+      <div className='w-full flex justify-center transition duration-300 ease snap-start min-h-screen'>
         <div className='flex w-3/4 flex-col items-center justify-center'>
           <div className='font-altesse64 text-black text-5xl sm:text-6xl md:text-8xl mb-4'>
             Our Commitment
           </div>
-          <div className='text-black font-futura text-lg flex flex-col items-center text-justify'>
+          <div className='text-black font-futura text-lg md:text-2xl flex flex-col items-center text-justify'>
             <div className='mb-2 w-full md:w-1/2'>
               We had at heart to create an eco-responsible and socially
               conscious brand. We work with collectives of dyers and embroiders
