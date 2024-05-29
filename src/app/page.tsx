@@ -15,6 +15,13 @@ import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 
+const isMobileDevice = () => {
+  return (
+    typeof window.orientation !== 'undefined' ||
+    navigator.userAgent.indexOf('IEMobile') !== -1
+  );
+};
+
 export default function Home() {
   const [scrollY, setScrollY] = useState<number>(0);
   const [windowHeight, setWindowHeight] = useState<number>(0);
@@ -48,40 +55,73 @@ export default function Home() {
   }, [setIsPastThreshold]);
 
   useEffect(() => {
-    const smoothScrollTo = (targetPos: number) => {
-      const startPos = window.scrollY;
-      const distance = targetPos - startPos;
-      const duration = 300;
-      let start: number | null = null;
+    if (!isMobileDevice()) {
+      const smoothScrollTo = (targetPos: number) => {
+        const startPos = window.scrollY;
+        const distance = targetPos - startPos;
+        const duration = 300;
+        let start: number | null = null;
 
-      const step = (timestamp: number) => {
-        if (!start) start = timestamp;
-        const progress = timestamp - start;
-        const percent = Math.min(progress / duration, 1);
-        window.scrollTo(0, startPos + distance * percent);
-        if (progress < duration) {
-          requestAnimationFrame(step);
-        }
+        const step = (timestamp: number) => {
+          if (!start) start = timestamp;
+          const progress = timestamp - start;
+          const percent = Math.min(progress / duration, 1);
+          window.scrollTo(0, startPos + distance * percent);
+          if (progress < duration) {
+            requestAnimationFrame(step);
+          }
+        };
+
+        requestAnimationFrame(step);
       };
 
-      requestAnimationFrame(step);
-    };
+      const handleWheel = (event: WheelEvent) => {
+        event.preventDefault();
+        const delta = Math.sign(event.deltaY);
+        const currentSection = Math.round(window.scrollY / windowHeight);
+        const targetSection = currentSection + delta;
+        const targetPos = targetSection * windowHeight;
 
-    const handleWheel = (event: WheelEvent) => {
-      event.preventDefault();
-      const delta = Math.sign(event.deltaY);
-      const currentSection = Math.round(window.scrollY / windowHeight);
-      const targetSection = currentSection + delta;
-      const targetPos = targetSection * windowHeight;
+        smoothScrollTo(targetPos);
+      };
 
-      smoothScrollTo(targetPos);
-    };
+      window.addEventListener('wheel', handleWheel, { passive: false });
 
-    window.addEventListener('wheel', handleWheel, { passive: false });
+      return () => {
+        window.removeEventListener('wheel', handleWheel);
+      };
+    } else {
+      const handleTouchStart = (event: TouchEvent) => {
+        const startY = event.touches[0].clientY;
+        const handleTouchMove = (moveEvent: TouchEvent) => {
+          const moveY = moveEvent.touches[0].clientY;
+          const deltaY = startY - moveY;
+          if (Math.abs(deltaY) > windowHeight / 4) {
+            const currentSection = Math.round(window.scrollY / windowHeight);
+            const targetSection = currentSection + (deltaY > 0 ? 1 : -1);
+            window.scrollTo({
+              top: targetSection * windowHeight,
+              behavior: 'smooth',
+            });
+            window.removeEventListener('touchmove', handleTouchMove);
+          }
+        };
+        window.addEventListener('touchmove', handleTouchMove);
+        window.addEventListener(
+          'touchend',
+          () => {
+            window.removeEventListener('touchmove', handleTouchMove);
+          },
+          { once: true },
+        );
+      };
 
-    return () => {
-      window.removeEventListener('wheel', handleWheel);
-    };
+      window.addEventListener('touchstart', handleTouchStart);
+
+      return () => {
+        window.removeEventListener('touchstart', handleTouchStart);
+      };
+    }
   }, [windowHeight]);
 
   useEffect(() => {
