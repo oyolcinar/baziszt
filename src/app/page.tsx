@@ -171,11 +171,11 @@ export default function Home() {
       </div>
 
       {windowWidth > 768 && (
-        <div className='flex flex-col md:flex-row h-screen transition duration-300 ease'>
+        <div className='flex flex-row h-screen transition duration-300 ease'>
           <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
             <Link href='/shop/tops'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
                 style={{
                   zIndex: 2,
                 }}
@@ -190,7 +190,7 @@ export default function Home() {
           <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
             <Link href='/shop/accessories'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
                 style={{
                   zIndex: 2,
                 }}
@@ -205,7 +205,7 @@ export default function Home() {
           <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
             <Link href='/shop/bottoms'>
               <div
-                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
+                className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
                 style={{
                   zIndex: 2,
                 }}
@@ -219,9 +219,59 @@ export default function Home() {
           </div>
         </div>
       )}
-      {windowWidth <= 768 && (
+      {windowWidth > 768 ||
+        (windowHeight < 400 && (
+          <div className='flex flex-row h-screen transition duration-300 ease'>
+            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
+              <Link href='/shop/tops'>
+                <div
+                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                  style={{
+                    zIndex: 2,
+                  }}
+                >
+                  Tops
+                </div>
+                <div className='transition-opacity duration-300 ease opacity-100 hover:opacity-75'>
+                  <Image alt='Tops' src={TopsImage} />
+                </div>
+              </Link>
+            </div>
+            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
+              <Link href='/shop/accessories'>
+                <div
+                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                  style={{
+                    zIndex: 2,
+                  }}
+                >
+                  Accessories
+                </div>
+                <div className='transition-opacity duration-300 ease opacity-100 hover:opacity-75'>
+                  <Image alt='Accessories' src={AccessoriesImage} />
+                </div>
+              </Link>
+            </div>
+            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease'>
+              <Link href='/shop/bottoms'>
+                <div
+                  className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl sm:text-4xl'
+                  style={{
+                    zIndex: 2,
+                  }}
+                >
+                  Bottoms
+                </div>
+                <div className='transition-opacity duration-300 ease opacity-100 hover:opacity-75'>
+                  <Image alt='Bottoms' src={BottomsImage} />
+                </div>
+              </Link>
+            </div>
+          </div>
+        ))}
+      {windowWidth <= 768 && !(windowHeight <= 400) && (
         <div className='lg:hidden w-full'>
-          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease h-screen'>
+          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease min-h-screen'>
             <Link href='/shop/tops'>
               <div
                 className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -236,7 +286,7 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease h-screen'>
+          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease min-h-screen'>
             <Link href='/shop/accessories'>
               <div
                 className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -251,7 +301,7 @@ export default function Home() {
               </div>
             </Link>
           </div>
-          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease h-screen'>
+          <div className='group relative cursor-pointer flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-black transition duration-300 ease min-h-screen'>
             <Link href='/shop/bottoms'>
               <div
                 className='absolute font-altesse24 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
