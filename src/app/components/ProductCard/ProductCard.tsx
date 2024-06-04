@@ -1,4 +1,3 @@
-import { useSwipeable } from 'react-swipeable';
 import Image from 'next/image';
 import React, { useState, useLayoutEffect } from 'react';
 import Link from 'next/link';
@@ -9,11 +8,9 @@ import { Product } from '@/app/context/ProductContext';
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const uniqueColors = Array.from(new Set(product.colors));
   const uniqueSizes = Array.from(new Set(product.sizes));
-  const [currentImageIndex, setCurrentImageIndex] = useState(1);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isFavorite, setIsFavorite] = useState(false);
   const [imageWidth, setImageWidth] = useState<number | null>(null);
-  const [isHovered, setIsHovered] = useState(false);
 
   useLayoutEffect(() => {
     function updateWidth() {
@@ -32,67 +29,18 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
-  const swipeHandlers = useSwipeable({
-    onSwipedLeft: () => imageWidth && handleImageChange('next'),
-    onSwipedRight: () => imageWidth && handleImageChange('prev'),
-    onSwiping: (eventData) => {
-      if (Math.abs(eventData.deltaX) > Math.abs(eventData.deltaY)) {
-        eventData.event.preventDefault();
-      }
-    },
-    trackTouch: true,
-  });
-
   if (imageWidth === null) return null;
-
-  const totalWidth = (product.images.length + 2) * imageWidth;
-
-  const handleImageChange = (
-    direction: 'next' | 'prev',
-    e?: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    if (!isTransitioning) {
-      let newIndex = currentImageIndex + (direction === 'next' ? 1 : -1);
-      setIsTransitioning(true);
-      setCurrentImageIndex(newIndex);
-    }
-  };
-
-  const handleTransitionEnd = () => {
-    setIsTransitioning(false);
-    if (currentImageIndex <= 0) {
-      setCurrentImageIndex(product.images.length);
-    } else if (currentImageIndex >= product.images.length + 1) {
-      setCurrentImageIndex(1);
-    }
-  };
-
-  const shift = -currentImageIndex * imageWidth;
-  const enhancedImages = [
-    product.images[product.images.length - 1],
-    ...product.images,
-    product.images[0],
-  ];
 
   const toggleFavorite = () => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
 
   const handleMouseEnter = () => {
-    setIsHovered(true);
-    setCurrentImageIndex(product.images.length);
-    setIsTransitioning(true);
+    setCurrentImageIndex(product.images.length - 1);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
-    setCurrentImageIndex(1);
-    setIsTransitioning(true);
+    setCurrentImageIndex(0);
   };
 
   const handleTouchStart = () => {
@@ -104,13 +52,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   };
 
   return (
-    <Link
-      href={`/shop/${product.category}/${product.slug}`}
-      scroll={true}
-      passHref
-    >
+    <Link href={`/shop/${product.category}/${product.slug}`} passHref>
       <div
-        {...swipeHandlers}
         className='relative cursor-pointer group'
         style={{
           width: `${imageWidth}px`,
@@ -123,61 +66,20 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         onMouseLeave={handleMouseLeave}
       >
         <div
-          className='absolute inset-0 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'
           style={{
-            zIndex: 2,
+            width: `${imageWidth}px`,
+            height: '100%',
+            position: 'relative',
           }}
         >
-          <button
-            onClick={(e) => handleImageChange('prev', e)}
-            className='text-transparent p-2'
-            disabled={isTransitioning}
-          >
-            ←
-          </button>
-          <button
-            onClick={(e) => handleImageChange('next', e)}
-            className='text-transparent p-2'
-            disabled={isTransitioning}
-          >
-            →
-          </button>
-        </div>
-        <div
-          className={`flex transition-transform duration-300 ease-in-out`}
-          style={{
-            transform: `translateX(${shift}px)`,
-            width: `${totalWidth}px`,
-          }}
-          onTransitionEnd={handleTransitionEnd}
-        >
-          {enhancedImages.map((image, index) => (
-            <div
-              key={index}
-              className='flex-none'
-              style={{
-                width: `${imageWidth}px`,
-                height: `${Math.round(imageWidth * 1.289)}px`,
-              }}
-            >
-              <div
-                style={{
-                  width: `${imageWidth}px`,
-                  height: '100%',
-                  position: 'relative',
-                }}
-              >
-                <Image
-                  src={image}
-                  alt={product.name}
-                  width={imageWidth}
-                  height={`${Math.round(imageWidth * 1.289)}`}
-                  objectFit='contain'
-                  objectPosition='center'
-                />
-              </div>
-            </div>
-          ))}
+          <Image
+            src={product.images[currentImageIndex]}
+            alt={product.name}
+            width={imageWidth}
+            height={Math.round(imageWidth * 1.289)}
+            objectFit='contain'
+            objectPosition='center'
+          />
         </div>
         <div className='absolute top-0 right-0 p-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           {uniqueColors.map((color, index) => (
