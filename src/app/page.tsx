@@ -53,17 +53,59 @@ export default function Home() {
 
   useEffect(() => {
     if (swiperInstance) {
+      const calculateTotalHeight = () => {
+        const slides = Array.from(swiperInstance.slides);
+        const totalSlides = slides.length;
+        let totalHeight = 0;
+        slides.forEach((slide, index) => {
+          if (index === totalSlides - 1) {
+            totalHeight += 162;
+          } else {
+            totalHeight += windowHeight;
+          }
+        });
+        return totalHeight - windowHeight + 162;
+      };
+
       swiperInstance.on('slideChange', () => {
         const activeIndex = swiperInstance.activeIndex;
         const totalSlides = swiperInstance.slides.length;
+
+        if (activeIndex === totalSlides - 1) {
+          (
+            swiperInstance.wrapperEl as HTMLElement
+          ).style.transform = `translate3d(0px, -${
+            (totalSlides - 2) * windowHeight + 162
+          }px, 0px)`;
+        } else if (activeIndex === totalSlides - 2) {
+          (
+            swiperInstance.wrapperEl as HTMLElement
+          ).style.transform = `translate3d(0px, -${
+            (totalSlides - 2) * windowHeight
+          }px, 0px)`;
+        } else {
+          (
+            swiperInstance.wrapperEl as HTMLElement
+          ).style.transform = `translate3d(0px, -${
+            activeIndex * windowHeight
+          }px, 0px)`;
+        }
+
         const newSize =
           windowWidth < 768
             ? Math.max(50 - (activeIndex / totalSlides) * 30, 10)
             : Math.max(30 - (activeIndex / totalSlides) * 20, 10);
         setLogoSize(newSize);
       });
+
+      const swiperContainer = document.querySelector(
+        '.swiper-container',
+      ) as HTMLElement;
+      if (swiperContainer) {
+        swiperContainer.style.height = `${calculateTotalHeight()}px`;
+      }
     }
-  }, [swiperInstance, windowWidth]);
+  }, [swiperInstance, windowWidth, windowHeight]);
 
   useEffect(() => {
     setShowPopup(true);
@@ -292,6 +334,7 @@ export default function Home() {
             </div>
           </div>
         </SwiperSlide>
+
         <SwiperSlide>
           <nav>
             <div className='flex justify-center items-center flex-row text-center'>
