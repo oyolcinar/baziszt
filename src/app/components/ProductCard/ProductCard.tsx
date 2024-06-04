@@ -95,6 +95,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     setIsTransitioning(true);
   };
 
+  const handleTouchStart = () => {
+    handleMouseEnter();
+  };
+
+  const handleTouchEnd = () => {
+    handleMouseLeave();
+  };
+
   return (
     <Link
       href={`/shop/${product.category}/${product.slug}`}
@@ -109,6 +117,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           height: `${imageWidth * 1.289}px`,
           overflow: 'hidden',
         }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
