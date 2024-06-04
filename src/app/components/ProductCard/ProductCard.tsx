@@ -1,6 +1,6 @@
 import { useSwipeable } from 'react-swipeable';
 import Image from 'next/image';
-import React, { useState, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect } from 'react';
 import Link from 'next/link';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -13,6 +13,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [imageWidth, setImageWidth] = useState<number | null>(null);
+  const [isHovered, setIsHovered] = useState(false);
 
   useLayoutEffect(() => {
     function updateWidth() {
@@ -82,9 +83,17 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     setIsFavorite((prevIsFavorite) => !prevIsFavorite);
   };
 
-  // useEffect(() => {
-  //   console.log(`Current Index: ${currentImageIndex}`);
-  // }, [currentImageIndex]);
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+    setCurrentImageIndex(product.images.length);
+    setIsTransitioning(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+    setCurrentImageIndex(1);
+    setIsTransitioning(true);
+  };
 
   return (
     <Link
@@ -100,6 +109,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           height: `${imageWidth * 1.289}px`,
           overflow: 'hidden',
         }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
       >
         <div
           className='absolute inset-0 flex justify-between items-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'
@@ -123,11 +134,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           </button>
         </div>
         <div
-          className={`flex ${
-            isTransitioning
-              ? 'transition-transform duration-300 ease-in-out'
-              : ''
-          }`}
+          className={`flex transition-transform duration-300 ease-in-out`}
           style={{
             transform: `translateX(${shift}px)`,
             width: `${totalWidth}px`,
@@ -162,9 +169,6 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             </div>
           ))}
         </div>
-        {/* <div className='absolute w-full text-center text-2xl top-1/2 transform -translate-y-1/2 text-bone font-quasimoda transition-opacity duration-300 ease-in-out opacity-100 group-hover:opacity-0'>
-          {product.name}
-        </div> */}
         <div className='absolute top-0 right-0 p-2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           {uniqueColors.map((color, index) => (
             <span
