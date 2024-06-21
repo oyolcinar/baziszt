@@ -10,6 +10,7 @@ import { CartProvider } from './context/CartContext';
 import { ScrollProvider } from './context/ScrollContext';
 import { BannerProvider } from './context/BannerContext';
 import { MenuProvider } from './context/MenuContext';
+import { LanguageProvider } from './context/LanguageContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -29,23 +30,25 @@ export default function RootLayout({
         <link rel='stylesheet' href='https://use.typekit.net/bbr3pbr.css' />
       </head>
       <body className={inter.className}>
-        <ThresholdProvider>
-          <MenuProvider>
-            <BannerProvider>
-              <ScrollProvider>
-                <UserProvider>
-                  <CartProvider>
-                    <ProductProvider>
-                      <Navbar />
-                      {children}
-                      <Footer />
-                    </ProductProvider>
-                  </CartProvider>
-                </UserProvider>
-              </ScrollProvider>
-            </BannerProvider>
-          </MenuProvider>
-        </ThresholdProvider>
+        <LanguageProvider>
+          <ThresholdProvider>
+            <MenuProvider>
+              <BannerProvider>
+                <ScrollProvider>
+                  <UserProvider>
+                    <CartProvider>
+                      <ProductProvider>
+                        <Navbar />
+                        {children}
+                        <Footer />
+                      </ProductProvider>
+                    </CartProvider>
+                  </UserProvider>
+                </ScrollProvider>
+              </BannerProvider>
+            </MenuProvider>
+          </ThresholdProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

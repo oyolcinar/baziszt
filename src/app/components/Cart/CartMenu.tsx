@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useTranslation } from '../../../../utils/useTranslation';
 import { useCart } from '../../context/CartContext';
 import { useMenu } from '../../context/MenuContext';
 import { XMarkIcon } from '@heroicons/react/24/solid';
@@ -21,6 +22,8 @@ const CartMenu: React.FC = () => {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [removingItem, setRemovingItem] = useState<string | null>(null);
   const itemRefs = useRef(new Map<string, HTMLDivElement | null>());
+
+  const { t } = useTranslation();
 
   const toggleMenu = () => {
     if (cartMenuOpened) {
@@ -98,7 +101,7 @@ const CartMenu: React.FC = () => {
         onClick={toggleMenu}
       >
         <div className='text-bordeux cursor-pointer hover:opacity-70 transition duration-300'>
-          CART(
+          {t('cart')}(
           {cart
             ? cart.items.reduce((total, item) => total + item.quantity, 0)
             : 0}
@@ -124,7 +127,7 @@ const CartMenu: React.FC = () => {
         </div>
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 h-full w-full pt-[30px] font-futura ml-[30px]'>
           <div className='w-full flex justify-between items-center'>
-            <div className='text-lg font-bold'>Your Cart</div>
+            <div className='text-lg font-bold'>{t('yourcart')}</div>
           </div>
           <div className='w-full'>
             {cart && cart.items.length > 0 ? (
@@ -223,7 +226,7 @@ const CartMenu: React.FC = () => {
                 );
               })
             ) : (
-              <div>Your cart is empty</div>
+              <div>{t('yourcartisempty')}</div>
             )}
           </div>
           <div className='w-full mt-4 flex justify-between items-center'>
@@ -239,7 +242,7 @@ const CartMenu: React.FC = () => {
               className='w-full border b-1 border-black bg-black text-white py-2 hover:text-black hover:bg-white transition duration-300 text-center block my-4'
               onClick={toggleMenu}
             >
-              PROCEED TO CHECKOUT
+              {t('proceedtocheckout')}
             </Link>
           </div>
         </div>

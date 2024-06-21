@@ -12,6 +12,7 @@ import Image from 'next/image';
 import { Product } from '@/app/context/ProductContext';
 import { useCart } from '../../context/CartContext';
 import { useMenu } from '../../context/MenuContext';
+import { useTranslation } from '../../../../utils/useTranslation';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -77,6 +78,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   );
 
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const currentRefs = imageRefs.current;
@@ -803,7 +806,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               onClick={() => toggleSection('description')}
             >
               <div className='flex justify-between items-center w-[100%]'>
-                <div className='text-[12px] font-bold'>DESCRIPTION</div>
+                <div className='text-[12px] font-bold'>{t('description')}</div>
                 <div>
                   {expandedSections.includes('description') ? '-' : '+'}
                 </div>
@@ -827,7 +830,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               onClick={() => toggleSection('color')}
             >
               <div className='text-[12px] text-black font-futura font-bold'>
-                COLOR
+                {t('color')}
               </div>
               <div className='text-black'>
                 {expandedSections.includes('color') ? '-' : '+'}
@@ -881,7 +884,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               onClick={() => toggleSection('size')}
             >
               <div className='text-[12px] text-black font-futura font-bold'>
-                SIZE
+                {t('size')}
               </div>
               <div className='text-black'>
                 {expandedSections.includes('size') ? '-' : '+'}
@@ -914,7 +917,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 <table className='w-full'>
                   <thead>
                     <tr className='border border-transparent border-b-black mb-2'>
-                      <th className='w-1/6'>CHART</th>
+                      <th className='w-1/6'>{t('chart')}</th>
                       <th className='w-1/6'>XS</th>
                       <th className='w-1/6'>SM</th>
                       <th className='w-1/6'>MD</th>
@@ -924,7 +927,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                   </thead>
                   <tbody>
                     <tr className='border border-transparent border-b-black mb-2'>
-                      <td className='w-1/6'>CHEST&quot;</td>
+                      <td className='w-1/6'>{t('chest')}&quot;</td>
                       <td className='w-1/6'>21&quot;</td>
                       <td className='w-1/6'>22&quot;</td>
                       <td className='w-1/6'>23.25&quot;</td>
@@ -932,7 +935,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                       <td className='w-1/6'>25&quot;</td>
                     </tr>
                     <tr className='mb-2'>
-                      <td className='w-1/6'>LENGTH&quot;</td>
+                      <td className='w-1/6'>{t('length')}&quot;</td>
                       <td className='w-1/6'>23&quot;</td>
                       <td className='w-1/6'>24&quot;</td>
                       <td className='w-1/6'>25&quot;</td>
@@ -944,16 +947,18 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               </div>
             </div>
             <div className='border-b-[1px] border-gray-200 w-[100%] my-4'></div>
-            <div
-              className='hidden border border-black h-16 w-[100%] mb-4 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone cursor-pointer'
-              onClick={handleAddToCart}
-            >
-              <div className='flex justify-between items-center w-[80%]'>
-                <div className='flex gap-2'>
-                  <ShoppingBagIcon className='h-4 w-4 font-bold' />
-                  <div className='font-futura text-sm'>ADD</div>
+            <div className='flex justify-center w-[100%]'>
+              <div
+                className='hidden border border-black h-16 w-[60%] mb-4 sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-black text-black hover:text-bone cursor-pointer'
+                onClick={handleAddToCart}
+              >
+                <div className='flex justify-center items-center w-[80%]'>
+                  <div className='flex gap-2'>
+                    <ShoppingBagIcon className='h-4 w-4 font-bold' />
+                    <div className='font-futura text-sm'>{t('add')}</div>
+                  </div>
+                  {/* <div className='font-futura text-sm'>{product.price}</div> */}
                 </div>
-                <div className='font-futura text-sm'>{product.price}</div>
               </div>
             </div>
           </div>
@@ -976,7 +981,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
           <div className='flex justify-between items-center w-[80%]'>
             <div className='flex gap-2 pb-2'>
               <ShoppingBagIcon className='h-4 w-4 font-bold' />
-              <div className='font-futura text-sm'>ADD</div>
+              <div className='font-futura text-sm'>{t('add')}</div>
             </div>
             <div className='font-futura text-sm'>{product.price}</div>
           </div>

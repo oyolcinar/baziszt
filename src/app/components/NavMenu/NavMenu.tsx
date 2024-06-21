@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useMenu } from '../../context/MenuContext';
+import { useTranslation } from '../../../../utils/useTranslation';
 
 import newMenu from '../../../../public/Images/newMenu.png';
 import topsMenu from '../../../../public/Images/topsMenu.png';
@@ -18,6 +19,8 @@ const NavMenu: React.FC = () => {
   const [isImageVisible, setIsImageVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const { navMenuOpened, openNavMenu, closeNavMenu } = useMenu();
+
+  const { t } = useTranslation();
 
   const router = useRouter();
 
@@ -70,7 +73,7 @@ const NavMenu: React.FC = () => {
         }`}
         onClick={toggleMenu}
       >
-        MENU
+        {t('menu')}
       </div>
       <div
         className={`fixed inset-0 bg-black bg-opacity-50 transition-opacity duration-300 z-30 ${
@@ -87,20 +90,20 @@ const NavMenu: React.FC = () => {
           className='fixed top-[28px] left-[30px] text-black font-futura font-bold cursor-pointer hover:opacity-70 transition duration-300'
           onClick={toggleMenu}
         >
-          CLOSE
+          {t('close')}
         </div>
         <div className='flex flex-col justify-start items-start text-base text-black font-futura gap-6 overflow-y-auto h-full w-full pt-[70px]'>
           <form className='w-full pr-[30px]' onSubmit={handleSearch}>
             <div className='flex items-center border-b-2 border-black py-1'>
               <input
                 type='text'
-                placeholder='search'
+                placeholder={t('search')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
               />
               <button type='submit' className='w-[20px] cursor-pointer ml-2'>
-                <MagnifyingGlassIcon className='text-black' />
+                <MagnifyingGlassIcon className='text-black hover:opacity-70 transition duration-300' />
               </button>
             </div>
           </form>
@@ -115,7 +118,7 @@ const NavMenu: React.FC = () => {
             // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
-            NEW
+            {t('new').toUpperCase()}
           </Link>
           <Link
             href='/shop/oneOfone'
@@ -128,7 +131,7 @@ const NavMenu: React.FC = () => {
             // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
-            ONE OF ONE
+            {t('oneofone').toUpperCase()}
           </Link>
           <Link
             href='/shop/tops'
@@ -141,7 +144,7 @@ const NavMenu: React.FC = () => {
             // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
-            TOPS
+            {t('tops').toUpperCase()}
           </Link>
           <div className='w-full flex justify-between'>
             <Link
@@ -155,7 +158,7 @@ const NavMenu: React.FC = () => {
               // onMouseLeave={() => setIsImageVisible(false)}
               onClick={toggleMenu}
             >
-              BOTTOMS
+              {t('bottoms').toUpperCase()}
             </Link>
             <Link
               href='/'
@@ -163,7 +166,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              account
+              {t('account')}
             </Link>
           </div>
           <div className='w-full flex justify-between'>
@@ -173,7 +176,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              ACCESSORIES
+              {t('accessories').toUpperCase()}
             </Link>
             <Link
               href='/'
@@ -181,7 +184,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              terms
+              {t('terms')}
             </Link>
           </div>
           <div className='w-full flex justify-between'>
@@ -191,7 +194,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              CATALOG
+              {t('catalog')}
             </Link>
             <Link
               href='/'
@@ -199,7 +202,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              privacy
+              {t('privacy')}
             </Link>
           </div>
           <div className='w-full flex justify-between'>
@@ -209,7 +212,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              STOCKISTS
+              {t('stockists')}
             </Link>
             <Link
               href='/'
@@ -217,7 +220,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              contact
+              {t('contact')}
             </Link>
           </div>
           <div className='w-full flex justify-between'>
@@ -227,7 +230,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              PRESS
+              {t('press')}
             </Link>
             <Link
               href='/'
@@ -245,7 +248,7 @@ const NavMenu: React.FC = () => {
               scroll={true}
               onClick={toggleMenu}
             >
-              JOURNAL
+              {t('journal')}
             </Link>
             <Link
               href='/'
@@ -296,16 +299,19 @@ const NavMenu: React.FC = () => {
         </div>
         <div className='absolute bottom-[35px] left-0 w-full px-[30px]'>
           <div className='text-black text-base font-futura'>
-            SUBSCRIBE TO OUR NEWSLETTER
+            {t('subscribe')}
           </div>
           <div className='flex items-center border-b-2 border-black py-1'>
             <input
               type='email'
-              placeholder='your email'
+              placeholder={t('youremail')}
               className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
             />
             <button className='w-[20px] cursor-pointer ml-2'>
-              <FontAwesomeIcon icon={faArrowRight} className='text-black' />
+              <FontAwesomeIcon
+                icon={faArrowRight}
+                className='text-black hover:opacity-70 transition duration-300'
+              />
             </button>
           </div>
         </div>

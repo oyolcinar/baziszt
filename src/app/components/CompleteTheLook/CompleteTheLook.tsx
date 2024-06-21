@@ -2,6 +2,7 @@ import React from 'react';
 import ProductCard from '../ProductCard/ProductCard';
 import { Product } from '@/app/context/ProductContext';
 import { useProducts } from '@/app/context/ProductContext';
+import { useTranslation } from '../../../../utils/useTranslation';
 
 interface CompleteTheLookProps {
   product: Product;
@@ -37,12 +38,14 @@ const CompleteTheLook: React.FC<CompleteTheLookProps> = ({ product }) => {
   const { products } = useProducts();
   const matchingProducts = findMatchingProducts(products, product);
 
+  const { t } = useTranslation();
+
   return (
     <div className='md:mt-10 mb-20 flex flex-col items-center md:block'>
       <div className='text-black font-futura text-lg md:ml-10 mb-10'>
-        COMPLETE THE LOOK
+        {t('completethelook')}
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-3 lg:grid-cols-3 md:pl-0 p-0 md:p-2 gap-2'>
+      <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-4 lg:grid-cols-4 md:pl-0 p-0 md:p-2 gap-2'>
         {matchingProducts.map((matchingProduct) => (
           <ProductCard key={matchingProduct.id} product={matchingProduct} />
         ))}

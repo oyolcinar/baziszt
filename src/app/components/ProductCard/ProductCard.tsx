@@ -20,7 +20,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           ? windowWidth - 30
           : windowWidth < 1024
           ? Math.round(windowWidth / 2 - 30)
-          : Math.round(windowWidth / 3 - 30);
+          : Math.round(windowWidth / 4 - 20);
       setImageWidth(newWidth);
     }
 

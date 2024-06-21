@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import { useTranslation } from '../../../../utils/useTranslation';
 import { Product } from '@/app/context/ProductContext';
 import ProductCard from '../ProductCard/ProductCard';
 import Link from 'next/link';
@@ -22,16 +23,20 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
   const pathname = usePathname();
   const breadcrumbs = pathname.split('/').filter(Boolean);
 
+  const { t } = useTranslation();
+
   const renderBreadcrumbs = () => {
     return breadcrumbs.map((crumb, index) => {
       const pathTo = '/' + breadcrumbs.slice(0, index + 1).join('/');
 
       const separator = index < breadcrumbs.length - 1 ? ' > ' : '';
 
-      const allText = breadcrumbs.length === 1 ? ' > ALL ' : '';
+      const allText = breadcrumbs.length === 1 ? ' > ' + t('all') + ' ' : '';
 
       const displayCrumb =
-        crumb.toLowerCase() === 'oneofone' ? 'ONE OF ONE' : crumb.toUpperCase();
+        crumb.toLowerCase() === 'oneofone'
+          ? 'ONE OF ONE'
+          : t(crumb.toUpperCase());
 
       return (
         <span key={index} className='text-black text-base font-futura'>
@@ -46,7 +51,9 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
   useEffect(() => {
     const filteredProducts = category.includes('all')
       ? products
-      : products.filter((product) => product.category.some((cat) => category));
+      : products.filter((product) =>
+          product.category.some((cat) => category.includes(cat)),
+        );
 
     const sorted = filteredProducts.sort((a, b) => {
       const priceA = parseFloat(a.price.replace('€', '').replace(',', '.'));
@@ -61,9 +68,11 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
     setSortOrder((prevSortOrder) => (prevSortOrder === 'asc' ? 'desc' : 'asc'));
   };
 
+  console.log(title);
+
   const formattedTitle =
     title === 'One of One'
-      ? title
+      ? 'One of One'
       : title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
 
   return (
@@ -78,15 +87,12 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
           </div>
 
           <div className='text-base text-black text-justify font-futura w-full md:w-1/2'>
-            {title === 'TOPS' &&
-              'Our latest collection features bold tops, whether adorned with hand-embroidered details, striking graphics, or vibrant hand-painted accents.'}
-            {title === 'BOTTOMS' &&
-              'Crafted from a blend of natural fibers like cotton, hemp, and artisanal fabrics, a collection of versatile bottoms feature nature-inspired motifs and intricate embroidered botanicals that elevate everyday style.'}
-            {title === 'ACCESSORIES' &&
-              'Our accessories collection demonstrates our commitment to sustainability and social consciousness, while also featuring high-quality materials that will last for years to come.'}
-            {title === 'One of One' &&
-              'We partnered with skilled artisans to create one-of-one pieces that celebrate the beauty of individuality and the artistry of hand craftsmanship, each piece a testament to the collaboration between artisanal mastery and creative vision.'}
-            {breadcrumbs[0] === 'search' && `Search results for "${title}"`}
+            {title === 'TOPS' && t('topsheader')}
+            {title === 'BOTTOMS' && t('bottomsheader')}
+            {title === 'ACCESSORIES' && t('accessoriesheader')}
+            {title === 'One of One' && t('oneofoneheader')}
+            {breadcrumbs[0] === 'search' &&
+              `${t('searchresultsfor')}"${title}"`}
           </div>
         </div>
       </div>
@@ -99,11 +105,11 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
           onClick={handleSortChange}
           className='text-black font-futura py-2 rounded hover:opacity-70 transition duration-300 ease-in-out text-center'
         >
-          PRICE {sortOrder === 'asc' ? '↑' : '↓'}
+          {t('price')} {sortOrder === 'asc' ? '↑' : '↓'}
         </button>
       </div>
       <div className='flex justify-center w-full mb-20'>
-        <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-3 lg:grid-cols-3 p-0 md:p-2 gap-2'>
+        <div className='grid grid-cols-1 md:grid-cols-2 customMd:grid-cols-4 lg:grid-cols-4 p-0 md:p-2 gap-2'>
           {sortedProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}
@@ -111,10 +117,10 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
       </div>
       <div className='w-full mb-20 font-futura text-black text-center'>
         <div className='grid grid-cols-2 md:grid-cols-4 md:p-2'>
-          <div>Packaging</div>
-          <div>Free Online Returns</div>
-          <div>Free exchange in store</div>
-          <div>Free shipping</div>
+          <div>{t('packaging')}</div>
+          <div>{t('freeonlinereturns')}</div>
+          <div>{t('freeexchangeinstore')}</div>
+          <div>{t('freeshippinggroup')}</div>
         </div>
       </div>
     </>

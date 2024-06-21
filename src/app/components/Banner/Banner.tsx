@@ -1,11 +1,14 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
 import { useBanner } from '../../context/BannerContext';
+import { useTranslation } from '../../../../utils/useTranslation';
 
 const Banner: React.FC = () => {
   const bannerRef = useRef<HTMLDivElement | null>(null);
   const { setBannerHeight, isVisible, setIsVisible } = useBanner();
   const [isRemoved, setIsRemoved] = useState(false);
+
+  const { t } = useTranslation();
 
   // useEffect(() => {
   //   const handleScroll = () => {
@@ -52,7 +55,7 @@ const Banner: React.FC = () => {
         className='flex justify-center font-futura font-bold items-center w-full max-w-4xl cursor-pointer'
         // onClick={handleClose}
       >
-        <span>FREE SHIPPING WORLDWIDE FOR ORDERS OVER €600</span>
+        <span>{t('freeshipping')}</span>
       </div>
     </div>
   );

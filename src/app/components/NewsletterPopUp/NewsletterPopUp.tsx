@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
+import { useTranslation } from '../../../../utils/useTranslation';
 
 const NewsletterPopup: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -44,22 +47,22 @@ const NewsletterPopup: React.FC = () => {
         >
           <XMarkIcon className='h-6 w-6 text-bone' />
         </button>
-        <h2 className='text-2xl mb-4'>Subscribe to our Newsletter</h2>
-        <p className='mb-4'>Stay updated with our latest news and offers!</p>
+        <h2 className='text-2xl mb-4'>{t('subscribesmall')}</h2>
+        <p className='mb-4'>{t('subscribeheader')}</p>
         <form className='mb-2'>
           <input
             type='email'
-            placeholder='Enter your email'
+            placeholder={t('enteryouremail')}
             className='bg-transparent outline-none flex-1 text-bone placeholder-gray text-[16px] mb-4 border-b-2 border-bone py-1 w-full'
           />
           <button
             type='submit'
             className='border bg-bordeux border-bone h-12 w-[100%] sm:flex justify-center items-center transition duration-300 ease-in-out hover:bg-bone text-bone hover:text-bordeux cursor-pointer'
           >
-            Subscribe
+            {t('subscribebutton')}
           </button>
         </form>
-        <div>Save 10% when you sign up!</div>
+        <div>{t('subscribebanner')}</div>
       </div>
     </div>
   );
