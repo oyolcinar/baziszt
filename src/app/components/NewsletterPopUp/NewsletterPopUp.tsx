@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { useTranslation } from '../../../../utils/useTranslation';
+import { useNewsletter } from '../../context/NewsletterContext';
 
 const NewsletterPopup: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isDisplayed, setIsDisplayed] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [email, setEmail] = useState('');
 
   const { t } = useTranslation();
+  const { subscribe, subscriptionStatus, error } = useNewsletter();
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -26,6 +29,11 @@ const NewsletterPopup: React.FC = () => {
       setIsVisible(false);
       setIsDisplayed(false);
     }, 300);
+  };
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    await subscribe(email);
   };
 
   if (!isDisplayed) return null;
@@ -49,9 +57,11 @@ const NewsletterPopup: React.FC = () => {
         </button>
         <h2 className='text-2xl mb-4'>{t('subscribesmall')}</h2>
         <p className='mb-4'>{t('subscribeheader')}</p>
-        <form className='mb-2'>
+        <form className='mb-2' onSubmit={handleSubscribe}>
           <input
             type='email'
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             placeholder={t('enteryouremail')}
             className='bg-transparent outline-none flex-1 text-bone placeholder-gray text-[16px] mb-4 border-b-2 border-bone py-1 w-full'
           />
@@ -62,6 +72,9 @@ const NewsletterPopup: React.FC = () => {
             {t('subscribebutton')}
           </button>
         </form>
+        {subscriptionStatus === 'subscribing' && <p>Subscribing...</p>}
+        {subscriptionStatus === 'subscribed' && <p>Subscribed successfully!</p>}
+        {subscriptionStatus === 'error' && <p>Error: {error}</p>}
         <div>{t('subscribebanner')}</div>
       </div>
     </div>

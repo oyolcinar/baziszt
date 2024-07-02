@@ -11,6 +11,7 @@ import { ScrollProvider } from './context/ScrollContext';
 import { BannerProvider } from './context/BannerContext';
 import { MenuProvider } from './context/MenuContext';
 import { LanguageProvider } from './context/LanguageContext';
+import { NewsletterProvider } from './context/NewsletterContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -31,23 +32,25 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <LanguageProvider>
-          <ThresholdProvider>
-            <MenuProvider>
-              <BannerProvider>
-                <ScrollProvider>
-                  <UserProvider>
-                    <CartProvider>
-                      <ProductProvider>
-                        <Navbar />
-                        {children}
-                        <Footer />
-                      </ProductProvider>
-                    </CartProvider>
-                  </UserProvider>
-                </ScrollProvider>
-              </BannerProvider>
-            </MenuProvider>
-          </ThresholdProvider>
+          <NewsletterProvider>
+            <ThresholdProvider>
+              <MenuProvider>
+                <BannerProvider>
+                  <ScrollProvider>
+                    <UserProvider>
+                      <CartProvider>
+                        <ProductProvider>
+                          <Navbar />
+                          {children}
+                          <Footer />
+                        </ProductProvider>
+                      </CartProvider>
+                    </UserProvider>
+                  </ScrollProvider>
+                </BannerProvider>
+              </MenuProvider>
+            </ThresholdProvider>
+          </NewsletterProvider>
         </LanguageProvider>
       </body>
     </html>
