@@ -17,6 +17,7 @@ interface ShopifyProductNode {
           amount: string;
           currencyCode: string;
         };
+        availableForSale: boolean;
         selectedOptions: Array<{
           name: string;
           value: string;
@@ -77,35 +78,41 @@ interface ShopifyApiResponse {
 const transformProductsData = (
   rawData: ShopifyApiResponse,
 ): TransformedProduct[] => {
-  return rawData.data.products.edges.map(({ node }) => ({
-    id: node.id,
-    slug: node.title.toLowerCase().replace(/ /g, '-'),
-    name: node.title,
-    images: node.images.edges.map((edge) => edge.node.originalSrc),
-    colors: node.variants.edges
-      .map(
-        (edge) =>
-          edge.node.selectedOptions.find((option) => option.name === 'Color')
-            ?.value,
-      )
-      .filter((color): color is string => color !== undefined),
-    price: `${node.priceRange.minVariantPrice.amount} ${node.priceRange.minVariantPrice.currencyCode}`,
-    details: node.descriptionHtml,
-    category: node.collections.edges.map((edge) => edge.node.title),
-    sizes: node.variants.edges
-      .map(
-        (edge) =>
-          edge.node.selectedOptions.find((option) => option.name === 'Size')
-            ?.value,
-      )
-      .filter((size): size is string => size !== undefined),
-    variants: node.variants.edges.map((edge) => ({
-      id: edge.node.id,
-      title: edge.node.title,
-      price: `${edge.node.priceV2.amount} ${edge.node.priceV2.currencyCode}`,
-      selectedOptions: edge.node.selectedOptions,
-    })),
-  }));
+  return rawData.data.products.edges.map(({ node }) => {
+    const availableVariants = node.variants.edges.filter(
+      (edge) => edge.node.availableForSale,
+    );
+
+    return {
+      id: node.id,
+      slug: node.title.toLowerCase().replace(/ /g, '-'),
+      name: node.title,
+      images: node.images.edges.map((edge) => edge.node.originalSrc),
+      colors: availableVariants
+        .map(
+          (edge) =>
+            edge.node.selectedOptions.find((option) => option.name === 'Color')
+              ?.value,
+        )
+        .filter((color): color is string => color !== undefined),
+      price: `${node.priceRange.minVariantPrice.amount} ${node.priceRange.minVariantPrice.currencyCode}`,
+      details: node.descriptionHtml,
+      category: node.collections.edges.map((edge) => edge.node.title),
+      sizes: availableVariants
+        .map(
+          (edge) =>
+            edge.node.selectedOptions.find((option) => option.name === 'Size')
+              ?.value,
+        )
+        .filter((size): size is string => size !== undefined),
+      variants: availableVariants.map((edge) => ({
+        id: edge.node.id,
+        title: edge.node.title,
+        price: `${edge.node.priceV2.amount} ${edge.node.priceV2.currencyCode}`,
+        selectedOptions: edge.node.selectedOptions,
+      })),
+    };
+  });
 };
 
 const fetchProducts = async () => {
@@ -141,6 +148,7 @@ const fetchProducts = async () => {
                   amount
                   currencyCode
                 }
+                availableForSale
                 selectedOptions {
                   name
                   value
@@ -176,11 +184,11 @@ const fetchProducts = async () => {
     {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/graphql',
+        'Content-Type': 'application/json',
         'X-Shopify-Storefront-Access-Token':
           process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN,
       },
-      body: query,
+      body: JSON.stringify({ query }),
     },
   );
 
@@ -190,7 +198,7 @@ const fetchProducts = async () => {
     );
   }
 
-  const json = await res.json();
+  const json: ShopifyApiResponse = await res.json();
   return transformProductsData(json);
 };
 

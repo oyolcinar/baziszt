@@ -9,6 +9,8 @@ import { XMarkIcon } from '@heroicons/react/24/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 
+import CheckoutButton from '../CheckoutButton/CheckoutButton';
+
 const CartMenu: React.FC = () => {
   const {
     cart,
@@ -17,6 +19,7 @@ const CartMenu: React.FC = () => {
     incrementItem,
     decrementItem,
     removeItem,
+    checkout,
   } = useCart();
   const { cartMenuOpened, openCartMenu, closeCartMenu } = useMenu();
   const [favorites, setFavorites] = useState<string[]>([]);
@@ -237,13 +240,7 @@ const CartMenu: React.FC = () => {
             </div>
           </div>
           <div className='w-full mt-4'>
-            <Link
-              href='/checkout'
-              className='w-full border b-1 border-black bg-black text-white py-2 hover:text-black hover:bg-white transition duration-300 text-center block my-4'
-              onClick={toggleMenu}
-            >
-              {t('proceedtocheckout')}
-            </Link>
+            <CheckoutButton />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 'use client';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createCart } from '../../../lib/createCart';
+import createCheckout from '../../../lib/createCheckout';
 
 interface CartItem {
   variantId: string;
@@ -28,6 +29,7 @@ interface CartContextType {
   removeItem: (variantId: string, size: string) => void;
   clearCart: () => void;
   toggleCartMenu: () => void;
+  checkout: () => Promise<string>;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -38,6 +40,21 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   const [cart, setCart] = useState<Cart | null>(null);
   const [menuOpened, setMenuOpened] = useState(false);
 
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    } else {
+      localStorage.removeItem('cart');
+    }
+  }, [cart]);
+
   const addToCart = async (item: CartItem) => {
     let updatedCart: Cart;
 
@@ -45,19 +62,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
       const newCart = await createCart([item]);
       updatedCart = { ...newCart, items: [item] };
     } else {
-      // Clone the cart to avoid direct state mutation
       updatedCart = { ...cart, items: [...cart.items] };
 
-      // Check if the item already exists in the cart
       const existingItemIndex = updatedCart.items.findIndex(
         (cartItem) => cartItem.variantId === item.variantId,
       );
 
       if (existingItemIndex !== -1) {
-        // Increase the quantity of the existing item
         updatedCart.items[existingItemIndex].quantity += item.quantity;
       } else {
-        // Add the new item to the cart
         updatedCart.items.push(item);
       }
     }
@@ -118,6 +131,23 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     setMenuOpened(!menuOpened);
   };
 
+  const checkout = async (): Promise<string> => {
+    if (!cart) throw new Error('Cart is empty');
+
+    const lineItems = cart.items.map((item) => ({
+      variantId: item.variantId,
+      quantity: item.quantity,
+    }));
+
+    try {
+      const checkoutUrl = await createCheckout(lineItems);
+      return checkoutUrl;
+    } catch (error) {
+      console.error('Checkout failed:', error);
+      throw new Error('Checkout failed, please try again.');
+    }
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -129,6 +159,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         removeItem,
         clearCart,
         toggleCartMenu,
+        checkout,
       }}
     >
       {children}
