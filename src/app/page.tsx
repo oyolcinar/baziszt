@@ -173,8 +173,13 @@ export default function Home() {
         </div>
 
         <SwiperSlide>
-          <div className='relative w-full h-screen top-0 left-0'>
-            <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' />
+          <div className='relative w-full h-screen top-0 left-0 overflow-hidden'>
+            <div className='absolute inset-0'>
+              <video autoPlay loop muted className='w-full h-full object-cover'>
+                <source src='Videos/BAZISZT-1.mp4' type='video/mp4' />
+              </video>
+            </div>
+            {/* <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' /> */}
           </div>
         </SwiperSlide>
 
