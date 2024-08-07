@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
@@ -38,6 +38,8 @@ export default function Home() {
   const [swiperHeight, setSwiperHeight] = useState('100vh');
   const [isMounted, setIsMounted] = useState(false);
   const { setIsPastThreshold } = useScroll();
+
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   const { t } = useTranslation();
 
@@ -95,6 +97,15 @@ export default function Home() {
 
   //   saveProducts();
   // }, []);
+
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (videoElement) {
+      videoElement.play().catch((error) => {
+        console.error('Video autoplay failed:', error);
+      });
+    }
+  }, []);
 
   useEffect(() => {
     if (swiperInstance) {
@@ -200,10 +211,12 @@ export default function Home() {
           <div className='relative w-full h-screen top-0 left-0 overflow-hidden'>
             <div className='absolute inset-0'>
               <video
+                ref={videoRef}
                 autoPlay
                 loop
                 playsInline
                 muted
+                disablePictureInPicture
                 controls={false}
                 className='w-full h-full object-cover'
               >
