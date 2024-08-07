@@ -72,6 +72,30 @@ export default function Home() {
     };
   }, []);
 
+  // Used for saving fetched data offline.
+
+  // useEffect(() => {
+  //   const saveProducts = async () => {
+  //     try {
+  //       console.log('Fetching API');
+  //       const res = await fetch('/api/saveProducts', {
+  //         method: 'POST',
+  //       });
+
+  //       if (!res.ok) {
+  //         throw new Error(`HTTP error! status: ${res.status}`);
+  //       }
+
+  //       const data = await res.json();
+  //       console.log('API Response:', data.message);
+  //     } catch (error) {
+  //       console.error('Failed to save products:', error);
+  //     }
+  //   };
+
+  //   saveProducts();
+  // }, []);
+
   useEffect(() => {
     if (swiperInstance) {
       const calculateTotalHeight = () => {
@@ -175,7 +199,14 @@ export default function Home() {
         <SwiperSlide>
           <div className='relative w-full h-screen top-0 left-0 overflow-hidden'>
             <div className='absolute inset-0'>
-              <video autoPlay loop muted className='w-full h-full object-cover'>
+              <video
+                autoPlay
+                loop
+                playsInline
+                muted
+                controls={false}
+                className='w-full h-full object-cover'
+              >
                 <source src='Videos/BAZISZT-1.mp4' type='video/mp4' />
               </video>
             </div>
