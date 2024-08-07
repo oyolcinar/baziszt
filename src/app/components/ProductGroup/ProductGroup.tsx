@@ -68,8 +68,6 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
     setSortOrder((prevSortOrder) => (prevSortOrder === 'asc' ? 'desc' : 'asc'));
   };
 
-  console.log(sortedProducts);
-
   const formattedTitle =
     title === 'One of One'
       ? 'One of One'
