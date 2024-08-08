@@ -44,9 +44,9 @@ import MI40 from '../../../public/MoodboardImages/e70954af7be2282eb4f22808703cf2
 export default function Journal() {
   return (
     <main className='flex justify-center items-center font-altesse24 text-bordeux mt-[160px] m-12 text-xl'>
-      <div className='leading-[100px]'>
-        <span className='text-8xl'>Lorem</span>, ipsum dolor sit amet
-        consectetur adipisicing elit.
+      <div className='w-[300px] md:w-full leading-[50px] md:leading-[200px]'>
+        <span className='text-6xl md:text-6xl md:text-8xl'>Lorem</span>, ipsum
+        dolor sit amet consectetur adipisicing elit.
         <span
           style={{
             display: 'inline-block',
@@ -57,8 +57,9 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI01} />
         </span>
-        Minus deserunt iste <span className='text-8xl'>magni</span> veritatis
-        ipsa libero perspiciatis, fugiat{' '}
+        Minus deserunt iste{' '}
+        <span className='text-6xl md:text-6xl md:text-8xl'>magni</span>{' '}
+        veritatis ipsa libero perspiciatis, fugiat{' '}
         <span
           style={{
             display: 'inline-block',
@@ -70,7 +71,7 @@ export default function Journal() {
           <Image alt='' height={300} width={300} src={MI02} />
         </span>
         doloribus assumenda, culpa, odit temporibus dolore.
-        <span className='text-8xl'>Cumque</span>, laboriosam
+        <span className='text-6xl md:text-8xl'>Cumque</span>, laboriosam
         <span
           style={{
             display: 'inline-block',
@@ -81,7 +82,8 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI03} />
         </span>
-        eum aut corporis reprehenderit <span className='text-8xl'>tempora</span>
+        eum aut corporis reprehenderit{' '}
+        <span className='text-6xl md:text-8xl'>tempora</span>
         itaque pariatur voluptas veritatis dolores dolor{' '}
         <span
           style={{
@@ -94,7 +96,7 @@ export default function Journal() {
           <Image alt='' height={300} width={300} src={MI04} />
         </span>
         quidem nostrum fugit soluta saepe magni{' '}
-        <span className='text-8xl'>expedita</span> voluptatum{' '}
+        <span className='text-6xl md:text-8xl'>expedita</span> voluptatum{' '}
         <span
           style={{
             display: 'inline-block',
@@ -117,7 +119,8 @@ export default function Journal() {
           <Image alt='' height={300} width={300} src={MI06} />
         </span>
         tenetur, quas totam et quos nihil possimus rem quibusdam tempore dolores
-        voluptatum officiis <span className='text-8xl'>eligendi</span> quasi sed{' '}
+        voluptatum officiis{' '}
+        <span className='text-6xl md:text-8xl'>eligendi</span> quasi sed{' '}
         <span
           style={{
             display: 'inline-block',
@@ -151,8 +154,8 @@ export default function Journal() {
           <Image alt='' height={300} width={300} src={MI09} />
         </span>{' '}
         culpa sint vel distinctio, natus iste{' '}
-        <span className='text-8xl'>reprehenderit</span> molestias eligendi nisi
-        mollitia est praesentium dolor! Ipsa vel{' '}
+        <span className='text-6xl md:text-8xl'>reprehenderit</span> molestias
+        eligendi nisi mollitia est praesentium dolor! Ipsa vel{' '}
         <span
           style={{
             display: 'inline-block',
@@ -176,8 +179,8 @@ export default function Journal() {
           <Image alt='' height={300} width={300} src={MI11} />
         </span>{' '}
         mollitia quibusdam illo cumque. In{' '}
-        <span className='text-8xl'>itaque</span> maxime qui velit, ut corrupti
-        est debitis{' '}
+        <span className='text-6xl md:text-8xl'>itaque</span> maxime qui velit,
+        ut corrupti est debitis{' '}
         <span
           style={{
             display: 'inline-block',
@@ -188,8 +191,8 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI12} />
         </span>
-        nobis hic fuga impedit aspernatur recusandae minus libero animi sint
-        aperiam. Ad minima{' '}
+        nobis hic <span className='text-6xl md:text-8xl'>fuga</span> impedit
+        aspernatur recusandae minus libero animi sint aperiam. Ad minima{' '}
         <span
           style={{
             display: 'inline-block',
@@ -200,7 +203,8 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI13} />
         </span>{' '}
-        corrupti suscipit enim minus iure quos commodi alias, numquam eum
+        corrupti suscipit enim minus iure quos{' '}
+        <span className='text-6xl md:text-8xl'>commodi</span> alias, numquam eum
         dolores{' '}
         <span
           style={{
@@ -212,7 +216,7 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI14} />
         </span>{' '}
-        possimus excepturi dolore culpa nisi fugiat vel.{' '}
+        possimus <span className='text-6xl md:text-8xl'>excepturi</span> dolore{' '}
         <span
           style={{
             display: 'inline-block',
@@ -223,8 +227,9 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI15} />
         </span>{' '}
-        Obcaecati dolorum non, doloribus dolor sint sapiente explicabo
-        accusantium iure quos ea amet consequuntur impedit officia?{' '}
+        culpa nisi fugiat vel.{' '}
+        <span className='text-6xl md:text-8xl'>Obcaecati</span> dolorum non,
+        doloribus dolor sint{' '}
         <span
           style={{
             display: 'inline-block',
@@ -235,8 +240,9 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI16} />
         </span>{' '}
-        Ipsum voluptates itaque, error nostrum eum, odio voluptatem cumque dicta
-        autem animi dignissimos nulla nemo facilis nesciunt atque!{' '}
+        sapiente explicabo{' '}
+        <span className='text-6xl md:text-8xl'>accusantium</span> iure quos ea
+        amet consequuntur impedit officia?{' '}
         <span
           style={{
             display: 'inline-block',
@@ -247,7 +253,7 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI17} />
         </span>{' '}
-        Ratione ipsa id sint fugit, sit porro laboriosam error mollitia{' '}
+        Ipsum voluptates itaque, error nostrum eum, odio
         <span
           style={{
             display: 'inline-block',
@@ -258,92 +264,300 @@ export default function Journal() {
         >
           <Image alt='' height={300} width={300} src={MI18} />
         </span>{' '}
-        quis voluptatum impedit enim officiis velit aliquam omnis, saepe
-        laudantium debitis in quo obcaecati optio eum quaerat aliquid alias!
-        Asperiores ipsam dolor tempora impedit, dolores molestias magni delectus
-        officia illum? Pariatur aliquam, iusto, nobis vero, cum impedit
-        blanditiis exercitationem quo consequuntur ab minima illum. Ab nemo
-        asperiores, alias aperiam nobis placeat quia fugit ratione repellat nisi
-        amet sed culpa expedita velit tempore in delectus incidunt consectetur
-        suscipit totam qui! Sint adipisci laborum aperiam aliquam similique ut
-        reiciendis ratione corrupti aliquid. Est culpa dolore eligendi incidunt
-        illo fugit nihil veniam, porro rerum iste veritatis. Magnam impedit
-        tempora eveniet amet rem vel eos, repellendus dolore. Voluptatibus iste
-        soluta id ipsam saepe ab voluptates culpa officiis quaerat, omnis
+        voluptatem cumque dicta autem{' '}
+        <span className='text-6xl md:text-8xl'>animi</span> dignissimos nulla
+        nemo{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI19} />
+        </span>{' '}
+        facilis nesciunt atque!{' '}
+        <span className='text-6xl md:text-8xl'>Ratione</span> ipsa id sint
+        fugit, sit porro laboriosam{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI18} />
+        </span>{' '}
+        voluptatem cumque dicta autem{' '}
+        <span className='text-6xl md:text-8xl'>animi</span> dignissimos nulla
+        nemo{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI20} />
+        </span>{' '}
+        error mollitia quis{' '}
+        <span className='text-6xl md:text-8xl'>voluptatum</span> impedit enim
+        officiis velit aliquam omnis, saepe laudantium{' '}
+        <span className='text-6xl md:text-8xl'>debitis</span> in quo obcaecati
+        optio eum quaerat aliquid alias!{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI21} />
+        </span>{' '}
+        Asperiores ipsam dolor tempora impedit, dolores molestias{' '}
+        <span className='text-6xl md:text-8xl'>magni</span> delectus officia
+        illum? Pariatur aliquam, iusto, nobis{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI22} />
+        </span>{' '}
+        vero, cum impedit{' '}
+        <span className='text-6xl md:text-8xl'>blanditiis</span> exercitationem
+        quo{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI23} />
+        </span>{' '}
+        consequuntur ab minima illum. Ab{' '}
+        <span className='text-6xl md:text-8xl'>nemo</span> asperiores, alias
+        aperiam nobis placeat quia fugit{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI24} />
+        </span>{' '}
+        ratione repellat nisi amet sed{' '}
+        <span className='text-6xl md:text-8xl'>culpa</span> expedita velit
+        tempore in delectus{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI25} />
+        </span>{' '}
+        incidunt consectetur suscipit totam qui!{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI26} />
+        </span>{' '}
+        <span className='text-6xl md:text-8xl'>Sint</span> adipisci laborum
+        aperiam aliquam similique ut reiciendis ratione corrupti aliquid.{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI27} />
+        </span>{' '}
+        Est culpa dolore <span className='text-6xl md:text-8xl'>eligendi</span>{' '}
+        incidunt illo fugit nihil veniam, porro rerum iste veritatis.{' '}
+        <span className='text-6xl md:text-8xl'>Magnam</span> impedit tempora
+        eveniet amet rem vel eos, repellendus dolore.{' '}
+        <span className='text-6xl md:text-8xl'>Voluptatibus</span>{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI28} />
+        </span>{' '}
+        iste soluta id{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI29} />
+        </span>{' '}
+        ipsam <span className='text-6xl md:text-8xl'>saepe</span> ab voluptates
+        culpa officiis quaerat, omnis{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI30} />
+        </span>{' '}
         veritatis quasi optio nisi odio consequatur provident, recusandae
-        suscipit eveniet minima ullam. Repellat nihil voluptatum totam
-        assumenda. Perferendis quaerat, repellendus ex quod consequuntur totam
-        perspiciatis consequatur soluta explicabo, architecto id placeat neque
-        deserunt beatae debitis suscipit quidem vel. Perferendis, ab libero
-        facilis voluptas soluta eaque necessitatibus dicta, laborum illo
-        doloremque iusto eos dolor ex aut corporis. Corrupti quisquam, quam vel
-        mollitia quod reprehenderit consectetur modi impedit! Laudantium
-        possimus magnam similique omnis fuga eligendi, doloribus illo tempore
-        iste minus officiis nobis facere quia dicta, accusantium provident nemo
-        impedit unde fugiat ex? Earum culpa molestiae laboriosam, aut deserunt
-        quasi distinctio beatae eum cupiditate quo mollitia porro molestias
-        voluptatum unde neque sunt dicta temporibus incidunt debitis animi
-        tenetur id pariatur, soluta repellendus. Placeat alias odit
-        exercitationem quasi hic nobis id minima aspernatur vel numquam officiis
-        necessitatibus dicta consequatur magni, velit molestiae optio expedita.
-        Deserunt ipsum, amet expedita iure vel atque sunt hic dolor aspernatur.
-        Corrupti rerum cum cupiditate aliquid, placeat recusandae velit dolorem!
-        Esse molestiae minima repellat ullam harum debitis eaque placeat ab aut
-        alias! Quasi assumenda deserunt tempora pariatur sit. Magni nemo
-        doloremque odit qui eligendi dolor cum quo, inventore quas adipisci
-        nihil aspernatur! Iure tenetur accusantium aliquam quas nostrum dolores
-        ab itaque. Cupiditate nam quidem possimus libero molestiae soluta quis
-        omnis est at voluptate, pariatur illo ipsum cum mollitia quia aut. Animi
-        mollitia accusamus fugit, velit eum labore rerum hic sint ea totam alias
-        voluptas consequatur atque voluptate? Aspernatur, est. Distinctio
-        deserunt inventore provident, voluptas ad est placeat harum asperiores
-        ut quo quis cum minima quasi nihil at ipsa magnam ipsam corrupti
-        molestiae doloremque voluptatum totam adipisci corporis. Dolores autem
-        laboriosam rem corporis quod praesentium pariatur doloremque eius?
-        Excepturi quasi id amet sequi voluptates quas expedita at optio itaque
-        dicta quaerat similique, et minus quod accusamus sint quae ipsam
-        voluptatum maiores eum dolorum odit aliquid labore. Non quae labore
-        atque eum doloribus reiciendis vero earum quibusdam dolorem praesentium
-        aut consequatur, soluta mollitia! Quis, accusamus magnam? Consequuntur
-        neque quidem voluptatum, dolorum excepturi obcaecati asperiores
-        architecto sint, reprehenderit natus sunt illum ut similique iure quas
-        officia commodi, eveniet eum. Voluptatum odit perspiciatis corrupti ut
-        neque molestiae ab eveniet non cupiditate dolorem delectus, placeat
-        deserunt. Vitae sunt culpa beatae veritatis officia asperiores labore
-        laboriosam commodi tempora nisi et, neque quis non. Voluptate
-        consequatur id iure neque! Totam ipsam temporibus saepe eaque, doloribus
-        similique tenetur libero laboriosam vitae fugit nisi quia, consectetur
-        minima dolor dolorem. Temporibus assumenda quod unde, sit natus repellat
-        dignissimos voluptatum hic tenetur perferendis quos dolorum esse.
-        Repudiandae placeat amet harum maxime doloremque quisquam nihil
-        excepturi, dolorum impedit corrupti quod dignissimos, sequi blanditiis
-        molestias deleniti velit. Distinctio quisquam ab saepe, ullam sed nam
-        rerum commodi corrupti asperiores. Quis nemo dolor dolorem dignissimos
-        nesciunt atque blanditiis perferendis quas non veritatis perspiciatis
-        eveniet hic obcaecati ea iste cum aliquam nihil, id illo sapiente
-        suscipit eligendi accusantium facilis? Iure, delectus? Eum dignissimos
-        expedita quod ipsa, aperiam praesentium provident ipsum illum possimus
-        adipisci obcaecati sint sit quae unde distinctio nisi. Odit omnis, iure
-        alias sit eos, tempora ipsam in, labore nihil vero obcaecati! Voluptate
-        dolorem quod, ducimus facere quas id illum harum ut magni fugit, dolor
-        modi ratione deleniti deserunt cupiditate est officia sequi aperiam
-        distinctio temporibus eos velit. Alias esse, ducimus sint accusamus
-        earum deleniti quia officiis? Et aliquid aperiam possimus molestiae
-        delectus voluptatibus deleniti facilis sunt ipsum non deserunt quis fuga
-        suscipit atque, commodi consectetur, officia vitae itaque labore ea odio
-        facere minus sit? Omnis nihil minima architecto, officia explicabo ex
-        similique aut eius optio doloremque voluptatum voluptatibus tempora
-        pariatur quam dolore vero rerum. Eligendi itaque dolor odio eaque saepe
-        molestiae magnam, eius tempora rerum quia voluptatum quidem similique
-        libero tenetur cum quisquam illo corrupti totam blanditiis obcaecati
-        odit nihil voluptate nemo dignissimos. Sunt distinctio perspiciatis
-        harum minus molestiae, eos dolore sint! Labore minus modi mollitia?
-        Molestias, eius recusandae? Tempore sequi expedita illum, molestias ab
-        ratione at? Dolore debitis quisquam, corrupti libero, fugit
-        reprehenderit est nam ullam in delectus tempora mollitia aliquam nulla
-        ipsam. Aspernatur culpa impedit iste exercitationem aliquid, accusantium
-        incidunt eveniet eos quisquam atque consequatur vitae ad sit ex aperiam
-        nesciunt voluptas quasi dolorem cumque illum.
+        suscipit eveniet minima ullam.{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI31} />
+        </span>{' '}
+        Repellat nihil <span className='text-6xl md:text-8xl'>voluptatum</span>{' '}
+        totam assumenda. Perferendis quaerat,{' '}
+        <span className='text-6xl md:text-8xl'>repellendus</span> ex quod
+        consequuntur totam perspiciatis consequatur{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI32} />
+        </span>{' '}
+        soluta explicabo,{' '}
+        <span className='text-6xl md:text-8xl'>architecto</span> id placeat
+        neque{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI33} />
+        </span>{' '}
+        deserunt beatae debitis suscipit quidem vel.{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI34} />
+        </span>{' '}
+        Perferendis, ab libero facilis{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI35} />
+        </span>{' '}
+        voluptas <span className='text-6xl md:text-8xl'>soluta</span> eaque
+        necessitatibus dicta, laborum illo{' '}
+        <span className='text-6xl md:text-8xl'>doloremque</span> iusto eos dolor
+        ex aut corporis.{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI36} />
+        </span>{' '}
+        Corrupti quisquam, quam vel mollitia quod reprehenderit consectetur modi
+        impedit!{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI37} />
+        </span>{' '}
+        Laudantium <span className='text-6xl md:text-8xl'>possimus</span> magnam
+        similique omnis fuga eligendi,{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI38} />
+        </span>{' '}
+        doloribus illo tempore iste minus officiis{' '}
+        <span className='text-6xl md:text-8xl'>nobis</span> facere quia dicta,
+        accusantium provident nemo impedit unde fugiat ex?{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI39} />
+        </span>{' '}
+        Earum culpa <span className='text-6xl md:text-8xl'>molestiae</span>{' '}
+        laboriosam, aut deserunt quasi distinctio beatae eum cupiditate{' '}
+        <span
+          style={{
+            display: 'inline-block',
+            verticalAlign: 'end',
+            margin: '0 10px',
+            border: '4px #370008 solid',
+          }}
+        >
+          <Image alt='' height={300} width={300} src={MI40} />
+        </span>{' '}
+        quo mollitia <span className='text-6xl md:text-8xl'>porro</span>{' '}
+        molestias voluptatum unde neque sunt dicta temporibus incidunt debitis
+        animi tenetur id pariatur.
       </div>
     </main>
   );
