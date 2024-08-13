@@ -74,30 +74,6 @@ export default function Home() {
     };
   }, []);
 
-  // Used for saving fetched data offline.
-
-  // useEffect(() => {
-  //   const saveProducts = async () => {
-  //     try {
-  //       console.log('Fetching API');
-  //       const res = await fetch('/api/saveProducts', {
-  //         method: 'POST',
-  //       });
-
-  //       if (!res.ok) {
-  //         throw new Error(`HTTP error! status: ${res.status}`);
-  //       }
-
-  //       const data = await res.json();
-  //       console.log('API Response:', data.message);
-  //     } catch (error) {
-  //       console.error('Failed to save products:', error);
-  //     }
-  //   };
-
-  //   saveProducts();
-  // }, []);
-
   useEffect(() => {
     const videoElement = videoRef.current;
     if (videoElement) {
