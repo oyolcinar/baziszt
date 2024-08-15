@@ -243,7 +243,9 @@ const NavMenu: React.FC = () => {
               {t('press')}
             </Link>
             <Link
-              href='/'
+              href='https://www.instagram.com/baziszt/'
+              target='_blank'
+              rel='noopener noreferrer'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               scroll={true}
               onClick={toggleMenu}
@@ -261,7 +263,9 @@ const NavMenu: React.FC = () => {
               {t('journal')}
             </Link>
             <Link
-              href='/'
+              href='https://www.facebook.com/baziszt/'
+              target='_blank'
+              rel='noopener noreferrer'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               scroll={true}
               onClick={toggleMenu}
