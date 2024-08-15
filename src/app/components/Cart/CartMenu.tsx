@@ -5,6 +5,8 @@ import Image from 'next/image';
 import { useTranslation } from '../../../../utils/useTranslation';
 import { useCart } from '../../context/CartContext';
 import { useMenu } from '../../context/MenuContext';
+import { useUser } from '../../context/UserContext';
+import { Product } from '../../context/ProductContext';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
@@ -22,6 +24,7 @@ const CartMenu: React.FC = () => {
     checkout,
   } = useCart();
   const { cartMenuOpened, openCartMenu, closeCartMenu } = useMenu();
+  const { addToWishlist, removeFromWishlist, isProductInWishlist } = useUser();
   const [favorites, setFavorites] = useState<string[]>([]);
   const [removingItem, setRemovingItem] = useState<string | null>(null);
   const itemRefs = useRef(new Map<string, HTMLDivElement | null>());
@@ -36,12 +39,12 @@ const CartMenu: React.FC = () => {
     }
   };
 
-  const toggleFavorite = (itemId: string) => {
-    setFavorites((prevFavorites) =>
-      prevFavorites.includes(itemId)
-        ? prevFavorites.filter((id) => id !== itemId)
-        : [...prevFavorites, itemId],
-    );
+  const toggleFavorite = (product: Product) => {
+    if (isProductInWishlist(product)) {
+      removeFromWishlist(product);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   useEffect(() => {
@@ -169,9 +172,9 @@ const CartMenu: React.FC = () => {
                           />
                           <button
                             className='bg-transparent p-1 absolute right-[4px] bottom-[4px]'
-                            onClick={() => toggleFavorite(item.variantId)}
+                            onClick={() => toggleFavorite(item.product)}
                           >
-                            {favorites.includes(item.variantId) ? (
+                            {isProductInWishlist(item.product) ? (
                               <HeartIconSolid className='h-4 w-4 text-black' />
                             ) : (
                               <HeartIcon className='h-4 w-4 text-black' />

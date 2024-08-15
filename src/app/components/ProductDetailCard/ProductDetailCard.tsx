@@ -13,6 +13,7 @@ import { Product } from '@/app/context/ProductContext';
 import { useCart } from '../../context/CartContext';
 import { useMenu } from '../../context/MenuContext';
 import { useTranslation } from '../../../../utils/useTranslation';
+import { useUser } from '@/app/context/UserContext';
 
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
@@ -70,6 +71,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     'size',
     'color',
   ]);
+  const { addToWishlist, removeFromWishlist, isProductInWishlist } = useUser();
   const { addToCart } = useCart();
   const { cartMenuOpened, openCartMenu, closeCartMenu } = useMenu();
 
@@ -80,6 +82,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   const sectionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    setIsFavorite(isProductInWishlist(product));
+  }, [isProductInWishlist, product]);
 
   useEffect(() => {
     const currentRefs = imageRefs.current;
@@ -330,7 +336,11 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   }, [handleMove]);
 
   const toggleFavorite = () => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+    if (isProductInWishlist(product)) {
+      removeFromWishlist(product);
+    } else {
+      addToWishlist(product);
+    }
   };
 
   const handleImageClick = (index: number) => {
@@ -431,6 +441,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         price: selectedVariant.price,
         size: sizeSelection,
         currency: selectedVariant.price.split(' ')[1],
+        product: product,
       });
       console.log('Added to cart successfully');
       openCartMenu();

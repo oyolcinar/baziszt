@@ -1,16 +1,22 @@
 import Image from 'next/image';
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useState, useLayoutEffect, useEffect, MouseEvent } from 'react';
 import Link from 'next/link';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import { Product } from '@/app/context/ProductContext';
+import { useUser } from '@/app/context/UserContext';
 
-const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+interface ProductCardProps {
+  product: Product;
+}
+
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const { addToWishlist, removeFromWishlist, isProductInWishlist } = useUser();
   const uniqueColors = Array.from(new Set(product.colors));
   const uniqueSizes = Array.from(new Set(product.sizes));
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
   const [imageWidth, setImageWidth] = useState<number | null>(null);
+  const [isFavorite, setIsFavorite] = useState(false);
 
   useLayoutEffect(() => {
     function updateWidth() {
@@ -29,10 +35,23 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     return () => window.removeEventListener('resize', updateWidth);
   }, []);
 
+  useEffect(() => {
+    setIsFavorite(isProductInWishlist(product));
+  }, [isProductInWishlist, product]);
+
   if (imageWidth === null) return null;
 
-  const toggleFavorite = () => {
-    setIsFavorite((prevIsFavorite) => !prevIsFavorite);
+  const toggleFavorite = (e: MouseEvent<HTMLDivElement>) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (isFavorite) {
+      removeFromWishlist(product);
+      setIsFavorite(false);
+    } else {
+      addToWishlist(product);
+      setIsFavorite(true);
+    }
   };
 
   const handleMouseEnter = () => {
@@ -92,14 +111,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         </div>
         <div className='absolute bottom-6 right-[30px] p-2 text-black font-futura flex flex-col items-end opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out'>
           <div className='text-sm'>{product.price}</div>
-          <div
-            style={{ zIndex: 3 }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              toggleFavorite();
-            }}
-          >
+          <div style={{ zIndex: 3 }} onClick={toggleFavorite}>
             {isFavorite ? (
               <HeartIconSolid className='cursor-pointer text-black h-4 w-4' />
             ) : (

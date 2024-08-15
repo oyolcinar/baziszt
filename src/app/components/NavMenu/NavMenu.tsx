@@ -133,19 +133,29 @@ const NavMenu: React.FC = () => {
           >
             {t('oneofone').toUpperCase()}
           </Link>
-          <Link
-            href='/shop/tops'
-            className='hover:opacity-70 transition duration-300'
-            scroll={true}
-            // onMouseEnter={() => {
-            //   setHoveredImage(topsMenu.src);
-            //   setIsImageVisible(true);
-            // }}
-            // onMouseLeave={() => setIsImageVisible(false)}
-            onClick={toggleMenu}
-          >
-            {t('tops').toUpperCase()}
-          </Link>
+          <div className='w-full flex justify-between'>
+            <Link
+              href='/shop/tops'
+              className='hover:opacity-70 transition duration-300'
+              scroll={true}
+              // onMouseEnter={() => {
+              //   setHoveredImage(topsMenu.src);
+              //   setIsImageVisible(true);
+              // }}
+              // onMouseLeave={() => setIsImageVisible(false)}
+              onClick={toggleMenu}
+            >
+              {t('tops').toUpperCase()}
+            </Link>
+            <Link
+              href='/account'
+              className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
+              onClick={toggleMenu}
+            >
+              {t('account')}
+            </Link>
+          </div>
           <div className='w-full flex justify-between'>
             <Link
               href='/shop/bottoms'
@@ -161,12 +171,12 @@ const NavMenu: React.FC = () => {
               {t('bottoms').toUpperCase()}
             </Link>
             <Link
-              href='/'
+              href='/legal-notice'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               scroll={true}
               onClick={toggleMenu}
             >
-              {t('account')}
+              {t('legal')}
             </Link>
           </div>
           <div className='w-full flex justify-between'>
@@ -179,7 +189,7 @@ const NavMenu: React.FC = () => {
               {t('accessories').toUpperCase()}
             </Link>
             <Link
-              href='/'
+              href='/terms-of-sale'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               scroll={true}
               onClick={toggleMenu}
@@ -197,7 +207,7 @@ const NavMenu: React.FC = () => {
               {t('catalog')}
             </Link>
             <Link
-              href='/'
+              href='/privacy-policy'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               scroll={true}
               onClick={toggleMenu}
@@ -215,7 +225,7 @@ const NavMenu: React.FC = () => {
               {t('stockists')}
             </Link>
             <Link
-              href='/'
+              href='/contact'
               className='hover:opacity-70 transition duration-300 pr-[30px]'
               scroll={true}
               onClick={toggleMenu}

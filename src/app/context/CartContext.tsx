@@ -2,8 +2,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import { createCart } from '../../../lib/createCart';
 import createCheckout from '../../../lib/createCheckout';
+import { Product } from '@/app/context/ProductContext';
 
-interface CartItem {
+export interface CartItem {
   variantId: string;
   quantity: number;
   title: string;
@@ -12,6 +13,7 @@ interface CartItem {
   size: string;
   currency: string;
   color: string;
+  product: Product;
 }
 
 interface Cart {

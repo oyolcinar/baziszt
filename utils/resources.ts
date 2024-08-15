@@ -212,6 +212,90 @@ const resources: Resources = {
     en: 'Language:',
     fr: 'Langue:',
   },
+  login: {
+    en: 'Login',
+    fr: 'Connexion',
+  },
+  signUp: {
+    en: 'Sign Up',
+    fr: 'Inscription',
+  },
+  firstName: {
+    en: 'First Name',
+    fr: 'Prénom',
+  },
+  lastName: {
+    en: 'Last Name',
+    fr: 'Nom de famille',
+  },
+  password: {
+    en: 'Password',
+    fr: 'Mot de passe',
+  },
+  email: {
+    en: 'Email',
+    fr: 'Courriel',
+  },
+  dontHaveAccountSignUp: {
+    en: "Don't have an account? Sign Up",
+    fr: "Vous n'avez pas de compte ? Inscrivez-vous",
+  },
+  alreadyHaveAccountLogin: {
+    en: 'Already have an account? Login',
+    fr: 'Vous avez déjà un compte ? Connectez-vous',
+  },
+  signOut: {
+    en: 'Sign Out',
+    fr: 'Déconnexion',
+  },
+  failedLogin: {
+    en: 'Failed to login. Please check your credentials.',
+    fr: 'Échec de la connexion. Veuillez vérifier vos identifiants.',
+  },
+  failedSignUp: {
+    en: 'Failed to sign up. Please try again.',
+    fr: "Échec de l'inscription. Veuillez réessayer.",
+  },
+  legal: {
+    en: 'legal',
+    fr: 'légal',
+  },
+  contactUs: {
+    en: 'Contact Us',
+    fr: 'Contactez-Nous',
+  },
+  name: {
+    en: 'Name',
+    fr: 'Nom',
+  },
+  message: {
+    en: 'Message',
+    fr: 'Message',
+  },
+  send: {
+    en: 'Send',
+    fr: 'Envoyer',
+  },
+  failedContactSubmission: {
+    en: 'Failed to submit the contact form. Please try again.',
+    fr: 'Échec de la soumission du formulaire de contact. Veuillez réessayer.',
+  },
+  legalNotice: {
+    en: 'LEGAL NOTICE',
+    fr: 'MENTIONS LÉGALES',
+  },
+  publisher: {
+    en: 'PUBLISHER',
+    fr: 'ÉDITEUR',
+  },
+  legalNoticeContent: {
+    en: 'The website www.baziszt.com is published by Baziszt SAS, a simplified joint stock company duly organised and existing under the laws of France, with a share capital of 1.000 euros, registered with the Trade and Companies Register of Paris under the no. 883 587 081, whose Intracommunity VAT number is FR 60 883 587 081 and whose registered office is situated 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+    fr: 'Le site web www.baziszt.com est publié par Baziszt SAS, une société par actions simplifiée dûment organisée et existante en vertu des lois de la France, avec un capital social de 1.000 euros, immatriculée au Registre du Commerce et des Sociétés de Paris sous le n° 883 587 081, dont le numéro de TVA intracommunautaire est FR 60 883 587 081 et dont le siège social est situé 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+  },
+  editorInChief: {
+    en: 'Editor in Chief',
+    fr: 'Rédacteur en Chef',
+  },
 };
 
 export default resources;
