@@ -4,8 +4,8 @@ const StockistsPage = () => {
       <div className='text-5xl font-futura text-bordeux mb-8'>STORES</div>
 
       <div className='mb-10 text-black font-futura'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          FRANCE
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          France
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none'>
@@ -61,8 +61,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          TURKEY
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Turkey
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -73,8 +73,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          UNITED ARAB EMIRATES
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          United Arab Emirates
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -85,8 +85,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          GERMANY
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Germany
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -103,8 +103,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          SWISS
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Switzerland
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -115,8 +115,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          ITALY
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Italy
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -166,8 +166,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          SPAIN
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Spain
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -178,8 +178,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          PORTUGAL
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Portugal
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -193,8 +193,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          ST BARTH
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          St Barth
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -203,8 +203,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          GREECE
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Greece
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -218,8 +218,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          THAILAND
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Thailand
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -230,8 +230,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          SOUTH-KOREA
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          South Korea
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -248,8 +248,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          JAPAN
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Japan
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
@@ -266,8 +266,8 @@ const StockistsPage = () => {
       </div>
 
       <div className='mb-10'>
-        <div className='text-2xl font-futura text-black mb-4 flex flex-col items-center justify-center gap-2'>
-          ONLINE
+        <div className='text-4xl font-altesse24 text-black mb-4 flex flex-col items-center justify-center gap-2'>
+          Online
           <span className='w-[50px] h-[1px] bg-black'></span>
         </div>
         <ul className='list-none text-black font-futura'>
