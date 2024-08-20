@@ -125,12 +125,13 @@ export default function Home() {
             activeIndex * windowHeight
           }px, 0px)`;
         }
-
-        const newSize =
-          windowWidth < 768
-            ? Math.max(50 - (activeIndex / totalSlides) * 40, 10)
-            : Math.max(30 - (activeIndex / totalSlides) * 30, 10);
-        setLogoSize(newSize);
+        if (windowWidth >= 768) {
+          const newSize =
+            windowWidth < 768
+              ? Math.max(50 - (activeIndex / totalSlides) * 40, 10)
+              : Math.max(30 - (activeIndex / totalSlides) * 30, 10);
+          setLogoSize(newSize);
+        }
       });
 
       const swiperContainer = document.querySelector(
