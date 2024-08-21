@@ -87,6 +87,8 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     setIsFavorite(isProductInWishlist(product));
   }, [isProductInWishlist, product]);
 
+  console.log(carouselWidth);
+
   useEffect(() => {
     const currentRefs = imageRefs.current;
 
@@ -656,8 +658,11 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         </div>
         <div
           {...swipeHandlers}
-          className={`relative md:hidden w-full h-[${imageHeight}px] mt-[80px]`}
-          style={{ width: imageWidth, overflow: 'hidden' }}
+          className={`relative md:hidden w-full h-[${imageHeight}px] mt-[80px] mx-auto`}
+          style={{
+            width: imageWidth,
+            overflow: 'hidden',
+          }}
         >
           <div
             ref={carouselRef}
