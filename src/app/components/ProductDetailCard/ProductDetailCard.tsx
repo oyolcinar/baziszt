@@ -87,8 +87,6 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     setIsFavorite(isProductInWishlist(product));
   }, [isProductInWishlist, product]);
 
-  console.log(carouselWidth);
-
   useEffect(() => {
     const currentRefs = imageRefs.current;
 
