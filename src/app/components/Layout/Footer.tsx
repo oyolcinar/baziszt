@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from '../../../../utils/useTranslation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
@@ -21,7 +21,8 @@ const Footer: React.FC = () => {
   const isNotHome = pathName !== '/';
 
   const [searchTerm, setSearchTerm] = useState('');
-
+  const [email, setEmail] = useState('');
+  const [subscriptionMessage, setSubscriptionMessage] = useState('');
   const router = useRouter();
 
   const { t } = useTranslation();
@@ -30,6 +31,31 @@ const Footer: React.FC = () => {
     event.preventDefault();
     if (searchTerm.trim()) {
       router.push(`/search?query=${searchTerm}`);
+    }
+  };
+
+  const handleSubscribe = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setSubscriptionMessage('');
+
+    try {
+      const response = await fetch('/api/subscribeToNewsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setSubscriptionMessage(t('subscriptionSuccess'));
+        setEmail('');
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to subscribe');
+      }
+    } catch (error) {
+      setSubscriptionMessage(t('subscriptionError'));
     }
   };
 
@@ -70,53 +96,65 @@ const Footer: React.FC = () => {
                 <div className='text-black text-base font-futura'>
                   {t('subscribe')}
                 </div>
-                <div className='flex items-center border-b-2 border-black py-1'>
-                  <input
-                    type='email'
-                    placeholder={t('youremail')}
-                    className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-                  />
-                  <button className='w-[20px] cursor-pointer ml-2'>
-                    <FontAwesomeIcon
-                      icon={faArrowRight}
-                      className='text-black hover:opacity-70 transition duration-300'
+                <form onSubmit={handleSubscribe}>
+                  {' '}
+                  {/* Add form for subscription */}
+                  <div className='flex items-center border-b-2 border-black py-1'>
+                    <input
+                      type='email'
+                      placeholder={t('youremail')}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                      required
                     />
-                  </button>
-                </div>
+                    {subscriptionMessage && (
+                      <p className='text-green-500 font-futura text-[14px]'>
+                        {subscriptionMessage}
+                      </p>
+                    )}
+                    <button
+                      type='submit'
+                      className='w-[20px] cursor-pointer ml-2'
+                    >
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        className='text-black hover:opacity-70 transition duration-300'
+                      />
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
-          <form
-            className='md:hidden w-full px-[50px] pb-[50px]'
-            onSubmit={handleSearch}
-          >
-            <div className='flex items-center border-b-2 border-black py-1'>
-              <input
-                type='text'
-                placeholder={t('search')}
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-              />
-              <button type='submit' className='w-[20px] cursor-pointer ml-2'>
-                <MagnifyingGlassIcon className='text-black' />
-              </button>
-            </div>
-          </form>
+
+          {/* Mobile subscription form */}
           <div className='md:hidden w-full px-[50px]'>
             <div className='text-black text-base font-futura'>
               {t('subscribe')}
             </div>
-            <div className='flex items-center border-b-2 border-black py-1'>
-              <input
-                type='email'
-                placeholder={t('youremail')}
-                className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-              />
-              <button className='w-[20px] cursor-pointer ml-2'>
-                <FontAwesomeIcon icon={faArrowRight} className='text-black' />
-              </button>
-            </div>
+            <form onSubmit={handleSubscribe}>
+              {' '}
+              {/* Add form for mobile subscription */}
+              <div className='flex items-center border-b-2 border-black py-1'>
+                <input
+                  type='email'
+                  placeholder={t('youremail')}
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                  required
+                />
+                {subscriptionMessage && (
+                  <p className='text-green-500 font-futura text-[14px]'>
+                    {subscriptionMessage}
+                  </p>
+                )}
+                <button type='submit' className='w-[20px] cursor-pointer ml-2'>
+                  <FontAwesomeIcon icon={faArrowRight} className='text-black' />
+                </button>
+              </div>
+            </form>
           </div>
 
           <div className='flex justify-center text-black font-futura text-sm mb-4'>

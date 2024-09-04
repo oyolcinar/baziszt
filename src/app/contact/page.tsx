@@ -11,15 +11,37 @@ const ContactPage = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(''); // Track success message
 
   const { t } = useTranslation();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
 
     try {
-      console.log({ name, email, message });
+      const response = await fetch('/api/sendInquiry', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          message,
+        }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to send inquiry');
+      }
+
+      setName('');
+      setEmail('');
+      setMessage('');
+      setSuccess(t('contactSubmissionSuccess'));
     } catch (err) {
       setError(t('failedContactSubmission'));
     }
@@ -33,6 +55,9 @@ const ContactPage = () => {
         </h2>
         <div className='h-[24px] my-4'>
           {error && <p className='text-red-500 font-futura mb-8'>{error}</p>}
+          {success && (
+            <p className='text-green-500 font-futura mb-8'>{success}</p>
+          )}
         </div>
 
         <div className='mb-4 border-b-2 border-black'>

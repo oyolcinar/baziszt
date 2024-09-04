@@ -38,6 +38,8 @@ export default function Home() {
   const [swiperHeight, setSwiperHeight] = useState('100vh');
   const [isMounted, setIsMounted] = useState(false);
   const { setIsPastThreshold } = useScroll();
+  const [email, setEmail] = useState('');
+  const [subscriptionMessage, setSubscriptionMessage] = useState('');
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -51,6 +53,31 @@ export default function Home() {
     event.preventDefault();
     if (searchTerm.trim()) {
       router.push(`/search?query=${searchTerm}`);
+    }
+  };
+
+  const handleSubscribe = async (event: React.FormEvent) => {
+    event.preventDefault();
+    setSubscriptionMessage('');
+
+    try {
+      const response = await fetch('/api/subscribeToNewsletter', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if (response.ok) {
+        setSubscriptionMessage(t('subscriptionSuccess'));
+        setEmail('');
+      } else {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Failed to subscribe');
+      }
+    } catch (error) {
+      setSubscriptionMessage(t('subscriptionError'));
     }
   };
 
@@ -107,18 +134,21 @@ export default function Home() {
         const additionalHeight = windowWidth > 768 ? 162 : 340;
 
         if (activeIndex === totalSlides - 1) {
+          swiperInstance.allowSlideNext = false;
           (
             swiperInstance.wrapperEl as HTMLElement
           ).style.transform = `translate3d(0px, -${
             (totalSlides - 2) * windowHeight + additionalHeight
           }px, 0px)`;
         } else if (activeIndex === totalSlides - 2) {
+          swiperInstance.allowSlideNext = true;
           (
             swiperInstance.wrapperEl as HTMLElement
           ).style.transform = `translate3d(0px, -${
             (totalSlides - 2) * windowHeight
           }px, 0px)`;
         } else {
+          swiperInstance.allowSlideNext = true;
           (
             swiperInstance.wrapperEl as HTMLElement
           ).style.transform = `translate3d(0px, -${
@@ -417,19 +447,34 @@ export default function Home() {
                   <div className='text-black text-base font-futura'>
                     {t('subscribe')}
                   </div>
-                  <div className='flex items-center border-b-2 border-black py-1'>
-                    <input
-                      type='email'
-                      placeholder={t('youremail')}
-                      className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-                    />
-                    <button className='w-[20px] cursor-pointer ml-2'>
-                      <FontAwesomeIcon
-                        icon={faArrowRight}
-                        className='text-black hover:opacity-70 transition duration-300'
+                  <form onSubmit={handleSubscribe}>
+                    {' '}
+                    {/* Add form for subscription */}
+                    <div className='flex items-center border-b-2 border-black py-1'>
+                      <input
+                        type='email'
+                        placeholder={t('youremail')}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)} // Handle input
+                        className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                        required
                       />
-                    </button>
-                  </div>
+                      {subscriptionMessage && (
+                        <p className='text-green-500 font-futura text-[14px]'>
+                          {subscriptionMessage}
+                        </p>
+                      )}
+                      <button
+                        type='submit'
+                        className='w-[20px] cursor-pointer ml-2'
+                      >
+                        <FontAwesomeIcon
+                          icon={faArrowRight}
+                          className='text-black hover:opacity-70 transition duration-300'
+                        />
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
@@ -450,20 +495,39 @@ export default function Home() {
                 </button>
               </div>
             </form>
+            {/* Mobile subscription form */}
             <div className='md:hidden w-full px-[50px]'>
               <div className='text-black text-base font-futura'>
                 {t('subscribe')}
               </div>
-              <div className='flex items-center border-b-2 border-black py-1'>
-                <input
-                  type='email'
-                  placeholder={t('youremail')}
-                  className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-                />
-                <button className='w-[20px] cursor-pointer ml-2'>
-                  <FontAwesomeIcon icon={faArrowRight} className='text-black' />
-                </button>
-              </div>
+              <form onSubmit={handleSubscribe}>
+                {' '}
+                {/* Add form for mobile subscription */}
+                <div className='flex items-center border-b-2 border-black py-1'>
+                  <input
+                    type='email'
+                    placeholder={t('youremail')}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                    required
+                  />
+                  {subscriptionMessage && (
+                    <p className='text-green-500 font-futura text-[14px]'>
+                      {subscriptionMessage}
+                    </p>
+                  )}
+                  <button
+                    type='submit'
+                    className='w-[20px] cursor-pointer ml-2'
+                  >
+                    <FontAwesomeIcon
+                      icon={faArrowRight}
+                      className='text-black'
+                    />
+                  </button>
+                </div>
+              </form>
             </div>
 
             <div className='flex justify-center text-black font-futura text-sm mb-4'>
