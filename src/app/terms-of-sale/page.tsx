@@ -1,497 +1,174 @@
+'use client';
+
+import { useTranslation } from '../../../utils/useTranslation';
+
 export default function TermsOfSalePage() {
+  const { t } = useTranslation();
+
   return (
     <div className='mx-12 md:mx-4 my-36 flex justify-center items-center'>
       <div className='text-black font-futura w-full md:w-2/3'>
         <h1 className='text-4xl mb-8 text-bordeux text-center'>
-          TERMS OF SALE
+          {t('termsOfSale')}
         </h1>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>1. IDENTIFICATION OF THE VENDOR</h2>
-          <p className='mb-4'>
-            BAZISZT, a “société par actions simplifiée” (simplified joint stock
-            company) duly organized and existing under the laws of France, with
-            a share capital of 1.000 euros, registered with the Trade and
-            Companies Register of Paris under the no. 883 587 081, whose
-            Intracommunity VAT number is FR 60 883 587 081 and whose registered
-            office is situated 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.
-          </p>
+          <h2 className='text-2xl mb-4'>{t('vendorIdentification')}</h2>
+          <p className='mb-4'>{t('vendorDetails')}</p>
         </section>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>
-            2. SCOPE AND ACCEPTANCE OF THE GENERAL TERMS OF SALE
-          </h2>
+          <h2 className='text-2xl mb-4'>{t('scopeAndAcceptance')}</h2>
           <p className='mb-4'>
-            The purchase of Products offered on the website{' '}
-            <strong>www.baziszt.com</strong> (hereafter the “Website”) is
-            subject to these general terms of online sale (hereafter the “GTS”).
+            {t('purchaseOfProducts')} <strong>www.baziszt.com</strong>{' '}
+            {t('websiteAndGTS')}
           </p>
+          <p className='mb-4'>{t('productsAndCustomers')}</p>
+          <p className='mb-4'>{t('updateGTS')}</p>
           <p className='mb-4'>
-            BAZISZT products (hereafter the “Products”) are exclusively intended
-            to be sold to end consumers, natural persons or end customers legal
-            entities, excluding all resellers or intermediaries acting on behalf
-            of resellers (hereafter the “Customers”). Consequently, the Customer
-            represents that he/she/it is acting as end consumer and that
-            he/she/it has no intention of reselling the Products for commercial
-            purpose.
-          </p>
-          <p className='mb-4'>BAZISZT can update these GTS at any time.</p>
-          <p className='mb-4'>
-            The Customer can familiarise himself at any time with the version of
-            the GTS then in force by clicking on the link{' '}
+            {t('familiariseGTS')}{' '}
             <a
               href='https://www.baziszt.com/terms_of_sale'
               className='underline'
             >
               https://www.baziszt.com/terms_of_sale
             </a>
-            . The applicable GTS at the time of the conclusion of the sales
-            contract are those that are enforceable to, and binding on, the
-            Customer.
+            . {t('applicableGTS')}
           </p>
-          <p className='mb-4'>
-            Furthermore, with each purchase of Products on the Website, the
-            Customer shall be asked to confirm the acceptance of applicable GTS
-            on the date of placing his/her/its order. Said GTS can be viewed at
-            the time he/she/it is asked to confirm that he/she/it accepts them.
-            To substantiate this acceptance, the Customer must check the box “I
-            have read and hereby accept the General Terms of Sale of the
-            baziszt.com website”.
-          </p>
+          <p className='mb-4'>{t('acceptanceGTS')}</p>
         </section>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>3. TERMS OF THE ORDER</h2>
+          <h2 className='text-2xl mb-4'>{t('termsOfOrder')}</h2>
+          <p className='mb-4'>{t('orderAcceptance')}</p>
           <p className='mb-4'>
-            Any order placed on the Website shall imply express acceptance of
-            the GTS and acceptance of the prices and Products available for sale
-            on the Website.
+            <strong>{t('orderProcess')}</strong>
+          </p>
+          <p className='mb-4'>{t('orderProcedure')}</p>
+          <p className='mb-4'>
+            <strong>{t('productChoice')}</strong> {t('productSelection')}
           </p>
           <p className='mb-4'>
-            <strong>ORDER PROCESS</strong>
+            <strong>{t('checkingSelectionContent')}</strong>{' '}
+            {t('checkingSelectionContent')}
           </p>
           <p className='mb-4'>
-            The Customer who wants to place an order must comply with the
-            following procedure:
+            <strong>{t('identification')}</strong>{' '}
+            {t('customerIdentificationForm')}
           </p>
           <p className='mb-4'>
-            <strong>Product choice:</strong> the Customer must select the
-            Product that he/she/it would like to order.
+            <strong>{t('checkingCustomerOrder')}</strong>{' '}
+            {t('customerOrderVerification')}
           </p>
           <p className='mb-4'>
-            <strong>
-              Checking of the content of the Customer’s selection:
-            </strong>{' '}
-            the Customer checks the content of his/her/its basket whilst having
-            the opportunity to delete the Products he/she/it has selected.
-          </p>
-          <p className='mb-4'>
-            <strong>Identification:</strong> the Customer must complete the
-            identification form made available to him/her/it and provide the
-            requested information (mandatory information: title, surname, first
-            name or corporate name, e-mail address, password, telephone number
-            for the delivery).
-          </p>
-          <p className='mb-4'>
-            <strong>Checking of the Customer’s order:</strong> the Customer
-            checks the content of his/her/its order, the total price, the
-            delivery and invoicing addresses while keeping the possibility of
-            deleting a Product or modifying the invoicing or delivery address.
-            The Customer confirms his/her/its method of delivery and payment.
-            The Customer must confirm his/her/its acceptance of these GTS by
-            checking the corresponding box. The validation of the order is only
-            possible after having checked this box. From this step, the Customer
-            cannot anymore modify and/or cancel its order.
-          </p>
-          <p className='mb-4'>
-            <strong>Order acknowledgement of receipt:</strong> the Customer
-            receives an e-mail summing up the content of his/her/its order,
-            namely:
+            <strong>{t('orderAcknowledgementOfReceipt')}</strong>{' '}
+            {t('emailOrderSummary')}
           </p>
           <ul className='list-disc pl-5 mb-4'>
-            <li>His/her/its delivery and invoicing addresses</li>
-            <li>The order number</li>
-            <li>The date of the order</li>
-            <li>The list of Products ordered and their amounts</li>
-            <li>The method of delivery (Client’s address or “point relay”)</li>
+            <li>{t('deliveryAndInvoicingAddresses')}</li>
+            <li>{t('orderNumber')}</li>
+            <li>{t('orderDate')}</li>
+            <li>{t('orderedProductsList')}</li>
+            <li>{t('deliveryMethod')}</li>
           </ul>
+          <p className='mb-4'>{t('orderProof')}</p>
           <p className='mb-4'>
-            The Customer is advised to keep and print this document, which is
-            official proof of his/her/its order. The order is then registered
-            and processed by BAZISZT which checks the availability of the
-            Product(s) ordered. Any order placed implies acceptance of the
-            prices and descriptions of the Products available for sale.
-          </p>
-          <p className='mb-4'>
-            <strong>Confirmation of shipping of the order:</strong> the Customer
-            receives an e-mail summarising the content of his/her/its order and
-            confirming the dispatch of the same. The contract is deemed to have
-            been concluded on the date on which this e-mail is sent.
+            <strong>{t('confirmationOfShipping')}</strong>{' '}
+            {t('orderEmailSummary')}
           </p>
         </section>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>4. PRODUCT AVAILABILITY</h2>
-          <p className='mb-4'>
-            The offers of Products and prices of BAZISZT are valid while they
-            are visible on the Website, and subject to stocks availability.
-          </p>
-          <p className='mb-4'>
-            Errors or modifications can exceptionally occur, notably in the
-            event of simultaneous orders of the same Product by several
-            Customers.
-          </p>
-          <p className='mb-4'>
-            In the event the Product is found unavailable after placing the
-            order, BAZISZT shall inform the Customer by e-mail or by telephone
-            as soon as possible, by offering that he/she/it either order another
-            Product available on the Website as a replacement, or cancels
-            his/her/its order at no cost.
-          </p>
-          <p className='mb-4'>
-            BAZISZT reserves the right to change at any time and without prior
-            notice the Products offered on the Website.
-          </p>
-          <p className='mb-4'>
-            To ensure a better quality of service and availability of its
-            Products with all of its online Customers, BAZISZT reserves the
-            right to limit the quantity of Products that can be bought by a
-            given Customer, this in accordance with the provisions applicable on
-            the matter and notably those of Article L.121-11 of the French
-            Consumer Code.
-          </p>
-          <p className='mb-4'>
-            Although all efforts are made to ensure that the colour and pattern
-            of the Products whose photos are displayed on the Website are
-            faithful to the original Products, variations may occur, notably due
-            to the technical limitations of colour reproduction on the
-            Customer’s computer equipment. Consequently, BAZISZT cannot be held
-            liable for non-substantial errors or inaccuracies of photographs or
-            graphic representations of Products appearing on the Website.
-          </p>
-          <p className='mb-4'>
-            BAZISZT reserves the right not to accept an order from a Customer
-            with whom it is in a dispute for a previous order, or if BAZISZT
-            reasonably considers that this Customer has infringed these GTS or
-            that he/she/it has been engaged in a fraudulent activity, or for any
-            other legitimate reason.
-          </p>
+          <h2 className='text-2xl mb-4'>{t('section4ProductAvailability')}</h2>
+          <p className='mb-4'>{t('offersValidity')}</p>
+          <p className='mb-4'>{t('errorsOrModifications')}</p>
+          <p className='mb-4'>{t('productUnavailable')}</p>
+          <p className='mb-4'>{t('productChangeRight')}</p>
+          <p className='mb-4'>{t('productQuantityLimit')}</p>
+          <p className='mb-4'>{t('productPhotoDisclaimer')}</p>
+          <p className='mb-4'>{t('orderRejectionClause')}</p>
         </section>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>5. PRICE</h2>
-          <p className='mb-4'>
-            The Prices of Products are expressed in Euros with also the
-            possibility to pay in the following currencies Dollar US, Pounds
-            Sterling, Dollar Canadian, Dollar Australian, Yuan, Yen, Won, Rouble
-            Russian (on the basis of a daily conversion via the converter used
-            for the Website) inclusive of taxes and excluding customs duties,
-            for orders outside of the EU that shall be borne by the Customer.
-            Outside of the cases of reimbursement made (i) in connection with
-            exercising the right of withdrawal or for (ii) lack of conformity
-            and hidden defects, BAZISZT shall not reimburse the VAT applied to
-            purchases made on the Website (even in the event the Customer, after
-            receipt of the Products, reships the Products for a third country
-            outside of the European Union).
-          </p>
-          <p className='mb-4'>
-            BAZISZT reserves the right to change at any time and without prior
-            notice the prices of Products offered on the Website.
-          </p>
-          <p className='mb-4'>
-            The Products are invoiced on the basis of tariffs displayed on the
-            Website at the time when the order is placed, subject to
-            availability of the Products.
-          </p>
-          <p className='mb-4'>
-            All the orders are payable in Euros and must be settled immediately
-            upon placing the order with the exception of the occasional
-            “0-interest financing with 3 instalments” offers, duly announced and
-            made available solely for orders exceeding €100.00 paid by Belgian
-            or French credit card and to be delivered to these territories, and
-            which shall consist in three monthly payments as of the first
-            payment.
-          </p>
-          <p className='mb-4'>
-            In the event of unavailability of certain Products ordered (see
-            Article 4 “Product availability”), only the price and shipping costs
-            related to the available Products shall be debited.
-          </p>
+          <h2 className='text-2xl mb-4'>{t('priceSectionTitle')}</h2>
+          <p className='mb-4'>{t('priceDetails')}</p>
+          <p className='mb-4'>{t('priceChangeNotice')}</p>
+          <p className='mb-4'>{t('productInvoiceBasis')}</p>
+          <p className='mb-4'>{t('orderPaymentTerms')}</p>
+          <p className='mb-4'>{t('partialOrderDebited')}</p>
         </section>
         <section className='mb-6'>
           <h2 className='text-2xl mb-4'>
-            <strong>MEANS OF PAYMENT</strong>
+            <strong>{t('meansOfPayment')}</strong>
           </h2>
-          <p className='mb-4'>
-            The customer can pay for their order as follows:
-          </p>
+          <p className='mb-4'>{t('paymentInstructions')}</p>
 
-          <h3 className='text-xl mb-4 underline'>Payments by credit card</h3>
-          <p className='mb-4'>
-            Payment may be made by Visa, CB, Mastercard or American Express
-            credit cards. Payment is made on the secure site of the Company’s
-            banking partner. The Customer’s banking data does not circulate
-            unencrypted on the Internet and cannot be intercepted. They are not
-            communicated to the Company.
-          </p>
+          <h3 className='text-xl mb-4 underline'>{t('paymentByCreditCard')}</h3>
+          <p className='mb-4'>{t('creditCardPaymentDetails')}</p>
 
-          <h3 className='text-xl mb-4 underline'>
-            Payment by payment application
-          </h3>
-          <p className='mb-4'>
-            Payment can be made via Apple pay (mobile) according to the terms
-            and conditions of this application. The Customer is deemed to have
-            accepted the terms and conditions and privacy policy of the chosen
-            payment application.
-          </p>
+          <h3 className='text-xl mb-4 underline'>{t('paymentByApp')}</h3>
+          <p className='mb-4'>{t('paymentByAppDetails')}</p>
 
-          <h3 className='text-xl mb-4 underline'>Payment by gift cards</h3>
+          <h3 className='text-xl mb-4 underline'>{t('paymentByGiftCards')}</h3>
           <p className='mb-4 text-[darkOrange] italic'>
-            Purchase of gift cards on the Site
+            {t('purchaseOfGiftCards')}
           </p>
-          <p className='mb-4'>
-            Gift cards are available for sale on the Site (hereinafter the “Gift
-            Card(s)”).
-          </p>
-          <p className='mb-4'>
-            These Gift Cards will have predefined amounts to be selected by the
-            Customer at the time of purchase.
-          </p>
-          <p className='mb-4'>
-            They will be sent to the Customer or the recipient of his/her choice
-            by email.
-          </p>
-          <p className='mb-4'>
-            These Gift Cards are non-refundable and are valid only for purchases
-            on the Site for a period of one (1) year from the date of
-            activation.
-          </p>
-          <p className='mb-4'>
-            If the total amount of the Gift Card is used, the Gift Card is
-            deactivated.
-          </p>
+          <p className='mb-4'>{t('giftCardsAvailability')}</p>
+          <p className='mb-4'>{t('giftCardAmounts')}</p>
+          <p className='mb-4'>{t('giftCardDelivery')}</p>
+          <p className='mb-4'>{t('giftCardConditions')}</p>
+          <p className='mb-4'>{t('giftCardDeactivation')}</p>
 
           <p className='mb-4 text-[darkOrange] italic'>
-            Payment with Gift Cards on the Site
+            {t('paymentWithGiftCards')}
           </p>
-          <p className='mb-4'>
-            The Gift Cards can be used on the Site by entering the Gift Card
-            code provided in the confirmation email of the Gift Card purchased
-            on the Site in the dedicated field.
-          </p>
-          <p className='mb-4'>
-            If the total amount of the Order exceeds the amount of the Gift
-            Card, the remaining amount will be paid with the other means of
-            payment proposed on the Site as described above.
-          </p>
-          <p className='mb-4'>
-            If the total amount of the Order is less than the amount of the Gift
-            Card, the Customer will not have to make any additional payment and
-            he will receive by email a new code corresponding to the remaining
-            amount to be spent on the Gift Card, to be used on his next purchase
-            on the Site. The validity date of this new code is identical to the
-            original code.
-          </p>
+          <p className='mb-4'>{t('giftCardUsage')}</p>
+          <p className='mb-4'>{t('giftCardPartialPayment')}</p>
+          <p className='mb-4'>{t('giftCardRemainingAmount')}</p>
 
           <p className='mb-4 text-[darkOrange] italic'>
-            Refund of all or part of an Order paid for in whole or in part with
-            a Gift Card
+            {t('refundWithGiftCard')}
           </p>
-          <p className='mb-4'>
-            A Customer who has paid for all or part of an Order with a Gift Card
-            shall be refunded for all or part of said Order as follows:
-          </p>
+          <p className='mb-4'>{t('refundWithGiftCardProcedure')}</p>
           <ol className='list-decimal pl-5 mb-4'>
+            <li>{t('refundAllGiftCard')}</li>
             <li>
-              If all the Order has been paid with a Gift Card, the Company shall
-              issue a new Gift Card in the form of a credit note for the amount
-              of the returned item(s), subject to validation of the return by
-              the Company’s warehouse (hereinafter the “Gift Card Credit”). This
-              Gift Card Credit has the same validity period as the original Gift
-              Card, except in the case where the Gift Card has already expired
-              at the date of issue of the Gift Card Credit. In which case, the
-              Gift Card Credit is valid for one (1) month. The Gift Card Credit
-              is only valid for use on the Site.
-            </li>
-            <li>
-              If the Order was paid for in part with a Gift Card and partly with
-              an additional payment method, and provided that the return of the
-              relevant item(s) for which reimbursement is being sought has been
-              declared compliant by the Company’s warehouse, the Customer will
-              be reimbursed proportionally for the relevant item(s) on the
-              different means of payment used, i.e.:
+              {t('refundPartialGiftCard')}
               <ul className='list-disc pl-5'>
-                <li>
-                  The part related to the amount paid by the Customer for the
-                  relevant item(s) with the issuance of a Gift Card Credit of a
-                  value proportional to the amount initially paid with this
-                  payment method for said item(s); and
-                </li>
-                <li>
-                  The remainder of the amount paid reimbursed with the
-                  additional payment method.
-                </li>
+                <li>{t('refundGiftCardCredit')}</li>
+                <li>{t('refundAdditionalPaymentMethod')}</li>
               </ul>
-              This Gift Card Credit has the same validity period as the original
-              Gift Card, except in the event that the Gift Card has already
-              expired at the date of issue of the Gift Card Credit. In which
-              case, the Gift Card Credit is valid for one (1) month. The Gift
-              Card Credit is only valid for use on the Site.
+              {t('giftCardCreditValidity')}
             </li>
           </ol>
         </section>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>6. RESERVATION OF OWNERSHIP</h2>
-          <p className='mb-4'>
-            The ordered Products remain the property of BAZISZT until receipt of
-            full payment of the price by BAZISZT. However, the Customer assumes
-            the risk (namely of loss, theft or deterioration) regarding the
-            Products delivered from the time that they are delivered to the
-            address indicated at the time of the order.
-          </p>
+          <h2 className='text-2xl mb-4'>{t('reservationOfOwnership')}</h2>
+          <p className='mb-4'>{t('productsOwnership')}</p>
         </section>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>7. TERMS AND CONDITIONS OF DELIVERY</h2>
-          <p className='mb-4'>
-            Handling and shipping costs depend on the country and the total
-            amount of the order. They shall be indicated on the invoice.
-          </p>
-          <p className='mb-4'>
-            BAZISZT cannot be held responsible for any action and/or costs
-            and/or taxes (which fall under the Customer’s responsibility) and/or
-            delays due to customs over which it has no control.
-          </p>
-          <p className='mb-4'>
-            For all the Products, the order is prepared for departure from
-            BAZISZT’s logistics warehouses within a maximum period of 3 working
-            days (subject to stock availability and except for the special case
-            of Products sold “on pre-order” for which the sheet indicates the
-            specific estimated time of delivery) from confirmation by e-mail of
-            the order. The average period between the placing of an order and
-            its delivery is from 4 to 9 working days. This is an average period
-            based on prior orders.
-          </p>
-          <p className='mb-4'>
-            By exception to the above mentioned time frames, “pre-order”
-            transactions may be subject to shipping periods that might exceed
-            the estimated shipping time. The estimated shipping time for
-            “pre-order” transactions may be as long as 6 to 9 months as of the
-            date of the order, as mentioned in the purchase process.
-          </p>
-          <p className='mb-4'>
-            Exceeding this estimated period may not give rise to any
-            cancellation of the order, reduction in the price paid by the
-            Customer, or to any damages. Customer is further informed that in
-            some special cases (e.g. products marketed on “pre-order”), the
-            periods indicated above can be longer. However, failure to deliver
-            within a period of 30 days from the maximum estimated time of
-            delivery, the Customer shall have the possibility to cancel the said
-            order at no cost. The sums that he/she/it will have paid will then
-            be reimbursed. In cases where it has the capacity to do so, BAZISZT
-            reserves the possibility to offer the Customer a Product of
-            equivalent quality and price as the initial product.
-          </p>
-          <p className='mb-4'>
-            If the order reaches a certain volume BAZISZT may send it to the
-            Customer in several deliveries and/or several packages.
-          </p>
-          <p className='mb-4'>
-            Generally, all of the parcels are shipped via UPS. A delivery note
-            is attached to the parcel. Customer is encouraged to keep it as it
-            will serve as proof of delivery.
-          </p>
-          <p className='mb-4'>
-            The Customer must check the compliance of the Products delivered at
-            the time of the delivery and before signature of the carrier’s
-            delivery note. He/she/it must indicate on this delivery note and in
-            the form of handwritten reservations any defect concerning the
-            delivery (damaged Product etc.). This verification is deemed
-            achieved as soon as the Customer, or a person of his/her/its choice,
-            has signed the delivery note. No claim regarding the condition of
-            the parcel(s) will be admissible thereafter. In the event of
-            reservations regarding the delivery, the Customer must also confirm
-            them to the carrier at the latest within 3 working days following
-            receipt of the article(s) and send a copy of this letter to BAZISZT
-            by e-mail to the address together@baziszt.com with confirmation by
-            registered letter with acknowledgement of receipt to Customer
-            Service at the following address: SAS BAZISZT - 13 RUE LA BOETIE,
-            75008 PARIS 8, FRANCE.
-          </p>
-          <p className='mb-4'>
-            In the event of an incomplete address, incorrect address, inability
-            to place the parcel in the Customer’s letterbox, refusal of the
-            parcel by the recipient, lack of information making it impossible to
-            deliver the Product to the recipient at the appointed time, BAZISZT
-            cannot be held liable for the complete, final, completion of this
-            delivery. If this lack of information leads to a second presentation
-            to the recipient, BAZISZT shall be entitled to request that the
-            Customer pay the corresponding fees for this second delivery.
-          </p>
-          <p className='mb-4'>
-            The Customer is subject to the general terms of delivery of the
-            carrier that, in some cases, if he/she/it does not submit to them
-            can impact the quality of the delivery. Accordingly, in the event of
-            absence of the recipient, according to the general terms of delivery
-            of the carrier, the product may be presented again and/or left at an
-            agreed drop-off point and/or in front of the Customer’s home and or
-            in a “sorting – pending” centre of the carrier and/or returned to
-            BAZISZT who shall in no event be held responsible for any theft of,
-            loss, or damage to the Products in connection with to their delivery
-            and, more generally, the final quality of the delivery.
-          </p>
-          <p className='mb-4'>
-            In the event that it is impossible to deliver and if the product
-            must be returned to BAZISZT by the carrier, BAZISZT will not make
-            any new delivery.
-          </p>
-          <p className='mb-4'>
-            Any claim regarding the delivery of Products must be submitted in 14
-            working days following receipt of the Product(s) in the same
-            conditions as mentioned above. If it is decided that the product(s)
-            must be returned to BAZISZT, they must be sent in their original
-            condition (packaging, accessories, etc.) and according to the
-            following shipping conditions. The Customer must contact the
-            customer service beforehand via e-mail at together@baziszt.com to
-            obtain a return number to note on the “Return Authorisation”
-            enclosed with the order as well as any information relating to the
-            shipping. No parcel shall be accepted without a return number. This
-            number must be written legibly with a marker pen on the parcel. The
-            Product must be returned to BAZISZT - customer service - 13 RUE LA
-            BOETIE, 75008 PARIS 8, FRANCE.
-          </p>
+          <h2 className='text-2xl mb-4'>{t('deliveryTerms')}</h2>
+          <p className='mb-4'>{t('handlingShippingCosts')}</p>
+          <p className='mb-4'>{t('customsResponsibility')}</p>
+          <p className='mb-4'>{t('preparationTime')}</p>
+          <p className='mb-4'>{t('preOrderShippingTime')}</p>
+          <p className='mb-4'>{t('deliveryExceedingPeriod')}</p>
+          <p className='mb-4'>{t('multipleDeliveries')}</p>
+          <p className='mb-4'>{t('shippingMethod')}</p>
+          <p className='mb-4'>{t('deliveryCompliance')}</p>
+          <p className='mb-4'>{t('incompleteAddress')}</p>
+          <p className='mb-4'>{t('deliveryTerms2')}</p>
+          <p className='mb-4'>{t('undeliverableReturn')}</p>
+          <p className='mb-4'>{t('returnClaim')}</p>
         </section>
 
         <section className='mb-6'>
-          <h2 className='text-2xl mb-4'>8. RIGHT OF WITHDRAWAL</h2>
-          <p className='mb-4'>
-            Pursuant to Articles L. 221-18 et seq. of the Consumer Code, the
-            Customer has 14 days from the day of delivery of the Product
-            purchased on the Website to inform the customer service of
-            his/her/its desire to return the Product.
-          </p>
-          <p className='mb-4 text-[darkOrange]'>
-            The customer is responsible for the all fees related to return
-            shipment.
-          </p>
-          <p className='mb-4'>
-            For any return, the Customer shall i) use the return form enclosed
-            in the delivery packing or ii) contact the customer service via
-            e-mail together@baziszt.com to inform it of his/her/its decision to
-            use his/her/its right of withdrawal. Any parcel returned after the
-            prescribed timeframe shall be refused and returned to the sender. No
-            parcel returned as cash on delivery shipping shall be accepted,
-            whatever the reason. The costs and risks pertaining to the return of
-            Products are borne by the sender. In order for the customer service
-            to accept the exchange and/or reimbursement, the Product must be
-            returned in full condition in its original packing, undamaged, with
-            its label attached, not worn, accompanied by all of its accessories,
-            and a copy of the purchase invoice to BAZISZT - 13 RUE LA BOETIE,
-            75008 PARIS 8, FRANCE. The Customer shall not have to justify the
-            reasons or pay penalties, with the exception of return costs.
-          </p>
+          <h2 className='text-2xl mb-4'>{t('rightOfWithdrawal')}</h2>
+          <p className='mb-4'>{t('rightOfWithdrawalDetails')}</p>
+          <p className='mb-4 text-[darkOrange]'>{t('returnShipmentFees')}</p>
+          <p className='mb-4'>{t('returnProcedure')}</p>
           <p className='mb-4'>
             BAZISZT cannot be held responsible in the event of loss, theft or
             damage of the parcel.

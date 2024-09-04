@@ -147,19 +147,29 @@ const NavMenu: React.FC = () => {
           >
             {t('new').toUpperCase()}
           </Link>
-          <Link
-            href='/shop/oneOfone'
-            className='hover:opacity-70 transition duration-300'
-            scroll={true}
-            // onMouseEnter={() => {
-            //   setHoveredImage(topsMenu.src);
-            //   setIsImageVisible(true);
-            // }}
-            // onMouseLeave={() => setIsImageVisible(false)}
-            onClick={toggleMenu}
-          >
-            {t('oneofone').toUpperCase()}
-          </Link>
+          <div className='w-full flex justify-between'>
+            <Link
+              href='/shop/oneOfone'
+              className='hover:opacity-70 transition duration-300'
+              scroll={true}
+              // onMouseEnter={() => {
+              //   setHoveredImage(topsMenu.src);
+              //   setIsImageVisible(true);
+              // }}
+              // onMouseLeave={() => setIsImageVisible(false)}
+              onClick={toggleMenu}
+            >
+              {t('oneofone').toUpperCase()}
+            </Link>
+            <Link
+              href='/wishlist'
+              className='hover:opacity-70 transition duration-300 pr-[30px]'
+              scroll={true}
+              onClick={toggleMenu}
+            >
+              {t('wishlist')}
+            </Link>
+          </div>
           <div className='w-full flex justify-between'>
             <Link
               href='/shop/tops'
