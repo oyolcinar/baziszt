@@ -32,32 +32,32 @@ const AccountPage = () => {
   const wishlistRef = useRef<HTMLDivElement>(null);
   const ordersRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      if (user) {
-        try {
-          const response = await fetch('/api/fetchOrders', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ customerAccessToken: user.accessToken }),
-          });
+  // useEffect(() => {
+  //   const fetchOrders = async () => {
+  //     if (user) {
+  //       try {
+  //         const response = await fetch('/api/fetchOrders', {
+  //           method: 'POST',
+  //           headers: {
+  //             'Content-Type': 'application/json',
+  //           },
+  //           body: JSON.stringify({ customerAccessToken: user.accessToken }),
+  //         });
 
-          if (response.ok) {
-            const data = await response.json();
-            setOrders(data.orders);
-          } else {
-            console.error('Failed to fetch orders');
-          }
-        } catch (error) {
-          console.error('Error fetching orders:', error);
-        }
-      }
-    };
+  //         if (response.ok) {
+  //           const data = await response.json();
+  //           setOrders(data.orders);
+  //         } else {
+  //           console.error('Failed to fetch orders');
+  //         }
+  //       } catch (error) {
+  //         console.error('Error fetching orders:', error);
+  //       }
+  //     }
+  //   };
 
-    fetchOrders();
-  }, [user]);
+  //   fetchOrders();
+  // }, [user]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
