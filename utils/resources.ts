@@ -660,6 +660,214 @@ const resources: Resources = {
     en: 'For any return, the Customer shall i) use the return form enclosed in the delivery packing or ii) contact customer service via e-mail together@baziszt.com to inform it of his/her/its decision to use his/her/its right of withdrawal. Any parcel returned after the prescribed timeframe shall be refused and returned to the sender. No parcel returned as cash on delivery shipping shall be accepted, whatever the reason. The costs and risks pertaining to the return of Products are borne by the sender. In order for the customer service to accept the exchange and/or reimbursement, the Product must be returned in full condition in its original packing, undamaged, with its label attached, not worn, accompanied by all of its accessories, and a copy of the purchase invoice to BAZISZT - 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE. The Customer shall not have to justify the reasons or pay penalties, with the exception of return costs.',
     fr: 'Pour tout retour, le Client doit i) utiliser le formulaire de retour inclus dans l’emballage de livraison ou ii) contacter le service client par e-mail à together@baziszt.com pour l’informer de sa décision d’exercer son droit de rétractation. Tout colis retourné après le délai prescrit sera refusé et renvoyé à l’expéditeur. Aucun colis retourné en port dû ne sera accepté, quelle qu’en soit la raison. Les coûts et risques liés au retour des Produits sont à la charge de l’expéditeur. Afin que le service client accepte l’échange et/ou le remboursement, le Produit doit être retourné en parfait état dans son emballage d’origine, non endommagé, avec son étiquette attachée, non porté, accompagné de tous ses accessoires et d’une copie de la facture d’achat à BAZISZT - 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE. Le Client n’aura pas à justifier les raisons ou à payer des pénalités, à l’exception des frais de retour.',
   },
+  parcelResponsibility: {
+    en: 'BAZISZT cannot be held responsible in the event of loss, theft, or damage of the parcel.',
+    fr: 'BAZISZT ne peut être tenu responsable en cas de perte, de vol ou de dommages du colis.',
+  },
+  parcelIdentification: {
+    en: 'Parcels for which the Customer’s identification (surname, first name, address, and return code) is not possible shall be refused.',
+    fr: 'Les colis pour lesquels l’identification du Client (nom, prénom, adresse et code de retour) est impossible seront refusés.',
+  },
+  returnTracking: {
+    en: 'Any return must be made by a traceable method (UPS, FEDEX, DHL, return receipt requested, etc.) and the tracking number must be provided to BAZISZT.',
+    fr: 'Tout retour doit être effectué par une méthode traçable (UPS, FEDEX, DHL, accusé de réception, etc.) et le numéro de suivi doit être fourni à BAZISZT.',
+  },
+  returnReceiptConfirmation: {
+    en: 'On receipt of the Product returned by the Customer, the customer service shall send a confirmation of receipt of the Product by e-mail.',
+    fr: 'À réception du Produit retourné par le Client, le service client enverra une confirmation de réception du Produit par e-mail.',
+  },
+  reimbursementPolicy: {
+    en: 'In the event the Customer makes a valid use of this right, BAZISZT shall reimburse the Customer for the sums paid corresponding to the acquisition of the returned Products (therefore excluding potential customs duties), within a maximum period of 14 days by bank transfer into the account used with the credit card bearing the Customer’s name.',
+    fr: 'Dans le cas où le Client exerce valablement ce droit, BAZISZT remboursera le Client des sommes payées correspondant à l’acquisition des Produits retournés (à l’exclusion des éventuels droits de douane), dans un délai maximum de 14 jours par virement bancaire sur le compte utilisé avec la carte de crédit au nom du Client.',
+  },
+  deliveryCostReimbursement: {
+    en: 'BAZISZT undertakes to reimburse the standard delivery costs including the tracking of the parcel. For that purpose, the Customer shall insert the delivery invoice indicating the parcel tracking number into the return parcel.',
+    fr: 'BAZISZT s’engage à rembourser les frais de livraison standard incluant le suivi du colis. À cette fin, le Client doit insérer la facture de livraison indiquant le numéro de suivi du colis dans le colis de retour.',
+  },
+  statutoryWarranties: {
+    en: '9. STATUTORY WARRANTIES',
+    fr: '9. GARANTIES LÉGALES',
+  },
+  warrantyConditions: {
+    en: 'The Products sold by BAZISZT are subject to the conditions of statutory warranties provided by Articles L.217-4 to L.217-14 of the Consumer Code as well as by Articles 1641 through 1648 of the Civil Code, to the exclusion of any other warranties.',
+    fr: 'Les Produits vendus par BAZISZT sont soumis aux conditions des garanties légales prévues par les Articles L.217-4 à L.217-14 du Code de la consommation ainsi que par les Articles 1641 à 1648 du Code civil, à l’exclusion de toute autre garantie.',
+  },
+  productComplaintRefusal: {
+    en: 'BAZISZT shall refuse any complaint for Products that have been used contrary to their intended use.',
+    fr: 'BAZISZT refusera toute réclamation concernant des Produits ayant été utilisés de manière contraire à leur usage prévu.',
+  },
+  productComplaintSubmission: {
+    en: 'Any complaint regarding the Products in their current form and without relation to the delivery must be submitted by e-mail to the address together@baziszt.com followed by a written confirmation sent by registered letter with acknowledgement of receipt to the customer service at the following address: BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+    fr: 'Toute réclamation concernant les Produits dans leur état actuel et sans rapport avec la livraison doit être soumise par e-mail à l’adresse together@baziszt.com suivie d’une confirmation écrite envoyée par lettre recommandée avec accusé de réception au service client à l’adresse suivante : BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+  },
+  warrantyOfConformity: {
+    en: 'Statutory warranty of conformity:',
+    fr: 'Garantie légale de conformité :',
+  },
+  warrantyOfConformityDetails: {
+    en: 'BAZISZT shall deliver to the Customer a Product that complies with the contract and which is exempt from conformity defects at the time of the delivery of said Product, to the extent that the Product shall be fit for the use normally expected of similar goods and that it shall have the characteristics featured during the sale. BAZISZT is also liable for conformity defects resulting from the packaging, assembly, or installation instructions provided such liability as agreed by contract or such processes where made under its responsibility.',
+    fr: 'BAZISZT livrera au Client un Produit conforme au contrat et exempt de défauts de conformité au moment de la livraison dudit Produit, dans la mesure où le Produit sera apte à l’usage normalement attendu de biens similaires et qu’il présentera les caractéristiques annoncées lors de la vente. BAZISZT est également responsable des défauts de conformité résultant de l’emballage, du montage ou des instructions d’installation, lorsque cette responsabilité est convenue par contrat ou que ces processus ont été réalisés sous sa responsabilité.',
+  },
+  warrantyAgainstHiddenDefects: {
+    en: 'Statutory warranty against hidden defects:',
+    fr: 'Garantie légale contre les vices cachés :',
+  },
+  warrantyAgainstHiddenDefectsDetails: {
+    en: 'BAZISZT shall ship to the Customer a Product free of hidden defects that would make it unfit for the use for which it was intended, or that substantially decreases this use, that he/she/it would not have acquired it or would have paid a lower price if he/she/it had been aware of them.',
+    fr: 'BAZISZT expédiera au Client un Produit exempt de vices cachés qui le rendraient impropre à l’usage auquel il est destiné, ou qui diminueraient substantiellement cet usage, au point qu’il/elle ne l’aurait pas acquis ou en aurait payé un prix inférieur s’il/elle en avait eu connaissance.',
+  },
+  warrantyTimeframe: {
+    en: 'These guarantees shall apply provided that the Customer makes the request within a period of 24 months following the delivery of the Product (for the statutory warranty of conformity) or the discovery of the defect (for the statutory warranty of hidden defects).',
+    fr: 'Ces garanties s’appliquent à condition que le Client fasse la demande dans un délai de 24 mois suivant la livraison du Produit (pour la garantie légale de conformité) ou la découverte du défaut (pour la garantie légale contre les vices cachés).',
+  },
+  conformityDefectsPresumption: {
+    en: 'Conformity defects that appear within a period of 24 months from delivery are presumed to exist at the time of delivery, unless proven otherwise.',
+    fr: 'Les défauts de conformité qui apparaissent dans un délai de 24 mois à compter de la livraison sont présumés exister au moment de la livraison, sauf preuve contraire.',
+  },
+  nonConformityOptions: {
+    en: 'In the event of an actual non-conformity on a Product sold by BAZISZT, the Customer may choose between the Product being repaired or replaced unless one of these choices is commercially unreasonable for BAZISZT. If the repair or the replacement of the Product is impossible, the Customer may be reimbursed and shall return the Product or keep the Product and have a part of the price reimbursed to him/her/it, unless the conformity defect is minor.',
+    fr: 'En cas de non-conformité avérée sur un Produit vendu par BAZISZT, le Client peut choisir entre la réparation ou le remplacement du Produit, sauf si l’un de ces choix est déraisonnable d’un point de vue commercial pour BAZISZT. Si la réparation ou le remplacement du Produit est impossible, le Client peut être remboursé et doit retourner le Produit ou conserver le Produit et se faire rembourser une partie du prix, sauf si le défaut de conformité est mineur.',
+  },
+  hiddenDefectOptions: {
+    en: 'In the event of an actual hidden defect on a Product sold by BAZISZT, the Customer shall have the choice of returning the Product and having the price and costs incurred by the sale refunded or keeping the Product and having a part of the price returned to him/her/it.',
+    fr: 'En cas de vice caché avéré sur un Produit vendu par BAZISZT, le Client a le choix de retourner le Produit et de se faire rembourser le prix et les frais engagés lors de l’achat ou de conserver le Produit et de se faire rembourser une partie du prix.',
+  },
+  customerProofOfGuarantee: {
+    en: 'In any event, it shall be up to the Customer to prove that he/she/it fulfills the conditions of the guarantee properly.',
+    fr: 'En tout état de cause, il appartient au Client de prouver qu’il/elle remplit correctement les conditions de la garantie.',
+  },
+  returnReplacementReimbursement: {
+    en: 'The return, replacement, or reimbursement of the Product shall occur without costs for the Customer and shall not prevent potential damages where applicable.',
+    fr: 'Le retour, le remplacement ou le remboursement du Produit s’effectuera sans frais pour le Client et n’exclut pas d’éventuels dommages et intérêts, le cas échéant.',
+  },
+  returnProcedureWithNumber: {
+    en: 'In the case of lack of conformity and/or hidden defects admitted by BAZISZT, should the Customer choose to return the Product, he/she/it shall ship it to the following address: BAZISZT – customer service - 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE. The Customer must obtain beforehand a return number as well as any details relating to shipping from the customer service, to be contacted via e-mail at together@baziszt.com. No parcel shall be accepted without a return number. This number must be written legibly with a marker pen on the parcel.',
+    fr: 'En cas de défaut de conformité et/ou de vices cachés reconnus par BAZISZT, si le Client choisit de retourner le Produit, il/elle devra l’expédier à l’adresse suivante : BAZISZT – service client - 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE. Le Client doit obtenir au préalable un numéro de retour ainsi que toutes les précisions relatives à l’expédition auprès du service client, à contacter par e-mail à together@baziszt.com. Aucun colis ne sera accepté sans numéro de retour. Ce numéro doit être inscrit lisiblement au marqueur sur le colis.',
+  },
+  afterSalesService: {
+    en: '10. AFTER-SALES SERVICE AND AVAILABILITY OF SPARE PARTS',
+    fr: '10. SERVICE APRÈS-VENTE ET DISPONIBILITÉ DES PIÈCES DÉTACHÉES',
+  },
+  repairService: {
+    en: 'Any Product that can be technically repaired benefits from an after-sales service for a fee. For any repair request, the Customer must directly contact the customer service via e-mail at: together@baziszt.com.',
+    fr: 'Tout Produit techniquement réparable bénéficie d’un service après-vente moyennant des frais. Pour toute demande de réparation, le Client doit directement contacter le service client par e-mail à : together@baziszt.com.',
+  },
+  sparePartsAvailability: {
+    en: 'In accordance with Article L 111-3 paragraph 1 of the French Consumer Code, BAZISZT makes no warranty regarding the availability period of spare parts that are essential for the use of the Products. BAZISZT shall nonetheless make its best efforts to satisfy its Customers in the event of a request for one or several spare parts.',
+    fr: 'Conformément à l’Article L 111-3 paragraphe 1 du Code de la consommation français, BAZISZT ne donne aucune garantie quant à la durée de disponibilité des pièces détachées indispensables à l’utilisation des Produits. BAZISZT s’efforcera néanmoins de satisfaire ses Clients en cas de demande d’une ou plusieurs pièces détachées.',
+  },
+  limitationOfLiability: {
+    en: '11. LIMITATION OF LIABILITY',
+    fr: '11. LIMITATION DE RESPONSABILITÉ',
+  },
+  liabilityExclusion: {
+    en: 'In no event may BAZISZT be held liable for any damage which does not result from a failure by BAZISZT to honor one of its obligations.',
+    fr: 'En aucun cas BAZISZT ne peut être tenu responsable de tout dommage qui ne résulte pas d’un manquement de BAZISZT à l’une de ses obligations.',
+  },
+  personalData: {
+    en: '12. PERSONAL DATA',
+    fr: '12. DONNÉES PERSONNELLES',
+  },
+  customerRegistration: {
+    en: 'When the Customer registers on the ',
+    fr: 'Lorsque le Client s’inscrit sur le ',
+  },
+  personalInformationCollection: {
+    en: ', BAZISZT collects personal information (personal data, e-mail address, gender, etc.) via the registration form in order to offer him/her/it accessible services in the reserved access areas of BAZISZT. The filling in of personal information is essential for the processing and delivery of his/her/its orders.',
+    fr: ', BAZISZT collecte des informations personnelles (données personnelles, adresse e-mail, sexe, etc.) via le formulaire d’inscription afin de lui proposer des services accessibles dans les espaces réservés de BAZISZT. Le renseignement des informations personnelles le concernant est essentiel au traitement et à la livraison de ses commandes.',
+  },
+  orderProcess2: {
+    en: 'The order process on the ',
+    fr: 'Le processus de commande sur le ',
+  },
+  customerAccountCreation: {
+    en: ' Website requires the creation of a Customer account in which his/her/its information is stored and protected by a password chosen by the Customer. This information is strictly confidential and intended for BAZISZT exclusively. It shall be processed in strict compliance with the provisions of Data Protection Act No. 78-17 of 6 January 1978 and the regulation (EU) 2016/679, General Data Protection Regulation (GDPR).',
+    fr: ' Site nécessite la création d’un compte Client dans lequel ses informations sont stockées et protégées par un mot de passe choisi par le Client. Ces informations sont strictement confidentielles et destinées exclusivement à BAZISZT. Elles seront traitées dans le strict respect des dispositions de la Loi Informatique et Libertés n° 78-17 du 6 janvier 1978 et du règlement (UE) 2016/679, règlement général sur la protection des données (RGPD).',
+  },
+  dataProtectionCommitments: {
+    en: 'In this respect, BAZISZT notably undertakes to: (i) guarantee the confidentiality of personal data processed in the framework hereof by implementing the appropriate security measures in its field of activity, (ii) ensure that the persons authorized to process personal data in virtue hereof undertake to respect confidentiality or are subject to an appropriate legal obligation of confidentiality and receive the necessary training regarding the protection of personal data, and (iii) ensure that its potential subcontractors respect the legal obligations on behalf of and according to the instructions of BAZISZT.',
+    fr: 'À ce titre, BAZISZT s’engage notamment à : (i) garantir la confidentialité des données à caractère personnel traitées dans le cadre des présentes en mettant en œuvre les mesures de sécurité appropriées dans son domaine d’activité, (ii) veiller à ce que les personnes autorisées à traiter les données à caractère personnel en vertu des présentes s’engagent à respecter la confidentialité ou soient soumises à une obligation légale appropriée de confidentialité et reçoivent la formation nécessaire à la protection des données à caractère personnel, et (iii) veiller à ce que ses éventuels sous-traitants respectent les obligations légales au nom et selon les instructions de BAZISZT.',
+  },
+  customerDataRights: {
+    en: 'The Customer shall at all times have a right of access, amendment, rectification, and deletion of his/her/its data. To exercise this right, he/she/it may present a request to BAZISZT by e-mail to the address together@baziszt.com or by letter to the following address: BAZISZT - 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+    fr: 'Le Client dispose à tout moment d’un droit d’accès, de modification, de rectification et de suppression de ses données. Pour exercer ce droit, il/elle peut adresser une demande à BAZISZT par e-mail à l’adresse together@baziszt.com ou par lettre à l’adresse suivante : BAZISZT - 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+  },
+  optInMarketing: {
+    en: 'Subject to validation by an “opt-in” of the Customer, personal information (personal data, e-mail address, gender, etc.) can also be used by BAZISZT and/or its partners for marketing purposes like the sending of newsletters or requests.',
+    fr: 'Sous réserve de la validation par un « opt-in » du Client, les informations personnelles (données personnelles, adresse e-mail, sexe, etc.) peuvent également être utilisées par BAZISZT et/ou ses partenaires à des fins marketing comme l’envoi de newsletters ou de sollicitations.',
+  },
+  cookieUsage: {
+    en: 'The Website uses cookies in order to best satisfy and customize the Customer’s requirements. The purpose of the cookie is to indicate that you have visited the Website.',
+    fr: 'Le Site utilise des cookies afin de mieux répondre et personnaliser les besoins du Client. Le cookie a pour but d’indiquer que vous avez visité le Site.',
+  },
+  dataPolicyAccess: {
+    en: 'The personal data management policy of BAZISZT can be accessed on the Website.',
+    fr: 'La politique de gestion des données personnelles de BAZISZT est accessible sur le Site.',
+  },
+  intellectualProperty: {
+    en: '13. INTELLECTUAL PROPERTY',
+    fr: '13. PROPRIÉTÉ INTELLECTUELLE',
+  },
+  intellectualPropertyContent: {
+    en: 'All documents, information, texts, graphs, images, photographs or any other content published on the ',
+    fr: 'Tous les documents, informations, textes, graphiques, images, photographies ou tout autre contenu publié sur le ',
+  },
+  intellectualPropertyRights: {
+    en: ' Website content is the exclusive property of BAZISZT. Consequently, it may not be reproduced, exploited, or used for any purpose whatsoever, without the express authorization of the publication manager.',
+    fr: ' Le contenu du Site est la propriété exclusive de BAZISZT. Par conséquent, il ne peut être reproduit, exploité ou utilisé à quelque fin que ce soit, sans l’autorisation expresse du responsable de la publication.',
+  },
+  intellectualPropertyOwnership: {
+    en: 'BAZISZT is the owner of all the intellectual property (with the exception of authors’ moral rights) pertaining to Products and distinctive trademarks and signs under which the Products are marketed.',
+    fr: 'BAZISZT est propriétaire de tous les droits de propriété intellectuelle (à l’exception des droits moraux des auteurs) relatifs aux Produits et aux marques et signes distinctifs sous lesquels les Produits sont commercialisés.',
+  },
+  intellectualPropertyAcknowledgement: {
+    en: 'The Customer acknowledges without reservations the intellectual property rights of BAZISZT and undertakes not to infringe them in any manner howsoever. More specifically, the Customer expressly undertakes not to manufacture, sell, provide a licence or market in any manner howsoever, directly or through a third party, for its benefit or the benefit of a third party, the Products, imitations or reproductions of the Products or the intellectual property rights pertaining to the Products and trademarks belonging to BAZISZT.',
+    fr: 'Le Client reconnaît sans réserve les droits de propriété intellectuelle de BAZISZT et s’engage à ne pas y porter atteinte de quelque manière que ce soit. Plus précisément, le Client s’engage expressément à ne pas fabriquer, vendre, accorder une licence ou commercialiser de quelque manière que ce soit, directement ou par l’intermédiaire d’un tiers, à son profit ou au profit d’un tiers, les Produits, imitations ou reproductions des Produits ou les droits de propriété intellectuelle relatifs aux Produits et marques appartenant à BAZISZT.',
+  },
+  forceMajeureDefinition: {
+    en: '"Force majeure" means all external unforeseeable and unavoidable circumstances, beyond the reasonable control of the party which is suffering a force majeure case.',
+    fr: 'La "force majeure" désigne toutes les circonstances extérieures, imprévisibles et inévitables, échappant au contrôle raisonnable de la partie subissant un cas de force majeure.',
+  },
+  forceMajeureDetails: {
+    en: 'In the situation where BAZISZT is prevented or delayed by a force majeure case in honoring its commitments, BAZISZT undertakes to inform the Customer within 96 hours by specifying the exact elements constituting the force majeure and the reasonably foreseeable period of delay or prevention. BAZISZT shall then be exempt from liability in connection with the non-performance or delay in performance of its obligations but undertakes to use its best efforts to resume full performance without further delay. In such a case of force majeure, BAZISZT may exercise its discretionary right to terminate the order or any part thereof, without being held liable, except however that BAZISZT shall be responsible to reimburse the Customer for any amounts already paid. In no event shall the Customer invoke a case of force majeure to release himself/herself/itself even temporarily from an obligation to pay a sum of money.',
+    fr: 'Dans le cas où BAZISZT est empêché ou retardé par un cas de force majeure dans l’exécution de ses engagements, BAZISZT s’engage à informer le Client dans un délai de 96 heures en précisant les éléments exacts constituant la force majeure et la période de retard ou de prévention raisonnablement prévisible. BAZISZT sera alors exonéré de toute responsabilité en lien avec la non-exécution ou le retard dans l’exécution de ses obligations, mais s’engage à faire de son mieux pour reprendre l’exécution complète sans autre retard. En cas de force majeure, BAZISZT pourra exercer son droit discrétionnaire de résilier la commande ou une partie de celle-ci, sans être tenu responsable, sauf que BAZISZT sera responsable de rembourser le Client pour toute somme déjà payée. En aucun cas le Client ne pourra invoquer un cas de force majeure pour se libérer, même temporairement, d’une obligation de payer une somme d’argent.',
+  },
+  governingLawDisputes: {
+    en: '15. GOVERNING LAW – DISPUTES',
+    fr: '15. LOI APPLICABLE – LITIGES',
+  },
+  governingLaw: {
+    en: 'These GTS shall be governed and interpreted in accordance with French law. The language of this contract is French.',
+    fr: 'Les présentes CGV sont régies et interprétées conformément au droit français. La langue de ce contrat est le français.',
+  },
+  disputeResolution: {
+    en: 'In the event of a dispute, the French courts shall have sole jurisdiction. However, in accordance with Regulation EC 593/2008 of 17 June 2008, these GTS do not prevent the application of more favorable mandatory non-waivable provisions to the Customer, as may be applicable based on the Customer’s normal place of residence.',
+    fr: 'En cas de litige, les tribunaux français auront compétence exclusive. Cependant, conformément au Règlement CE 593/2008 du 17 juin 2008, les présentes CGV n’empêchent pas l’application de dispositions impératives plus favorables et non dérogeables au Client, et pouvant s’appliquer en fonction du lieu de résidence habituel du Client.',
+  },
+  mediationProcedure: {
+    en: 'In the event of a dispute arising in connection with the performance and/or the interpretation of these GTS, the Customer may submit such dispute to a contractually-agreed mediation procedure or any other alternative dispute resolution procedure. Pursuant to Ordinance No. 2015-1033 of 20 August 2015 and to the application decree No. 2015-1382 of 30 October 2015, any consumer dispute or litigation, subject to Article L.612-2 of the Consumer Code, may be the subject of an amicable settlement by mediation through the CMAP - Paris Centre of Mediation and Arbitration. In order to bring a complaint before the mediator, the Customer may (i) fill in the form on the CMAP website',
+    fr: 'En cas de litige relatif à l’exécution et/ou à l’interprétation des présentes CGV, le Client peut soumettre ce litige à une procédure de médiation contractuellement convenue ou à toute autre procédure de règlement alternatif des litiges. Conformément à l’Ordonnance n° 2015-1033 du 20 août 2015 et au décret d’application n° 2015-1382 du 30 octobre 2015, tout litige ou différend de consommation, sous réserve de l’article L.612-2 du Code de la consommation, peut faire l’objet d’un règlement amiable par médiation via le CMAP - Centre de Médiation et d’Arbitrage de Paris. Pour déposer une réclamation auprès du médiateur, le Client peut (i) remplir le formulaire sur le site du CMAP',
+  },
+  mediationContact: {
+    en: ', tab "you are: a consumer", (ii) send his/her/its request by first-class mail or registered letter to: CMAP - Médiation Consommation, 39 avenue Franklin D. Roosevelt, 75008 PARIS, or (iii) send an e-mail to',
+    fr: ', onglet "vous êtes : un consommateur", (ii) envoyer sa demande par courrier ordinaire ou recommandé à : CMAP - Médiation Consommation, 39 avenue Franklin D. Roosevelt, 75008 PARIS, ou (iii) envoyer un e-mail à',
+  },
+  mediationRequestDetails: {
+    en: '. Irrespective of the means used to contact CMAP, the Customer’s request must contain the following elements in order to be processed rapidly: his/her/its postal address, e-mail address, and telephone number, as well as the full name and address of BAZISZT, a clear statement of the facts, and proof of previous steps taken with BAZISZT.',
+    fr: '. Quel que soit le moyen utilisé pour contacter le CMAP, la demande du Client doit contenir les éléments suivants afin d’être traitée rapidement : son adresse postale, adresse e-mail et numéro de téléphone, ainsi que le nom complet et l’adresse de BAZISZT, un exposé clair des faits, et la preuve des démarches préalables effectuées auprès de BAZISZT.',
+  },
+  disputeRegulation: {
+    en: 'Notwithstanding the foregoing, in the case of a dispute, in accordance with Regulation No. 1215/2012 of 12 December 2012:',
+    fr: 'Nonobstant ce qui précède, en cas de litige, conformément au Règlement n° 1215/2012 du 12 décembre 2012:',
+  },
+  customerCourtChoice: {
+    en: 'The Customer may bring the matter before the competent court of his/her/its domicile or the French courts,',
+    fr: 'Le Client peut porter l’affaire devant le tribunal compétent de son domicile ou les tribunaux français,',
+  },
+  bazisztCourtChoice: {
+    en: 'BAZISZT may bring the matter before the court of the Customer’s domicile.',
+    fr: 'BAZISZT peut porter l’affaire devant le tribunal du domicile du Client.',
+  },
 };
 
 export default resources;

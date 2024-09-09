@@ -2,13 +2,11 @@ import { NextResponse } from 'next/server';
 
 export async function POST(req: Request) {
   try {
-    // Placeholder for incoming request data
     const { customerAccessToken } = await req.json();
 
-    // Check for environment variables
     if (
-      !process.env.SHOPIFY_HOST_NAME ||
-      !process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN
+      !process.env.NEXT_PUBLIC_SHOPIFY_HOST_NAME ||
+      !process.env.NEXT_PUBLIC_SHOPIFY_ADMIN_API_ACCESS_TOKEN
     ) {
       return NextResponse.json(
         { error: 'Missing environment variables' },
@@ -16,47 +14,38 @@ export async function POST(req: Request) {
       );
     }
 
-    // Placeholder API endpoint to avoid build errors
-    // const customerResponse = await fetch(
-    //   `https://${process.env.SHOPIFY_HOST_NAME}/admin/api/2024-01/customers.json`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN,
-    //     },
-    //   },
-    // );
+    // Fetch customer information using the access token
+    const customerResponse = await fetch(
+      `https://${process.env.NEXT_PUBLIC_SHOPIFY_HOST_NAME}/admin/api/2024-01/customers.json`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Access-Token':
+            process.env.NEXT_PUBLIC_SHOPIFY_ADMIN_API_ACCESS_TOKEN,
+        },
+      },
+    );
 
-    // Simulated response data
-    // const customerData = await customerResponse.json();
-    // const customer = customerData.customers.find((cust: any) => cust.access_token === customerAccessToken);
+    const customerData = await customerResponse.json();
+    const customerId = customerData.customer.id;
 
-    // if (!customer) {
-    //   return NextResponse.json(
-    //     { error: 'Customer not found' },
-    //     { status: 404 },
-    //   );
-    // }
+    // Fetch orders by customer ID
+    const ordersResponse = await fetch(
+      `https://${process.env.NEXT_PUBLIC_SHOPIFY_HOST_NAME}/admin/api/2024-01/orders.json?customer_id=${customerId}`,
+      {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Access-Token':
+            process.env.NEXT_PUBLIC_SHOPIFY_ADMIN_API_ACCESS_TOKEN,
+        },
+      },
+    );
 
-    // const customerId = customer.id;
+    const ordersData = await ordersResponse.json();
 
-    // Placeholder API endpoint to avoid build errors
-    // const ordersResponse = await fetch(
-    //   `https://${process.env.SHOPIFY_HOST_NAME}/admin/api/2024-01/orders.json?customer_id=${customerId}`,
-    //   {
-    //     method: 'GET',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //       'X-Shopify-Access-Token': process.env.SHOPIFY_ADMIN_API_ACCESS_TOKEN,
-    //     },
-    //   },
-    // );
-
-    // Simulated orders response data
-    // const ordersData = await ordersResponse.json();
-
-    return NextResponse.json({ orders: [] }, { status: 200 });
+    return NextResponse.json({ orders: ordersData.orders }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: 'Failed to fetch orders' },
