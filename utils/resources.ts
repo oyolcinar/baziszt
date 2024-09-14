@@ -868,6 +868,294 @@ const resources: Resources = {
     en: 'BAZISZT may bring the matter before the court of the Customer’s domicile.',
     fr: 'BAZISZT peut porter l’affaire devant le tribunal du domicile du Client.',
   },
+  privacyPolicy: {
+    en: 'PRIVACY POLICY',
+    fr: 'POLITIQUE DE CONFIDENTIALITÉ',
+  },
+  controller1: {
+    en: '1. CONTROLLER',
+    fr: '1. RESPONSABLE DU TRAITEMENT',
+  },
+  controller1_1: {
+    en: '1.1 The controller is BAZISZT SAS, whose head office is located at 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE (hereinafter « BAZISZT »). BAZISZT – and its service providers acting on its behalf – determines the purposes, the technical and juridical means of the data processing and commits to take all necessary measures to ensure that the processing is compliant with the provisions of Data Protection Act of January 6, 1978 modified by the law of August 6, 2004 (hereinafter “the Law”) and the regulation (EU) 2016/679 of April 26, 2016, general regulation on data protection (hereinafter “GDPR”).',
+    fr: '1.1 Le responsable du traitement est BAZISZT SAS, dont le siège social est situé au 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE (ci-après « BAZISZT »). BAZISZT – et ses prestataires agissant en son nom – détermine les finalités, les moyens techniques et juridiques du traitement des données et s’engage à prendre toutes les mesures nécessaires pour garantir que le traitement soit conforme aux dispositions de la loi Informatique et Libertés du 6 janvier 1978 modifiée par la loi du 6 août 2004 (ci-après « la Loi ») et au règlement (UE) 2016/679 du 26 avril 2016, règlement général sur la protection des données (ci-après « RGPD »).',
+  },
+  controller1_2: {
+    en: '1.2 BAZISZT is free to choose any natural or legal person to process the User’s personal data at its request and on its behalf (hereinafter « the processor »). BAZISZT commits to select processors providing sufficient guarantees regarding technical and organizational security measures of the personal data processing.',
+    fr: '1.2 BAZISZT est libre de choisir toute personne physique ou morale pour traiter les données personnelles de l’Utilisateur à sa demande et en son nom (ci-après « le sous-traitant »). BAZISZT s’engage à sélectionner des sous-traitants offrant des garanties suffisantes concernant les mesures de sécurité techniques et organisationnelles du traitement des données personnelles.',
+  },
+  personalDataProcessing2: {
+    en: '2. PERSONAL DATA PROCESSING',
+    fr: '2. TRAITEMENT DES DONNÉES PERSONNELLES',
+  },
+  personalDataProcessing2_1: {
+    en: '2.1 The use of the Website, the access to specific pages and / or all information or services requested by the website User may lead to the communication of personal data. The processing of those data by BAZISZT, as controller, and/or by the processors acting on BAZISZT behalf, shall be compliant to the Law and the GDPR Regulation.',
+    fr: '2.1 L’utilisation du site web, l’accès à des pages spécifiques et / ou toutes les informations ou services demandés par l’Utilisateur du site peuvent entraîner la communication de données personnelles. Le traitement de ces données par BAZISZT, en tant que responsable du traitement, et/ou par les sous-traitants agissant au nom de BAZISZT, doit être conforme à la Loi et au Règlement RGPD.',
+  },
+  personalDataProcessing2_2: {
+    en: '2.2 The purpose of this Privacy Policy is to inform the User, before accessing specific pages of the Website and communicating its personal data, about the way BAZISZT processes its data. The User shall be aware of this Privacy Policy before providing personal data by filling the forms provided in that respect in the different pages of the Website.',
+    fr: '2.2 Le but de cette politique de confidentialité est d’informer l’Utilisateur, avant d’accéder à des pages spécifiques du site web et de communiquer ses données personnelles, sur la manière dont BAZISZT traite ses données. L’Utilisateur doit avoir pris connaissance de cette politique de confidentialité avant de fournir des données personnelles en remplissant les formulaires prévus à cet effet sur les différentes pages du site web.',
+  },
+  personalDataProcessing2_3: {
+    en: '2.3 The personal data will be processed mainly in an automated manner, with procedures linked to the purposes described in point 3. BAZISZT cares that User’s personal data are processed safely and in confidentiality and takes all necessary measures to avoid loss, misuse, deterioration, or deletion of the personal data.',
+    fr: '2.3 Les données personnelles seront principalement traitées de manière automatisée, selon des procédures liées aux finalités décrites au point 3. BAZISZT veille à ce que les données personnelles de l’Utilisateur soient traitées en toute sécurité et confidentialité, et prend toutes les mesures nécessaires pour éviter la perte, l’utilisation abusive, la détérioration ou la suppression des données personnelles.',
+  },
+  personalDataProcessing2_4: {
+    en: '2.4 BAZISZT also collects User’s specific personal data in order to recognize him/her and offer him/her an optimal and personalized use experience. This collection also aims to correct potential mistakes in the Website. The collected data concern the User’s connection (IP address, geographical zone, day and hour of connection, pages viewed and / or used, etc.) as well as the equipment from where the connection occurred.',
+    fr: '2.4 BAZISZT collecte également des données personnelles spécifiques à l’Utilisateur afin de le reconnaître et de lui offrir une expérience d’utilisation optimale et personnalisée. Cette collecte vise également à corriger les éventuelles erreurs du site web. Les données collectées concernent la connexion de l’Utilisateur (adresse IP, zone géographique, jour et heure de connexion, pages consultées et / ou utilisées, etc.) ainsi que l’équipement à partir duquel la connexion a eu lieu.',
+  },
+  personalDataProcessing2_5: {
+    en: '2.5 The Website, to better meet the needs of the User and personalize them, makes use of cookies. The purpose of the cookie is to signal your visit to the Website.',
+    fr: '2.5 Le site web, afin de mieux répondre aux besoins de l’Utilisateur et de les personnaliser, utilise des cookies. L’objectif du cookie est de signaler votre visite sur le site web.',
+  },
+  personalDataProcessing2_6: {
+    en: '2.6 Any failure, partial or inaccurate information on personal data, indicated by an asterisk, and therefore necessary for the performance of the requested service, makes it impossible to carry out. On the other hand, any failure, partial or inaccurate information on optional personal data has no consequence.',
+    fr: '2.6 Toute absence, inexactitude ou information partielle concernant les données personnelles, indiquées par un astérisque, et donc nécessaires à l’exécution du service demandé, rend son exécution impossible. En revanche, toute absence, inexactitude ou information partielle concernant des données personnelles facultatives n’a aucune conséquence.',
+  },
+  purposesOfPersonalDataProcessing3: {
+    en: '3. PURPOSES OF PERSONAL DATA PROCESSING',
+    fr: '3. FINALITÉS DU TRAITEMENT DES DONNÉES PERSONNELLES',
+  },
+  purposesOfPersonalDataProcessing3_1: {
+    en: 'The User’s personal data are processed in order to process and deliver his/her orders. The order process on the Website www.baziszt.com requires the creation of a Customer account in which his/her information is stored and protected by a password chosen by the Customer. Subject to validation by an “opt-in” of the Customer, personal information (personal data, e-mail address, gender, etc.…) can also be used by BAZISZT and/or its partners for marketing purposes like the sending of newsletters or requests.',
+    fr: 'Les données personnelles de l’Utilisateur sont traitées afin de traiter et livrer ses commandes. Le processus de commande sur le site www.baziszt.com nécessite la création d’un compte Client dans lequel ses informations sont stockées et protégées par un mot de passe choisi par le Client. Sous réserve de la validation par un « opt-in » du Client, les informations personnelles (données personnelles, adresse e-mail, sexe, etc.) peuvent également être utilisées par BAZISZT et/ou ses partenaires à des fins marketing telles que l’envoi de newsletters ou de demandes.',
+  },
+  personalDataLikelyToBeProcessed4: {
+    en: '4. PERSONAL DATA LIKELY TO BE PROCESSED',
+    fr: '4. DONNÉES PERSONNELLES SUSCEPTIBLES D’ÊTRE TRAITÉES',
+  },
+  personalDataLikelyToBeProcessed4_1: {
+    en: 'The information given by the User while filling the forms or creating his/her account are collected and processed. This information includes the User’s name, gender, size, address, email, and phone number.',
+    fr: 'Les informations fournies par l’Utilisateur lors du remplissage des formulaires ou de la création de son compte sont collectées et traitées. Ces informations incluent le nom, le sexe, la taille, l’adresse, l’e-mail et le numéro de téléphone de l’Utilisateur.',
+  },
+  consent5: {
+    en: '5. CONSENT',
+    fr: '5. CONSENTEMENT',
+  },
+  consent5_1: {
+    en: 'The User can withdraw his/her consent at any time. The withdrawal of his/her consent does not question the legality of the process already done, based on the consent given before the withdrawal. This right can be exercised by e-mail to the address together@baziszt.com or by letter to the following address: BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+    fr: 'L’Utilisateur peut retirer son consentement à tout moment. Le retrait de son consentement ne remet pas en cause la légalité du traitement déjà effectué, sur la base du consentement donné avant le retrait. Ce droit peut être exercé par e-mail à l’adresse together@baziszt.com ou par courrier à l’adresse suivante : BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+  },
+  durationOfPersonalDataStorage6: {
+    en: '6. DURATION OF PERSONAL DATA’S STORAGE',
+    fr: '6. DURÉE DE CONSERVATION DES DONNÉES PERSONNELLES',
+  },
+  durationOfPersonalDataStorage6_1: {
+    en: 'In compliance with the Law and GDPR Regulation, BAZISZT only stores User’s personal data during a timeframe reasonably necessary to achieve the purposes for which it is collected.',
+    fr: 'Conformément à la Loi et au Règlement RGPD, BAZISZT ne conserve les données personnelles de l’Utilisateur que pendant une période raisonnablement nécessaire pour atteindre les finalités pour lesquelles elles sont collectées.',
+  },
+  communicationOfUsersPersonalData7: {
+    en: '7. COMMUNICATION OF USER’S PERSONAL DATA FOR INTERNAL PURPOSES',
+    fr: "7. COMMUNICATION DES DONNÉES PERSONNELLES DE L'UTILISATEUR À DES FINS INTERNES",
+  },
+  personalDataProvidedToEmployees7_1: {
+    en: '7.1 The personal data can be provided to BAZISZT’ employees and staff who, acting under BAZISZT’ direct authority, are considered controller or processor and receive appropriate operational instructions. The personal data can be disclosed to the controller’s employees or staff, appointed by BAZISZT, provided that the data are collected according to the pursued purposes.',
+    fr: "7.1 Les données personnelles peuvent être communiquées aux employés et au personnel de BAZISZT qui, agissant sous l'autorité directe de BAZISZT, sont considérés comme responsables du traitement ou sous-traitants et reçoivent des instructions opérationnelles appropriées. Les données personnelles peuvent être divulguées aux employés ou au personnel du responsable du traitement, désignés par BAZISZT, à condition que les données soient collectées en fonction des finalités poursuivies.",
+  },
+  bazisztEnsuresProtection7_2: {
+    en: '7.2 BAZISZT ensures that the processors, employees or staff guarantee the same level of protection as itself and ensures that these processors, employees or staff process the personal data only for the pursued purposes, with the required discretion and security.',
+    fr: "7.2 BAZISZT s'assure que les sous-traitants, employés ou personnel garantissent le même niveau de protection qu'elle-même et veille à ce que ces sous-traitants, employés ou personnel traitent les données personnelles uniquement pour les finalités poursuivies, avec la discrétion et la sécurité requises.",
+  },
+  personalDataDisclosedToProviders7_3: {
+    en: '7.3 The personal data directly communicated by the Users through the online forms can be disclosed and collected by external providers acting on BAZISZT’ behalf.',
+    fr: '7.3 Les données personnelles directement communiquées par les Utilisateurs via les formulaires en ligne peuvent être divulguées et collectées par des prestataires externes agissant au nom de BAZISZT.',
+  },
+  dataNotTransferredToThirdCountry7_4: {
+    en: '7.4 The data are not subject to a transfer to a third country outside the European Union.',
+    fr: "7.4 Les données ne font pas l'objet d'un transfert vers un pays tiers en dehors de l'Union européenne.",
+  },
+  usersRights8: {
+    en: '8. THE USER’S RIGHTS',
+    fr: "8. LES DROITS DE L'UTILISATEUR",
+  },
+  fairAndLawfulProcessing8_1: {
+    en: '8.1 BAZISZT guarantees fair and lawful processing of User’s personal data.',
+    fr: "8.1 BAZISZT garantit un traitement équitable et légal des données personnelles de l'Utilisateur.",
+  },
+  rightToAccessPersonalData8_2: {
+    en: '8.2 BAZISZT guarantees the User a right to access his/her personal data.',
+    fr: "8.2 BAZISZT garantit à l'Utilisateur un droit d'accès à ses données personnelles.",
+  },
+  rightToObtainInformationGDPR8_3: {
+    en: 'According to article 15 of GDPR, the User shall have the right to obtain from BAZISZT the following (non-exhaustive) information:',
+    fr: "Conformément à l'article 15 du RGPD, l'Utilisateur a le droit d'obtenir de BAZISZT les informations suivantes (liste non exhaustive):",
+  },
+  purposesOfProcessing8_3_1: {
+    en: 'The purposes of the processing;',
+    fr: 'Les finalités du traitement;',
+  },
+  categoriesOfPersonalData8_3_2: {
+    en: 'The categories of personal data concerned;',
+    fr: 'Les catégories de données personnelles concernées;',
+  },
+  recipientsOfPersonalData8_3_3: {
+    en: 'The recipients or categories of recipients to whom the personal data have been or will be disclosed, in particular recipients in third countries or international organizations;',
+    fr: 'Les destinataires ou les catégories de destinataires auxquels les données personnelles ont été ou seront divulguées, en particulier les destinataires dans des pays tiers ou des organisations internationales;',
+  },
+  dataStoragePeriod8_3_4: {
+    en: 'Where possible, the envisaged period for which the personal data will be stored, or, if not possible, the criteria used to determine that period;',
+    fr: "Si possible, la durée envisagée de conservation des données personnelles ou, si ce n'est pas possible, les critères utilisés pour déterminer cette durée;",
+  },
+  automatedDecisionMaking8_3_5: {
+    en: 'The existence of automated decision-making, including profiling, referred to in Article 22(1) and (4) and, at least in those cases, meaningful information about the logic involved, as well as the significance and the envisaged consequences of such processing for the data subject.',
+    fr: "L'existence de décisions automatisées, y compris le profilage, mentionnées à l'article 22(1) et (4) et, au moins dans ces cas, des informations utiles sur la logique impliquée, ainsi que l'importance et les conséquences envisagées de ce traitement pour la personne concernée.",
+  },
+  rightToAccessPersonalData8_3: {
+    en: '8.3 BAZISZT guarantees the User a right to access his/her personal data.',
+    fr: "8.3 BAZISZT garantit à l'Utilisateur un droit d'accès à ses données personnelles.",
+  },
+  rectificationOfData8_4: {
+    en: 'According to article 16 of GDPR, the incorrect or inaccurate data can be rectified or deleted at any time. First, the User shall proceed by himself to the necessary modifications from his/her user account, then the User shall ask BAZISZT to proceed to the modifications if necessary.',
+    fr: "Conformément à l'article 16 du RGPD, les données incorrectes ou inexactes peuvent être rectifiées ou supprimées à tout moment. L'Utilisateur doit d'abord procéder lui-même aux modifications nécessaires depuis son compte utilisateur, puis, si nécessaire, demander à BAZISZT d'effectuer les modifications.",
+  },
+  rightToDeletion8_5: {
+    en: 'The User shall have a right to obtain the deletion of his/her personal data in the cases listed in article 17 of GDPR.',
+    fr: "L'Utilisateur a le droit d'obtenir la suppression de ses données personnelles dans les cas énumérés à l'article 17 du RGPD.",
+  },
+  rightToRestrictionOfProcessing8_4: {
+    en: '8.4 BAZISZT guarantees the right to restriction of processing.',
+    fr: '8.4 BAZISZT garantit le droit à la limitation du traitement.',
+  },
+  restrictionOfProcessingConditions8_5: {
+    en: 'The User shall have the right to obtain restriction of processing where one of the cases described in article 18 of GDPR applies.',
+    fr: "L'Utilisateur a le droit d'obtenir la limitation du traitement lorsque l'un des cas décrits à l'article 18 du RGPD s'applique.",
+  },
+  rightToDataPortability8_5: {
+    en: '8.5 BAZISZT guarantees the right to data portability.',
+    fr: '8.5 BAZISZT garantit le droit à la portabilité des données.',
+  },
+  rightToReceiveData8_6: {
+    en: 'According to article 20 of GDPR, the User shall have the right to receive from BAZISZT the personal data concerning him or her, in a structured, commonly used and machine-readable format.',
+    fr: "Conformément à l'article 20 du RGPD, l'Utilisateur a le droit de recevoir de BAZISZT les données personnelles le concernant, dans un format structuré, couramment utilisé et lisible par machine.",
+  },
+  rightToTransmitData8_7: {
+    en: 'The User shall also have a right to transmit those data to another controller without hindrance from BAZISZT, in the cases described in GDPR.',
+    fr: "L'Utilisateur a également le droit de transmettre ces données à un autre responsable du traitement sans entrave de la part de BAZISZT, dans les cas décrits dans le RGPD.",
+  },
+  rightToObjectProcessing8_6: {
+    en: '8.6 BAZISZT guarantees the right to object to the processing.',
+    fr: "8.6 BAZISZT garantit le droit de s'opposer au traitement.",
+  },
+  rightToObjectConditions8_7: {
+    en: 'The User shall have the right to object, on compelling and legitimate grounds relating to his or her particular situation, at any time to processing of personal data concerning him or her. In such a case, BAZISZT will not process the personal data, unless there are compelling legitimate grounds for the processing which override the interests, rights and freedoms of the data subject or for the establishment, exercise or defense of legal claims.',
+    fr: "L'Utilisateur a le droit de s'opposer, pour des raisons impérieuses et légitimes liées à sa situation particulière, à tout moment au traitement des données personnelles le concernant. Dans un tel cas, BAZISZT ne traitera pas les données personnelles, sauf s'il existe des motifs légitimes impérieux pour le traitement qui priment sur les intérêts, les droits et les libertés de la personne concernée ou pour la constatation, l'exercice ou la défense de droits en justice.",
+  },
+  rightToLodgeComplaint8_7: {
+    en: '8.7 BAZISZT guarantees the right to lodge a complaint.',
+    fr: '8.7 BAZISZT garantit le droit de déposer une plainte.',
+  },
+  rightToLodgeComplaintWithCNIL8_8: {
+    en: 'The User shall have the right to lodge a complaint regarding the processing of his/her personal data by BAZISZT with the CNIL, the supervisory authority competent in the French territory.',
+    fr: "L'Utilisateur a le droit de déposer une plainte concernant le traitement de ses données personnelles par BAZISZT auprès de la CNIL, l'autorité de contrôle compétente sur le territoire français.",
+  },
+  exerciseOfRights8_8: {
+    en: '8.8 The User can exercise the rights listed above, at any time, by e-mail to the address together@baziszt.com or by letter to the following address: BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+    fr: "8.8 L'Utilisateur peut exercer les droits énumérés ci-dessus, à tout moment, par e-mail à l'adresse together@baziszt.com ou par courrier à l'adresse suivante : BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.",
+  },
+  processorsLimitationOfLiability9: {
+    en: '9. PROCESSOR’S LIMITATION OF LIABILITY',
+    fr: '9. LIMITATION DE RESPONSABILITÉ DU SOUS-TRAITANT',
+  },
+  thirdPartyWebsitesLiability9_1: {
+    en: 'The website may contain hyperlinks to websites controlled and operated by third parties not linked to BAZISZT. In such a case, BAZISZT cannot be held responsible for the content of these websites, or for these third parties’ practices as regards personal data protection.',
+    fr: 'Le site peut contenir des hyperliens vers des sites contrôlés et exploités par des tiers non liés à BAZISZT. Dans ce cas, BAZISZT ne peut être tenu responsable du contenu de ces sites, ni des pratiques de ces tiers en matière de protection des données personnelles.',
+  },
+  bazisztNoLiabilityForLoss9_2: {
+    en: 'BAZISZT cannot be held responsible for the loss, data corruption, or identity theft, which may be caused particularly but not exclusively by the presence of viruses or by cyber-attacks.',
+    fr: "BAZISZT ne peut être tenu responsable de la perte, de la corruption des données ou du vol d'identité, qui peuvent être causés notamment, mais pas exclusivement, par la présence de virus ou par des cyberattaques.",
+  },
+  usersDataModificationProcess10: {
+    en: '10. USER’S DATA MODIFICATION PROCESS',
+    fr: "10. PROCESSUS DE MODIFICATION DES DONNÉES DE L'UTILISATEUR",
+  },
+  modifyPersonalData10_1: {
+    en: 'The User can, at any time, modify the disclosed personal data by e-mail to the address together@baziszt.com or by letter to the following address: BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.',
+    fr: "L'Utilisateur peut, à tout moment, modifier les données personnelles divulguées par e-mail à l'adresse together@baziszt.com ou par courrier à l'adresse suivante : BAZISZT – 13 RUE LA BOETIE, 75008 PARIS 8, FRANCE.",
+  },
+  cookiesUsage11_1: {
+    en: 'Cookies are used on the site, in order to improve your experience of the site. The cookie identifies your computer and allows the site to remember your personal settings. Cookies are also used for statistical purposes.',
+    fr: "Des cookies sont utilisés sur le site afin d'améliorer votre expérience du site. Le cookie identifie votre ordinateur et permet au site de se souvenir de vos paramètres personnels. Les cookies sont également utilisés à des fins statistiques.",
+  },
+  cookieSettings11_2: {
+    en: 'You can set your browser to notify you when a cookie is to be activated. This enables you to reject the use of this cookie or to tell your browser to erase the cookie at the end of your visit. The web shop cannot be used if cookies are disallowed.',
+    fr: "Vous pouvez configurer votre navigateur pour qu'il vous avertisse lorsqu'un cookie est activé. Cela vous permet de refuser l'utilisation de ce cookie ou d'indiquer à votre navigateur de supprimer le cookie à la fin de votre visite. La boutique en ligne ne peut pas être utilisée si les cookies sont désactivés.",
+  },
+  userIDTracking11_3: {
+    en: 'A user-ID will be assigned to logged-in users, which allows for anonymized website tracking across multiple devices (tablet, desktop, mobile, etc.). No personally identifiable data is collected or connected to the user-ID and you can opt out by contacting: together@baziszt.com.',
+    fr: "Un ID utilisateur sera attribué aux utilisateurs connectés, ce qui permet un suivi anonymisé du site Web sur plusieurs appareils (tablette, ordinateur de bureau, mobile, etc.). Aucune donnée personnelle identifiable n'est collectée ou liée à l'ID utilisateur et vous pouvez vous désinscrire en contactant : together@baziszt.com.",
+  },
+  privacyPolicyModification12: {
+    en: '12. PRIVACY POLICY’S MODIFICATION',
+    fr: '12. MODIFICATION DE LA POLITIQUE DE CONFIDENTIALITÉ',
+  },
+  privacyPolicyRightToModify12_1: {
+    en: 'BAZISZT reserves the right to modify this Privacy policy for compliance with privacy laws and regulations or in order to adapt it to its practice. Therefore, the User is encouraged to consult it regularly to be aware of potential modifications and adaptations.',
+    fr: "BAZISZT se réserve le droit de modifier cette politique de confidentialité pour se conformer aux lois et réglementations en matière de confidentialité ou pour l'adapter à ses pratiques. Par conséquent, l'Utilisateur est encouragé à la consulter régulièrement pour être informé des éventuelles modifications et adaptations.",
+  },
+  cookieList12_2: {
+    en: 'Cookie List',
+    fr: 'Liste des cookies',
+  },
+  cookieDefinition12_3: {
+    en: 'A cookie is a small piece of data (text file) that a website – when visited by a user – asks your browser to store on your device in order to remember information about you, such as your language preference or login information. Those cookies are set by us and called first-party cookies. We also use third-party cookies – which are cookies from a domain different than the domain of the website you are visiting – for our advertising and marketing efforts. More specifically, we use cookies and other tracking technologies for the following purposes:',
+    fr: "Un cookie est un petit morceau de données (fichier texte) qu'un site Web – lorsqu'il est visité par un utilisateur – demande à votre navigateur de stocker sur votre appareil afin de se souvenir d'informations vous concernant, telles que votre préférence de langue ou vos informations de connexion. Ces cookies sont définis par nous et sont appelés cookies de première partie. Nous utilisons également des cookies tiers – qui sont des cookies provenant d'un domaine différent de celui du site Web que vous visitez – pour nos efforts publicitaires et marketing. Plus précisément, nous utilisons des cookies et d'autres technologies de suivi aux fins suivantes :",
+  },
+  necessaryCookiesForStoreFunctioning12_4: {
+    en: 'Necessary Cookies for the Functioning of the Store',
+    fr: 'Cookies nécessaires au fonctionnement de la boutique',
+  },
+  cookieName12_5: {
+    en: 'NAME',
+    fr: 'NOM',
+  },
+  cookieFunction12_6: {
+    en: 'FUNCTION',
+    fr: 'FONCTION',
+  },
+  usedForAdminAccess12_7: {
+    en: 'Used in connection with access to admin.',
+    fr: "Utilisé en relation avec l'accès à l'administration.",
+  },
+  usedForStorefrontNavigation12_8: {
+    en: 'Used in connection with navigation through a storefront.',
+    fr: 'Utilisé en relation avec la navigation dans une vitrine.',
+  },
+  usedForShoppingCart12_9: {
+    en: 'Used in connection with shopping cart.',
+    fr: "Utilisé en relation avec le panier d'achat.",
+  },
+  usedForCheckout12_10: {
+    en: 'Used in connection with checkout.',
+    fr: 'Utilisé en relation avec le processus de paiement.',
+  },
+  usedForCustomerLogin12_11: {
+    en: 'Used in connection with customer login.',
+    fr: 'Utilisé en relation avec la connexion client.',
+  },
+  usedForUpdatingCustomerInfo12_12: {
+    en: 'Used to facilitate updating customer account information.',
+    fr: 'Utilisé pour faciliter la mise à jour des informations du compte client.',
+  },
+  performanceAndTargetingCookies12_13: {
+    en: 'Performance Cookies and Targeting Cookies',
+    fr: 'Cookies de performance et cookies de ciblage',
+  },
+  trackingPreferences12_14: {
+    en: 'Tracking preferences.',
+    fr: 'Suivi des préférences.',
+  },
+  trackLandingPages12_15: {
+    en: 'Track landing pages.',
+    fr: "Suivi des pages d'atterrissage.",
+  },
+  shopifyAnalytics12_16: {
+    en: 'Shopify analytics.',
+    fr: 'Analyses Shopify.',
+  },
+  shopifyMarketingAndReferralsAnalytics12_17: {
+    en: 'Shopify analytics relating to marketing & referrals.',
+    fr: 'Analyses Shopify liées au marketing et aux parrainages.',
+  },
 };
 
 export default resources;
