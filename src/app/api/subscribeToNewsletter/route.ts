@@ -1,41 +1,41 @@
-import { NextRequest, NextResponse } from 'next/server';
-import Shopify from 'shopify-api-node';
+import { NextApiRequest, NextApiResponse } from 'next';
+import sendgrid from '@sendgrid/mail';
 
-// Configure Shopify API
-const shopify = new Shopify({
-  shopName: process.env.NEXT_PUBLIC_SHOPIFY_HOST_NAME!,
-  accessToken: process.env.NEXT_PUBLIC_SHOPIFY_ADMIN_API_ACCESS_TOKEN!,
-});
+const sendGridApiKey = process.env.NEXT_PUBLIC_SENDGRID_API_KEY;
 
-export async function POST(req: NextRequest) {
-  try {
-    const body = await req.json();
-    const { email } = body;
+if (!sendGridApiKey) {
+  throw new Error('SendGrid API key is not set in environment variables.');
+}
+
+sendgrid.setApiKey(sendGridApiKey);
+
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
+  if (req.method === 'POST') {
+    const { email } = req.body;
 
     if (!email) {
-      return NextResponse.json({ message: 'Missing email' }, { status: 400 });
+      return res.status(400).json({ error: 'Email is required' });
     }
 
-    const draftOrder = await shopify.draftOrder.create({
-      line_items: [
-        {
-          title: 'Newsletter Subscription',
-          price: 0,
-          quantity: 1,
-        },
-      ],
-      note: `Newsletter Subscription\n\nEmail: ${email}`,
-    });
+    try {
+      await sendgrid.send({
+        to: 'together@gmail.com',
+        from: 'no-reply@yourdomain.com',
+        subject: 'New Newsletter Subscription',
+        text: `A new user has subscribed to the newsletter: ${email}`,
+        html: `<strong>A new user has subscribed to the newsletter:</strong> ${email}`,
+      });
 
-    return NextResponse.json(
-      { message: 'Successfully subscribed to newsletter', draftOrder },
-      { status: 200 },
-    );
-  } catch (error) {
-    console.error('Error creating draft order:', error);
-    return NextResponse.json(
-      { message: 'Error subscribing to newsletter' },
-      { status: 500 },
-    );
+      return res.status(200).json({ message: 'Subscription successful' });
+    } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Failed to send email' });
+    }
+  } else {
+    res.setHeader('Allow', ['POST']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }

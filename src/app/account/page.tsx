@@ -69,7 +69,7 @@ const AccountPage = () => {
       } else {
         await signUp(email, firstName, lastName);
       }
-      router.push('/');
+      // router.push('/');
     } catch (err) {
       setError(isLogin ? t('failedLogin') : t('failedSignUp'));
     }
