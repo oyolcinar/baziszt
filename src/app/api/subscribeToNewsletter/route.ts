@@ -20,7 +20,7 @@ export async function POST(req: NextRequest) {
 
     await sendgrid.send({
       to: 'together@gmail.com',
-      from: 'no-reply@yourdomain.com', // Make sure this is a verified sender in SendGrid
+      from: 'no-reply@yourdomain.com', // Ensure this is a verified email in SendGrid
       subject: 'New Newsletter Subscription',
       text: `A new user has subscribed to the newsletter: ${email}`,
       html: `<strong>A new user has subscribed to the newsletter:</strong> ${email}`,
@@ -38,8 +38,3 @@ export async function POST(req: NextRequest) {
     );
   }
 }
-
-// If you need to restrict methods:
-export const config = {
-  methods: ['POST'],
-};
