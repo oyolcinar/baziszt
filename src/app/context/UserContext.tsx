@@ -45,26 +45,38 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [wishlist]);
 
   const login = async (email: string, password: string) => {
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    if (!response.ok) {
-      throw new Error(`Failed to login: ${response.statusText}`);
-    }
-
-    const data = await response.json();
-    if (data.customerAccessToken) {
-      setUser({
-        accessToken: data.customerAccessToken.accessToken,
-        expiresAt: data.customerAccessToken.expiresAt,
+    try {
+      const response = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
       });
-    } else {
-      console.error(data.userErrors);
+
+      const data = await response.json();
+      console.log('Full response from login API:', data);
+
+      if (data.error || data.userErrors) {
+        console.error('User Errors or Missing Access Token:', data.userErrors);
+        const errorMessage = data.error
+          ? data.error
+          : data.userErrors.map((error: any) => error.message).join(', ');
+        throw new Error(errorMessage);
+      }
+
+      if (data.accessToken) {
+        console.log('Login successful, setting user data...');
+        setUser({
+          accessToken: data.accessToken,
+          expiresAt: data.expiresAt,
+        });
+      } else {
+        throw new Error('Login failed: no access token provided.');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+      throw error;
     }
   };
 
@@ -77,8 +89,12 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({
       body: JSON.stringify({ email, firstName, lastName }),
     });
 
+    const data = await response.json();
+
     if (!response.ok) {
-      throw new Error(`Failed to sign up: ${response.statusText}`);
+      throw new Error(
+        data.error || `Failed to sign up: ${response.statusText}`,
+      );
     }
 
     await login(email, 'password');

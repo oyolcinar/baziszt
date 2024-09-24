@@ -1156,6 +1156,18 @@ const resources: Resources = {
     en: 'Shopify analytics relating to marketing & referrals.',
     fr: 'Analyses Shopify liées au marketing et aux parrainages.',
   },
+  noOrders: {
+    en: 'no previous orders found.',
+    fr: 'Aucune commande précédente trouvée.',
+  },
+  previousOrders: {
+    en: 'previous orders',
+    fr: 'commandes précédentes',
+  },
+  noWishlistItems: {
+    en: 'no wishlist items found.',
+    fr: 'aucun article dans la liste de souhaits trouvé.',
+  },
 };
 
 export default resources;

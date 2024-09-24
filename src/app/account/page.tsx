@@ -6,6 +6,9 @@ import { useRouter } from 'next/navigation';
 import { useTranslation } from '../../../utils/useTranslation';
 import ProductCard from '../components/ProductCard/ProductCard';
 
+import { faSignOut } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 interface Order {
   id: number;
   total_price: string;
@@ -26,7 +29,6 @@ const AccountPage = () => {
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
   const [orders, setOrders] = useState<Order[]>([]);
 
-  // Track which sections are expanded
   const [expandedSections, setExpandedSections] = useState<string[]>([]);
 
   const wishlistRef = useRef<HTMLDivElement>(null);
@@ -71,7 +73,7 @@ const AccountPage = () => {
       }
       // router.push('/');
     } catch (err) {
-      setError(isLogin ? t('failedLogin') : t('failedSignUp'));
+      setError(isLogin ? err + t('failedLogin') : err + t('failedSignUp'));
     }
   };
 
@@ -103,13 +105,28 @@ const AccountPage = () => {
   if (user) {
     return (
       <>
+        <div
+          className='flex justify-end mt-32 text-black mr-8 text-futura cursor-pointer hover:opacity-70 transition duration-300'
+          onClick={signOut}
+        >
+          <div className='flex justify-center items-center'>
+            <div className='mr-[4px] font-futura font-bold text-base'>
+              {t('signOut').toUpperCase()}
+            </div>
+            <FontAwesomeIcon icon={faSignOut} className='text-black' />
+          </div>
+        </div>
         {/* Wishlist Section */}
         <div
-          className='flex justify-between items-center w-full px-[30px] mb-4 mt-20 cursor-pointer'
+          className='flex justify-between items-center w-full px-[30px] mb-4 mt-4 cursor-pointer'
           onClick={() => toggleSection('wishlist')}
         >
-          <div className='text-xl text-black font-futura'>{t('wishlist')}</div>
-          <div>{isSectionExpanded('wishlist') ? '-' : '+'}</div>
+          <div className='text-lg text-black font-futura'>
+            {t('wishlist').toUpperCase()}
+          </div>
+          <div className='text-black'>
+            {isSectionExpanded('wishlist') ? '-' : '+'}
+          </div>
         </div>
 
         <div
@@ -133,15 +150,19 @@ const AccountPage = () => {
           </div>
         </div>
 
+        <div className='border-b mx-8 border-black'></div>
+
         {/* Orders Section */}
         <div
-          className='flex justify-between items-center w-full px-[30px] mb-4 mt-20 cursor-pointer'
+          className='flex justify-between items-center w-full px-[30px] mt-4 mb-20 cursor-pointer'
           onClick={() => toggleSection('orders')}
         >
-          <div className='text-xl text-black font-futura'>
-            {t('previousOrders')}
+          <div className='text-lg text-black font-futura'>
+            {t('previousOrders').toUpperCase()}
           </div>
-          <div>{isSectionExpanded('orders') ? '-' : '+'}</div>
+          <div className='text-black'>
+            {isSectionExpanded('orders') ? '-' : '+'}
+          </div>
         </div>
 
         <div
