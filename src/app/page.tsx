@@ -119,7 +119,12 @@ export default function Home() {
         const slides = Array.from(swiperInstance.slides);
         const totalSlides = slides.length;
         let totalHeight = 0;
-        const additionalHeight = windowWidth > 768 ? 162 : 340;
+        const additionalHeight =
+          windowWidth > 768
+            ? windowHeight
+            : windowHeight < 400
+            ? windowHeight
+            : 340;
 
         slides.forEach((slide, index) => {
           if (index === totalSlides - 1) {
