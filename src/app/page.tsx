@@ -198,8 +198,9 @@ export default function Home() {
         slidesPerView={1}
         direction={'vertical'}
         modules={[Pagination, Mousewheel]}
-        pagination={{}}
-        mousewheel
+        pagination={{ clickable: true }}
+        mousewheel={{ forceToAxis: true }}
+        freeMode={false}
         style={{ height: swiperHeight }}
       >
         <div>
