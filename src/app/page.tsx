@@ -92,6 +92,9 @@ export default function Home() {
     if (window.innerWidth >= 768) {
       setLogoSize(30);
     }
+    if (window.innerWidth < 768 && window.innerHeight < 400) {
+      setLogoSize(30);
+    }
     setLogoVisible(true);
 
     window.addEventListener('resize', updateWindowDimensions);
@@ -131,7 +134,12 @@ export default function Home() {
       swiperInstance.on('slideChange', () => {
         const activeIndex = swiperInstance.activeIndex;
         const totalSlides = swiperInstance.slides.length;
-        const additionalHeight = windowWidth > 768 ? 162 : 340;
+        const additionalHeight =
+          windowWidth > 768
+            ? windowHeight
+            : windowHeight < 400
+            ? windowHeight
+            : 340;
 
         if (activeIndex === totalSlides - 1) {
           swiperInstance.allowSlideNext = false;
@@ -159,7 +167,7 @@ export default function Home() {
           const newSize =
             windowWidth < 768
               ? Math.max(50 - (activeIndex / totalSlides) * 40, 10)
-              : Math.max(30 - (activeIndex / totalSlides) * 30, 10);
+              : Math.max(30 - (activeIndex / totalSlides) * 30, 1);
           setLogoSize(newSize);
         }
       });
@@ -198,11 +206,11 @@ export default function Home() {
           <div
             style={{
               width: `${logoSize}vw`,
-              height: `${logoSize}vh`,
+              height: `${logoSize / 1.75}vh`,
               position: 'fixed',
-              top: topPixels,
+              top: '0px',
               left: '50%',
-              transform: 'translate(-50%, -50%)',
+              transform: 'translate(-50%, 0)',
               zIndex: 4,
               opacity: logoVisible ? 1 : 0,
               transition: isMounted
@@ -397,65 +405,123 @@ export default function Home() {
             </div>
           </SwiperSlide>
         )}
-        <SwiperSlide>
-          <div className='w-full flex justify-center h-screen'>
-            <div className='flex w-3/4 flex-col items-center justify-center'>
-              <div className='font-altesse64 text-bordeux text-5xl sm:text-6xl md:text-8xl mb-4'>
-                {t('ourcommitment')}
-              </div>
-              <div className='text-bordeux font-futura text-lg flex flex-col items-center text-justify'>
-                <div className='mb-2 w-full md:w-1/2'>
-                  {t('commitmenttext')}
+        {windowWidth >= 768 && (
+          <SwiperSlide>
+            <div className='w-full flex flex-col justify-center items-center h-screen'>
+              <div className='flex-grow flex w-3/4 flex-col items-center justify-center'>
+                <div className='font-altesse64 text-bordeux text-5xl sm:text-6xl md:text-8xl mb-4'>
+                  {t('ourcommitment')}
+                </div>
+                <div className='text-bordeux font-futura text-lg flex flex-col items-center text-justify'>
+                  <div className='mb-2 w-full md:w-1/2'>
+                    {t('commitmenttext')}
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </SwiperSlide>
-
-        <SwiperSlide>
-          <nav>
-            <div className='flex justify-center items-center flex-row text-center'>
-              <div className='flex-1 w-full flex justify-center'>
-                <div className='hidden md:block w-2/3 px-[30px]'>
-                  <LanguageSwitcher />
-                  <form onSubmit={handleSearch}>
-                    <div className='flex items-center border-b-2 border-black py-1'>
-                      <input
-                        type='text'
-                        placeholder={t('search')}
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-                      />
-                      <button
-                        type='submit'
-                        className='w-[20px] cursor-pointer ml-2'
-                      >
-                        <MagnifyingGlassIcon className='text-black hover:opacity-70 transition duration-300' />
-                      </button>
+              <nav className='w-full mb-2'>
+                <div className='flex justify-center items-center flex-row text-center'>
+                  <div className='flex-1 w-full flex justify-center'>
+                    <div className='hidden md:block w-2/3 px-[30px]'>
+                      <LanguageSwitcher />
+                      <form onSubmit={handleSearch}>
+                        <div className='flex items-center border-b-2 border-black py-1'>
+                          <input
+                            type='text'
+                            placeholder={t('search')}
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                            className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                          />
+                          <button
+                            type='submit'
+                            className='w-[20px] cursor-pointer ml-2'
+                          >
+                            <MagnifyingGlassIcon className='text-black hover:opacity-70 transition duration-300' />
+                          </button>
+                        </div>
+                      </form>
                     </div>
-                  </form>
+                  </div>
+
+                  <div className='py-4'>
+                    <Image
+                      alt='baziszt'
+                      src={CamelLogo}
+                      width={80}
+                      height={50}
+                    />
+                  </div>
+
+                  <div className='flex-1 w-full flex justify-center'>
+                    <div className='hidden md:block w-2/3 px-[30px]'>
+                      <div className='text-black text-base font-futura'>
+                        {t('subscribe')}
+                      </div>
+                      <form onSubmit={handleSubscribe}>
+                        {' '}
+                        {/* Add form for subscription */}
+                        <div className='flex items-center border-b-2 border-black py-1'>
+                          <input
+                            type='email'
+                            placeholder={t('youremail')}
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)} // Handle input
+                            className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                            required
+                          />
+                          {subscriptionMessage && (
+                            <p className='text-green-500 font-futura text-[14px]'>
+                              {subscriptionMessage}
+                            </p>
+                          )}
+                          <button
+                            type='submit'
+                            className='w-[20px] cursor-pointer ml-2'
+                          >
+                            <FontAwesomeIcon
+                              icon={faArrowRight}
+                              className='text-black hover:opacity-70 transition duration-300'
+                            />
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className='py-4'>
-                <Image alt='baziszt' src={CamelLogo} width={80} height={50} />
-              </div>
-
-              <div className='flex-1 w-full flex justify-center'>
-                <div className='hidden md:block w-2/3 px-[30px]'>
+                <form
+                  className='md:hidden w-full px-[50px] pb-[50px]'
+                  onSubmit={handleSearch}
+                >
+                  <div className='flex items-center border-b-2 border-black py-1'>
+                    <input
+                      type='text'
+                      placeholder={t('search')}
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                    />
+                    <button
+                      type='submit'
+                      className='w-[20px] cursor-pointer ml-2'
+                    >
+                      <MagnifyingGlassIcon className='text-black' />
+                    </button>
+                  </div>
+                </form>
+                {/* Mobile subscription form */}
+                <div className='md:hidden w-full px-[50px]'>
                   <div className='text-black text-base font-futura'>
                     {t('subscribe')}
                   </div>
                   <form onSubmit={handleSubscribe}>
                     {' '}
-                    {/* Add form for subscription */}
+                    {/* Add form for mobile subscription */}
                     <div className='flex items-center border-b-2 border-black py-1'>
                       <input
                         type='email'
                         placeholder={t('youremail')}
                         value={email}
-                        onChange={(e) => setEmail(e.target.value)} // Handle input
+                        onChange={(e) => setEmail(e.target.value)}
                         className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
                         required
                       />
@@ -470,71 +536,165 @@ export default function Home() {
                       >
                         <FontAwesomeIcon
                           icon={faArrowRight}
-                          className='text-black hover:opacity-70 transition duration-300'
+                          className='text-black'
                         />
                       </button>
                     </div>
                   </form>
                 </div>
+
+                <div className='flex justify-center text-black font-futura text-sm mb-4'>
+                  © 2024, baziszt
+                </div>
+              </nav>
+            </div>
+          </SwiperSlide>
+        )}
+        {windowWidth <= 768 && (
+          <SwiperSlide>
+            <div className='w-full flex justify-center h-screen'>
+              <div className='flex w-3/4 flex-col items-center justify-center'>
+                <div className='font-altesse64 text-bordeux text-5xl sm:text-6xl md:text-8xl mb-4'>
+                  {t('ourcommitment')}
+                </div>
+                <div className='text-bordeux font-futura text-lg flex flex-col items-center text-justify'>
+                  <div className='mb-2 w-full md:w-1/2'>
+                    {t('commitmenttext')}
+                  </div>
+                </div>
               </div>
             </div>
-            <form
-              className='md:hidden w-full px-[50px] pb-[50px]'
-              onSubmit={handleSearch}
-            >
-              <div className='flex items-center border-b-2 border-black py-1'>
-                <input
-                  type='text'
-                  placeholder={t('search')}
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-                />
-                <button type='submit' className='w-[20px] cursor-pointer ml-2'>
-                  <MagnifyingGlassIcon className='text-black' />
-                </button>
+          </SwiperSlide>
+        )}
+
+        {windowWidth <= 768 && (
+          <SwiperSlide>
+            <nav>
+              <div className='flex justify-center items-center flex-row text-center'>
+                <div className='flex-1 w-full flex justify-center'>
+                  <div className='hidden md:block w-2/3 px-[30px]'>
+                    <LanguageSwitcher />
+                    <form onSubmit={handleSearch}>
+                      <div className='flex items-center border-b-2 border-black py-1'>
+                        <input
+                          type='text'
+                          placeholder={t('search')}
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                        />
+                        <button
+                          type='submit'
+                          className='w-[20px] cursor-pointer ml-2'
+                        >
+                          <MagnifyingGlassIcon className='text-black hover:opacity-70 transition duration-300' />
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+
+                <div className='py-4'>
+                  <Image alt='baziszt' src={CamelLogo} width={80} height={50} />
+                </div>
+
+                <div className='flex-1 w-full flex justify-center'>
+                  <div className='hidden md:block w-2/3 px-[30px]'>
+                    <div className='text-black text-base font-futura'>
+                      {t('subscribe')}
+                    </div>
+                    <form onSubmit={handleSubscribe}>
+                      {' '}
+                      {/* Add form for subscription */}
+                      <div className='flex items-center border-b-2 border-black py-1'>
+                        <input
+                          type='email'
+                          placeholder={t('youremail')}
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)} // Handle input
+                          className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                          required
+                        />
+                        {subscriptionMessage && (
+                          <p className='text-green-500 font-futura text-[14px]'>
+                            {subscriptionMessage}
+                          </p>
+                        )}
+                        <button
+                          type='submit'
+                          className='w-[20px] cursor-pointer ml-2'
+                        >
+                          <FontAwesomeIcon
+                            icon={faArrowRight}
+                            className='text-black hover:opacity-70 transition duration-300'
+                          />
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </div>
-            </form>
-            {/* Mobile subscription form */}
-            <div className='md:hidden w-full px-[50px]'>
-              <div className='text-black text-base font-futura'>
-                {t('subscribe')}
-              </div>
-              <form onSubmit={handleSubscribe}>
-                {' '}
-                {/* Add form for mobile subscription */}
+              <form
+                className='md:hidden w-full px-[50px] pb-[50px]'
+                onSubmit={handleSearch}
+              >
                 <div className='flex items-center border-b-2 border-black py-1'>
                   <input
-                    type='email'
-                    placeholder={t('youremail')}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type='text'
+                    placeholder={t('search')}
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
                     className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
-                    required
                   />
-                  {subscriptionMessage && (
-                    <p className='text-green-500 font-futura text-[14px]'>
-                      {subscriptionMessage}
-                    </p>
-                  )}
                   <button
                     type='submit'
                     className='w-[20px] cursor-pointer ml-2'
                   >
-                    <FontAwesomeIcon
-                      icon={faArrowRight}
-                      className='text-black'
-                    />
+                    <MagnifyingGlassIcon className='text-black' />
                   </button>
                 </div>
               </form>
-            </div>
+              {/* Mobile subscription form */}
+              <div className='md:hidden w-full px-[50px]'>
+                <div className='text-black text-base font-futura'>
+                  {t('subscribe')}
+                </div>
+                <form onSubmit={handleSubscribe}>
+                  {' '}
+                  {/* Add form for mobile subscription */}
+                  <div className='flex items-center border-b-2 border-black py-1'>
+                    <input
+                      type='email'
+                      placeholder={t('youremail')}
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className='bg-transparent outline-none flex-1 font-futura text-black placeholder-gray text-[14px]'
+                      required
+                    />
+                    {subscriptionMessage && (
+                      <p className='text-green-500 font-futura text-[14px]'>
+                        {subscriptionMessage}
+                      </p>
+                    )}
+                    <button
+                      type='submit'
+                      className='w-[20px] cursor-pointer ml-2'
+                    >
+                      <FontAwesomeIcon
+                        icon={faArrowRight}
+                        className='text-black'
+                      />
+                    </button>
+                  </div>
+                </form>
+              </div>
 
-            <div className='flex justify-center text-black font-futura text-sm mb-4'>
-              © 2024, baziszt
-            </div>
-          </nav>
-        </SwiperSlide>
+              <div className='flex justify-center text-black font-futura text-sm mb-4'>
+                © 2024, baziszt
+              </div>
+            </nav>
+          </SwiperSlide>
+        )}
       </Swiper>
     </main>
   );
