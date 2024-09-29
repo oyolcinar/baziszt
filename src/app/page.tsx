@@ -207,6 +207,11 @@ export default function Home() {
         mousewheel={{ forceToAxis: true }}
         freeMode={false}
         style={{ height: swiperHeight }}
+        watchSlidesProgress={true}
+        touchReleaseOnEdges={true}
+        threshold={20}
+        resistance={false}
+        followFinger={false}
       >
         <div>
           <div
