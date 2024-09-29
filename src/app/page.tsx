@@ -128,14 +128,13 @@ export default function Home() {
             : 340;
 
         slides.forEach((slide, index) => {
-          const slideElement = slide as HTMLElement;
           if (index === totalSlides - 1) {
             totalHeight += additionalHeight;
           } else {
             totalHeight += windowHeight;
           }
         });
-        return totalHeight;
+        return totalHeight - windowHeight + additionalHeight;
       };
 
       const handleSlideChange = () => {
@@ -147,16 +146,28 @@ export default function Home() {
             : windowHeight < 400
             ? windowHeight
             : 340;
-        const lastSlideIndex = totalSlides - 1;
 
-        if (activeIndex === lastSlideIndex) {
+        if (activeIndex === totalSlides - 1) {
           swiperInstance.allowSlideNext = false;
-          swiperInstance.setTranslate(
-            -(lastSlideIndex * windowHeight + additionalHeight - windowHeight),
-          );
+          (
+            swiperInstance.wrapperEl as HTMLElement
+          ).style.transform = `translate3d(0px, -${
+            (totalSlides - 2) * windowHeight + additionalHeight
+          }px, 0px)`;
+        } else if (activeIndex === totalSlides - 2) {
+          swiperInstance.allowSlideNext = true;
+          (
+            swiperInstance.wrapperEl as HTMLElement
+          ).style.transform = `translate3d(0px, -${
+            (totalSlides - 2) * windowHeight
+          }px, 0px)`;
         } else {
           swiperInstance.allowSlideNext = true;
-          swiperInstance.setTranslate(-(activeIndex * windowHeight));
+          (
+            swiperInstance.wrapperEl as HTMLElement
+          ).style.transform = `translate3d(0px, -${
+            activeIndex * windowHeight
+          }px, 0px)`;
         }
 
         if (windowWidth >= 768) {
@@ -168,15 +179,18 @@ export default function Home() {
         }
       };
 
+      const updateSwiperHeight = () => {
+        const swiperContainer = document.querySelector(
+          '.swiper-container',
+        ) as HTMLElement;
+        if (swiperContainer) {
+          swiperContainer.style.height = `${calculateTotalHeight()}px`;
+        }
+      };
       swiperInstance.on('slideChange', handleSlideChange);
       swiperInstance.on('touchEnd', handleSlideChange);
 
-      const swiperContainer = document.querySelector(
-        '.swiper-container',
-      ) as HTMLElement;
-      if (swiperContainer) {
-        swiperContainer.style.height = `${calculateTotalHeight()}px`;
-      }
+      updateSwiperHeight();
 
       return () => {
         swiperInstance.off('slideChange', handleSlideChange);
