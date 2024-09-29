@@ -128,16 +128,17 @@ export default function Home() {
             : 340;
 
         slides.forEach((slide, index) => {
+          const slideElement = slide as HTMLElement;
           if (index === totalSlides - 1) {
             totalHeight += additionalHeight;
           } else {
             totalHeight += windowHeight;
           }
         });
-        return totalHeight - windowHeight + additionalHeight;
+        return totalHeight;
       };
 
-      swiperInstance.on('slideChange', () => {
+      const handleSlideChange = () => {
         const activeIndex = swiperInstance.activeIndex;
         const totalSlides = swiperInstance.slides.length;
         const additionalHeight =
@@ -146,29 +147,18 @@ export default function Home() {
             : windowHeight < 400
             ? windowHeight
             : 340;
+        const lastSlideIndex = totalSlides - 1;
 
-        if (activeIndex === totalSlides - 1) {
+        if (activeIndex === lastSlideIndex) {
           swiperInstance.allowSlideNext = false;
-          (
-            swiperInstance.wrapperEl as HTMLElement
-          ).style.transform = `translate3d(0px, -${
-            (totalSlides - 2) * windowHeight + additionalHeight
-          }px, 0px)`;
-        } else if (activeIndex === totalSlides - 2) {
-          swiperInstance.allowSlideNext = true;
-          (
-            swiperInstance.wrapperEl as HTMLElement
-          ).style.transform = `translate3d(0px, -${
-            (totalSlides - 2) * windowHeight
-          }px, 0px)`;
+          swiperInstance.setTranslate(
+            -(lastSlideIndex * windowHeight + additionalHeight - windowHeight),
+          );
         } else {
           swiperInstance.allowSlideNext = true;
-          (
-            swiperInstance.wrapperEl as HTMLElement
-          ).style.transform = `translate3d(0px, -${
-            activeIndex * windowHeight
-          }px, 0px)`;
+          swiperInstance.setTranslate(-(activeIndex * windowHeight));
         }
+
         if (windowWidth >= 768) {
           const newSize =
             windowWidth < 768
@@ -176,7 +166,10 @@ export default function Home() {
               : Math.max(30 - (activeIndex / totalSlides) * 30, 1);
           setLogoSize(newSize);
         }
-      });
+      };
+
+      swiperInstance.on('slideChange', handleSlideChange);
+      swiperInstance.on('touchEnd', handleSlideChange);
 
       const swiperContainer = document.querySelector(
         '.swiper-container',
@@ -184,6 +177,11 @@ export default function Home() {
       if (swiperContainer) {
         swiperContainer.style.height = `${calculateTotalHeight()}px`;
       }
+
+      return () => {
+        swiperInstance.off('slideChange', handleSlideChange);
+        swiperInstance.off('touchEnd', handleSlideChange);
+      };
     }
   }, [swiperInstance, windowWidth, windowHeight]);
 
