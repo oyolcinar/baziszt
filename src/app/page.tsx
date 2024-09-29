@@ -1,5 +1,5 @@
 'use client';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Image from 'next/image';
 import React from 'react';
 import Link from 'next/link';
@@ -40,6 +40,7 @@ export default function Home() {
   const { setIsPastThreshold } = useScroll();
   const [email, setEmail] = useState('');
   const [subscriptionMessage, setSubscriptionMessage] = useState('');
+  const [isIOS, setIsIOS] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -191,14 +192,45 @@ export default function Home() {
     setShowPopup(true);
   }, []);
 
+  useEffect(() => {
+    const checkIsIOS = () => {
+      const userAgent = window.navigator.userAgent.toLowerCase();
+      setIsIOS(/iphone|ipad|ipod/.test(userAgent));
+    };
+    checkIsIOS();
+
+    // Debug log
+    console.log('Component mounted');
+
+    return () => {
+      console.log('Component will unmount');
+      if (swiperInstance) {
+        swiperInstance.destroy();
+      }
+    };
+  }, [swiperInstance]);
+
+  const handleSwiper = useCallback((swiper: any) => {
+    console.log('Swiper instance created');
+    setSwiperInstance(swiper);
+  }, []);
+
+  const handleSlideChange = useCallback(() => {
+    console.log('Slide changed');
+  }, []);
+
   const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
+
+  if (!isMounted) {
+    return null;
+  }
 
   return (
     <main>
       {showPopup && <NewsletterPopup />}
       <Swiper
         speed={1000}
-        onSwiper={setSwiperInstance}
+        // onSwiper={setSwiperInstance}
         spaceBetween={10}
         slidesPerView={1}
         direction={'vertical'}
@@ -212,6 +244,9 @@ export default function Home() {
         threshold={20}
         resistance={false}
         followFinger={false}
+        touchMoveStopPropagation={true}
+        onSwiper={handleSwiper}
+        onSlideChange={handleSlideChange}
       >
         <div>
           <div
