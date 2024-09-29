@@ -137,7 +137,7 @@ export default function Home() {
         return totalHeight - windowHeight + additionalHeight;
       };
 
-      const handleSlideChange = () => {
+      swiperInstance.on('slideChange', () => {
         const activeIndex = swiperInstance.activeIndex;
         const totalSlides = swiperInstance.slides.length;
         const additionalHeight =
@@ -169,7 +169,6 @@ export default function Home() {
             activeIndex * windowHeight
           }px, 0px)`;
         }
-
         if (windowWidth >= 768) {
           const newSize =
             windowWidth < 768
@@ -177,25 +176,14 @@ export default function Home() {
               : Math.max(30 - (activeIndex / totalSlides) * 30, 1);
           setLogoSize(newSize);
         }
-      };
+      });
 
-      const updateSwiperHeight = () => {
-        const swiperContainer = document.querySelector(
-          '.swiper-container',
-        ) as HTMLElement;
-        if (swiperContainer) {
-          swiperContainer.style.height = `${calculateTotalHeight()}px`;
-        }
-      };
-      swiperInstance.on('slideChange', handleSlideChange);
-      swiperInstance.on('touchEnd', handleSlideChange);
-
-      updateSwiperHeight();
-
-      return () => {
-        swiperInstance.off('slideChange', handleSlideChange);
-        swiperInstance.off('touchEnd', handleSlideChange);
-      };
+      const swiperContainer = document.querySelector(
+        '.swiper-container',
+      ) as HTMLElement;
+      if (swiperContainer) {
+        swiperContainer.style.height = `${calculateTotalHeight()}px`;
+      }
     }
   }, [swiperInstance, windowWidth, windowHeight]);
 
