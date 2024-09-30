@@ -602,7 +602,7 @@ export default function Home() {
         {windowWidth <= 768 && (
           <SwiperSlide>
             <nav>
-              <div className='flex justify-center items-center flex-row text-center'>
+              <div className='mt-40 flex justify-center items-center flex-row text-center'>
                 <div className='flex-1 w-full flex justify-center'>
                   <div className='hidden md:block w-2/3 px-[30px]'>
                     <LanguageSwitcher />
