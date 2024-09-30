@@ -147,28 +147,28 @@ export default function Home() {
             ? windowHeight
             : 340;
 
-        if (activeIndex === totalSlides - 1) {
-          swiperInstance.allowSlideNext = false;
-          (
-            swiperInstance.wrapperEl as HTMLElement
-          ).style.transform = `translate3d(0px, -${
-            (totalSlides - 2) * windowHeight + additionalHeight
-          }px, 0px)`;
-        } else if (activeIndex === totalSlides - 2) {
-          swiperInstance.allowSlideNext = true;
-          (
-            swiperInstance.wrapperEl as HTMLElement
-          ).style.transform = `translate3d(0px, -${
-            (totalSlides - 2) * windowHeight
-          }px, 0px)`;
-        } else {
-          swiperInstance.allowSlideNext = true;
-          (
-            swiperInstance.wrapperEl as HTMLElement
-          ).style.transform = `translate3d(0px, -${
-            activeIndex * windowHeight
-          }px, 0px)`;
-        }
+        // if (activeIndex === totalSlides - 1) {
+        //   swiperInstance.allowSlideNext = false;
+        //   (
+        //     swiperInstance.wrapperEl as HTMLElement
+        //   ).style.transform = `translate3d(0px, -${
+        //     (totalSlides - 2) * windowHeight + additionalHeight
+        //   }px, 0px)`;
+        // } else if (activeIndex === totalSlides - 2) {
+        //   swiperInstance.allowSlideNext = true;
+        //   (
+        //     swiperInstance.wrapperEl as HTMLElement
+        //   ).style.transform = `translate3d(0px, -${
+        //     (totalSlides - 2) * windowHeight
+        //   }px, 0px)`;
+        // } else {
+        //   swiperInstance.allowSlideNext = true;
+        //   (
+        //     swiperInstance.wrapperEl as HTMLElement
+        //   ).style.transform = `translate3d(0px, -${
+        //     activeIndex * windowHeight
+        //   }px, 0px)`;
+        // }
         if (windowWidth >= 768) {
           const newSize =
             windowWidth < 768
@@ -199,11 +199,7 @@ export default function Home() {
     };
     checkIsIOS();
 
-    // Debug log
-    console.log('Component mounted');
-
     return () => {
-      console.log('Component will unmount');
       if (swiperInstance) {
         swiperInstance.destroy();
       }
@@ -211,13 +207,10 @@ export default function Home() {
   }, [swiperInstance]);
 
   const handleSwiper = useCallback((swiper: any) => {
-    console.log('Swiper instance created');
     setSwiperInstance(swiper);
   }, []);
 
-  const handleSlideChange = useCallback(() => {
-    console.log('Slide changed');
-  }, []);
+  const handleSlideChange = useCallback(() => {}, []);
 
   const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
 
