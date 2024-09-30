@@ -7,8 +7,6 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination, Mousewheel } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
-import { useScroll } from './context/ScrollContext';
-import ProductCard from './components/ProductCard/ProductCard';
 import NewsletterPopup from './components/NewsletterPopUp/NewsletterPopUp';
 import { useTranslation } from '../../utils/useTranslation';
 import { useRouter } from 'next/navigation';
@@ -20,12 +18,9 @@ import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CamelLogo from '../../public/Logos/camelLogoSmall.png';
 import Logo from '../../public/Logos/logoEditBordeux1.png';
-import Hero from '../../public/Images/heroMock.png';
 import TopsImage from '../../public/Images/topsImage.png';
-import TopsImage2 from '../../public/Images/topsImage2.png';
 import BottomsImage from '../../public/Images/bottomsImage.png';
 import AccessoriesImage from '../../public/Images/accessoriesImage.png';
-import Footer from './components/Layout/Footer';
 import { Swiper as SwiperType } from 'swiper';
 
 export default function Home() {
@@ -37,10 +32,8 @@ export default function Home() {
   const [showPopup, setShowPopup] = useState(false);
   const [swiperHeight, setSwiperHeight] = useState('100vh');
   const [isMounted, setIsMounted] = useState(false);
-  const { setIsPastThreshold } = useScroll();
   const [email, setEmail] = useState('');
   const [subscriptionMessage, setSubscriptionMessage] = useState('');
-  const [isIOS, setIsIOS] = useState(false);
 
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -147,28 +140,28 @@ export default function Home() {
             ? windowHeight
             : 340;
 
-        // if (activeIndex === totalSlides - 1) {
-        //   swiperInstance.allowSlideNext = false;
-        //   (
-        //     swiperInstance.wrapperEl as HTMLElement
-        //   ).style.transform = `translate3d(0px, -${
-        //     (totalSlides - 2) * windowHeight + additionalHeight
-        //   }px, 0px)`;
-        // } else if (activeIndex === totalSlides - 2) {
-        //   swiperInstance.allowSlideNext = true;
-        //   (
-        //     swiperInstance.wrapperEl as HTMLElement
-        //   ).style.transform = `translate3d(0px, -${
-        //     (totalSlides - 2) * windowHeight
-        //   }px, 0px)`;
-        // } else {
-        //   swiperInstance.allowSlideNext = true;
-        //   (
-        //     swiperInstance.wrapperEl as HTMLElement
-        //   ).style.transform = `translate3d(0px, -${
-        //     activeIndex * windowHeight
-        //   }px, 0px)`;
-        // }
+        //   if (activeIndex === totalSlides - 1) {
+        //     swiperInstance.allowSlideNext = false;
+        //     (
+        //       swiperInstance.wrapperEl as HTMLElement
+        //     ).style.transform = `translate3d(0px, -${
+        //       (totalSlides - 2) * windowHeight + additionalHeight
+        //     }px, 0px)`;
+        //   } else if (activeIndex === totalSlides - 2) {
+        //     swiperInstance.allowSlideNext = true;
+        //     (
+        //       swiperInstance.wrapperEl as HTMLElement
+        //     ).style.transform = `translate3d(0px, -${
+        //       (totalSlides - 2) * windowHeight
+        //     }px, 0px)`;
+        //   } else {
+        //     swiperInstance.allowSlideNext = true;
+        //     (
+        //       swiperInstance.wrapperEl as HTMLElement
+        //     ).style.transform = `translate3d(0px, -${
+        //       activeIndex * windowHeight
+        //     }px, 0px)`;
+        //   }
         if (windowWidth >= 768) {
           const newSize =
             windowWidth < 768
@@ -192,27 +185,14 @@ export default function Home() {
     setShowPopup(true);
   }, []);
 
-  useEffect(() => {
-    const checkIsIOS = () => {
-      const userAgent = window.navigator.userAgent.toLowerCase();
-      setIsIOS(/iphone|ipad|ipod/.test(userAgent));
-    };
-    checkIsIOS();
-
-    return () => {
-      if (swiperInstance) {
-        swiperInstance.destroy();
-      }
-    };
-  }, [swiperInstance]);
-
   const handleSwiper = useCallback((swiper: any) => {
+    console.log('Swiper instance created');
     setSwiperInstance(swiper);
   }, []);
 
-  const handleSlideChange = useCallback(() => {}, []);
-
-  const topPixels = windowHeight * (windowWidth <= 768 ? 0.12 : 0.1);
+  const handleSlideChange = useCallback(() => {
+    console.log('Slide changed');
+  }, []);
 
   if (!isMounted) {
     return null;
@@ -223,7 +203,6 @@ export default function Home() {
       {showPopup && <NewsletterPopup />}
       <Swiper
         speed={1000}
-        // onSwiper={setSwiperInstance}
         spaceBetween={10}
         slidesPerView={1}
         direction={'vertical'}
@@ -283,7 +262,7 @@ export default function Home() {
 
         {windowWidth > 768 && (
           <SwiperSlide>
-            <div className='flex flex-row h-screen'>
+            <div className='flex flex-row h-screen mt-3'>
               <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300'>
                 <Link href='/shop/tops'>
                   <div
