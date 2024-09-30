@@ -188,13 +188,9 @@ export default function Home() {
   const handleSwiper = useCallback((swiper: any) => {
     setSwiperInstance(swiper);
     const swiperEl = swiper.el;
-    swiperEl.addEventListener(
-      'touchstart',
-      (e: TouchEvent) => {
-        e.preventDefault();
-      },
-      { passive: false },
-    );
+    swiperEl.addEventListener('touchstart', (e: TouchEvent) => {}, {
+      passive: false,
+    });
 
     swiperEl.addEventListener(
       'touchmove',
