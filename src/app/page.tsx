@@ -420,6 +420,8 @@ export default function Home() {
                       objectPosition: 'center',
                       transform: 'scale(1.2)',
                     }}
+                    priority={true}
+                    loading='eager'
                   />
                 </div>
               </Link>
@@ -468,6 +470,8 @@ export default function Home() {
                       objectPosition: 'center',
                       transform: 'scale(1.2)',
                     }}
+                    priority={true}
+                    loading='eager'
                   />
                 </div>
               </Link>
@@ -515,6 +519,8 @@ export default function Home() {
                       objectPosition: 'center',
                       transform: 'scale(1.2)',
                     }}
+                    priority={true}
+                    loading='eager'
                   />
                 </div>
               </Link>
