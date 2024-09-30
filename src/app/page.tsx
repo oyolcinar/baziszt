@@ -81,7 +81,7 @@ export default function Home() {
       setWindowWidth(window.innerWidth);
     };
     if (window.innerWidth < 768) {
-      setLogoSize(50);
+      setLogoSize(40);
     }
     if (window.innerWidth >= 768) {
       setLogoSize(30);
@@ -166,7 +166,7 @@ export default function Home() {
           const newSize =
             windowWidth < 768
               ? Math.max(50 - (activeIndex / totalSlides) * 40, 10)
-              : Math.max(30 - (activeIndex / totalSlides) * 30, 1);
+              : Math.max(30 - (activeIndex / totalSlides) * 20, 1);
           setLogoSize(newSize);
         }
       });
@@ -276,7 +276,7 @@ export default function Home() {
 
         {windowWidth > 768 && (
           <SwiperSlide>
-            <div className='flex flex-row h-screen mt-3'>
+            <div className='flex flex-row h-screen mt-8'>
               <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300'>
                 <Link href='/shop/tops'>
                   <div
@@ -379,9 +379,9 @@ export default function Home() {
           </SwiperSlide>
         )}
 
-        {windowWidth <= 768 && windowHeight > 400 && (
+        {windowWidth <= 768 && windowHeight > 400 && windowHeight > 800 && (
           <SwiperSlide>
-            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-screen'>
+            <div className='group relative cursor-pointer lg:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-screen'>
               <Link href='/shop/tops'>
                 <div
                   className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl '
@@ -398,10 +398,38 @@ export default function Home() {
             </div>
           </SwiperSlide>
         )}
-
-        {windowWidth <= 768 && windowHeight > 400 && (
+        {windowWidth <= 768 && windowHeight > 400 && windowHeight < 800 && (
           <SwiperSlide>
-            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-screen'>
+            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-end p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-[100vh]'>
+              <Link href='/shop/tops'>
+                <div
+                  className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
+                  style={{
+                    zIndex: 2,
+                  }}
+                >
+                  {t('tops')}
+                </div>
+                <div className='w-full h-[80vh] overflow-hidden'>
+                  <Image
+                    alt='Tops'
+                    src={TopsImage}
+                    className='w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-110 opacity-100 hover:opacity-75'
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      transform: 'scale(1.2)',
+                    }}
+                  />
+                </div>
+              </Link>
+            </div>
+          </SwiperSlide>
+        )}
+
+        {windowWidth <= 768 && windowHeight > 400 && windowHeight > 800 && (
+          <SwiperSlide>
+            <div className='group relative cursor-pointer lg:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-screen'>
               <Link href='/shop/bottoms'>
                 <div
                   className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -418,9 +446,37 @@ export default function Home() {
             </div>
           </SwiperSlide>
         )}
-        {windowWidth <= 768 && windowHeight > 400 && (
+        {windowWidth <= 768 && windowHeight > 400 && windowHeight < 800 && (
           <SwiperSlide>
-            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-screen'>
+            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-end p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-[100vh]'>
+              <Link href='/shop/bottoms'>
+                <div
+                  className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
+                  style={{
+                    zIndex: 2,
+                  }}
+                >
+                  {t('bottoms')}
+                </div>
+                <div className='w-full h-[80vh] overflow-hidden'>
+                  <Image
+                    alt='Bottoms'
+                    src={BottomsImage}
+                    className='w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-110 opacity-100 hover:opacity-75'
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      transform: 'scale(1.2)',
+                    }}
+                  />
+                </div>
+              </Link>
+            </div>
+          </SwiperSlide>
+        )}
+        {windowWidth <= 768 && windowHeight > 400 && windowHeight > 800 && (
+          <SwiperSlide>
+            <div className='group relative cursor-pointer lg:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-screen'>
               <Link href='/shop/accessories'>
                 <div
                   className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
@@ -432,6 +488,34 @@ export default function Home() {
                 </div>
                 <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
                   <Image alt='Accessories' src={AccessoriesImage} />
+                </div>
+              </Link>
+            </div>
+          </SwiperSlide>
+        )}
+        {windowWidth <= 768 && windowHeight > 400 && windowHeight < 800 && (
+          <SwiperSlide>
+            <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-end p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-[100vh]'>
+              <Link href='/shop/accessories'>
+                <div
+                  className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
+                  style={{
+                    zIndex: 2,
+                  }}
+                >
+                  {t('accessories')}
+                </div>
+                <div className='w-full h-[80vh] overflow-hidden'>
+                  <Image
+                    alt='Accessories'
+                    src={AccessoriesImage}
+                    className='w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-110 opacity-100 hover:opacity-75'
+                    style={{
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      transform: 'scale(1.2)',
+                    }}
+                  />
                 </div>
               </Link>
             </div>
@@ -585,7 +669,11 @@ export default function Home() {
         {windowWidth <= 768 && (
           <SwiperSlide>
             <div className='w-full flex justify-center h-screen'>
-              <div className='flex w-3/4 flex-col items-center justify-center'>
+              <div
+                className={`flex w-3/4 flex-col items-center justify-center ${
+                  windowHeight > 400 ? 'mt-24' : 'mt-20'
+                }`}
+              >
                 <div className='font-altesse64 text-bordeux text-5xl sm:text-6xl md:text-8xl mb-4'>
                   {t('ourcommitment')}
                 </div>
@@ -602,7 +690,11 @@ export default function Home() {
         {windowWidth <= 768 && (
           <SwiperSlide>
             <nav>
-              <div className='mt-40 flex justify-center items-center flex-row text-center'>
+              <div
+                className={`${
+                  windowHeight > 400 ? 'mt-40' : 'mt-12'
+                } flex justify-center items-center flex-row text-center`}
+              >
                 <div className='flex-1 w-full flex justify-center'>
                   <div className='hidden md:block w-2/3 px-[30px]'>
                     <LanguageSwitcher />
