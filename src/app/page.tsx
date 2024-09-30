@@ -186,13 +186,26 @@ export default function Home() {
   }, []);
 
   const handleSwiper = useCallback((swiper: any) => {
-    console.log('Swiper instance created');
     setSwiperInstance(swiper);
+    const swiperEl = swiper.el;
+    swiperEl.addEventListener(
+      'touchstart',
+      (e: TouchEvent) => {
+        e.preventDefault();
+      },
+      { passive: false },
+    );
+
+    swiperEl.addEventListener(
+      'touchmove',
+      (e: TouchEvent) => {
+        e.preventDefault();
+      },
+      { passive: false },
+    );
   }, []);
 
-  const handleSlideChange = useCallback(() => {
-    console.log('Slide changed');
-  }, []);
+  const handleSlideChange = useCallback(() => {}, []);
 
   if (!isMounted) {
     return null;
@@ -214,11 +227,16 @@ export default function Home() {
         watchSlidesProgress={true}
         touchReleaseOnEdges={true}
         threshold={20}
-        resistance={false}
-        followFinger={false}
+        resistance={true}
+        resistanceRatio={0.85}
+        followFinger={true}
         touchMoveStopPropagation={true}
         onSwiper={handleSwiper}
         onSlideChange={handleSlideChange}
+        touchStartPreventDefault={true}
+        touchStartForcePreventDefault={true}
+        simulateTouch={true}
+        preventInteractionOnTransition={true}
       >
         <div>
           <div
