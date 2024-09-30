@@ -414,12 +414,7 @@ export default function Home() {
                   <Image
                     alt='Tops'
                     src={TopsImage}
-                    className='w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-110 opacity-100 hover:opacity-75'
-                    style={{
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                      transform: 'scale(1.2)',
-                    }}
+                    className='w-full h-full transition-transform duration-300 ease-in-out transform opacity-100 hover:opacity-75 object-cover object-center scale-[1.1]'
                     priority={true}
                     loading='eager'
                   />
@@ -464,12 +459,7 @@ export default function Home() {
                   <Image
                     alt='Bottoms'
                     src={BottomsImage}
-                    className='w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-110 opacity-100 hover:opacity-75'
-                    style={{
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                      transform: 'scale(1.2)',
-                    }}
+                    className='w-full h-full transition-transform duration-300 ease-in-out transform opacity-100 hover:opacity-75 object-cover object-center scale-[1.1]'
                     priority={true}
                     loading='eager'
                   />
@@ -513,12 +503,7 @@ export default function Home() {
                   <Image
                     alt='Accessories'
                     src={AccessoriesImage}
-                    className='w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-110 opacity-100 hover:opacity-75'
-                    style={{
-                      objectFit: 'cover',
-                      objectPosition: 'center',
-                      transform: 'scale(1.2)',
-                    }}
+                    className='w-full h-full transition-transform duration-300 ease-in-out transform opacity-100 hover:opacity-75 object-cover object-center scale-[1.1]'
                     priority={true}
                     loading='eager'
                   />
