@@ -18,6 +18,8 @@ html {
   scroll-behavior: smooth !important;
   /* border-left: 10px solid #370008;
   border-right: 10px solid #370008; */
+  overscroll-behavior: none;
+  touch-action: none;
 }
 
 .swiper-slide {
