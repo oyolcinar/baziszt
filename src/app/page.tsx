@@ -192,13 +192,9 @@ export default function Home() {
       passive: false,
     });
 
-    swiperEl.addEventListener(
-      'touchmove',
-      (e: TouchEvent) => {
-        e.preventDefault();
-      },
-      { passive: false },
-    );
+    swiperEl.addEventListener('touchmove', (e: TouchEvent) => {}, {
+      passive: false,
+    });
   }, []);
 
   const handleSlideChange = useCallback(() => {}, []);
@@ -229,10 +225,13 @@ export default function Home() {
         touchMoveStopPropagation={true}
         onSwiper={handleSwiper}
         onSlideChange={handleSlideChange}
-        touchStartPreventDefault={true}
-        touchStartForcePreventDefault={true}
+        touchStartPreventDefault={false}
+        touchStartForcePreventDefault={false}
         simulateTouch={true}
         preventInteractionOnTransition={true}
+        touchEventsTarget='wrapper'
+        noSwiping={true}
+        noSwipingClass='swiper-no-swiping'
       >
         <div>
           <div
