@@ -562,3 +562,5 @@
 //     </main>
 //   );
 // }
+
+export default function Journal() {}
