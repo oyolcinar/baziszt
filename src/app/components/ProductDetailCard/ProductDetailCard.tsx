@@ -322,43 +322,6 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     [isZoomed, carouselRef],
   );
 
-  //new logic for image scroll
-
-  // useEffect(() => {
-  //   const handleWheel = (e: WheelEvent) => {
-  //     if (!isZoomed) {
-  //       e.preventDefault();
-
-  //       if (!isTransitioning) {
-  //         if (e.deltaY > 0) {
-  //           handleImageChange('next');
-  //         } else if (e.deltaY < 0) {
-  //           handleImageChange('prev');
-  //         }
-  //       }
-  //     }
-  //   };
-
-  //   const desktopElement = desktopCarouselRef.current;
-  //   const mobileElement = carouselRef.current;
-
-  //   if (desktopElement) {
-  //     desktopElement.addEventListener('wheel', handleWheel, { passive: false });
-  //   }
-  //   if (mobileElement) {
-  //     mobileElement.addEventListener('wheel', handleWheel, { passive: false });
-  //   }
-
-  //   return () => {
-  //     if (desktopElement) {
-  //       desktopElement.removeEventListener('wheel', handleWheel);
-  //     }
-  //     if (mobileElement) {
-  //       mobileElement.removeEventListener('wheel', handleWheel);
-  //     }
-  //   };
-  // }, [isZoomed, isTransitioning, handleImageChange]);
-
   useEffect(() => {
     const handleMouseUp = () => {
       setMousePos(null);
@@ -399,35 +362,70 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     setClickedIndex(index);
   };
 
-  const smoothScrollTo = (targetElement: any, duration = 500) => {
-    const target =
-      targetElement.getBoundingClientRect().top + window.pageYOffset;
-    const startPosition = window.scrollY;
-    const distance = target - startPosition;
-    let startTime: any = null;
+  // const smoothScrollTo = (targetElement: any, duration = 500) => {
+  //   const target =
+  //     targetElement.getBoundingClientRect().top + window.pageYOffset;
+  //   const startPosition = window.scrollY;
+  //   const distance = target - startPosition;
+  //   let startTime: any = null;
 
-    const animation = (currentTime: number) => {
-      if (startTime === null) startTime = currentTime;
-      const timeElapsed = currentTime - startTime;
-      const run = easeInOutCubic(
-        timeElapsed,
-        startPosition,
-        distance,
-        duration,
-      );
-      window.scrollTo(0, run);
-      if (timeElapsed < duration) requestAnimationFrame(animation);
-    };
+  //   const animation = (currentTime: number) => {
+  //     if (startTime === null) startTime = currentTime;
+  //     const timeElapsed = currentTime - startTime;
+  //     const run = easeInOutCubic(
+  //       timeElapsed,
+  //       startPosition,
+  //       distance,
+  //       duration,
+  //     );
+  //     window.scrollTo(0, run);
+  //     if (timeElapsed < duration) requestAnimationFrame(animation);
+  //   };
 
-    const easeInOutCubic = (t: any, b: any, c: any, d: any) => {
-      t /= d / 2;
-      if (t < 1) return (c / 2) * t * t * t + b;
-      t -= 2;
-      return (c / 2) * (t * t * t + 2) + b;
-    };
+  //   const easeInOutCubic = (t: any, b: any, c: any, d: any) => {
+  //     t /= d / 2;
+  //     if (t < 1) return (c / 2) * t * t * t + b;
+  //     t -= 2;
+  //     return (c / 2) * (t * t * t + 2) + b;
+  //   };
 
-    requestAnimationFrame(animation);
+  //   requestAnimationFrame(animation);
+  // };
+
+  const easeInOutCubic = (t: number, b: number, c: number, d: number) => {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t * t + b;
+    t -= 2;
+    return (c / 2) * (t * t * t + 2) + b;
   };
+
+  const smoothScrollTo = useCallback(
+    (targetElement: HTMLElement | null, duration = 500) => {
+      if (!targetElement) return;
+
+      const target =
+        targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const startPosition = window.scrollY;
+      const distance = target - startPosition;
+      let startTime: number | null = null;
+
+      const animation = (currentTime: number) => {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const run = easeInOutCubic(
+          timeElapsed,
+          startPosition,
+          distance,
+          duration,
+        );
+        window.scrollTo(0, run);
+        if (timeElapsed < duration) requestAnimationFrame(animation);
+      };
+
+      requestAnimationFrame(animation);
+    },
+    [],
+  );
 
   const scrollToImage = (index: any) => {
     const ref = imageRefs.current[index];
@@ -598,6 +596,65 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
     return <>{transformedContent}</>;
   };
+
+  // Add this effect in your ProductDetailCard component
+
+  useEffect(() => {
+    let isScrolling = false;
+    const handleWheel = async (e: WheelEvent) => {
+      if (isScrolling || isZoomed) return;
+
+      e.preventDefault();
+      isScrolling = true;
+
+      const direction = e.deltaY > 0 ? 1 : -1;
+      const currentIndex = clickedIndex;
+      let targetIndex;
+
+      if (direction > 0) {
+        targetIndex = Math.min(currentIndex + 1, product.images.length - 1);
+      } else {
+        targetIndex = Math.max(currentIndex - 1, 0);
+      }
+
+      if (targetIndex !== currentIndex) {
+        const targetRef = imageRefs.current[targetIndex];
+        if (targetRef && targetRef.current) {
+          await new Promise<void>((resolve) => {
+            smoothScrollTo(targetRef.current, 500);
+            setTimeout(resolve, 500);
+          });
+          setClickedIndex(targetIndex);
+        }
+      }
+
+      if (
+        (direction > 0 && targetIndex === product.images.length - 1) ||
+        (direction < 0 && targetIndex === 0)
+      ) {
+        window.scrollBy({
+          top: e.deltaY,
+          behavior: 'smooth',
+        });
+      }
+
+      setTimeout(() => {
+        isScrolling = false;
+      }, 500);
+    };
+
+    const desktopElement = desktopCarouselRef.current;
+
+    if (desktopElement) {
+      desktopElement.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (desktopElement) {
+        desktopElement.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, [isZoomed, clickedIndex, product.images.length, smoothScrollTo]);
 
   return (
     <div>
