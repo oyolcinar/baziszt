@@ -6,17 +6,11 @@ import { useRouter } from 'next/navigation';
 import { useMenu } from '../../context/MenuContext';
 import { useTranslation } from '../../../../utils/useTranslation';
 
-import newMenu from '../../../../public/Images/newMenu.png';
-import topsMenu from '../../../../public/Images/topsMenu.png';
-import bottomsMenu from '../../../../public/Images/bottomsMenu.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 
 const NavMenu: React.FC = () => {
-  const [menuOpened, setMenuOpened] = useState(false);
-  const [hoveredImage, setHoveredImage] = useState('');
-  const [isImageVisible, setIsImageVisible] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const { navMenuOpened, openNavMenu, closeNavMenu } = useMenu();
   const [subscriptionMessage, setSubscriptionMessage] = useState('');

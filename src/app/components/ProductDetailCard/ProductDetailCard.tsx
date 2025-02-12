@@ -19,7 +19,6 @@ import { ShoppingBagIcon } from '@heroicons/react/24/outline';
 import { HeartIcon } from '@heroicons/react/24/outline';
 import { HeartIcon as HeartIconSolid } from '@heroicons/react/24/solid';
 import CompleteTheLook from '../CompleteTheLook/CompleteTheLook';
-import DetailsMenu from '../DetailsMenu/DetailsMenu';
 
 const debounce = <F extends (...args: any[]) => any>(
   func: F,
