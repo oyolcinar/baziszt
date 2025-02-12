@@ -1,0 +1,7 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  NEXT_PUBLIC_R2_URL = "https://baziszt.nuglobucket.org/"
+  NODE_VERSION = "18"
