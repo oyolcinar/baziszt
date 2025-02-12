@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 
 interface CatalogImageProps {
-  src: StaticImageData;
+  src: string | StaticImageData;
   alt: string;
   large: boolean;
 }

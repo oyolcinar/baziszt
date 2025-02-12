@@ -1168,6 +1168,26 @@ const resources: Resources = {
     en: 'no wishlist items found.',
     fr: 'aucun article dans la liste de souhaits trouvé.',
   },
+  latestArrivals: {
+    en: 'Latest Arrivals',
+    fr: 'Dernières Arrivées',
+  },
+  shirtsAndTops: {
+    en: 'Shirts & Tops',
+    fr: 'Chemises & Hauts',
+  },
+  collection: {
+    en: 'Collection',
+    fr: 'Collection',
+  },
+  knitwear: {
+    en: 'Knitwear',
+    fr: 'Maille',
+  },
+  jackets: {
+    en: 'Jackets',
+    fr: 'Vestes',
+  },
 };
 
 export default resources;

@@ -11,9 +11,6 @@ import { faFacebookSquare } from '@fortawesome/free-brands-svg-icons';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
-import brownLine1px from '../../../../public/Hamburger/1px/brownLine.png';
-import brownLine from '../../../../public/Hamburger/brownLine.png';
-import Logo from '../../../../public/Logos/camelLogoSmall.png';
 import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
 
 const Footer: React.FC = () => {
@@ -88,7 +85,12 @@ const Footer: React.FC = () => {
             </div>
 
             <div className='py-4'>
-              <Image alt='baziszt' src={Logo} width={80} height={50} />
+              <Image
+                alt='baziszt'
+                src='https://baziszt.nuglobucket.org/public/Logos/camelLogoSmall.png'
+                width={80}
+                height={50}
+              />
             </div>
 
             <div className='flex-1 w-full flex justify-center'>

@@ -195,21 +195,37 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     return () => window.removeEventListener('resize', debouncedHandleResize);
   }, [updateWidth]);
 
-  const handleImageChange = (
-    direction: 'next' | 'prev',
-    e?: React.MouseEvent<HTMLButtonElement>,
-  ) => {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
+  // const handleImageChange = (
+  //   direction: 'next' | 'prev',
+  //   e?: React.MouseEvent<HTMLButtonElement>,
+  // ) => {
+  //   if (e) {
+  //     e.preventDefault();
+  //     e.stopPropagation();
+  //   }
 
-    if (!isTransitioning) {
-      let newIndex = currentImageIndex + (direction === 'next' ? 1 : -1);
-      setIsTransitioning(true);
-      setCurrentImageIndex(newIndex);
-    }
-  };
+  //   if (!isTransitioning) {
+  //     let newIndex = currentImageIndex + (direction === 'next' ? 1 : -1);
+  //     setIsTransitioning(true);
+  //     setCurrentImageIndex(newIndex);
+  //   }
+  // };
+
+  const handleImageChange = useCallback(
+    (direction: 'next' | 'prev', e?: React.MouseEvent<HTMLButtonElement>) => {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+
+      if (!isTransitioning) {
+        let newIndex = currentImageIndex + (direction === 'next' ? 1 : -1);
+        setIsTransitioning(true);
+        setCurrentImageIndex(newIndex);
+      }
+    },
+    [currentImageIndex, isTransitioning],
+  );
 
   const handleTransitionEnd = () => {
     setIsTransitioning(false);
@@ -306,6 +322,43 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     },
     [isZoomed, carouselRef],
   );
+
+  //new logic for image scroll
+
+  // useEffect(() => {
+  //   const handleWheel = (e: WheelEvent) => {
+  //     if (!isZoomed) {
+  //       e.preventDefault();
+
+  //       if (!isTransitioning) {
+  //         if (e.deltaY > 0) {
+  //           handleImageChange('next');
+  //         } else if (e.deltaY < 0) {
+  //           handleImageChange('prev');
+  //         }
+  //       }
+  //     }
+  //   };
+
+  //   const desktopElement = desktopCarouselRef.current;
+  //   const mobileElement = carouselRef.current;
+
+  //   if (desktopElement) {
+  //     desktopElement.addEventListener('wheel', handleWheel, { passive: false });
+  //   }
+  //   if (mobileElement) {
+  //     mobileElement.addEventListener('wheel', handleWheel, { passive: false });
+  //   }
+
+  //   return () => {
+  //     if (desktopElement) {
+  //       desktopElement.removeEventListener('wheel', handleWheel);
+  //     }
+  //     if (mobileElement) {
+  //       mobileElement.removeEventListener('wheel', handleWheel);
+  //     }
+  //   };
+  // }, [isZoomed, isTransitioning, handleImageChange]);
 
   useEffect(() => {
     const handleMouseUp = () => {

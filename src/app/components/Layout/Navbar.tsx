@@ -10,7 +10,6 @@ import Banner from '../Banner/Banner';
 
 import { useBanner } from '../../context/BannerContext';
 
-import Logo from '../../../../public/Logos/logoEditBordeux1.png';
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { UserIcon } from '@heroicons/react/24/outline';
 import { ShoppingBagIcon } from '@heroicons/react/24/outline';
@@ -38,7 +37,7 @@ const Navbar: React.FC = () => {
             <Link href='/'>
               <Image
                 alt='baziszt'
-                src={Logo}
+                src='https://baziszt.nuglobucket.org/public/Logos/logoEditBordeux1.png'
                 layout='fill'
                 objectFit='contain'
               />

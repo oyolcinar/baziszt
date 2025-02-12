@@ -134,32 +134,30 @@ const NavMenu: React.FC = () => {
               </button>
             </div>
           </form>
-          <Link
+          {/* <Link
             href='/shop/new'
             className='hover:opacity-70 transition duration-300'
             scroll={true}
-            // onMouseEnter={() => {
-            //   setHoveredImage(newMenu.src);
-            //   setIsImageVisible(true);
-            // }}
-            // onMouseLeave={() => setIsImageVisible(false)}
             onClick={toggleMenu}
           >
             {t('new').toUpperCase()}
-          </Link>
+          </Link> */}
           <div className='w-full flex justify-between'>
-            <Link
+            {/* <Link
               href='/shop/oneOfone'
               className='hover:opacity-70 transition duration-300'
               scroll={true}
-              // onMouseEnter={() => {
-              //   setHoveredImage(topsMenu.src);
-              //   setIsImageVisible(true);
-              // }}
-              // onMouseLeave={() => setIsImageVisible(false)}
               onClick={toggleMenu}
             >
               {t('oneofone').toUpperCase()}
+            </Link> */}
+            <Link
+              href='/shop/latest-arrivals'
+              className='hover:opacity-70 transition duration-300'
+              scroll={true}
+              onClick={toggleMenu}
+            >
+              {t('latestArrivals').toUpperCase()}
             </Link>
             <Link
               href='/wishlist'
@@ -172,17 +170,12 @@ const NavMenu: React.FC = () => {
           </div>
           <div className='w-full flex justify-between'>
             <Link
-              href='/shop/tops'
+              href='/shop/shirts-and-tops'
               className='hover:opacity-70 transition duration-300'
               scroll={true}
-              // onMouseEnter={() => {
-              //   setHoveredImage(topsMenu.src);
-              //   setIsImageVisible(true);
-              // }}
-              // onMouseLeave={() => setIsImageVisible(false)}
               onClick={toggleMenu}
             >
-              {t('tops').toUpperCase()}
+              {t('shirtsAndTops').toUpperCase()}
             </Link>
             <Link
               href='/account'
@@ -218,12 +211,12 @@ const NavMenu: React.FC = () => {
           </div>
           <div className='w-full flex justify-between'>
             <Link
-              href='/shop/accessories'
+              href='/shop/knitwear'
               className='hover:opacity-70 transition duration-300'
               scroll={true}
               onClick={toggleMenu}
             >
-              {t('accessories').toUpperCase()}
+              {t('knitwear').toUpperCase()}
             </Link>
             <Link
               href='/terms-of-sale'
@@ -236,12 +229,12 @@ const NavMenu: React.FC = () => {
           </div>
           <div className='w-full flex justify-between'>
             <Link
-              href='/catalog'
+              href='/shop/jackets'
               className='hover:opacity-70 transition duration-300'
               scroll={true}
               onClick={toggleMenu}
             >
-              {t('catalog')}
+              {t('jackets').toUpperCase()}
             </Link>
             <Link
               href='/privacy-policy'
@@ -254,12 +247,12 @@ const NavMenu: React.FC = () => {
           </div>
           <div className='w-full flex justify-between'>
             <Link
-              href='/stockists'
+              href='/shop/accessories'
               className='hover:opacity-70 transition duration-300'
               scroll={true}
               onClick={toggleMenu}
             >
-              {t('stockists')}
+              {t('accessories').toUpperCase()}
             </Link>
             <Link
               href='/contact'
@@ -272,12 +265,12 @@ const NavMenu: React.FC = () => {
           </div>
           <div className='w-full flex justify-between'>
             <Link
-              href='/press'
+              href='/catalog'
               className='hover:opacity-70 transition duration-300'
               scroll={true}
               onClick={toggleMenu}
             >
-              {t('press')}
+              {t('collection').toUpperCase()}
             </Link>
             <Link
               href='https://www.instagram.com/baziszt/'
@@ -292,13 +285,21 @@ const NavMenu: React.FC = () => {
           </div>
           <div className='w-full flex justify-between'>
             <Link
+              href='/stockists'
+              className='hover:opacity-70 transition duration-300'
+              scroll={true}
+              onClick={toggleMenu}
+            >
+              {t('stockists')}
+            </Link>
+            {/* <Link
               href='/journal'
               className='hover:opacity-70 transition duration-300'
               scroll={true}
               onClick={toggleMenu}
             >
               {t('journal')}
-            </Link>
+            </Link> */}
             <Link
               href='https://www.facebook.com/baziszt/'
               target='_blank'
@@ -310,43 +311,14 @@ const NavMenu: React.FC = () => {
               facebook
             </Link>
           </div>
-          {/* <div className='w-full pr-[30px]'>
-            <div className='text-black text-base font-futura'>
-              SUBSCRIBE TO OUR NEWSLETTER
-            </div>
-            <div className='flex items-center border-b-2 border-black py-1'>
-              <input
-                type='email'
-                placeholder='your email'
-                className='bg-transparent outline-none flex-1 text-black placeholder-gray text-[14px]'
-              />
-              <button className='w-[20px] cursor-pointer ml-2'>
-                <FontAwesomeIcon icon={faArrowRight} className='text-black' />
-              </button>
-            </div>
-          </div> */}
-          {/* <div
-            className={`hidden sm:block w-full h-[150px] overflow-hidden transition-opacity duration-300 ${
-              isImageVisible ? 'opacity-100' : 'opacity-0'
-            }`}
+          <Link
+            href='/press'
+            className='hover:opacity-70 transition duration-300'
+            scroll={true}
+            onClick={toggleMenu}
           >
-            {hoveredImage && (
-              <div
-                className={`transition-opacity duration-300 ${
-                  isImageVisible ? 'opacity-100' : 'opacity-0'
-                } w-full h-[30%] overflow-hidden`}
-              >
-                <div className='fixed bottom-0 left-0 h-[30%] w-full'>
-                  <Image
-                    src={hoveredImage}
-                    alt='Test Image'
-                    layout='fill'
-                    objectFit='cover'
-                  />
-                </div>
-              </div>
-            )}
-          </div> */}
+            {t('press')}
+          </Link>
         </div>
         <div className='absolute bottom-[35px] left-0 w-full px-[30px]'>
           <div className='text-black text-base font-futura'>
@@ -378,9 +350,6 @@ const NavMenu: React.FC = () => {
             </div>
           </form>
         </div>
-        {/* <div className='absolute bottom-0 left-0 flex justify-center font-futura items-center w-full max-w-4xl px-4 bg-black text-bone cursor-pointer'>
-          <span>FREE SHIPPING WORLDWIDE</span>
-        </div> */}
       </div>
     </>
   );

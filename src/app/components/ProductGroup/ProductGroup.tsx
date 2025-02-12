@@ -36,6 +36,10 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
       const displayCrumb =
         crumb.toLowerCase() === 'oneofone'
           ? 'ONE OF ONE'
+          : crumb.toLowerCase() === 'latest-arrivals'
+          ? 'LATEST ARRIVALS'
+          : crumb.toLowerCase() === 'shirts-and-tops'
+          ? 'SHIRTS & TOPS'
           : t(crumb.toUpperCase());
 
       return (
@@ -71,6 +75,10 @@ const ProductGroup: React.FC<ProductGroupProps> = ({
   const formattedTitle =
     title === 'One of One'
       ? 'One of One'
+      : title === 'Latest Arrivals'
+      ? 'Latest Arrivals'
+      : title === 'Shirts & Tops'
+      ? 'Shirts & Tops'
       : title.charAt(0).toUpperCase() + title.slice(1).toLowerCase();
 
   return (

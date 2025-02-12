@@ -4,18 +4,28 @@ import ProductGroup from '@/app/components/ProductGroup/ProductGroup';
 import { useProducts } from '../../context/ProductContext';
 import { useEffect } from 'react';
 
-type CategoryKey = 'new' | 'tops' | 'bottoms' | 'accessories' | 'oneOfone';
+type CategoryKey =
+  | 'new'
+  | 'shirts-and-tops'
+  | 'bottoms'
+  | 'accessories'
+  | 'oneOfone'
+  | 'knitwear'
+  | 'jackets'
+  | 'latest-arrivals';
 
 interface CategoryMapping {
   [key: string]: string[];
 }
 
 const categoryMapping: CategoryMapping = {
-  new: ['SS24'],
-  tops: ['Shirts & Tops'],
-  bottoms: ['Shorts', 'Pants'],
-  accessories: ['Accessories'],
+  'latest-arrivals': ['Latest arrivals'],
+  'shirts-and-tops': ['Shirts & Tops'],
+  bottoms: ['Shorts', 'Pants', 'Bottoms'],
+  accessories: ['Accessories', 'Carry over'],
   oneOfone: ['One-of-one'],
+  knitwear: ['Knitwear'],
+  jackets: ['Jackets'],
 };
 
 export default function Shop() {
@@ -37,6 +47,10 @@ export default function Shop() {
   const categoryTitle =
     categoryFromUrl === 'oneOfone'
       ? 'One of One'
+      : categoryFromUrl === 'latest-arrivals'
+      ? 'Latest Arrivals'
+      : categoryFromUrl === 'shirts-and-tops'
+      ? 'Shirts & Tops'
       : categoryFromUrl.toUpperCase();
 
   return (

@@ -16,11 +16,6 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import CamelLogo from '../../public/Logos/camelLogoSmall.png';
-import Logo from '../../public/Logos/logoEditBordeux1.png';
-import TopsImage from '../../public/Images/topsImage.png';
-import BottomsImage from '../../public/Images/bottomsImage.png';
-import AccessoriesImage from '../../public/Images/accessoriesImage.png';
 import { Swiper as SwiperType } from 'swiper';
 
 export default function Home() {
@@ -249,7 +244,12 @@ export default function Home() {
                 : 'transform 0.5s ease, opacity 0.5s ease',
             }}
           >
-            <Image alt='Logo' src={Logo} layout='fill' objectFit='contain' />
+            <Image
+              alt='Logo'
+              src='https://baziszt.nuglobucket.org/public/Logos/logoEditBordeux1.png'
+              layout='fill'
+              objectFit='contain'
+            />
           </div>
         </div>
 
@@ -266,7 +266,10 @@ export default function Home() {
                 controls={false}
                 className='w-full h-full object-cover'
               >
-                <source src='Videos/BAZISZT-1.mp4' type='video/mp4' />
+                <source
+                  src='https://baziszt.nuglobucket.org/public/Videos/BAZISZT-1.mp4'
+                  type='video/mp4'
+                />
               </video>
             </div>
             {/* <Image alt='Hero' src={Hero} layout='fill' objectFit='cover' /> */}
@@ -277,7 +280,7 @@ export default function Home() {
           <SwiperSlide>
             <div className='flex flex-row h-screen mt-8'>
               <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300'>
-                <Link href='/shop/tops'>
+                <Link href='/shop/shirts-and-tops'>
                   <div
                     className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl '
                     style={{
@@ -287,7 +290,10 @@ export default function Home() {
                     {t('tops')}
                   </div>
                   <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                    <Image alt='Tops' src={TopsImage} />
+                    <img
+                      alt='Tops'
+                      src='https://baziszt.nuglobucket.org/public/Images/topsImage.png'
+                    />
                   </div>
                 </Link>
               </div>
@@ -303,7 +309,10 @@ export default function Home() {
                     {t('bottoms')}
                   </div>
                   <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                    <Image alt='Bottoms' src={BottomsImage} />
+                    <img
+                      alt='Bottoms'
+                      src='https://baziszt.nuglobucket.org/public/Images/bottomsImage.png'
+                    />
                   </div>
                 </Link>
               </div>
@@ -318,7 +327,10 @@ export default function Home() {
                     {t('accessories')}
                   </div>
                   <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                    <Image alt='Accessories' src={AccessoriesImage} />
+                    <img
+                      alt='Accessories'
+                      src='https://baziszt.nuglobucket.org/public/Images/accessoriesImage.png'
+                    />
                   </div>
                 </Link>
               </div>
@@ -329,7 +341,7 @@ export default function Home() {
           <SwiperSlide>
             <div className='flex flex-row h-screen'>
               <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300'>
-                <Link href='/shop/tops'>
+                <Link href='/shop/shirts-and-tops'>
                   <div
                     className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-4xl '
                     style={{
@@ -339,7 +351,10 @@ export default function Home() {
                     {t('tops')}
                   </div>
                   <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                    <Image alt='Tops' src={TopsImage} />
+                    <img
+                      alt='Tops'
+                      src='https://baziszt.nuglobucket.org/public/Images/topsImage.png'
+                    />
                   </div>
                 </Link>
               </div>
@@ -355,7 +370,10 @@ export default function Home() {
                     {t('bottoms')}
                   </div>
                   <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                    <Image alt='Bottoms' src={BottomsImage} />
+                    <img
+                      alt='Bottoms'
+                      src='https://baziszt.nuglobucket.org/public/Images/bottomsImage.png'
+                    />
                   </div>
                 </Link>
               </div>
@@ -370,7 +388,10 @@ export default function Home() {
                     {t('accessories')}
                   </div>
                   <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                    <Image alt='Accessories' src={AccessoriesImage} />
+                    <img
+                      alt='Accessories'
+                      src='https://baziszt.nuglobucket.org/public/Images/accessoriesImage.png'
+                    />
                   </div>
                 </Link>
               </div>
@@ -381,7 +402,7 @@ export default function Home() {
         {windowWidth <= 768 && windowHeight > 400 && windowHeight > 800 && (
           <SwiperSlide>
             <div className='group relative cursor-pointer lg:w-1/3 flex justify-center items-center p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-screen'>
-              <Link href='/shop/tops'>
+              <Link href='/shop/shirts-and-tops'>
                 <div
                   className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl '
                   style={{
@@ -391,7 +412,10 @@ export default function Home() {
                   {t('tops')}
                 </div>
                 <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                  <Image alt='Tops' src={TopsImage} />
+                  <img
+                    alt='Tops'
+                    src='https://baziszt.nuglobucket.org/public/Images/topsImage.png'
+                  />
                 </div>
               </Link>
             </div>
@@ -400,7 +424,7 @@ export default function Home() {
         {windowWidth <= 768 && windowHeight > 400 && windowHeight < 800 && (
           <SwiperSlide>
             <div className='group relative cursor-pointer md:w-1/3 flex justify-center items-end p-4 md:py-6 md:px-3 hover:text-bordeux transition duration-300 h-[100vh]'>
-              <Link href='/shop/tops'>
+              <Link href='/shop/shirts-and-tops'>
                 <div
                   className='absolute font-altesse24 top-3/4 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-6xl'
                   style={{
@@ -410,12 +434,12 @@ export default function Home() {
                   {t('tops')}
                 </div>
                 <div className='w-full h-[80vh] overflow-hidden'>
-                  <Image
+                  <img
                     alt='Tops'
-                    src={TopsImage}
+                    src='https://baziszt.nuglobucket.org/public/Images/topsImage.png'
                     className='w-full h-full transition-transform duration-300 ease-in-out transform opacity-100 hover:opacity-75 object-cover object-center scale-[1.1]'
-                    priority={true}
-                    loading='eager'
+                    // priority={true}
+                    // loading='eager'
                   />
                 </div>
               </Link>
@@ -436,7 +460,10 @@ export default function Home() {
                   {t('bottoms')}
                 </div>
                 <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                  <Image alt='Bottoms' src={BottomsImage} />
+                  <img
+                    alt='Bottoms'
+                    src='https://baziszt.nuglobucket.org/public/Images/bottomsImage.png'
+                  />
                 </div>
               </Link>
             </div>
@@ -455,12 +482,12 @@ export default function Home() {
                   {t('bottoms')}
                 </div>
                 <div className='w-full h-[80vh] overflow-hidden'>
-                  <Image
+                  <img
                     alt='Bottoms'
-                    src={BottomsImage}
+                    src='https://baziszt.nuglobucket.org/public/Images/bottomsImage.png'
                     className='w-full h-full transition-transform duration-300 ease-in-out transform opacity-100 hover:opacity-75 object-cover object-center scale-[1.1]'
-                    priority={true}
-                    loading='eager'
+                    // priority={true}
+                    // loading='eager'
                   />
                 </div>
               </Link>
@@ -480,7 +507,10 @@ export default function Home() {
                   {t('accessories')}
                 </div>
                 <div className='transition-opacity duration-300 ease-in-out opacity-100 hover:opacity-75'>
-                  <Image alt='Accessories' src={AccessoriesImage} />
+                  <img
+                    alt='Accessories'
+                    src='https://baziszt.nuglobucket.org/public/Images/accessoriesImage.png'
+                  />
                 </div>
               </Link>
             </div>
@@ -499,12 +529,12 @@ export default function Home() {
                   {t('accessories')}
                 </div>
                 <div className='w-full h-[80vh] overflow-hidden'>
-                  <Image
+                  <img
                     alt='Accessories'
-                    src={AccessoriesImage}
+                    src='https://baziszt.nuglobucket.org/public/Images/accessoriesImage.png'
                     className='w-full h-full transition-transform duration-300 ease-in-out transform opacity-100 hover:opacity-75 object-cover object-center scale-[1.1]'
-                    priority={true}
-                    loading='eager'
+                    // priority={true}
+                    // loading='eager'
                   />
                 </div>
               </Link>
@@ -552,7 +582,7 @@ export default function Home() {
                   <div className='py-4'>
                     <Image
                       alt='baziszt'
-                      src={CamelLogo}
+                      src='https://baziszt.nuglobucket.org/public/Logos/camelLogoSmall.png'
                       width={80}
                       height={50}
                     />
@@ -709,7 +739,12 @@ export default function Home() {
                 </div>
 
                 <div className='py-4'>
-                  <Image alt='baziszt' src={CamelLogo} width={80} height={50} />
+                  <Image
+                    alt='baziszt'
+                    src='https://baziszt.nuglobucket.org/public/Logos/camelLogoSmall.png'
+                    width={80}
+                    height={50}
+                  />
                 </div>
 
                 <div className='flex-1 w-full flex justify-center'>
