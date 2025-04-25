@@ -286,14 +286,6 @@ const NavMenu: React.FC = () => {
             >
               {t('stockists')}
             </Link>
-            {/* <Link
-              href='/journal'
-              className='hover:opacity-70 transition duration-300'
-              scroll={true}
-              onClick={toggleMenu}
-            >
-              {t('journal')}
-            </Link> */}
             <Link
               href='https://www.facebook.com/baziszt/'
               target='_blank'
@@ -305,6 +297,14 @@ const NavMenu: React.FC = () => {
               facebook
             </Link>
           </div>
+          <Link
+            href='/journal'
+            className='hover:opacity-70 transition duration-300'
+            scroll={true}
+            onClick={toggleMenu}
+          >
+            {t('journal')}
+          </Link>
           <Link
             href='/press'
             className='hover:opacity-70 transition duration-300'

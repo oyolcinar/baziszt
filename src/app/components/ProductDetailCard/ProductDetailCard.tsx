@@ -597,8 +597,6 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     return <>{transformedContent}</>;
   };
 
-  // Add this effect in your ProductDetailCard component
-
   useEffect(() => {
     let isScrolling = false;
     const handleWheel = async (e: WheelEvent) => {
