@@ -92,22 +92,20 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          if (entry.isIntersecting && entry.intersectionRatio >= 0.7) {
             const index = currentRefs.findIndex(
               (ref) => ref.current === entry.target,
             );
             if (index !== -1) {
-              if (Math.abs(index - clickedIndex) <= 2) {
-                setScrollIndex(index);
-              }
+              setScrollIndex(index);
             }
           }
         });
       },
       {
         root: null,
-        rootMargin: '0px',
-        threshold: 0.5,
+        rootMargin: '-40% 0px -40% 0px',
+        threshold: [0.7],
       },
     );
 
@@ -124,7 +122,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
         }
       });
     };
-  }, [product.images.length, clickedIndex]);
+  }, [product.images.length]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -400,11 +398,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
   };
 
   const smoothScrollTo = useCallback(
-    (targetElement: HTMLElement | null, duration = 500) => {
+    (targetElement: HTMLElement | null, duration = 300) => {
       if (!targetElement) return;
 
-      const target =
-        targetElement.getBoundingClientRect().top + window.pageYOffset;
+      const target = targetElement.offsetTop - 40; // Account for fixed header
       const startPosition = window.scrollY;
       const distance = target - startPosition;
       let startTime: number | null = null;
@@ -412,14 +409,21 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       const animation = (currentTime: number) => {
         if (startTime === null) startTime = currentTime;
         const timeElapsed = currentTime - startTime;
+
+        if (timeElapsed >= duration) {
+          window.scrollTo(0, target);
+          return;
+        }
+
         const run = easeInOutCubic(
           timeElapsed,
           startPosition,
           distance,
           duration,
         );
+
         window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
+        requestAnimationFrame(animation);
       };
 
       requestAnimationFrame(animation);
@@ -427,12 +431,18 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
     [],
   );
 
-  const scrollToImage = (index: any) => {
+  const scrollToImage = (index: number) => {
     const ref = imageRefs.current[index];
     if (ref && ref.current) {
-      smoothScrollTo(ref.current);
+      smoothScrollTo(ref.current, 400);
+      setClickedIndex(index);
+      setScrollIndex(index);
     }
   };
+
+  useEffect(() => {
+    setScrollIndex(clickedIndex);
+  }, [clickedIndex]);
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => !isZoomed && imageWidth && handleImageChange('next'),
@@ -599,50 +609,60 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
 
   useEffect(() => {
     let isScrolling = false;
-    const handleWheel = async (e: WheelEvent) => {
-      if (isScrolling || isZoomed) return;
+    let scrollTimeout: NodeJS.Timeout;
 
-      e.preventDefault();
+    const handleWheel = (e: WheelEvent) => {
+      if (isZoomed) return;
+
+      const desktopElement = desktopCarouselRef.current;
+      if (!desktopElement) return;
+
+      const rect = desktopElement.getBoundingClientRect();
+
+      if (rect.top > window.innerHeight || rect.bottom < 0) return;
+
+      const isAtTop = clickedIndex === 0 && e.deltaY < 0;
+      const isAtBottom =
+        clickedIndex === product.images.length - 1 && e.deltaY > 0;
+
+      if (isAtTop || isAtBottom) {
+        return;
+      }
+
+      if (rect.top <= 80 && rect.bottom >= 0) {
+        e.preventDefault();
+      }
+
+      if (isScrolling) return;
+
+      const scrollThreshold = 50;
+      if (Math.abs(e.deltaY) < scrollThreshold) return;
+
       isScrolling = true;
 
       const direction = e.deltaY > 0 ? 1 : -1;
       const currentIndex = clickedIndex;
-      let targetIndex;
+      let targetIndex = currentIndex + direction;
 
-      if (direction > 0) {
-        targetIndex = Math.min(currentIndex + 1, product.images.length - 1);
-      } else {
-        targetIndex = Math.max(currentIndex - 1, 0);
-      }
-
-      if (targetIndex !== currentIndex) {
-        const targetRef = imageRefs.current[targetIndex];
-        if (targetRef && targetRef.current) {
-          await new Promise<void>((resolve) => {
-            smoothScrollTo(targetRef.current, 500);
-            setTimeout(resolve, 500);
-          });
-          setClickedIndex(targetIndex);
-        }
-      }
-
-      if (
-        (direction > 0 && targetIndex === product.images.length - 1) ||
-        (direction < 0 && targetIndex === 0)
-      ) {
-        window.scrollBy({
-          top: e.deltaY,
-          behavior: 'smooth',
-        });
-      }
-
-      setTimeout(() => {
+      if (targetIndex < 0 || targetIndex >= product.images.length) {
         isScrolling = false;
-      }, 500);
+        return;
+      }
+
+      const targetRef = imageRefs.current[targetIndex];
+      if (targetRef && targetRef.current) {
+        setClickedIndex(targetIndex);
+        setScrollIndex(targetIndex); // Update scrollIndex immediately
+        smoothScrollTo(targetRef.current, 300);
+      }
+
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 300);
     };
 
     const desktopElement = desktopCarouselRef.current;
-
     if (desktopElement) {
       desktopElement.addEventListener('wheel', handleWheel, { passive: false });
     }
@@ -651,6 +671,7 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
       if (desktopElement) {
         desktopElement.removeEventListener('wheel', handleWheel);
       }
+      clearTimeout(scrollTimeout);
     };
   }, [isZoomed, clickedIndex, product.images.length, smoothScrollTo]);
 
@@ -672,9 +693,10 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
             <div
               key={index}
               ref={imageRefs.current[index]}
-              className={`flex-none relative h-[${imageHeight}px]`}
+              className='flex-none relative'
               style={{
                 width: `${imageWidth}px`,
+                height: `${imageHeight}px`,
                 overflow: 'hidden',
               }}
               onClick={() => handleImageClick(index)}
@@ -933,7 +955,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
                 </div>
               </div>
               <div
-                ref={(el) => (sectionRefs.current['description'] = el)}
+                ref={(el) => {
+                  sectionRefs.current['description'] = el;
+                }}
                 className={`overflow-hidden transition-max-height duration-300 ease-in-out ${
                   expandedSections.includes('description')
                     ? 'max-h-screen'
@@ -958,7 +982,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               </div>
             </div>
             <div
-              ref={(el) => (sectionRefs.current['color'] = el)}
+              ref={(el) => {
+                sectionRefs.current['color'] = el;
+              }}
               className={`overflow-hidden transition-max-height duration-300 ease-in-out ${
                 expandedSections.includes('color') ? 'max-h-screen' : 'max-h-0'
               }`}
@@ -1012,7 +1038,9 @@ const ProductDetailCard: React.FC<ProductDetailCardProps> = ({ product }) => {
               </div>
             </div>
             <div
-              ref={(el) => (sectionRefs.current['size'] = el)}
+              ref={(el) => {
+                sectionRefs.current['size'] = el;
+              }}
               className={`overflow-hidden transition-max-height duration-300 ease-in-out ${
                 expandedSections.includes('size') ? 'max-h-screen' : 'max-h-0'
               }`}

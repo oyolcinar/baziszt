@@ -14,8 +14,10 @@ const config: Config = {
         '100': '100',
       },
       cursor: {
-        zoomInCustom: 'url(/Cursors/zoomin1.png), auto',
-        dragCustom: 'url(/Cursors/drag1.png), auto',
+        zoomInCustom:
+          'url(https://baziszt.nuglobucket.org/public/Cursors/zoomin1.png), auto',
+        dragCustom:
+          'url(https://baziszt.nuglobucket.org/public/Cursors/drag1.png), auto',
       },
       screens: {
         customMd: '1450px',
